@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/calendar.eb56a9ce.css">
+        <link rel="stylesheet" href="/demo.223651a2.css">
+    <script src="/calendar.eb56a9ce.js"></script><script src="/demo.223651a2.js"></script></head>
+    <body>
+        <script src="https://static.tildacdn.com/js/jquery-1.10.2.min.js"></script>
+        <section class="book-page">
+            <div class="col-md-6" style="background: #FAFAFB;">
+                <div class="book__title">Забронировать
+                    <!-- <span id="carName"> </span> -->
+                    <span class="bool_title-price" id="carPrice"></span>
+                </div>
+                <div id="dateListener" class="book__dates ex-inputs">
+                    <div id="leftDateFrame" class="book__field-start book__field-wrap book__outline">
+                        <input id="leftDate" class="ex-inputs-start book__field-value" placeholder="DD.MM.YYYY  10:00" readonly="">
+                        <div class="book__field-subtitle">Дата получения</div>
+                    </div>
+                    <div id="rightDateFrame" class="book__field-end book__field-wrap">
+                        <input id="rightDate" class="ex-inputs-end book__field-value" placeholder="DD.MM.YYYY 10:00" readonly="">
+                        <div class="book__field-subtitle">Дата возврата</div>
+                    </div>
+                    <div class="row">
+                        <div class="ex-inputs-picker"></div>
+                    </div>
+                </div>
+                <input type="range" id="receiveTimeRange" disabled="disabled" max="95">
+                <input type="range" id="returnTimeRange" disabled="disabled" max="95">
+                    <div class="book__field-wrap">
+                    <select class="book__field book__field-receivePlaceSelect" id="receivePlaceSelect"></select>
+                    <div class="book__field-subtitle">Место получения</div>
+                </div>
+                <div class="book__field-wrap customPlace">
+                <input type="text" id="receiveCustomPlace" class="book__field customPlace-hidden" placeholder="Введите адрес">
+                <div class="book__field-subtitle customPlace-hidden">Куда подать авто?</div>
+            </div>
+                <div class="book__field-wrap">
+                    <select class="book__field book__field-receivePlaceSelect" id="returnPlaceSelect"></select>
+                    <div class="book__field-subtitle">Место возврата</div>
+                </div>
+                <input type="text" id="returnCustomPlace" class="book__field customPlace-hidden" placeholder="Введите адрес">
+                <div class="book__subtitle">Ваши данные</div>
+                <form autocomplete="on">
+                    <div class="book__field-wrap">
+                        <input class="book__field" id="customerName" name="name" type="text" required="" placeholder="Введите имя">
+                        <div class="book__field-subtitle">Имя и фамилия</div>
+                    </div>
+                    <div class="book__field-wrap">
+                        <input class="book__field" id="customerPhone" name="phone" type="tel" required="" placeholder="+7">
+                        <div class="book__field-subtitle">Телефон</div>
+                    </div>
+                </form>
+                <div id="lawAgreement">
+                    <input type="checkbox" class="book__checkbox" id="age" value="yes">
+                    <label id="proofOfAgeAndExperience" class="book__radio" for="age">Мне больше 23 лет и мой водительский стаж больше 3 лет</label>
+                    <input type="checkbox" class="book__checkbox" id="agree" value="yes">
+                    <label id="agreementWithPolicy" class="book__radio" for="agree">Я согласен с Политикой обработки данных.</label>
+                </div>
+                <div class="book__checkup">
+                    <span id="carName"></span>
+                    <span id="periodRent"></span>
+                    <br>
+                    <span id="bidCost"></span>
+                    <span id="deposit"></span>
+                    <br>
+                    <span id="resolution"></span>
+                </div>
+                <button class="book__btn" type="submit" id="bookButtonId">Забронировать</button>
+            </div>
+        
+        <script src="/auth.f01930d2.js"></script>
+        <script src="/connection.faf5f2a2.js"></script>
+        <script src="/dataFromServer.11d42312.js"></script>
+        <script src="/placeSelector.cc03f5e1.js"></script>
+        <script src="/carSelector.d095cf27.js"></script>
+        <script src="/fetchPeriods.1ac39429.js"></script>
+        <script src="/namespaces.68f610e8.js"></script>
+        <script src="/validators.94210ff2.js"></script>
+        <script src="/handlers.eb17d443.js"></script>
+        <script src="/cal.e06ce6c8.js"></script>
+        <script src="/calinject.e7db45b5.js"></script>
+        <script src="/bundle.e5ef4e5c.js"></script>
+    </section></body>
+</html>
