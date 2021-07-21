@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+})({"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var define;
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -868,7 +868,7 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -11963,7 +11963,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{"process":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{"process":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -12115,7 +12115,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/ieee754/index.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/ieee754/index.js":[function(require,module,exports) {
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -12202,14 +12202,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js":[function(require,module,exports) {
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js":[function(require,module,exports) {
 
 var global = arguments[3];
 /*!
@@ -14002,7 +14002,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js","ieee754":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/ieee754/index.js","isarray":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/isarray/index.js","buffer":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"node_modules/lodash/lodash.js":[function(require,module,exports) {
+},{"base64-js":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js","ieee754":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/ieee754/index.js","isarray":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/isarray/index.js","buffer":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"node_modules/lodash/lodash.js":[function(require,module,exports) {
 var global = arguments[3];
 var Buffer = require("buffer").Buffer;
 var define;
@@ -31216,7 +31216,7 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"static/namespaces.js":[function(require,module,exports) {
+},{"buffer":"../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"static/namespaces.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31372,16 +31372,21 @@ function translateMonth(monthStr) {
 
 
 var dataFromServer = {
+  bufferTimeMin: 180,
   placesToReceiveOrReturnCar: [],
   //fill by components/placeSelector.js
   carList: [],
   tariffsList: [],
   currentCar: '',
+  carToBid: [],
   beginFetchPeriod: "".concat(new Date().getFullYear(), "-01-01 00:00"),
   endFetchPeriod: "".concat(new Date().getFullYear(), "-12-31 00:00"),
   freePeriods: [],
+  rawPeriods: [],
   operationCars: [],
   clickedCars: [],
+  placeHtml: '',
+  dateIsBad: true,
 
   /**
    * @property {function} getPlaceId
@@ -31905,7 +31910,7 @@ function _getAccess() {
   }));
   return _getAccess.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js"}],"static/connection/index.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"static/connection/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32250,7 +32255,7 @@ function _sendRequest() {
   }));
   return _sendRequest.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./auth":"static/connection/auth.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./auth":"static/connection/auth.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52208,10 +52213,12 @@ exports.objToFormData = objToFormData;
 exports.translateDate = translateDate;
 exports.bookCar = bookCar;
 exports.percentsToTime = percentsToTime;
+exports.timeToPercent = timeToPercent;
 exports.transferReceiveTime = transferReceiveTime;
 exports.transferReturnTime = transferReturnTime;
 exports.checkingInputPhone = checkingInputPhone;
 exports.inputHandler = inputHandler;
+exports.phoneAdditional = phoneAdditional;
 exports.lawAgreementHandlerAgeExpr = lawAgreementHandlerAgeExpr;
 exports.lawAgreementHandlerAgreePolicy = lawAgreementHandlerAgreePolicy;
 exports.receivePlaceHandle = receivePlaceHandle;
@@ -52223,6 +52230,13 @@ exports.showCustomReceivePlaceInput = showCustomReceivePlaceInput;
 exports.showCustomReturnPlaceInput = showCustomReturnPlaceInput;
 exports.hideCal = hideCal;
 exports.isDateShouldBeDisabled = isDateShouldBeDisabled;
+exports.checkingReceiveTime = checkingReceiveTime;
+exports.checkingReturnTime = checkingReturnTime;
+exports.genTimeHTML = genTimeHTML;
+exports.getFreeReceiveTime = getFreeReceiveTime;
+exports.getFreeReturnTime = getFreeReturnTime;
+exports.clearReceiveDate = clearReceiveDate;
+exports.clearReturnDate = clearReturnDate;
 exports.dropSecondDate = exports.setSecondDate = exports.dropFirstDate = exports.setFirstDate = exports.secondDate = exports.firstDate = exports.secondDateIsSelect = exports.firstDateIsSelect = exports.agreePolicyInx = exports.ageExpInx = exports.lawAgreements = exports.state = exports.fieldHandlers = void 0;
 
 var _lodash = _interopRequireDefault(require("lodash"));
@@ -52235,7 +52249,17 @@ var _index = require("./connection/index");
 
 var _dateFns = require("date-fns");
 
+var _jquery = _interopRequireDefault(require("jquery"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -52308,7 +52332,7 @@ var agreePolicyInx = 1;
 exports.agreePolicyInx = agreePolicyInx;
 
 function coloringBorder(inx, fieldClass) {
-  $("#".concat(fieldHandlers[inx].id)).addClass(fieldClass);
+  (0, _jquery.default)("#".concat(fieldHandlers[inx].id)).addClass(fieldClass);
 }
 /**
  * @function
@@ -52319,7 +52343,7 @@ function coloringBorder(inx, fieldClass) {
 
 
 function deColoringBorder(inx, fieldClass) {
-  $("#".concat(fieldHandlers[inx].id)).removeClass(fieldClass);
+  (0, _jquery.default)("#".concat(fieldHandlers[inx].id)).removeClass(fieldClass);
 } //-------------------------------------------------------------------------------------------------
 
 /**
@@ -52430,13 +52454,13 @@ function _bookCar() {
               } else {// coloringBorder(inx, fieldClasses.validationPassed);
               }
             });
-            custName = "".concat($("#".concat(_namespaces.customerName.id)).val(), " -");
-            custPhone = "".concat($("#".concat(_namespaces.customerPhone.id)).val());
+            custName = "".concat((0, _jquery.default)("#".concat(_namespaces.customerName.id)).val(), " -");
+            custPhone = "".concat((0, _jquery.default)("#".concat(_namespaces.customerPhone.id)).val());
             car_id = 9;
-            begin = reformDate($("#leftDate").val());
-            end = reformDate($("#rightDate").val());
-            receivePlaceId = _dataFromServer.dataFromServer.getPlaceId($("#receivePlaceSelect").val());
-            returnPlaceId = _dataFromServer.dataFromServer.getPlaceId($("#returnPlaceSelect").val());
+            begin = reformDate((0, _jquery.default)("#leftDate").val());
+            end = reformDate((0, _jquery.default)("#rightDate").val());
+            receivePlaceId = _dataFromServer.dataFromServer.getPlaceId((0, _jquery.default)("#receivePlaceSelect").val());
+            returnPlaceId = _dataFromServer.dataFromServer.getPlaceId((0, _jquery.default)("#returnPlaceSelect").val());
             include_reserves = true;
             include_idles = true;
             city_id = 1;
@@ -52491,16 +52515,37 @@ function percentsToTime(percent) {
 
 /**
  * @function
+ * @param {number} percent
+ * @returns {Date} HH:MM
+ * @description convert HH:MM to percent
+ * 
+*/
+
+
+function timeToPercent(timestamp) {
+  //проценты это шаги по 15 минут, 1 процент - 15 минут
+  // const minutes = percent * 15;
+  console.log(timestamp);
+  var mil = (0, _dateFns.hoursToMilliseconds)(timestamp.getHours()) + (0, _dateFns.minutesToMilliseconds)(timestamp.getMinutes());
+  var percent = Math.ceil(mil / (0, _dateFns.hoursToMilliseconds)(24) * 100);
+  console.log(percent);
+  return percent - 3; //convert Thu, 01 Jan 1970 12:00:00 GMT
+  //to 12:00
+  // return (new Date(milisecondsPerMinutes).toUTCString().split(' ')[4]).slice(0, 5);
+} //-------------------------------------------------------------------------------------------------
+
+/**
+ * @function
  * @description transfers the time input to the display field 
 */
 
 
 function transferReceiveTime() {
-  var time = percentsToTime($(this).val());
-  var data = $('#leftDate').val();
+  var time = percentsToTime((0, _jquery.default)(this).val());
+  var data = (0, _jquery.default)('#leftDate').val();
   var date = data.length > 0 ? data.split(' ')[0] : '';
   if (date === '') return;
-  $('#leftDate').val("".concat(date, " ").concat(time));
+  (0, _jquery.default)('#leftDate').val("".concat(date, " ").concat(time));
 } //-------------------------------------------------------------------------------------------------
 
 /**
@@ -52510,11 +52555,11 @@ function transferReceiveTime() {
 
 
 function transferReturnTime() {
-  var time = percentsToTime($(this).val());
-  var data = $('#rightDate').val();
+  var time = percentsToTime((0, _jquery.default)(this).val());
+  var data = (0, _jquery.default)('#rightDate').val();
   var date = data.length > 0 ? data.split(' ')[0] : '';
   if (date === '') return;
-  $('#rightDate').val("".concat(date, " ").concat(time));
+  (0, _jquery.default)('#rightDate').val("".concat(date, " ").concat(time));
 } //-------------------------------------------------------------------------------------------------
 
 /**
@@ -52526,7 +52571,7 @@ function transferReturnTime() {
 function checkingInputPhone() {
   var inx = _namespaces.customerPhone.inx;
 
-  if (validationPhone($("#".concat(_namespaces.customerPhone.id)).val())) {
+  if (validationPhone((0, _jquery.default)("#".concat(_namespaces.customerPhone.id)).val())) {
     state[inx] = true;
     coloringBorder(inx, _namespaces.fieldClasses.validationPassed);
     deColoringBorder(inx, _namespaces.fieldClasses.validationFailed);
@@ -52550,7 +52595,7 @@ function inputHandler(namespace, validator) {
   return function () {
     var inx = namespace.inx;
 
-    if (validator($("#".concat(namespace.id)).val())) {
+    if (validator((0, _jquery.default)("#".concat(namespace.id)).val())) {
       state[inx] = true;
       coloringBorder(inx, _namespaces.fieldClasses.validationPassed);
       deColoringBorder(inx, _namespaces.fieldClasses.validationFailed);
@@ -52561,6 +52606,10 @@ function inputHandler(namespace, validator) {
     coloringBorder(inx, _namespaces.fieldClasses.validationFailed);
     deColoringBorder(inx, _namespaces.fieldClasses.validationPassed);
   };
+}
+
+function phoneAdditional() {
+  if ((0, _jquery.default)(this).val() == '') (0, _jquery.default)(this).val('+7');
 }
 /**
  * @function
@@ -52574,10 +52623,10 @@ function lawAgreementHandlerAgeExpr() {
     lawAgreement[ageExpInx] = lawAgreement[ageExpInx] === true ? false : true;
 
     if (lawAgreement[ageExpInx] && lawAgreement[agreePolicyInx]) {
-      $("#".concat(_namespaces.lawAgreementNamespace.id)).addClass(_namespaces.fieldClasses.validationPassed);
+      (0, _jquery.default)("#".concat(_namespaces.lawAgreementNamespace.id)).addClass(_namespaces.fieldClasses.validationPassed);
       state[_namespaces.lawAgreementNamespace.inx] = true;
     } else if (!lawAgreement[ageExpInx] || !lawAgreement[agreePolicyInx]) {
-      $("#".concat(_namespaces.lawAgreementNamespace.id)).removeClass(_namespaces.fieldClasses.validationPassed);
+      (0, _jquery.default)("#".concat(_namespaces.lawAgreementNamespace.id)).removeClass(_namespaces.fieldClasses.validationPassed);
       state[_namespaces.lawAgreementNamespace.inx] = false;
     }
   };
@@ -52594,10 +52643,10 @@ function lawAgreementHandlerAgreePolicy() {
     lawAgreement[agreePolicyInx] = lawAgreement[agreePolicyInx] === true ? false : true;
 
     if (lawAgreement[ageExpInx] && lawAgreement[agreePolicyInx]) {
-      $("#".concat(_namespaces.lawAgreementNamespace.id)).addClass(_namespaces.fieldClasses.validationPassed);
+      (0, _jquery.default)("#".concat(_namespaces.lawAgreementNamespace.id)).addClass(_namespaces.fieldClasses.validationPassed);
       state[_namespaces.lawAgreementNamespace.inx] = true;
     } else if (!lawAgreement[ageExpInx] || !lawAgreement[agreePolicyInx]) {
-      $("#".concat(_namespaces.lawAgreementNamespace.id)).removeClass(_namespaces.fieldClasses.validationPassed);
+      (0, _jquery.default)("#".concat(_namespaces.lawAgreementNamespace.id)).removeClass(_namespaces.fieldClasses.validationPassed);
       state[_namespaces.lawAgreementNamespace.inx] = false;
     }
   };
@@ -52610,7 +52659,7 @@ function lawAgreementHandlerAgreePolicy() {
 
 
 function receivePlaceHandle() {
-  var val = $('#receivePlaceSelect').val();
+  var val = (0, _jquery.default)('#receivePlaceSelect').val();
 
   if (val != '') {
     state[_namespaces.receivePlace.inx] = true;
@@ -52628,7 +52677,7 @@ function receivePlaceHandle() {
 
 
 function returnPlaceHandle() {
-  var val = $('#returnPlaceSelect').val();
+  var val = (0, _jquery.default)('#returnPlaceSelect').val();
 
   if (val != '') {
     state[_namespaces.returnPlace.inx] = true;
@@ -52676,7 +52725,7 @@ function _carPreview() {
             //0 потому что все машине в массиве отличаются только цветом
             car = currCar[0].model.replace(/\([^\s]+\)/, ''); //убираем цвет
 
-            $('#carName').text("\u0410\u0440\u0435\u043D\u0434\u0430: ".concat(car));
+            (0, _jquery.default)('#carName').text("\u0410\u0440\u0435\u043D\u0434\u0430: ".concat(car));
 
           case 5:
           case "end":
@@ -52689,9 +52738,10 @@ function _carPreview() {
 }
 
 function datePreview() {
-  var begin = reformDate($("#leftDate").val());
-  var end = reformDate($("#rightDate").val());
-  $("#periodRent").text(translateDate(begin, end));
+  if (_dataFromServer.dataFromServer.dateIsBad) return;
+  var begin = reformDate((0, _jquery.default)("#leftDate").val());
+  var end = reformDate((0, _jquery.default)("#rightDate").val());
+  (0, _jquery.default)("#periodRent").text(translateDate(begin, end));
 }
 /**
  * @function
@@ -52716,45 +52766,61 @@ function _costPreview() {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            begin = reformDate($("#leftDate").val());
-            end = reformDate($("#rightDate").val());
-            receivePlaceId = _dataFromServer.dataFromServer.getPlaceId($("#receivePlaceSelect").val());
+            if (!_dataFromServer.dataFromServer.dateIsBad) {
+              _context3.next = 2;
+              break;
+            }
+
+            return _context3.abrupt("return");
+
+          case 2:
+            begin = reformDate((0, _jquery.default)("#leftDate").val());
+            end = reformDate((0, _jquery.default)("#rightDate").val());
+            receivePlaceId = _dataFromServer.dataFromServer.getPlaceId((0, _jquery.default)("#receivePlaceSelect").val());
             receivePlaceId = receivePlaceId ? receivePlaceId : _dataFromServer.dataFromServer.getFreePlace();
-            returnPlaceId = _dataFromServer.dataFromServer.getPlaceId($("#returnPlaceSelect").val());
+            returnPlaceId = _dataFromServer.dataFromServer.getPlaceId((0, _jquery.default)("#returnPlaceSelect").val());
             returnPlaceId = returnPlaceId ? returnPlaceId : _dataFromServer.dataFromServer.getFreePlace();
 
             if (!(!begin || !end)) {
-              _context3.next = 12;
+              _context3.next = 14;
               break;
             }
 
             _deliveryCost = _dataFromServer.dataFromServer.getDeliveryCost(receivePlaceId) + _dataFromServer.dataFromServer.getDeliveryCost(returnPlaceId);
             _resolution = "\u0418\u0442\u043E\u0433\u043E: ".concat(_deliveryCost, " \u20BD");
-            $("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 \u0430\u0432\u0442\u043E ".concat(_deliveryCost, " \u20BD"));
-            $("#resolution").text(_resolution);
+            (0, _jquery.default)("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 \u0430\u0432\u0442\u043E ".concat(_deliveryCost, " \u20BD"));
+            (0, _jquery.default)("#resolution").text(_resolution);
             return _context3.abrupt("return");
 
-          case 12:
+          case 14:
+            if (!(_dataFromServer.dataFromServer.carToBid === '')) {
+              _context3.next = 16;
+              break;
+            }
+
+            throw new Error('bad');
+
+          case 16:
             bidCostObj = {
-              car_id: 9,
+              car_id: _dataFromServer.dataFromServer.carToBid,
               begin: begin,
               end: end,
               begin_place_id: receivePlaceId,
               end_place_id: returnPlaceId
             };
-            _context3.next = 15;
+            _context3.next = 19;
             return (0, _index.getCost)(bidCostObj);
 
-          case 15:
+          case 19:
             bidCost = _context3.sent;
             deliveryCost = _dataFromServer.dataFromServer.getDeliveryCost(receivePlaceId) + _dataFromServer.dataFromServer.getDeliveryCost(returnPlaceId);
             depositStr = "+ \u0437\u0430\u043B\u043E\u0433 (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B) ".concat(bidCost.deposit, " \u20BD");
             resolution = "\u0418\u0442\u043E\u0433\u043E: ".concat(bidCost.cost + bidCost.deposit + deliveryCost, " \u20BD");
-            if (deliveryCost > 0) $("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B ".concat(bidCost.cost - deliveryCost, " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E ").concat(deliveryCost, " \u20BD"));else $("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B: ".concat(bidCost.cost, " \u20BD "));
-            $("#deposit").text(depositStr);
-            $("#resolution").text(resolution);
+            if (deliveryCost > 0) (0, _jquery.default)("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B ".concat(bidCost.cost - deliveryCost, " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E ").concat(deliveryCost, " \u20BD"));else (0, _jquery.default)("#bidCost").text("C\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B: ".concat(bidCost.cost, " \u20BD "));
+            (0, _jquery.default)("#deposit").text(depositStr);
+            (0, _jquery.default)("#resolution").text(resolution);
 
-          case 22:
+          case 26:
           case "end":
             return _context3.stop();
         }
@@ -52765,12 +52831,20 @@ function _costPreview() {
 }
 
 function showCustomReceivePlaceInput() {
-  if ($(this).val() === 'Другое место... + 300 ₽') {
-    $("#receiveCustomPlace").removeClass('customPlace-hidden');
-    $("#receiveCustomPlace").addClass('customPlace-visible');
+  if ((0, _jquery.default)(this).val() === 'Подача по городу + 300 ₽') {
+    (0, _jquery.default)("#receiveCustomPlace").removeClass('customPlace-hidden');
+    (0, _jquery.default)("#receiveCustomPlace").addClass('customPlace-visible');
+    (0, _jquery.default)("#receiveCustomPlace-wrap").removeClass('customPlace-wrap-start');
+    (0, _jquery.default)("#receiveCustomPlace-wrap").removeClass('customPlace-hidden');
+    (0, _jquery.default)("#receiveCustomPlace-wrap").addClass('customPlace-visible');
   } else {
-    $("#receiveCustomPlace").addClass('customPlace-hidden');
-    $("#receiveCustomPlace").removeClass('customPlace-visible');
+    setTimeout(function () {
+      (0, _jquery.default)("#receiveCustomPlace").removeClass('customPlace-visible');
+      (0, _jquery.default)("#receiveCustomPlace").addClass('customPlace-hidden');
+      (0, _jquery.default)("#receiveCustomPlace-wrap").addClass('customPlace-hidden');
+      (0, _jquery.default)("#receiveCustomPlace-wrap").addClass('customPlace-wrap-start');
+      (0, _jquery.default)("#receiveCustomPlace-wrap").removeClass('customPlace-visible');
+    }, 200);
   }
 }
 /**
@@ -52780,17 +52854,25 @@ function showCustomReceivePlaceInput() {
 
 
 function showCustomReturnPlaceInput() {
-  if ($(this).val() === 'Другое место... + 300 ₽') {
-    $("#returnCustomPlace").removeClass('customPlace-hidden');
-    $("#returnCustomPlace").addClass('customPlace-visible');
+  if ((0, _jquery.default)(this).val() === 'Подача по городу + 300 ₽') {
+    (0, _jquery.default)("#returnCustomPlace").removeClass('customPlace-hidden');
+    (0, _jquery.default)("#returnCustomPlace").addClass('customPlace-visible');
+    (0, _jquery.default)("#returnCustomPlace-wrap").removeClass('customPlace-wrap-end');
+    (0, _jquery.default)("#returnCustomPlace-wrap").removeClass('customPlace-hidden');
+    (0, _jquery.default)("#returnCustomPlace-wrap").addClass('customPlace-visible');
   } else {
-    $("#returnCustomPlace").addClass('customPlace-hidden');
-    $("#returnCustomPlace").removeClass('customPlace-visible');
+    setTimeout(function () {
+      (0, _jquery.default)("#returnCustomPlace").removeClass('customPlace-visible');
+      (0, _jquery.default)("#returnCustomPlace").addClass('customPlace-hidden');
+      (0, _jquery.default)("#returnCustomPlace-wrap").addClass('customPlace-hidden');
+      (0, _jquery.default)("#returnCustomPlace-wrap").addClass('customPlace-wrap-end');
+      (0, _jquery.default)("#returnCustomPlace-wrap").removeClass('customPlace-visible');
+    }, 200);
   }
 }
 
 function hideCal() {
-  $('.ex-inputs-picker').removeClass('ex-inputs-picker-visible');
+  (0, _jquery.default)('.ex-inputs-picker').removeClass('ex-inputs-picker-visible');
 }
 /**
  * @global
@@ -52831,6 +52913,7 @@ exports.secondDate = secondDate;
 var setFirstDate = function setFirstDate(dt) {
   exports.firstDateIsSelect = firstDateIsSelect = true;
   exports.firstDate = firstDate = dt;
+  getFreeReceiveTime();
 };
 /**
  * @function
@@ -52856,6 +52939,7 @@ exports.dropFirstDate = dropFirstDate;
 var setSecondDate = function setSecondDate(dt) {
   exports.secondDateIsSelect = secondDateIsSelect = true;
   exports.secondDate = secondDate = dt;
+  getFreeReturnTime();
 };
 /**
  * @function
@@ -52868,6 +52952,8 @@ exports.setSecondDate = setSecondDate;
 var dropSecondDate = function dropSecondDate() {
   exports.secondDateIsSelect = secondDateIsSelect = false;
   exports.secondDate = secondDate = '';
+  clearReceiveDate();
+  clearReturnDate();
 };
 
 exports.dropSecondDate = dropSecondDate;
@@ -52893,14 +52979,19 @@ function isDateShouldBeDisabled(timestamp) {
       return true;
     }
 
-    var dts = _dataFromServer.dataFromServer.freePeriods.filter(function (perObj) {
+    var dts = _dataFromServer.dataFromServer.freePeriods.filter(function (perObj, carInx) {
       return perObj.periods.some(function (per) {
         return per.some(function (dt) {
-          return (0, _dateFns.isEqual)(dt, firstDate);
+          if ((0, _dateFns.isEqual)(dt, firstDate)) {
+            _dataFromServer.dataFromServer.carToBid.push(_dataFromServer.dataFromServer.freePeriods[carInx].car_id);
+
+            return true;
+          }
         });
       });
     });
 
+    _dataFromServer.dataFromServer.carToBid = _lodash.default.uniq(_dataFromServer.dataFromServer.carToBid);
     dateAfterSelect = dts;
   }
 
@@ -52918,7 +53009,168 @@ function isDateShouldBeDisabled(timestamp) {
     });
   });
 }
-},{"lodash":"node_modules/lodash/lodash.js","./namespaces":"static/namespaces.js","./state/dataFromServer":"static/state/dataFromServer.js","./connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js"}],"static/components/carSelector.js":[function(require,module,exports) {
+/**
+ * @function
+ * @callback
+ * @description проверка корректности выбора даты и вывод предупреждения по результатам
+*/
+
+
+function checkingReceiveTime() {
+  var _this = this;
+
+  var time = percentsToTime((0, _jquery.default)(this).val()).split(':');
+  var fd = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate(), parseInt(time[0], 10), parseInt(time[1], 10));
+  var busyCars = [];
+
+  _dataFromServer.dataFromServer.rawPeriods.some(function (rawPeriod) {
+    var res = rawPeriod.periods.some(function (period) {
+      var begin = new Date(period.begin);
+      var end = new Date(period.end);
+      begin = (0, _dateFns.addMinutes)(begin, begin.getTimezoneOffset());
+      end = (0, _dateFns.addMinutes)(end, end.getTimezoneOffset());
+
+      if (!(0, _dateFns.isWithinInterval)(fd, {
+        start: begin,
+        end: end
+      })) {
+        (0, _jquery.default)(_this).val(timeToPercent(end)); // busyCars.push(rawPeriod.car_id);
+
+        return true;
+      }
+
+      return false;
+    });
+    return res;
+  });
+
+  var dateIsBad = busyCars.length === _dataFromServer.dataFromServer.rawPeriods.length - 3 ? true : false;
+
+  if (dateIsBad) {
+    _dataFromServer.dataFromServer.dateIsBad = true;
+    (0, _jquery.default)('#timeNotificsId').addClass('time_notifics-show');
+    (0, _jquery.default)('#notificsTimeLeft').addClass('notifics-time-left-show');
+  } else {
+    (0, _jquery.default)('#notificsTimeLeft').removeClass('notifics-time-left-show');
+    (0, _jquery.default)('#timeNotificsId').removeClass('time_notifics-show');
+  }
+}
+/**
+ * @function
+ * @callback
+ * @description проверка корректности выбора даты и вывод предупреждения по результатам
+*/
+
+
+function checkingReturnTime() {
+  var time = percentsToTime((0, _jquery.default)(this).val());
+  console.log({
+    time: time
+  });
+  (0, _jquery.default)('#timeNotificsId').removeClass('time_notifics-show');
+  (0, _jquery.default)('#timeNotificsId').removeClass('time_notifics-show');
+  (0, _jquery.default)('#notificsTimeLeft').removeClass('notifics-time-left-show');
+}
+/**
+ * @function
+ * @param {Date} time
+ * @description проверяет дату на предмет того, является ли она пограничной, то есть является ли она begin или end
+*/
+
+
+function isBorder(time) {
+  var periods = [];
+
+  _dataFromServer.dataFromServer.rawPeriods.forEach(function (carAndPeriod) {
+    periods = [].concat(_toConsumableArray(periods), _toConsumableArray(carAndPeriod.periods));
+  });
+
+  periods = _lodash.default.uniq(periods);
+  return periods = periods.filter(function (item) {
+    return true && true;
+  }).length > 0 ? true : false;
+}
+/**
+ * @function
+ * @param {Array} time
+ * @return {string} 
+ * @description генерирует разметку для select для пограничных timestamp
+*/
+
+
+function borderTime(times) {
+  var str = '';
+  times.forEach(function (item) {
+    str += genTimeHTML("".concat(item.toLocaleTimeString().slice(0, 5)), true) + '\n';
+  });
+  return str; // genTimeHTML(`${item.toLocaleTimeString().slice(0, 5)}`, true) + '\n'
+}
+/**
+ * @function
+ * @param {string} timestr
+ * @param {Boolean} disabled
+ * @example getTimeHTML(11:00,true) {
+ * 	return <option disabled> 11:00 </option>
+ * 
+ * @example getTimeHTML(10:00,false) {
+ * 	return <option> 10:00 </option>
+ * }
+ * 
+*/
+
+
+function genTimeHTML(timestr, disabled) {
+  return disabled ? "<option disabled> ".concat(timestr, " </option>") : "<option> ".concat(timestr, " </option>");
+}
+/**
+ * rendering date of receive time
+*/
+
+
+function getFreeReceiveTime() {
+  if (!firstDateIsSelect) return;
+  var times = (0, _dateFns.eachMinuteOfInterval)({
+    start: firstDate,
+    end: (0, _dateFns.addHours)(firstDate, 24)
+  }, {
+    step: 15
+  });
+  times.splice(times.length - 1);
+  var selStr = '';
+
+  if (isBorder(firstDate)) {
+    selStr = borderTime(times);
+  } else times.forEach(function (item) {
+    selStr += genTimeHTML("".concat(item.toLocaleTimeString().slice(0, 5)), false) + '\n';
+  });
+
+  (0, _jquery.default)('#selectReceiveDate').html(selStr);
+}
+
+function getFreeReturnTime() {
+  if (!secondDateIsSelect) return;
+  var times = (0, _dateFns.eachMinuteOfInterval)({
+    start: secondDate,
+    end: (0, _dateFns.addHours)(secondDate, 24)
+  }, {
+    step: 15
+  });
+  times.splice(times.length - 1);
+  var selStr = '';
+  times.forEach(function (item) {
+    selStr += genTimeHTML("".concat(item.toLocaleTimeString().slice(0, 5)), false) + '\n';
+  });
+  (0, _jquery.default)('#selectReturnDate').html(selStr);
+}
+
+function clearReceiveDate() {
+  (0, _jquery.default)('#selectReceiveDate').html('');
+}
+
+function clearReturnDate() {
+  (0, _jquery.default)('#selectReturnDate').html('');
+}
+},{"lodash":"node_modules/lodash/lodash.js","./namespaces":"static/namespaces.js","./state/dataFromServer":"static/state/dataFromServer.js","./connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js","jquery":"node_modules/jquery/dist/jquery.js"}],"static/components/carSelector.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52946,7 +53198,6 @@ function getCarsAndTariffs() {
 
 function _getCarsAndTariffs() {
   _getCarsAndTariffs = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var promises, i, tarifObj;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -52956,22 +53207,8 @@ function _getCarsAndTariffs() {
 
           case 2:
             _dataFromServer.dataFromServer.carList = _context.sent;
-            promises = [];
 
-            for (i = 0; i < _dataFromServer.dataFromServer.carList.length; ++i) {
-              tarifObj = {
-                car_id: _dataFromServer.dataFromServer.carList[i].car_id
-              };
-              promises.push((0, _index.getTarrifs)(tarifObj));
-            }
-
-            _context.next = 7;
-            return Promise.all(promises);
-
-          case 7:
-            _dataFromServer.dataFromServer.tariffsList = _context.sent;
-
-          case 8:
+          case 3:
           case "end":
             return _context.stop();
         }
@@ -52980,7 +53217,7 @@ function _getCarsAndTariffs() {
   }));
   return _getCarsAndTariffs.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","../connection/index":"static/connection/index.js","../state/dataFromServer":"static/state/dataFromServer.js"}],"static/components/fetchPeriods.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","../connection/index":"static/connection/index.js","../state/dataFromServer":"static/state/dataFromServer.js"}],"static/components/fetchPeriods.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53004,11 +53241,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /**
  * @function
+ * @param {Array}
+ * @returns perriod with offset
+ * @description смысл функции в том, чтобы скорректировать период времени на буфферное время, необходимое для подготовки авто к очередной аренде (3 часа)
+ * Если период отдыха менее 3 часов, то он удаляется 
+*/
+function correctingPeriodOnBufferTime(periods) {
+  var res = periods.map(function (period) {
+    var begin = new Date(period.begin);
+    var end = new Date(period.end);
+    end = (0, _dateFns.addMinutes)(end, end.getTimezoneOffset());
+    begin = (0, _dateFns.addMinutes)(begin, begin.getTimezoneOffset());
+    var diffOfEndAndBegin = end - begin;
+
+    if (diffOfEndAndBegin < 1000 * 60 * _dataFromServer.dataFromServer.bufferTimeMin) {
+      var diffOfEndAndBufferTime = 1000 * 60 * _dataFromServer.dataFromServer.bufferTimeMin - diffOfEndAndBegin;
+      return undefined; //если период отдыха авто менее 3 часов, то он становится равен 0
+    } else {
+      begin = (0, _dateFns.addMinutes)(begin, _dataFromServer.dataFromServer.bufferTimeMin);
+    }
+
+    end = (0, _dateFns.format)(end, 'yyyy-MM-dd HH:mm:ss');
+    begin = (0, _dateFns.format)(begin, 'yyyy-MM-dd HH:mm:ss');
+    end = "".concat(end, "Z");
+    begin = "".concat(begin, "Z");
+    return {
+      begin: begin,
+      end: end
+    };
+  });
+  return res.filter(function (period) {
+    return period;
+  });
+}
+/**
+ * @function
  * @param {Array of Date} interval
  * @returns {Array}
  * @description массив промежутков и возвращает массивов массив timestamp по 1 на 1 день
  * @example  intervalToArray([{start: 01.11.2020, end: 03.11.2020}]) return 01.11.2020, 02.11.2020,03.11.2020
 */
+
+
 function intervalToArray(arrayOfIntervals) {
   if (!arrayOfIntervals) return undefined;
   var res = [];
@@ -53043,7 +53317,7 @@ function getFreePeriods() {
 
 function _getFreePeriods() {
   _getFreePeriods = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var promises, begin, end, res;
+    var promises, begin, end, res, reformat;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -53084,15 +53358,21 @@ function _getFreePeriods() {
 
           case 10:
             res = _context.sent;
-            res = res.map(function (item, inx) {
+            reformat = res.map(function (item, inx) {
               return {
                 car_id: _dataFromServer.dataFromServer.currentCar[inx].car_id,
-                periods: intervalToArray(item)
+                periods: intervalToArray(correctingPeriodOnBufferTime(item))
               };
             });
-            _dataFromServer.dataFromServer.freePeriods = res;
+            _dataFromServer.dataFromServer.freePeriods = reformat;
+            _dataFromServer.dataFromServer.rawPeriods = res.map(function (item, inx) {
+              return {
+                car_id: _dataFromServer.dataFromServer.currentCar[inx].car_id,
+                periods: item
+              };
+            });
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -53101,7 +53381,7 @@ function _getFreePeriods() {
   }));
   return _getFreePeriods.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","../state/dataFromServer":"static/state/dataFromServer.js","../connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js","date-fns/esm":"node_modules/date-fns/esm/index.js"}],"static/components/placeSelector.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","../state/dataFromServer":"static/state/dataFromServer.js","../connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js","date-fns/esm":"node_modules/date-fns/esm/index.js"}],"static/components/placeSelector.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53113,7 +53393,11 @@ require("regenerator-runtime/runtime");
 
 var _index = require("../connection/index");
 
+var _jquery = _interopRequireDefault(require("jquery"));
+
 var _dataFromServer = require("../state/dataFromServer");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -53161,7 +53445,7 @@ function _createPlaceSelect() {
 
             _dataFromServer.dataFromServer.placesToReceiveOrReturnCar.push({
               place_id: 164,
-              title: "Другое место...",
+              title: "Подача по городу",
               city_id: 4,
               delivery_cost: 300,
               archive: false
@@ -53172,10 +53456,9 @@ function _createPlaceSelect() {
               placeHTML += rStr;
             });
 
-            $("#receivePlaceSelect").html(placeHTML);
-            $("#returnPlaceSelect").html(placeHTML);
+            _dataFromServer.dataFromServer.placeHtml = placeHTML;
 
-          case 9:
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -53186,7 +53469,7 @@ function _createPlaceSelect() {
 }
 
 ;
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","../connection/index":"static/connection/index.js","../state/dataFromServer":"static/state/dataFromServer.js"}],"static/loadData.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","../connection/index":"static/connection/index.js","jquery":"node_modules/jquery/dist/jquery.js","../state/dataFromServer":"static/state/dataFromServer.js"}],"static/loadData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53208,24 +53491,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var whenDataLoad = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var promises;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return (0, _carSelector.getCarsAndTariffs)();
-
-          case 2:
-            _dataFromServer.dataFromServer.getCurrentCar();
-
+            promises = [];
+            promises.push((0, _placeSelector.createPlaceSelect)());
+            promises.push((0, _carSelector.getCarsAndTariffs)());
             _context.next = 5;
-            return (0, _fetchPeriods.getFreePeriods)();
+            return Promise.all(promises);
 
           case 5:
-            _context.next = 7;
-            return (0, _placeSelector.createPlaceSelect)();
+            _dataFromServer.dataFromServer.getCurrentCar();
 
-          case 7:
+            _context.next = 8;
+            return (0, _fetchPeriods.getFreePeriods)();
+
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -53287,8 +53570,13 @@ function validationName(name) {
   });
   return badName ? false : true;
 }
-},{}],"static/bundle.js":[function(require,module,exports) {
+},{}],"static/bind.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.binding = binding;
 
 require("regenerator-runtime/runtime");
 
@@ -53304,31 +53592,964 @@ var _validators = require("./validators");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(function () {
-  (0, _jquery.default)(document).ready(function () {
-    (0, _jquery.default)('#receiveTimeRange').bind('input', _handlers.transferReceiveTime);
-    (0, _jquery.default)('#returnTimeRange').bind('input', _handlers.transferReturnTime);
-    (0, _jquery.default)('#receiveTimeRange').bind('input', _handlers.datePreview);
-    (0, _jquery.default)('#returnTimeRange').bind('input', _handlers.datePreview);
-    (0, _jquery.default)('#receiveTimeRange').bind('input', _handlers.costPreview);
-    (0, _jquery.default)('#returnTimeRange').bind('input', _handlers.costPreview);
-    (0, _jquery.default)('#bookButtonId').bind('click', _handlers.bookCar);
-    (0, _jquery.default)("#".concat(_namespaces.customerPhone.id)).bind('change', (0, _handlers.inputHandler)(_namespaces.customerPhone, _validators.validationPhone));
-    (0, _jquery.default)("#".concat(_namespaces.customerName.id)).bind('change', (0, _handlers.inputHandler)(_namespaces.customerName, _validators.validationName));
-    (0, _jquery.default)("#".concat(_namespaces.proofOfAgeAndExperience.id)).bind('click', (0, _handlers.lawAgreementHandlerAgeExpr)());
-    (0, _jquery.default)("#".concat(_namespaces.agreementWithPolicy.id)).bind('click', (0, _handlers.lawAgreementHandlerAgreePolicy)());
-    (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.receivePlaceHandle);
-    (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.costPreview);
-    (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.showCustomReceivePlaceInput);
-    (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.returnPlaceHandle);
-    (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.costPreview);
-    (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.showCustomReturnPlaceInput);
-    (0, _jquery.default)('#dateListener').click(_handlers.carPreview);
-    (0, _jquery.default)('#dateListener').bind('focusin', _handlers.datePreview);
-    (0, _jquery.default)('#dateListener').bind('focusout', _handlers.datePreview);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function binding() {
+  return _binding.apply(this, arguments);
+}
+
+function _binding() {
+  _binding = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _jquery.default.when(_jquery.default.ready).then(function () {
+              (0, _jquery.default)('#bookButtonId').bind('click', _handlers.bookCar);
+              (0, _jquery.default)("#".concat(_namespaces.customerPhone.id)).bind('change', (0, _handlers.inputHandler)(_namespaces.customerPhone, _validators.validationPhone));
+              (0, _jquery.default)("#".concat(_namespaces.customerPhone.id)).bind('focusin', _handlers.phoneAdditional);
+              (0, _jquery.default)("#".concat(_namespaces.customerName.id)).bind('change', (0, _handlers.inputHandler)(_namespaces.customerName, _validators.validationName));
+              (0, _jquery.default)("#".concat(_namespaces.proofOfAgeAndExperience.id)).bind('click', (0, _handlers.lawAgreementHandlerAgeExpr)());
+              (0, _jquery.default)("#".concat(_namespaces.agreementWithPolicy.id)).bind('click', (0, _handlers.lawAgreementHandlerAgreePolicy)());
+              (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.receivePlaceHandle);
+              (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.costPreview);
+              (0, _jquery.default)("#receivePlaceSelect").bind('change', _handlers.showCustomReceivePlaceInput);
+              (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.returnPlaceHandle);
+              (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.costPreview);
+              (0, _jquery.default)("#returnPlaceSelect").bind('change', _handlers.showCustomReturnPlaceInput);
+              (0, _jquery.default)('#dateListener').click(_handlers.carPreview);
+              (0, _jquery.default)('#dateListener').bind('focusin', _handlers.datePreview);
+              (0, _jquery.default)('#dateListener').bind('focusout', _handlers.datePreview);
+            });
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _binding.apply(this, arguments);
+}
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","jquery":"node_modules/jquery/dist/jquery.js","./handlers":"static/handlers.js","./loadData":"static/loadData.js","./namespaces":"static/namespaces.js","./validators":"static/validators.js"}],"static/cal.js":[function(require,module,exports) {
+var define;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DateRangePicker = void 0;
+
+var _handlers = require("./handlers");
+
+var _dataFromServer = require("./state/dataFromServer");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var dateRangePicker = 0;
+var num = 0;
+!function (t, e) {
+  "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : e(t.DateRangePicker = {});
+}(void 0, function (t) {
+  "use strict";
+
+  function o() {
+    var t = new Date();
+    return t.setHours(0, 0, 0, 0), t;
+  }
+
+  function h(t, e) {
+    return (t && t.toDateString()) === (e && e.toDateString());
+  }
+
+  function v(t, e, n) {
+    var a = (t = new Date(t)).getDate(),
+        o = t.getMonth() + e;
+    return t.setDate(1), t.setMonth(n ? (12 + o) % 12 : o), t.setDate(a), t.getDate() < a && t.setDate(0), t;
+  }
+
+  function i(t, e) {
+    return (t = new Date(t)).setFullYear(t.getFullYear() + e), t;
+  }
+
+  function r(n) {
+    return function (t) {
+      return e = "string" == typeof t ? n(t) : t, (e = new Date(e)).setHours(0, 0, 0, 0), e;
+      var e;
+    };
+  }
+
+  function l(t, e, n) {
+    return t < e ? e : n < t ? n : t;
+  }
+
+  function f(t, e) {
+    var n = void 0;
+    return function () {
+      clearTimeout(n), n = setTimeout(e, t);
+    };
+  }
+
+  function p() {}
+
+  function g() {
+    for (var t = arguments, e = t[0], n = 1; n < t.length; ++n) {
+      var a = t[n] || {};
+
+      for (var o in a) {
+        e[o] = a[o];
+      }
+    }
+
+    return e;
+  }
+
+  var s = {
+    days: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+    today: "Сегодня",
+    clear: "Очистить",
+    close: "Закрыть"
+  };
+
+  function u(t) {
+    t = t || {};
+    var n,
+        a,
+        e = r((t = g({
+      lang: s,
+      mode: "dp-modal",
+      hilightedDate: o(),
+      format: function format(t) {
+        return t.getMonth() + 1 + "/" + t.getDate() + "/" + t.getFullYear();
+      },
+      parse: function parse(t) {
+        var e = new Date(t);
+        return isNaN(e) ? o() : e;
+      },
+      dateClass: function dateClass() {},
+      inRange: function inRange() {
+        return !0;
+      }
+    }, t)).parse);
+    return t.lang = g(s, t.lang), t.parse = e, t.inRange = (a = (n = t).inRange, function (t, e) {
+      return a(t, e) && n.min <= t && n.max >= t;
+    }), t.min = e(t.min || i(o(), -100)), t.max = e(t.max || i(o(), 100)), t.hilightedDate = t.parse(t.hilightedDate), t;
+  }
+
+  var m = {
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40,
+    enter: 13,
+    esc: 27
+  };
+
+  function D(t, e, n) {
+    return e.addEventListener(t, n, !0), function () {
+      e.removeEventListener(t, n, !0);
+    };
+  }
+
+  var y = function () {
+    var t = window.CustomEvent;
+    "function" != typeof t && ((t = function t(_t, e) {
+      e = e || {
+        bubbles: !1,
+        cancelable: !1,
+        detail: void 0
+      };
+      var n = document.createEvent("CustomEvent");
+      return n.initCustomEvent(_t, e.bubbles, e.cancelable, e.detail), n;
+    }).prototype = window.Event.prototype);
+    return t;
+  }();
+
+  var b = {
+    day: {
+      onKeyDown: function onKeyDown(t, e) {
+        var n = t.keyCode,
+            a = n === m.left ? -1 : n === m.right ? 1 : n === m.up ? -7 : n === m.down ? 7 : 0;
+        n === m.esc ? e.close() : a && (t.preventDefault(), e.setState({
+          hilightedDate: (o = e.state.hilightedDate, r = a, (o = new Date(o)).setDate(o.getDate() + r), o)
+        }));
+        var o, r;
+      },
+      onClick: {
+        "dp-day": function dpDay(t, e) {
+          var dt = new Date(parseInt(t.target.getAttribute("data-date")));
+
+          if (_handlers.firstDateIsSelect) {
+            var days = (0, _jquery.default)(".dp-day").toArray();
+            days = days.filter(function (item) {
+              return (0, _jquery.default)(item).hasClass('dr-in-range');
+            });
+            var bad = '';
+            days.forEach(function (item) {
+              var d = (0, _jquery.default)(item).hasClass('dp-day-disabled');
+              if (d) bad = true;
+            });
+            if (bad) return;
+          }
+
+          ;
+          e.setState({
+            selectedDate: dt
+          });
+          /**
+           * @author wlr986
+          */
+
+          if (_handlers.firstDateIsSelect && _handlers.secondDateIsSelect) {
+            (0, _handlers.dropFirstDate)();
+            (0, _handlers.dropSecondDate)();
+          }
+
+          if (_handlers.firstDateIsSelect) {
+            (0, _handlers.setSecondDate)(dt);
+            return;
+          }
+
+          (0, _handlers.setFirstDate)(dt);
+        },
+        "dp-next": function dpNext(t, e) {
+          var n = e.state.hilightedDate;
+          e.setState({
+            hilightedDate: v(n, 1)
+          });
+        },
+        "dp-prev": function dpPrev(t, e) {
+          var n = e.state.hilightedDate;
+          e.setState({
+            hilightedDate: v(n, -1)
+          });
+        },
+        "dp-today": function dpToday(t, e) {
+          e.setState({
+            selectedDate: o()
+          });
+        },
+        "dp-clear": function dpClear(t, e) {
+          (0, _handlers.dropFirstDate)();
+          (0, _handlers.dropSecondDate)();
+          _dataFromServer.dataFromServer.clickedCars = [];
+          e.setState({
+            selectedDate: null
+          });
+        },
+        "dp-close": function dpClose(t, e) {
+          e.close();
+        },
+        "dp-cal-month": function dpCalMonth(t, e) {
+          e.setState({
+            view: "month"
+          });
+        },
+        "dp-cal-year": function dpCalYear(t, e) {
+          e.setState({
+            view: "year"
+          });
+        }
+      },
+      render: function render(r) {
+        var i = r.opts,
+            t = i.lang,
+            e = r.state,
+            n = t.days,
+            a = i.dayOffset || 1,
+            s = e.selectedDate,
+            u = e.hilightedDate,
+            d = u.getMonth(),
+            c = o().getTime();
+        var weekStr = "\n\t\t\t\t".concat(n.map(function (t, e) {
+          return "<span class=\"dp-col-header\"> ".concat(n[(e + a) % n.length], " </span>");
+        }).join(""), "\n\t\t\t\t\t");
+        var header = "\n\t\t\t\t\t<div class=\"dp-cal\"> \n\t\t\t\t\t<header class=\"dp-cal-header\"> \n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-prev\">Prev</button> \n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-cal-month\" id=\"dp-cal-month-text\">\n\t\t\t\t\t".concat(t.months[d], " </button>\n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-cal-year\">\n\t\t\t\t\t ").concat(u.getFullYear(), " \n\t\t\t\t\t</button>\n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-next\">Next</button>\n\t\t\t\t\t\t</header>\n\t\t\t\t\t\t<div class=\"dp-days\">\n\t\t\t\t\t"); // const select = `<select class="car-select" "> 
+        // <option value="Белый">Белый</option>
+        // </select>`
+
+        var select = '';
+        var closeOrSaveName = _handlers.firstDateIsSelect ? "Сохранить" : "Закрыть";
+        var footer = "\n\t\t\t\t</div>\n\t\t\t\t<footer class=\"dp-cal-footer\">\n\t\t\t\t\n\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-clear\">  ".concat(t.clear, " </button>\n\t\t\t\t</script>\n\t\t\t\t<button onClick=\"\n\t\t\t\tdocument.querySelector('.ex-inputs-picker').classList.remove('ex-inputs-picker-visible');\" tabindex=\"-1\" type=\"button\" class=\"dp-close\" id=\"dp-close-btn\">").concat(closeOrSaveName, "</button>\n\n\t\t\t\t</footer>\n\t\t\t\t</div>"); // < button tabindex = "-1" type = "button" class="dp-today" > ${ t.today } </button >
+
+        function resHTML(timestamp, e, n) {
+          var res = "";
+          var newDate = new Date(timestamp);
+          newDate.setDate(1);
+          newDate.setDate(1 - newDate.getDay() + e);
+          e && newDate.getDate() === e + 1 && newDate.setDate(e - 6);
+
+          for (var r = 0; r < 42; ++r) {
+            var _r = n(newDate);
+
+            res += _r;
+            newDate.setDate(newDate.getDate() + 1);
+          }
+
+          return res;
+        }
+        /**
+         * @function
+         * @param {Date}
+         * @returns {HTMLButtonElement}
+         * @description смысл функции в том, что она принимает timestamp и возвращает разметку HTML кнопки с необходимыми стилями: пограничный день(pg-edge-day), текущий день (dp-day-today),
+         * неактивный день (dp-day-disabled), а также текущий и выбранный день (dp-current, dp-select)
+        */
+
+
+        function dayHTML(t) {
+          var currentMonth = d; // e === true if currenthMonth не равен t.Month(). Смысл переменной в том, что она используется для установления класса пограничного дня
+
+          var onBorder = t.getMonth() !== currentMonth; //Boolean
+          // var n = !i.inRange(t);//Boolean 
+
+          var shouldToDisabled = (0, _handlers.isDateShouldBeDisabled)(t);
+          var attr = shouldToDisabled ? 'disabled' : ''; // Если а установлено, то дата помечается как сегодняшнее число
+
+          var isToday = shouldToDisabled ? false : t.getTime() === c; //Boolean
+          //итоговая разметка кнопки
+
+          var res = "dp-day"; //String
+
+          var isCurrent = shouldToDisabled ? false : t.getTime() === c && d === new Date().getMonth() + 1;
+          var isSelected = shouldToDisabled ? false : h(t, s);
+          res += onBorder ? " dp-edge-day" : "";
+          res += isCurrent ? " dp-current" : "";
+          res += isSelected ? " dp-selected" : "";
+          res += shouldToDisabled ? " dp-day-disabled" : "";
+          res += isToday ? " dp-day-today" : "";
+          return "\n\t\t\t\t\t<button ".concat(attr, " tabindex=\"-1\" type=\"button\" class=\"").concat(res += " " + i.dateClass(t, r), "\" data-date=\" ").concat(t.getTime(), " \" id=\"day-").concat(t.getDate(), " \"> ").concat(t.getDate(), " </button>\n\t\t\t\t\t");
+        }
+
+        var body = resHTML(u, a, dayHTML);
+        return header + select + weekStr + body + footer;
+      }
+    },
+    year: {
+      render: function render(t) {
+        var e = t.state,
+            n = e.hilightedDate.getFullYear(),
+            a = e.selectedDate.getFullYear();
+        return '<div class="dp-years">' + function (t, e) {
+          for (var n = "", a = t.opts.max.getFullYear(); a >= t.opts.min.getFullYear(); --a) {
+            n += e(a);
+          }
+
+          return n;
+        }(t, function (t) {
+          var e = "dp-year";
+          return e += t === n ? " dp-current" : "", '<button tabindex="-1" type="button" class="' + (e += t === a ? " dp-selected" : "") + '" data-year="' + t + '">' + t + "</button>";
+        }) + "</div>";
+      },
+      onKeyDown: function onKeyDown(t, e) {
+        var n = t.keyCode,
+            a = e.opts,
+            o = n === m.left || n === m.up ? 1 : n === m.right || n === m.down ? -1 : 0;
+        if (n === m.esc) e.setState({
+          view: "day"
+        });else if (o) {
+          t.preventDefault();
+          var r = i(e.state.hilightedDate, o);
+          e.setState({
+            hilightedDate: l(r, a.min, a.max)
+          });
+        }
+      },
+      onClick: {
+        "dp-year": function dpYear(t, e) {
+          e.setState({
+            hilightedDate: (n = e.state.hilightedDate, a = parseInt(t.target.getAttribute("data-year")), (n = new Date(n)).setFullYear(a), n),
+            view: "day"
+          });
+          var n, a;
+        }
+      }
+    },
+    month: {
+      onKeyDown: function onKeyDown(t, e) {
+        var n = t.keyCode,
+            a = n === m.left ? -1 : n === m.right ? 1 : n === m.up ? -3 : n === m.down ? 3 : 0;
+        n === m.esc ? e.setState({
+          view: "day"
+        }) : a && (t.preventDefault(), e.setState({
+          hilightedDate: v(e.state.hilightedDate, a, !0)
+        }));
+      },
+      onClick: {
+        "dp-month": function dpMonth(t, e) {
+          e.setState({
+            hilightedDate: (n = e.state.hilightedDate, a = parseInt(t.target.getAttribute("data-month")), v(n, a - n.getMonth())),
+            view: "day"
+          });
+          var n, a;
+        }
+      },
+      render: function render(t) {
+        var e = t.opts.lang.months,
+            a = t.state.hilightedDate.getMonth();
+        return '<div class="dp-months">' + e.map(function (t, e) {
+          var n = "dp-month";
+          return '<button tabindex="-1" type="button" class="' + (n += a === e ? " dp-current" : "") + '" data-month="' + e + '">' + t + "</button>";
+        }).join("") + "</div>";
+      }
+    }
+  };
+
+  function d(o, r, a) {
+    var t,
+        i,
+        e,
+        n,
+        s,
+        u,
+        d = !1,
+        c = {
+      el: void 0,
+      opts: a,
+      shouldFocusOnBlur: !0,
+      shouldFocusOnRender: !0,
+      state: {
+        get selectedDate() {
+          return i;
+        },
+
+        set selectedDate(t) {
+          /**update input here !!!  */
+          t && !a.inRange(t) || (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t, c.updateInput(i), r("select"), c.close());
+        },
+
+        view: "day"
+      },
+      adjustPosition: p,
+      containerHTML: '<div class="dp"></div>',
+      attachToDom: function attachToDom() {
+        document.body.appendChild(c.el);
+      },
+      updateInput: function updateInput(t) {
+        var e = new y("change", {
+          bubbles: !0
+        });
+        e.simulated = !0, o.value = t ? a.format(t) : "", o.dispatchEvent(e);
+      },
+      computeSelectedDate: function computeSelectedDate() {
+        return a.parse(o.value);
+      },
+      currentView: function currentView() {
+        return b[c.state.view];
+      },
+      open: function open() {
+        var t, e, n;
+        d || (c.el || (c.el = (t = a, e = c.containerHTML, (n = document.createElement("div")).className = t.mode, n.innerHTML = e, n), function (a) {
+          var t = a.el,
+              e = t.querySelector(".dp");
+
+          function n(n) {
+            n.target.className.split(" ").forEach(function (t) {
+              var e = a.currentView().onClick[t];
+              e && e(n, a);
+            });
+          }
+
+          t.ontouchstart = p, D("blur", e, f(150, function () {
+            a.hasFocus() || a.close(!0);
+          })), D("keydown", t, function (t) {
+            t.keyCode === m.enter ? n(t) : a.currentView().onKeyDown(t, a);
+          }), D("mousedown", e, function (t) {
+            t.target.focus && t.target.focus(), document.activeElement !== t.target && (t.preventDefault(), w(a));
+          }), D("click", t, n);
+        }(c)), i = l(c.computeSelectedDate(), a.min, a.max), c.state.hilightedDate = i || a.hilightedDate, c.state.view = "day", c.attachToDom(), c.render(), r("open"));
+      },
+      isVisible: function isVisible() {
+        return !!c.el && !!c.el.parentNode;
+      },
+      hasFocus: function hasFocus() {
+        var t = document.activeElement;
+        return c.el && c.el.contains(t) && t.className.indexOf("dp-focuser") < 0;
+      },
+      shouldHide: function shouldHide() {
+        return c.isVisible();
+      },
+      close: function close(t) {
+        var e = c.el;
+
+        if (c.isVisible()) {
+          if (e) {
+            var n = e.parentNode;
+            n && n.removeChild(e);
+          }
+
+          var a;
+          d = !0, t && c.shouldFocusOnBlur && ((a = o).focus(), /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && a.blur()), setTimeout(function () {
+            d = !1;
+          }, 100), r("close");
+        }
+      },
+      destroy: function destroy() {
+        c.close(), t();
+      },
+      render: function render() {
+        if (c.el) {
+          var t = c.hasFocus(),
+              e = c.currentView().render(c);
+          e && (c.el.firstChild.innerHTML = e), c.adjustPosition(), (t || c.shouldFocusOnRender) && w(c);
+        }
+      },
+      setState: function setState(t) {
+        for (var e in t) {
+          c.state[e] = t[e];
+        }
+
+        r("statechange"), c.render();
+      }
+    };
+    return e = o, n = c, s = f(5, function () {
+      n.shouldHide() ? n.close() : n.open();
+    }), u = [D("blur", e, f(150, function () {
+      n.hasFocus() || n.close(!0);
+    })), D("mousedown", e, function () {
+      e === document.activeElement && s();
+    }), D("focus", e, s), D("input", e, function (t) {
+      var e = n.opts.parse(t.target.value);
+      isNaN(e) || n.setState({
+        hilightedDate: e
+      });
+    })], t = function t() {
+      u.forEach(function (t) {
+        t();
+      });
+    }, c;
+  }
+
+  function w(t) {
+    var e = t.el.querySelector(".dp-current");
+    return e && e.focus();
+  }
+
+  function c(S, t, e) {
+    var x = d(S, t, e);
+    return x.shouldFocusOnBlur = !1, Object.defineProperty(x, "shouldFocusOnRender", {
+      get: function get() {
+        return S !== document.activeElement;
+      }
+    }), x.adjustPosition = function () {
+      var t, e, n, a, o, r, i, s, u, d, c, l, f, p, h, v, g, m, D, y, b, w;
+      c = x, l = S.getBoundingClientRect(), f = window, t = l, e = f, n = c.el, a = e.pageYOffset, o = a + t.top, r = n.offsetHeight, i = o + t.height + 8, u = 0 < (s = o - r - 8) && i + r > a + e.innerHeight, d = u ? s : i, n.classList && (n.classList.toggle("dp-is-above", u), n.classList.toggle("dp-is-below", !u)), n.style.top = d + "px", p = l, h = f, v = c.el, g = h.pageXOffset, m = p.left + g, D = h.innerWidth + g, y = v.offsetWidth, b = D - y, w = D < m + y && 0 < b ? b : m, v.style.left = w + "px", c.el.style.visibility = "";
+    }, x;
+  }
+
+  function S(t, e, n) {
+    return t = t && t.tagName ? t : document.querySelector(t), "dp-modal" === n.mode ? (o = d(a = t, e, n), a.readonly = !0, o.containerHTML += '<a href="#" class="dp-focuser">.</a>', o) : "dp-below" === n.mode ? c(t, e, n) : "dp-permanent" === n.mode ? ((s = d(r = t, e, i = n)).close = p, s.destroy = p, s.updateInput = p, s.shouldFocusOnRender = i.shouldFocusOnRender, s.computeSelectedDate = function () {
+      return i.hilightedDate;
+    }, s.attachToDom = function () {
+      r.appendChild(s.el);
+    }, s.open(), s) : void 0;
+    var a, o, r, i, s;
+  }
+
+  function x() {
+    var a = {};
+
+    function n(t, e) {
+      (a[t] = a[t] || []).push(e);
+    }
+
+    return {
+      on: function on(t, e) {
+        return e ? n(t, e) : function (t) {
+          for (var e in t) {
+            n(e, t[e]);
+          }
+        }(t), this;
+      },
+      emit: function emit(e, n) {
+        (a[e] || []).forEach(function (t) {
+          t(e, n);
+        });
+      },
+      off: function off(t, e) {
+        return t ? a[t] = e ? (a[t] || []).filter(function (t) {
+          return t !== e;
+        }) : [] : a = {}, this;
+      }
+    };
+  }
+
+  function F(t, e) {
+    var n = x(),
+        a = S(t, function (t) {
+      n.emit(t, o);
+    }, u(e)),
+        o = {
+      get state() {
+        return a.state;
+      },
+
+      on: n.on,
+      off: n.off,
+      setState: a.setState,
+      open: a.open,
+      close: a.close,
+      destroy: a.destroy
+    };
+    return o;
+  }
+
+  var e = F;
+
+  function C(t) {
+    return 12 * t.getYear() + t.getMonth();
+  }
+
+  t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e) {
+    e = e || {};
+    var o,
+        n = x(),
+        a = (c = t, "string" == typeof c && (c = document.querySelector(c)), c.innerHTML = '<div class="dr-cals"><div class="dr-cal-start"></div><div class="dr-cal-end"></div></div>', c.querySelector(".dr-cals")),
+        r = {
+      start: void 0,
+      end: void 0
+    },
+        i = F(a.querySelector(".dr-cal-start"), g({}, e.startOpts, {
+      mode: "dp-permanent",
+      dateClass: p
+    })),
+        s = F(a.querySelector(".dr-cal-end"), g({}, e.endOpts, {
+      mode: "dp-permanent",
+      hilightedDate: v(i.state.hilightedDate, 1),
+      dateClass: p
+    })),
+        u = {
+      statechange: function statechange(t, e) {
+        var n,
+            a = i.state.hilightedDate,
+            o = s.state.hilightedDate;
+        1 != (n = a, C(o) - C(n)) && (e === i ? s.setState({
+          hilightedDate: v(e.state.hilightedDate, 1)
+        }) : i.setState({
+          hilightedDate: v(e.state.hilightedDate, -1)
+        }));
+      },
+      select: function select(t, e) {
+        var n = e.state.selectedDate;
+        !r.start || r.end ? l({
+          start: n,
+          end: void 0
+        }) : l({
+          start: n > r.start ? r.start : n,
+          end: n > r.start ? n : r.start
+        });
+      }
+    },
+        d = {
+      state: r,
+      setState: l,
+      on: n.on,
+      off: n.off
+    };
+    var c;
+
+    function l(t) {
+      for (var e in t) {
+        r[e] = t[e];
+      }
+
+      n.emit("statechange", d), f();
+    }
+
+    function f() {
+      i.setState({}), s.setState({});
+    }
+
+    function p(t) {
+      var e, n, a;
+      return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "");
+    }
+
+    return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+      if (t.target.classList.contains("dp-day")) {
+        var e = new Date(parseInt(t.target.dataset.date));
+        !h(e, o) && (o = e, f());
+      }
+    }), d;
+  }, Object.defineProperty(t, "__esModule", {
+    value: !0
   });
 });
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","jquery":"node_modules/jquery/dist/jquery.js","./handlers":"static/handlers.js","./loadData":"static/loadData.js","./namespaces":"static/namespaces.js","./validators":"static/validators.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var DateRangePicker = dateRangePicker;
+exports.DateRangePicker = DateRangePicker;
+},{"./handlers":"static/handlers.js","./state/dataFromServer":"static/state/dataFromServer.js","jquery":"node_modules/jquery/dist/jquery.js"}],"static/calinject.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.calInject = calInject;
+
+var _loadData = require("./loadData");
+
+var _cal = require("./cal");
+
+var _handlers = require("./handlers");
+
+var _namespaces = require("./namespaces");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+var _dataFromServer = require("./state/dataFromServer");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function calInject() {
+  return _calInject.apply(this, arguments);
+} //
+// <!--
+//     <div class="book__field-value"><span>Владикавказ</span> ул. Кырджалийская 8а</div>
+// </div> <ul id="book__place-options" class="book__place-options">
+//     <a href="">
+//         <li>
+//             Аэропорт Беслан
+//             <span class="book__place-add-price">+ 1&nbsp;000₽</span>
+//         </li>
+//     </a>
+//     <li>
+//         Аэропорт Магас
+//         <span class="book__place-add-price">+ 2&nbsp;000₽</span>
+//     </li>
+//     <li>
+//         Подача авто по городу
+//         <span class="book__place-add-price">+ 300₽</span>
+//     </li>
+// </ul> -->
+// <!--
+//         <div class="book__field" id="returnPlace">
+//             <div class="book__field-subtitle">Место возврата</div>
+//             <div class="book__field-value"><span>Владикавказ</span> ул. Кырджалийская 8а</div>
+//         </div>
+//         <ul id="book__place-options" class="book__place-options">
+//             <a href="">
+//                 <li>
+//                     Аэропорт Беслан
+//                     <span class="book__place-add-price">+ 1&nbsp;000₽</span>
+//                 </li>
+//             </a>
+//             <li>
+//                 Аэропорт Магас
+//                 <span class="book__place-add-price">+ 2&nbsp;000₽</span>
+//             </li>
+//             <li>
+//                 Подача авто по городу
+//                 <span class="book__place-add-price">+ 300₽</span>
+//             </li>
+//         </ul>
+//         <input type="range" id="returnTimeRange" disabled="disabled" max="96"> --></input>
+
+
+function _calInject() {
+  _calInject = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var root, txtStart, txtEnd, container, showPicker, previousTimeout, hidePicker;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            hidePicker = function _hidePicker() {
+              clearTimeout(previousTimeout);
+              previousTimeout = setTimeout(function () {
+                if (!root.contains(document.activeElement)) {
+                  container.classList.remove('ex-inputs-picker-visible');
+                }
+              }, 10);
+            };
+
+            showPicker = function _showPicker() {
+              container.classList.add('ex-inputs-picker-visible');
+            };
+
+            root = document.querySelector('.ex-inputs');
+            txtStart = root.querySelector('.ex-inputs-start');
+            txtEnd = root.querySelector('.ex-inputs-end');
+            container = root.querySelector('.ex-inputs-picker'); // Inject DateRangePicker into our container
+
+            (0, _cal.DateRangePicker)(container).on('statechange', function (_, rp) {
+              // Update the inputs when the state changes
+              var range = rp.state;
+              /**
+               * @author wlr986
+               * @description saving time data when change date
+              */
+
+              var startModifier = '';
+              var endModifier = '';
+              _dataFromServer.dataFromServer.dateIsBad = true;
+              var currDateStart = (0, _jquery.default)('#leftDate').val();
+              var dataArrStart = currDateStart.split(' ');
+              var currDateEnd = (0, _jquery.default)('#rightDate').val();
+              var dataArrEnd = currDateEnd.split(' ');
+
+              if (currDateStart.length > 0 && dataArrStart.length > 1 && dataArrStart[1] != '') {
+                startModifier = dataArrStart[1];
+              }
+
+              if (currDateEnd.length > 0 && dataArrEnd.length > 1 && dataArrEnd[1] != '') {
+                endModifier = dataArrEnd[1];
+              }
+
+              txtStart.value = range.start ? range.start.toLocaleDateString() + ' ' + startModifier : '';
+              if (txtStart.value) txtEnd.value = range.end ? range.end.toLocaleDateString() + ' ' + endModifier : '';else txtEnd.value = '';
+              var leftDateInsert = false;
+              var rightDateInsert = false;
+
+              if (txtStart.value) {
+                (0, _jquery.default)('#selectReceiveDate').attr('disabled', null);
+                leftDateInsert = true;
+              } else {
+                (0, _jquery.default)('#selectReceiveDate').attr('disabled', true);
+              }
+
+              if (txtEnd.value) {
+                (0, _jquery.default)('#selectReturnDate').attr('disabled', null);
+                rightDateInsert = true;
+              } else {
+                (0, _jquery.default)('#selectReturnDate').attr('disabled', true);
+              }
+
+              if (leftDateInsert && rightDateInsert) {
+                _handlers.state[_namespaces.dateObj.inx] = true;
+                (0, _handlers.coloringBorder)(_namespaces.dateObj.inx, _namespaces.fieldClasses.validationPassed);
+                (0, _handlers.datePreview)();
+                (0, _handlers.costPreview)();
+              } else {
+                (0, _handlers.datePreview)();
+                (0, _handlers.costPreview)();
+                _handlers.state[_namespaces.dateObj.inx] = false;
+                (0, _handlers.deColoringBorder)(_namespaces.dateObj.inx, _namespaces.fieldClasses.validationPassed);
+              }
+            }); // When the inputs gain focus, show the date range picker
+
+            (0, _jquery.default)('#dateListener').bind('focusin', showPicker); // txtStart.addEventListener('focus', showPicker); txtEnd.addEventListener('focus', showPicker);
+
+            // root.addEventListener('focusout', hidePicker);
+            (0, _jquery.default)('.dr-cal-end').detach();
+            (0, _jquery.default)('.dp-next').css('visibility', 'visible');
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _calInject.apply(this, arguments);
+}
+},{"./loadData":"static/loadData.js","./cal":"static/cal.js","./handlers":"static/handlers.js","./namespaces":"static/namespaces.js","jquery":"node_modules/jquery/dist/jquery.js","./state/dataFromServer":"static/state/dataFromServer.js"}],"static/template.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.rootSection = void 0;
+
+var _dataFromServer = require("./state/dataFromServer");
+
+var rootSection = function rootSection(placeHtml) {
+  return " <div style=\"background: #FAFAFB; padding: 15px\">\n    <div class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n        <span class=\"bool_title-price\" id=\"carPrice\"></span>\n    </div>\n    <div id=\"dateListener\" class=\"book__dates ex-inputs\">\n        <div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n            <input id=\"leftDate\" class=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n            <div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n        </div>\n        <div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n            <input id=\"rightDate\" class=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n            <div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n        </div>\n        <div class=\"row\">\n            <div class=\"ex-inputs-picker\"></div>\n        </div>\n    </div>\n    <div id=\"timeSelects\" class=\"timeSelects\">\n        <div id=\"receiveSelects\" class=\"receiveSelects\">\n            <select id=\"selectReceiveDate\" size=\"1\" class=\"dateTimeSelect\" disabled>\n            </select>\n\n        </div>\n        <div id=\"returnSelects\" class=\"returnSelects\">\n            <select id=\"selectReturnDate\" class=\"dateTimeSelect\" disabled>\n            </select>\n        </div>\n    </div>\n</div>\n\n<div class=\"book__field-wrap\">\n    <select class=\"book__field book__field-receivePlaceSelect\" id=\"receivePlaceSelect\">\n        ".concat(placeHtml, "\n    </select>\n    <div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n</div>\n<div id=\"receiveCustomPlace-wrap\" class=\"book__field-wrap customPlace-wrap-start\">\n    <input type=\"text\" id=\"receiveCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n    <div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n</div>\n<div class=\"book__field-wrap\">\n    <select class=\"book__field book__field-receivePlaceSelect\" id=\"returnPlaceSelect\">\n        ").concat(placeHtml, "\n    </select>\n    <div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n</div>\n<div id=\"returnCustomPlace-wrap\" class=\"book__field-wrap customPlace-wrap-end\">\n    <input type=\"text\" id=\"returnCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n    <div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n</div>\n<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n<form autocomplete=\"on\">\n    <div class=\"book__field-wrap\">\n        <input class=\"book__field\" id=\"customerName\" name=\"name\" type=\"text\" required placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n        <div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n    </div>\n    <div class=\"book__field-wrap\">\n        <input class=\"book__field\" id=\"customerPhone\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n        <div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n    </div>\n</form>\n<div id=\"lawAgreement\">\n    <input type=\"checkbox\" class=\"book__checkbox\" id=\"age\" value=\"yes\">\n    <label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438 \u043C\u043E\u0439 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n        \u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label>\n    <input type=\"checkbox\" class=\"book__checkbox\" id=\"agree\" value=\"yes\">\n    <label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n        \u0434\u0430\u043D\u043D\u044B\u0445.</label>\n</div>\n\n<button class=\"book__btn\" type=\"submit\" id=\"bookButtonId\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n<div class=\"book__checkup\">\n    <span id=\"carName\"></span>\n    <span id=\"periodRent\"></span>\n    <br>\n    <span id=\"bidCost\"></span>\n    <span id=\"deposit\"></span>\n    <br>\n    <span id=\"resolution\"></span>\n</div>\n</div>\n\n");
+};
+
+exports.rootSection = rootSection;
+},{"./state/dataFromServer":"static/state/dataFromServer.js"}],"static/clearForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.clearForm = clearForm;
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+var _template = require("./template");
+
+var _dataFromServer = require("./state/dataFromServer");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function clearForm() {
+  return _clearForm.apply(this, arguments);
+}
+
+function _clearForm() {
+  _clearForm = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            (0, _jquery.default)("#rootSection").html("".concat((0, _template.rootSection)(_dataFromServer.dataFromServer.placeHtml)));
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _clearForm.apply(this, arguments);
+}
+
+;
+},{"jquery":"node_modules/jquery/dist/jquery.js","./template":"static/template.js","./state/dataFromServer":"static/state/dataFromServer.js"}],"static/bundle.js":[function(require,module,exports) {
+"use strict";
+
+var _bind = require("./bind");
+
+var _calinject = require("./calinject");
+
+var _clearForm = require("./clearForm");
+
+var _loadData = require("./loadData");
+
+var _dataFromServer = require("./state/dataFromServer");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+(0, _loadData.whenDataLoad)().then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  return regeneratorRuntime.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return (0, _clearForm.clearForm)();
+
+        case 2:
+          _context.next = 4;
+          return (0, _bind.binding)();
+
+        case 4:
+          _context.next = 6;
+          return (0, _calinject.calInject)();
+
+        case 6:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee);
+})));
+},{"./bind":"static/bind.js","./calinject":"static/calinject.js","./clearForm":"static/clearForm.js","./loadData":"static/loadData.js","./state/dataFromServer":"static/state/dataFromServer.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -53356,7 +54577,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43665" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36115" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -53532,5 +54753,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","static/bundle.js"], null)
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","static/bundle.js"], null)
 //# sourceMappingURL=/bundle.e5ef4e5c.js.map

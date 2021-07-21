@@ -12,6 +12,8 @@
   "dependencies": {
     "date-fns": "^2.22.1",
     "jquery": "^3.6.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "regenerator-runtime": "^0.13.7",
+    "uikit": "^3.7.1"
   }
 }

@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+})({"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var define;
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -912,6 +912,7 @@ var dataFromServer = {
   carList: [],
   tariffsList: [],
   currentCar: '',
+  carToBid: '',
   beginFetchPeriod: "".concat(new Date().getFullYear(), "-01-01 00:00"),
   endFetchPeriod: "".concat(new Date().getFullYear(), "-12-31 00:00"),
   freePeriods: [],
@@ -1440,7 +1441,7 @@ function _getAccess() {
   }));
   return _getAccess.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js"}],"static/connection/index.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"static/connection/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1785,7 +1786,7 @@ function _sendRequest() {
   }));
   return _sendRequest.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./auth":"static/connection/auth.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./auth":"static/connection/auth.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21851,7 +21852,7 @@ function _getFreePeriods() {
   }));
   return _getFreePeriods.apply(this, arguments);
 }
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","../state/dataFromServer":"static/state/dataFromServer.js","../connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js","date-fns/esm":"node_modules/date-fns/esm/index.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","../state/dataFromServer":"static/state/dataFromServer.js","../connection/index":"static/connection/index.js","date-fns":"node_modules/date-fns/esm/index.js","date-fns/esm":"node_modules/date-fns/esm/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -21879,7 +21880,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43665" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43117" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -22055,5 +22056,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","static/components/fetchPeriods.js"], null)
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","static/components/fetchPeriods.js"], null)
 //# sourceMappingURL=/fetchPeriods.1ac39429.js.map

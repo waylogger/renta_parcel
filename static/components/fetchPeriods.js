@@ -1,9 +1,50 @@
 
 import 'regenerator-runtime/runtime'
-import {dataFromServer} from '../state/dataFromServer'
-import {getCarPeriodList} from '../connection/index'
-import { addHours, addMinutes, format, startOfDecade } from 'date-fns'
+import { dataFromServer } from '../state/dataFromServer'
+import { getCarPeriodList } from '../connection/index'
+import { addHours, addMilliseconds, addMinutes, format, startOfDecade } from 'date-fns'
 import { eachDayOfInterval } from 'date-fns/esm';
+
+
+/**
+ * @function
+ * @param {Array}
+ * @returns perriod with offset
+ * @description смысл функции в том, чтобы скорректировать период времени на буфферное время, необходимое для подготовки авто к очередной аренде (3 часа)
+ * Если период отдыха менее 3 часов, то он удаляется 
+*/
+function correctingPeriodOnBufferTime(periods) {
+
+	const res =  periods.map(
+		(period) => {
+			let begin = new Date(period.begin);
+			let end = new Date(period.end);
+			end = addMinutes(end, end.getTimezoneOffset());
+			begin = addMinutes(begin, begin.getTimezoneOffset());
+
+			const diffOfEndAndBegin = end - begin;
+			if (
+				diffOfEndAndBegin < (1000 * 60 * dataFromServer.bufferTimeMin)
+			) {
+				const diffOfEndAndBufferTime = 1000 * 60 * dataFromServer.bufferTimeMin - diffOfEndAndBegin;
+				return undefined;
+				//если период отдыха авто менее 3 часов, то он становится равен 0
+			} else {
+				begin = addMinutes(begin, dataFromServer.bufferTimeMin);
+			}
+			end = format(end, 'yyyy-MM-dd HH:mm:ss');
+			begin = format(begin, 'yyyy-MM-dd HH:mm:ss');
+			end = `${end}Z`;
+			begin = `${begin}Z`;
+			return { begin, end };
+		}
+
+	);
+
+	return res.filter((
+		period => period
+	));
+}
 
 
 /**
@@ -24,20 +65,20 @@ function intervalToArray(arrayOfIntervals) {
 			let start = new Date(interval.begin);
 			let end = new Date(interval.end);
 
-			start = addMinutes(start,start.getTimezoneOffset());
-			end = addMinutes(end,end.getTimezoneOffset());
+			start = addMinutes(start, start.getTimezoneOffset());
+			end = addMinutes(end, end.getTimezoneOffset());
 
-			if (format(end,'HH:mm:ss') === '00:00:00' && format(end,`yyyy:MM;dd`) != `${end.getFullYear()}:12;31`) {
-					
-				end = addMinutes(end,-60);
+			if (format(end, 'HH:mm:ss') === '00:00:00' && format(end, `yyyy:MM;dd`) != `${end.getFullYear()}:12;31`) {
+
+				end = addMinutes(end, -60);
 			}
 
-			start = new Date(start.getUTCFullYear(),start.getUTCMonth(),start.getUTCDate());	
-			end = new Date(end.getUTCFullYear(),end.getUTCMonth(),end.getUTCDate());	
+			start = new Date(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate());
+			end = new Date(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate());
 
 			res.push(
-				eachDayOfInterval({start:start,end:end})
-			);	
+				eachDayOfInterval({ start: start, end: end })
+			);
 		}
 	);
 	return res;
@@ -59,31 +100,39 @@ export async function getFreePeriods() {
 	const promises = [];
 
 	const begin = dataFromServer.beginFetchPeriod;
-	const end  = dataFromServer.endFetchPeriod;
+	const end = dataFromServer.endFetchPeriod;
 
 	dataFromServer.currentCar.forEach(
-		 (item) => {
-				const placeObj  = {
-					car_id: item.car_id,
-					begin: begin,
-					end: end,
-					include_reserves: true,
-					include_idles: true,
-				};
+		(item) => {
+			const placeObj = {
+				car_id: item.car_id,
+				begin: begin,
+				end: end,
+				include_reserves: true,
+				include_idles: true,
+			};
 			promises.push(
-					getCarPeriodList(placeObj)
-			);	
+				getCarPeriodList(placeObj)
+			);
 		}
 	);
 
 	let res = await Promise.all(promises);
-	res = res.map(
-		(item,inx) => {
+	const reformat = res.map(
+		(item, inx) => {
 			return {
 				car_id: dataFromServer.currentCar[inx].car_id,
-				periods: intervalToArray(item),
+				periods: intervalToArray(correctingPeriodOnBufferTime(item)),
 			}
 		}
 	);
-	dataFromServer.freePeriods = res;
+	dataFromServer.freePeriods = reformat;
+	dataFromServer.rawPeriods = res.map(
+		(item, inx) => {
+			return {
+				car_id: dataFromServer.currentCar[inx].car_id,
+				periods: item,
+			}
+		}
+	);
 }

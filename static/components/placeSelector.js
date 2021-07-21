@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 import {getPlaceList} from '../connection/index'
-
+import $ from 'jquery';
 import {dataFromServer} from '../state/dataFromServer'
 /**
  * @file placeSelector.js
@@ -49,13 +49,12 @@ export async function createPlaceSelect(){
 	let placeHTML = '';
 	dataFromServer.placesToReceiveOrReturnCar = (await getPlaceList()).places;
 	dataFromServer.placesToReceiveOrReturnCar.splice(0, 3);
-	dataFromServer.placesToReceiveOrReturnCar.push({place_id: 164, title: "Другое место...", city_id: 4, delivery_cost: 300, archive: false});
+	dataFromServer.placesToReceiveOrReturnCar.push({place_id: 164, title: "Подача по городу", city_id: 4, delivery_cost: 300, archive: false});
 	
 	dataFromServer.placesToReceiveOrReturnCar.forEach((item, el) => {
 		const rStr = item.delivery_cost > 0 ? createOption(item.title, item.delivery_cost)
 		: createOption(item.title);
 		placeHTML += rStr;
 	});
-	$(`#receivePlaceSelect`).html(placeHTML);
-	$(`#returnPlaceSelect`).html(placeHTML);
+	dataFromServer.placeHtml = placeHTML;
 };

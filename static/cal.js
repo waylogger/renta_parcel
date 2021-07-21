@@ -1,5 +1,6 @@
 import { firstDateIsSelect, secondDateIsSelect, firstDate, secondDate, isDateShouldBeDisabled, datePreview, hideCal, setFirstDate, dropFirstDate, setSecondDate, dropSecondDate } from './handlers'
 import { dataFromServer } from './state/dataFromServer'
+import $ from 'jquery'
 let dateRangePicker = 0;
 
 let num = 0;
@@ -155,20 +156,6 @@ let num = 0;
 						return;
 					}
 					setFirstDate(dt);
-
-					// dataFromServer.clickedCars = dataFromServer.freePeriods.filter(
-					// 	(itemCar,inxCar) => {
-					// 		let res = false;
-					// 		itemCar.periods.forEach( 
-					// 			(item,inx) => {
-					// 				if (dateInPeriod(firstDate,item))
-					// 					res = true;
-					// 			}
-					// 		);
-					// 		return false;
-					// 	}
-					// );
-
 				},
 				"dp-next": function (t, e) {
 					var n = e.state.hilightedDate;
@@ -252,7 +239,8 @@ let num = 0;
 				
 				<button tabindex="-1" type="button" class="dp-clear">  ${t.clear} </button>
 				</script>
-				<button onClick="$('.ex-inputs-picker').removeClass('ex-inputs-picker-visible');" tabindex="-1" type="button" class="dp-close" id="dp-close-btn">${closeOrSaveName}</button>
+				<button onClick="
+				document.querySelector('.ex-inputs-picker').classList.remove('ex-inputs-picker-visible');" tabindex="-1" type="button" class="dp-close" id="dp-close-btn">${closeOrSaveName}</button>
 
 				</footer>
 				</div>`

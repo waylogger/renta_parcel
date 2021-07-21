@@ -5,10 +5,16 @@ import {getFreePeriods} from './components/fetchPeriods';
 import {createPlaceSelect} from './components/placeSelector'
 
 export const whenDataLoad = async () => {
-	await getCarsAndTariffs();
+	const promises = []
+	promises.push(createPlaceSelect());
+	promises.push(getCarsAndTariffs());
+
+	await Promise.all(promises);
+
+
 	dataFromServer.getCurrentCar();
 	await getFreePeriods();
-	await createPlaceSelect();
+
 };
 
 

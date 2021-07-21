@@ -1,14 +1,17 @@
 import _ from 'lodash'
-import {dateObj} from './namespaces'
-import {receivePlace} from './namespaces'
-import {returnPlace} from './namespaces'
-import {customerName} from './namespaces'
-import {customerPhone} from './namespaces'
-import {lawAgreementNamespace} from './namespaces'
-import {dataFromServer} from './state/dataFromServer'
-import {getCost} from './connection/index';
-import {fieldClasses} from './namespaces'
-import { isEqual } from 'date-fns'
+import { dateObj } from './namespaces'
+import { receivePlace } from './namespaces'
+import { returnPlace } from './namespaces'
+import { customerName } from './namespaces'
+import { customerPhone } from './namespaces'
+import { lawAgreementNamespace } from './namespaces'
+import { dataFromServer } from './state/dataFromServer'
+import { getCost } from './connection/index';
+import { fieldClasses } from './namespaces'
+import { addHours, addMinutes, eachMinuteOfInterval, hoursToMilliseconds, isEqual, isWithinInterval, milliseconds, minutesToMilliseconds, startOfDay } from 'date-fns'
+import $ from 'jquery';
+import { format } from 'date-fns'
+
 /**
  * @file handlers.js
  * @module handlers.js
@@ -216,13 +219,37 @@ export function percentsToTime(percent) {
 	return (new Date(milisecondsPerMinutes).toUTCString().split(' ')[4]).slice(0, 5);
 }
 
+
+//-------------------------------------------------------------------------------------------------
+/**
+ * @function
+ * @param {number} percent
+ * @returns {Date} HH:MM
+ * @description convert HH:MM to percent
+ * 
+*/
+export function timeToPercent(timestamp) {
+	//проценты это шаги по 15 минут, 1 процент - 15 минут
+	// const minutes = percent * 15;
+
+	console.log(timestamp);
+	const mil = hoursToMilliseconds(timestamp.getHours()) + minutesToMilliseconds(timestamp.getMinutes());
+
+	const percent = Math.ceil(mil / hoursToMilliseconds(24) * 100);
+	console.log(percent);
+	return percent - 3;
+	//convert Thu, 01 Jan 1970 12:00:00 GMT
+	//to 12:00
+	// return (new Date(milisecondsPerMinutes).toUTCString().split(' ')[4]).slice(0, 5);
+}
+
+
 //-------------------------------------------------------------------------------------------------
 /**
  * @function
  * @description transfers the time input to the display field 
 */
 export function transferReceiveTime() {
-
 	const time = percentsToTime($(this).val());
 	const data = $('#leftDate').val();
 	const date = data.length > 0 ? data.split(' ')[0] : '';
@@ -279,6 +306,11 @@ export function inputHandler(namespace, validator) {
 		deColoringBorder(inx, fieldClasses.validationPassed);
 	}
 }
+
+export function phoneAdditional() {
+	if ($(this).val() == '') $(this).val('+7');
+}
+
 /**
  * @function
  * @type {void}
@@ -378,6 +410,9 @@ export async function carPreview() {
  * @callback
 */
 export function datePreview() {
+
+	if (dataFromServer.dateIsBad) return;
+
 	const begin = reformDate($(`#leftDate`).val());
 	const end = reformDate($(`#rightDate`).val());
 	$(`#periodRent`).text(translateDate(begin, end));
@@ -388,6 +423,8 @@ export function datePreview() {
  * @callback
 */
 export async function costPreview() {
+
+	if (dataFromServer.dateIsBad) return;
 
 	const begin = reformDate($(`#leftDate`).val());
 	const end = reformDate($(`#rightDate`).val());
@@ -404,16 +441,15 @@ export async function costPreview() {
 		$(`#resolution`).text(resolution);
 		return;
 	}
-
+	if (dataFromServer.carToBid === '') throw new Error('bad');
 	const bidCostObj = {
-		car_id: 9,
+		car_id: dataFromServer.carToBid,
 		begin: begin,
 		end: end,
 		begin_place_id: receivePlaceId,
 		end_place_id: returnPlaceId,
 	}
-
-	const bidCost = await getCost(bidCostObj);
+	const bidCost = await getCost(bidCostObj)
 
 	const deliveryCost = dataFromServer.getDeliveryCost(receivePlaceId) + dataFromServer.getDeliveryCost(returnPlaceId);
 
@@ -433,14 +469,24 @@ export async function costPreview() {
 */
 export function showCustomReceivePlaceInput() {
 
-	if ($(this).val() === 'Другое место... + 300 ₽') {
+
+	if ($(this).val() === 'Подача по городу + 300 ₽') {
 		$(`#receiveCustomPlace`).removeClass('customPlace-hidden');
 		$(`#receiveCustomPlace`).addClass('customPlace-visible');
+
+		$(`#receiveCustomPlace-wrap`).removeClass('customPlace-wrap-start');
+		$(`#receiveCustomPlace-wrap`).removeClass('customPlace-hidden');
+		$(`#receiveCustomPlace-wrap`).addClass('customPlace-visible');
 	}
 	else {
+		setTimeout(() => {
+			$(`#receiveCustomPlace`).removeClass('customPlace-visible');
+			$(`#receiveCustomPlace`).addClass('customPlace-hidden');
 
-		$(`#receiveCustomPlace`).addClass('customPlace-hidden');
-		$(`#receiveCustomPlace`).removeClass('customPlace-visible');
+			$(`#receiveCustomPlace-wrap`).addClass('customPlace-hidden');
+			$(`#receiveCustomPlace-wrap`).addClass('customPlace-wrap-start');
+			$(`#receiveCustomPlace-wrap`).removeClass('customPlace-visible');
+		}, 200);
 	}
 
 }
@@ -449,15 +495,27 @@ export function showCustomReceivePlaceInput() {
  * @callback
 */
 export function showCustomReturnPlaceInput() {
-	if ($(this).val() === 'Другое место... + 300 ₽') {
+
+	if ($(this).val() === 'Подача по городу + 300 ₽') {
 		$(`#returnCustomPlace`).removeClass('customPlace-hidden');
 		$(`#returnCustomPlace`).addClass('customPlace-visible');
+
+		$(`#returnCustomPlace-wrap`).removeClass('customPlace-wrap-end');
+		$(`#returnCustomPlace-wrap`).removeClass('customPlace-hidden');
+		$(`#returnCustomPlace-wrap`).addClass('customPlace-visible');
 	}
 	else {
+		setTimeout(() => {
+			$(`#returnCustomPlace`).removeClass('customPlace-visible');
+			$(`#returnCustomPlace`).addClass('customPlace-hidden');
 
-		$(`#returnCustomPlace`).addClass('customPlace-hidden');
-		$(`#returnCustomPlace`).removeClass('customPlace-visible');
+			$(`#returnCustomPlace-wrap`).addClass('customPlace-hidden');
+			$(`#returnCustomPlace-wrap`).addClass('customPlace-wrap-end');
+			$(`#returnCustomPlace-wrap`).removeClass('customPlace-visible');
+		}, 200);
 	}
+
+
 }
 
 
@@ -498,6 +556,7 @@ export let secondDate = '';
 export const setFirstDate = (dt) => {
 	firstDateIsSelect = true;
 	firstDate = dt;
+	getFreeReceiveTime();
 }
 
 /**
@@ -518,6 +577,7 @@ export const dropFirstDate = () => {
 export const setSecondDate = (dt) => {
 	secondDateIsSelect = true;
 	secondDate = dt;
+	getFreeReturnTime();
 }
 
 /**
@@ -527,6 +587,8 @@ export const setSecondDate = (dt) => {
 export const dropSecondDate = () => {
 	secondDateIsSelect = false;
 	secondDate = '';
+	clearReceiveDate();
+	clearReturnDate();
 }
 export function isDateShouldBeDisabled(timestamp) {
 	let dt0 = new Date().toLocaleDateString().split(' ')[0];
@@ -550,12 +612,22 @@ export function isDateShouldBeDisabled(timestamp) {
 		}
 
 		const dts = dataFromServer.freePeriods.filter(
-			(perObj) => perObj.periods.some(
-				(per) => per.some(
-					(dt) => isEqual(dt,firstDate)
-				)
+			(perObj, carInx) => perObj.periods.some(
+				(per) => {
+
+					return per.some(
+						(dt) => {
+							if (isEqual(dt, firstDate)) {
+								dataFromServer.carToBid.push(dataFromServer.freePeriods[carInx].car_id);
+								return true;
+							}
+
+						}
+					)
+				}
 			)
 		);
+		dataFromServer.carToBid = _.uniq(dataFromServer.carToBid);
 		dateAfterSelect = dts;
 
 	}
@@ -568,11 +640,189 @@ export function isDateShouldBeDisabled(timestamp) {
 	return !periods.some(
 		(perObj) => perObj.periods.some(
 			(per) => per.some(
-				(dt,inx) => {if (isEqual(timestamp,dt)){
-					return true;
-				}}
+				(dt, inx) => {
+					if (isEqual(timestamp, dt)) {
+						return true;
+					}
+				}
 			)
 
 		)
 	)
 }
+
+
+/**
+ * @function
+ * @callback
+ * @description проверка корректности выбора даты и вывод предупреждения по результатам
+*/
+
+export function checkingReceiveTime() {
+	const time = percentsToTime($(this).val()).split(':');
+	const fd = new Date(
+		firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate(), parseInt(time[0], 10), parseInt(time[1], 10)
+	);
+
+	let busyCars = [];
+	dataFromServer.rawPeriods.some(
+		(rawPeriod) => {
+			const res = rawPeriod.periods.some(
+				(period) => {
+
+					let begin = new Date(period.begin);
+					let end = new Date(period.end);
+					begin = addMinutes(begin, begin.getTimezoneOffset());
+					end = addMinutes(end, end.getTimezoneOffset());
+					if (
+						!isWithinInterval(fd, { start: begin, end: end })
+					) {
+						$(this).val(timeToPercent(end));
+						// busyCars.push(rawPeriod.car_id);
+						return true;
+					}
+					return false;
+				}
+			)
+
+			return res;
+		}
+	);
+	const dateIsBad = busyCars.length === dataFromServer.rawPeriods.length - 3 ? true : false;
+	if (dateIsBad) {
+		dataFromServer.dateIsBad = true;
+		$('#timeNotificsId').addClass('time_notifics-show');
+		$('#notificsTimeLeft').addClass('notifics-time-left-show');
+	}
+	else {
+
+		$('#notificsTimeLeft').removeClass('notifics-time-left-show');
+		$('#timeNotificsId').removeClass('time_notifics-show');
+	}
+}
+
+/**
+ * @function
+ * @callback
+ * @description проверка корректности выбора даты и вывод предупреждения по результатам
+*/
+export function checkingReturnTime() {
+	const time = percentsToTime($(this).val());
+	console.log({ time });
+	$('#timeNotificsId').removeClass('time_notifics-show');
+	$('#timeNotificsId').removeClass('time_notifics-show');
+	$('#notificsTimeLeft').removeClass('notifics-time-left-show');
+}
+
+/**
+ * @function
+ * @param {Date} time
+ * @description проверяет дату на предмет того, является ли она пограничной, то есть является ли она begin или end
+*/
+function isBorder(time) {
+
+	let periods = [];
+	dataFromServer.rawPeriods.forEach(
+		carAndPeriod => {
+			periods = [...periods,...carAndPeriod.periods]
+
+		}
+	);
+	periods = _.uniq(periods);
+
+	return	periods = periods.filter(
+		(item) => {
+			return (true) && (true)
+		}
+
+	).length > 0 ? true : false;
+
+}
+
+/**
+ * @function
+ * @param {Array} time
+ * @return {string} 
+ * @description генерирует разметку для select для пограничных timestamp
+*/
+function borderTime(times) {
+	let str = '';
+
+	times.forEach(
+		(item) => {
+			str += genTimeHTML(`${item.toLocaleTimeString().slice(0, 5)}`, true) + '\n'
+		}
+	)
+
+	return str;
+	// genTimeHTML(`${item.toLocaleTimeString().slice(0, 5)}`, true) + '\n'
+}
+
+/**
+ * @function
+ * @param {string} timestr
+ * @param {Boolean} disabled
+ * @example getTimeHTML(11:00,true) {
+ * 	return <option disabled> 11:00 </option>
+ * 
+ * @example getTimeHTML(10:00,false) {
+ * 	return <option> 10:00 </option>
+ * }
+ * 
+*/
+export function genTimeHTML(timestr, disabled) {
+
+	return disabled ? `<option disabled> ${timestr} </option>` :
+		`<option> ${timestr} </option>`;
+}
+/**
+ * rendering date of receive time
+*/
+export function getFreeReceiveTime() {
+	if (!firstDateIsSelect) return;
+	let times = eachMinuteOfInterval({ start: firstDate, end: addHours(firstDate, 24) }, { step: 15 });
+	times.splice(times.length - 1);
+
+	let selStr = '';
+	if (isBorder(firstDate)){
+		selStr = borderTime(times);
+	}
+	else
+	times.forEach(
+		item => {
+			selStr += genTimeHTML(`${item.toLocaleTimeString().slice(0, 5)}`, false) + '\n'
+		}
+	);
+	$('#selectReceiveDate').html(selStr);
+}
+
+export function getFreeReturnTime() {
+	if (!secondDateIsSelect) return;
+	let times = eachMinuteOfInterval({ start: secondDate, end: addHours(secondDate, 24) }, { step: 15 });
+	times.splice(times.length - 1);
+
+	let selStr = '';
+	times.forEach(
+		item => {
+			selStr += genTimeHTML(`${item.toLocaleTimeString().slice(0, 5)}`, false) + '\n';
+		}
+	);
+	$('#selectReturnDate').html(selStr);
+}
+
+export function clearReceiveDate() {
+	$('#selectReceiveDate').html('');
+}
+
+export function clearReturnDate() {
+	$('#selectReturnDate').html('');
+}
+
+
+
+
+
+
+
+
+

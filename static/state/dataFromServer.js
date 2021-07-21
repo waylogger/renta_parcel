@@ -38,15 +38,20 @@ function translateMonth(monthStr) {
  * @property {Array} placeToReceiveOrReturnCar=[]
 */
 export const dataFromServer = {
+	bufferTimeMin: 180,
 	placesToReceiveOrReturnCar: [], //fill by components/placeSelector.js
 	carList: [],
 	tariffsList: [],
 	currentCar: '',
+	carToBid: [],
 	beginFetchPeriod: `${new Date().getFullYear()}-01-01 00:00`,
 	endFetchPeriod: `${new Date().getFullYear()}-12-31 00:00`,
 	freePeriods: [],
+	rawPeriods: [],
 	operationCars: [],
 	clickedCars: [],
+	placeHtml: '',
+	dateIsBad: true,
 	/**
 	 * @property {function} getPlaceId
 	 * @returns {number} 
