@@ -67,6 +67,15 @@ var placeSelect_1 = require("./app/components/placeSelect");
 var timeSelect_1 = require("./app/components/timeSelect");
 var customersPhone_1 = require("./app/components/customersPhone");
 var customersName_1 = require("./app/components/customersName");
+var carSelect_1 = require("./app/components/carSelect");
+var checkHash = function () {
+    if (location.hash = '#') {
+        jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
+    }
+    else {
+        jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
+    }
+};
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     var state;
     return __generator(this, function (_a) {
@@ -76,6 +85,7 @@ var customersName_1 = require("./app/components/customersName");
                 state = _a.sent();
                 jquery_1.default.when(jquery_1.default.ready).then(function () {
                     jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
+                    checkHash();
                     CalendarEnjection_1.CalendarEnjector();
                     customersPhone_1.customersPhoneValidateAndSave(state);
                     customersName_1.nameValidateAndSave(state);
@@ -83,6 +93,7 @@ var customersName_1 = require("./app/components/customersName");
                     timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
                     placeSelect_1.placeOptions(state);
                     placeSelect_1.selectPlace(state);
+                    carSelect_1.carSelect(state);
                 });
                 return [2 /*return*/];
         }

@@ -14,9 +14,14 @@ export interface PlacesResponse {
     places: SinglePlace[],
 }
 // ------------------------------------------------------------------------------------------------
-export interface CarListResponse {
+export interface SingleCar{
     id: number,
     model: string,
+    year: number,
+}
+export interface CarListResponse {
+    result_code: number,
+    cars: SingleCar[],
 }
 // ------------------------------------------------------------------------------------------------
 export interface FreePeriodResponse {

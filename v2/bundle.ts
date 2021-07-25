@@ -11,10 +11,17 @@ import { placeOptions, selectPlace } from "./app/components/placeSelect";
 import { timeSelectorBy15Min } from "./app/components/timeSelect";
 import { customersPhoneValidateAndSave } from "./app/components/customersPhone";
 import { nameValidateAndSave } from "./app/components/customersName";
+import { carSelect } from "./app/components/carSelect";
 
 
-
-
+const checkHash = (): void => {
+	if (location.hash = '#'){
+		$(`#${shared.domElementId.bookModuleId}`).addClass('carNotSelect');
+	}
+	else{
+		$(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
+	}
+}
 
 (
 	async (): Promise<void> => {
@@ -24,13 +31,17 @@ import { nameValidateAndSave } from "./app/components/customersName";
 				$(`#${shared.domElementId.rootSectionId}`).html(
 					rootSection()
 				);
+				checkHash();
 				CalendarEnjector();
 				customersPhoneValidateAndSave(state);
 				nameValidateAndSave(state);
-				timeSelectorBy15Min('receive',shared.domElementId.selectReceiveTimeId);
-				timeSelectorBy15Min('return',shared.domElementId.selectReturnTimeId);
+				timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
+				timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
 				placeOptions(state);
 				selectPlace(state);
+				carSelect(state);
+				
+
 			}
 		);
 	}

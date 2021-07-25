@@ -136,7 +136,7 @@ input.book__field-value:focus {
     position: absolute;
 }
 .customPlace-visible .book__field-subtitle {
-    top: 6px;
+    top: 18px;
 }
 .book__field:valid { 
 	/* border: solid #bbdcd9 1px; 
@@ -945,6 +945,23 @@ background: transparent;
 width: 100%;
 border-bottom: 2px solid transparent;
 font-size: 16px;
+}
+
+
+.carNotSelect{
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.carSelect{
+  
+  pointer-events: all;
+  opacity: 0;
+}
+
+.book__title{
+  display: flex;
+  justify-content: space-around;
 }
 
 

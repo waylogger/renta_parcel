@@ -40,7 +40,36 @@ function placeOptions(state) {
 exports.placeOptions = placeOptions;
 var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).on('change', function () {
-        var txt = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val();
+        var _a;
+        var txt = (_a = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
+        if (txt === state.getPlaces().places[4].title) {
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).removeClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-wrap-start');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).addClass('customPlace-visible');
+        }
+        else {
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).addClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).addClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).addClass('customPlace-wrap-start');
+            jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-visible');
+        }
+    });
+    jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).on('change', function () {
+        var _a;
+        var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
+        if (txt === state.getPlaces().places[4].title) {
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-wrap-end');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).addClass('customPlace-visible');
+        }
+        else {
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).addClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).addClass('customPlace-hidden');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).addClass('customPlace-wrap-end');
+            jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-visible');
+        }
     });
 };
 exports.selectPlace = selectPlace;

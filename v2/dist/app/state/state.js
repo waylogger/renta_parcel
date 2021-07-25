@@ -35,6 +35,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingState = exports.State = void 0;
 /**
@@ -42,15 +47,18 @@ exports.BookingState = exports.State = void 0;
 */
 require("regenerator-runtime/runtime");
 var querySender_1 = require("../CORS/querySender");
+var sharedActions_1 = require("../shared/sharedActions");
 var State = /** @class */ (function () {
     function State() {
         this.places = { result_code: 0, places: [] };
+        this.cars = { result_code: 0, cars: [] };
+        this.selectedCar = [];
         this.customersPhone = '';
         this.customersName = '';
     }
     State.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var places;
+            var places, cars;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, querySender_1.getPlaceList()];
@@ -58,6 +66,10 @@ var State = /** @class */ (function () {
                         places = _a.sent();
                         places.places.splice(0, 3);
                         this.places = places;
+                        return [4 /*yield*/, querySender_1.getCarList()];
+                    case 2:
+                        cars = _a.sent();
+                        this.cars = cars;
                         return [2 /*return*/, this];
                 }
             });
@@ -78,6 +90,20 @@ var State = /** @class */ (function () {
     };
     State.prototype.getName = function () {
         return new String(this.customersName);
+    };
+    State.prototype.getCars = function () {
+        var res = this.cars;
+        return { result_code: res.result_code, cars: res.cars };
+    };
+    State.prototype.selectCar = function (carStr) {
+        var res = this.cars.cars.filter(function (car) {
+            return sharedActions_1.formatCarModel(car.model).trim().replace(/\s/g, '_').toLowerCase() === carStr;
+        });
+        this.selectedCar = res;
+    };
+    State.prototype.getSelectedCars = function () {
+        var a = __spreadArray([], this.selectedCar);
+        return a;
     };
     return State;
 }());

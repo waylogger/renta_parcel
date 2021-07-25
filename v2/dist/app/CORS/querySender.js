@@ -72,10 +72,15 @@ function getRequestBuilder(urlSuffix, query) {
 exports.getRequestBuilder = getRequestBuilder;
 function getCarList() {
     return __awaiter(this, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getRequestBuilder('car_list', '')];
-                case 1: return [2 /*return*/, (_a.sent())];
+                case 1:
+                    res = _a.sent();
+                    if (res.result_code != 0)
+                        jquery_1.default(location).attr('href', '/');
+                    return [2 /*return*/, res];
             }
         });
     });

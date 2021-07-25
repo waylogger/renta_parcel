@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime'
-import {server,port,dataApiEndpoint,getAccess} from './auth'
+import { server, port, dataApiEndpoint, getAccess } from './auth'
 import queryString from 'query-string';
 import { CarListResponse, PlacesResponse } from './entities/apiExchange/serverTypes';
 import $ from 'jquery';
@@ -8,7 +8,7 @@ import $ from 'jquery';
 
 
 
-export async function getRequestBuilder<T>(urlSuffix: string, query:string): Promise<T> {
+export async function getRequestBuilder<T>(urlSuffix: string, query: string): Promise<T> {
 	let url = '';
 	query ? url = `${server}:${port}/${dataApiEndpoint}/${urlSuffix}?${query}`
 		:
@@ -23,13 +23,16 @@ export async function getRequestBuilder<T>(urlSuffix: string, query:string): Pro
 	return res.json();
 }
 
-export async function getCarList() {
-	return (await getRequestBuilder<CarListResponse[]>('car_list', ''));
+export async function getCarList(): Promise<CarListResponse> {
+	const res: CarListResponse = await getRequestBuilder<CarListResponse>('car_list', '');
+	if (res.result_code != 0)
+		$(location).attr('href', '/');
+	return res;
 }
 export async function getPlaceList() {
-	const res:PlacesResponse = (await getRequestBuilder<PlacesResponse>('place_list',''));
-	if (res.result_code != 0) 
-		$(location).attr('href','/');
+	const res: PlacesResponse = (await getRequestBuilder<PlacesResponse>('place_list', ''));
+	if (res.result_code != 0)
+		$(location).attr('href', '/');
 	return res;
 }
 /*
