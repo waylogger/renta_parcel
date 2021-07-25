@@ -45,6 +45,8 @@ var querySender_1 = require("../CORS/querySender");
 var State = /** @class */ (function () {
     function State() {
         this.places = { result_code: 0, places: [] };
+        this.customersPhone = '';
+        this.customersName = '';
     }
     State.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -64,6 +66,18 @@ var State = /** @class */ (function () {
     State.prototype.getPlaces = function () {
         var places = this.places;
         return { result_code: places.result_code, places: places.places };
+    };
+    State.prototype.savePhone = function (num) {
+        this.customersPhone = num;
+    };
+    State.prototype.getPhone = function () {
+        return new String(this.customersPhone);
+    };
+    State.prototype.saveName = function (name) {
+        this.customersName = name;
+    };
+    State.prototype.getName = function () {
+        return new String(this.customersName);
     };
     return State;
 }());

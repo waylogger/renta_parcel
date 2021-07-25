@@ -117,20 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"dist/app/views/template.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.rootSection = void 0;
-
-var rootSection = function rootSection(placeSelect, receiveTimeSelect, returnTimeSelect) {
-  return " <div style=\"background: #FAFAFB; padding: 15px\">\n\t<div class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t    <span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t</div>\n\t<div id=\"dateListener\" class=\"book__dates ex-inputs\" >\n\t    <div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t<input id=\"leftDate\" class=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t</div>\n\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t    <select id=\"selectReceiveDate\" size=\"1\" class=\"dateTimeSelect\" placeholder=\"--:--\">\n\t\t    \t" + receiveTimeSelect + "\n\t\t    </select>\n\t\t</div> \n\t    <div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t<input id=\"rightDate\" class=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t    </div>\n\t    <div id=\"returnSelects\" class=\"returnSelects\">\n\t\t<select id=\"selectReturnDate\" class=\"dateTimeSelect\" placeholder=\"--:--\">\n\t\t" + returnTimeSelect + "\n\t\t</select>\n\t    </div>\n\t    <div class=\"row\">\n\t\t<div class=\"ex-inputs-picker\"></div>\n\t    </div>\n\t</div>\n    <div class=\"book__field-wrap\">\n\t<select class=\"book__field book__field-receivePlaceSelect\" id=\"receivePlaceSelect\">\n\t    " + placeSelect + "\n\t</select>\n\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n    </div>\n    <div id=\"receiveCustomPlace-wrap\" class=\"book__field-wrap customPlace-wrap-start\">\n\t<input type=\"text\" id=\"receiveCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n    </div>\n    <div class=\"book__field-wrap\">\n\t<select class=\"book__field book__field-receivePlaceSelect\" id=\"returnPlaceSelect\">\n\t    " + placeSelect + "\n\t</select>\n\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n    </div>\n    <div id=\"returnCustomPlace-wrap\" class=\"book__field-wrap customPlace-wrap-end\">\n\t<input type=\"text\" id=\"returnCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n    </div>\n    <div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n    <form autocomplete=\"on\">\n\t<div class=\"book__field-wrap\">\n\t    <input class=\"book__field\" id=\"customerName\" name=\"name\" type=\"text\" required placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t    <div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t</div>\n\t<div class=\"book__field-wrap\">\n\t    <input class=\"book__field\" id=\"customerPhone\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t    <div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t</div>\n    </form>\n    <div id=\"lawAgreement\">\n\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"age\" value=\"yes\" checked>\n\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438 \u043C\u043E\u0439 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t    \u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"agree\" value=\"yes\" checked>\n\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t    \u0434\u0430\u043D\u043D\u044B\u0445.</label>\n    </div>\n    \n    <button class=\"book__btn\" type=\"submit\" id=\"bookButtonId\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n    <div class=\"book__checkup\">\n\t<span id=\"carName\"></span>\n\t<span id=\"periodRent\"></span>\n\t<br>\n\t<span id=\"bidCost\"></span>\n\t<span id=\"deposit\"></span>\n\t<br>\n\t<span id=\"resolution\"></span>\n    </div>";
-};
-
-exports.rootSection = rootSection;
-},{}],"dist/app/shared/sharedData.js":[function(require,module,exports) {
+})({"dist/app/shared/sharedData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -138,9 +125,74 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.domElementId = void 0;
 exports.domElementId = {
-  rootSectionId: 'rootSection'
+  rootSectionId: 'rootSection',
+  //------------------------------------------
+  customersPhoneId: 'customersPhoneId',
+  custonersNameId: 'customersNameId',
+  //------------------------------------------
+  receiveCustomPlaceId: 'receiveCustomPlace-wrap',
+  returnCustomPlaceId: 'returnCustomPlace-wrap',
+  receivePlaceSelectId: 'receivePlaceSelect',
+  returnPlaceSelectId: 'returnPlaceSelect',
+  //-------------------------------------------
+  selectReceiveTimeId: 'selectReceiveTimeId',
+  selectReturnTimeId: 'selectReturnTimeId',
+  //-------------------------------------------
+  bidTextId: 'bidTextId'
 };
-},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{}],"dist/app/views/template.js":[function(require,module,exports) {
+"use strict";
+/**
+ * @module template.ts
+*/
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.rootSection = void 0;
+
+var shared = __importStar(require("../shared/sharedData"));
+
+var rootSection = function rootSection() {
+  return " <div style=\"background: #FAFAFB; padding: 15px\">\n\t<div class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t    <span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t</div>\n\t<div id=\"dateListener\" class=\"book__dates ex-inputs\" >\n\t    <div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t<input id=\"leftDate\" class=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t</div>\n\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t    <select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\" class=\"dateTimeSelect\" placeholder=\"--:--\">\n\t\t    </select>\n\t\t</div> \n\t    <div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t<input id=\"rightDate\" class=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t    </div>\n\t    <div id=\"returnSelects\" class=\"returnSelects\">\n\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\" placeholder=\"--:--\">\n\t\t</select>\n\t    </div>\n\t    <div class=\"row\">\n\t\t<div class=\"ex-inputs-picker\"></div>\n\t    </div>\n\t</div>\n    <div class=\"book__field-wrap\">\n\t<select class=\"book__field book__field-receivePlaceSelect\" id=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t</select>\n\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n    </div>\n    <div id=\"" + shared.domElementId.receiveCustomPlaceId + "\" class=\"book__field-wrap customPlace-wrap-start\">\n\t<input type=\"text\" id=\"receiveCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n    </div>\n    <div class=\"book__field-wrap\">\n\t<select class=\"book__field book__field-receivePlaceSelect\" id=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t</select>\n\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n    </div>\n    <div id=\"returnCustomPlace-wrap\" class=\"book__field-wrap customPlace-wrap-end\">\n\t<input type=\"text\" id=\"returnCustomPlace\" class=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n    </div>\n    <div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n    <form autocomplete=\"on\">\n\t<div class=\"book__field-wrap\">\n\t    <input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\" name=\"name\" maxlength=\"50\" type=\"text\" required placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t    <div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t</div>\n\t<div class=\"book__field-wrap\">\n\t    <input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\" maxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t    <div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t</div>\n    </form>\n    <div id=\"lawAgreement\">\n\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"age\" value=\"yes\" checked>\n\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438 \u043C\u043E\u0439 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t    \u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"agree\" value=\"yes\" checked>\n\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t    \u0434\u0430\u043D\u043D\u044B\u0445.</label>\n    </div>\n    \n    <button class=\"book__btn\" type=\"submit\" id=\"bookButtonId\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n    <div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\n    </div>";
+};
+
+exports.rootSection = rootSection;
+},{"../shared/sharedData":"dist/app/shared/sharedData.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -12111,10 +12163,8 @@ function CalendarEnjector() {
         // }
       }); // When the inputs gain focus, show the date range picker
 
-      jquery_1.default('#dateListener').bind('focusin', showPicker);
       txtStart.addEventListener('focus', showPicker);
-      txtEnd.addEventListener('focus', showPicker); // root.addEventListener('focusout', hidePicker);
-
+      txtEnd.addEventListener('focus', showPicker);
       jquery_1.default('.dr-cal-end').detach();
       jquery_1.default('.dp-next').css('visibility', 'visible');
       return [2
@@ -14391,6 +14441,8 @@ function () {
       result_code: 0,
       places: []
     };
+    this.customersPhone = '';
+    this.customersName = '';
   }
 
   State.prototype.init = function () {
@@ -14421,6 +14473,22 @@ function () {
       result_code: places.result_code,
       places: places.places
     };
+  };
+
+  State.prototype.savePhone = function (num) {
+    this.customersPhone = num;
+  };
+
+  State.prototype.getPhone = function () {
+    return new String(this.customersPhone);
+  };
+
+  State.prototype.saveName = function (name) {
+    this.customersName = name;
+  };
+
+  State.prototype.getName = function () {
+    return new String(this.customersName);
   };
 
   return State;
@@ -14465,23 +14533,77 @@ exports.option = option;
  * @description генерирует разметку для выбора места получения и возврата авто
 */
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.placeOptions = void 0;
+exports.selectPlace = exports.placeOptions = void 0;
 
 var sharedActions_1 = require("../shared/sharedActions");
 
-function placeOptions(places) {
+var shared = __importStar(require("../shared/sharedData"));
+
+var jquery_1 = __importDefault(require("jquery"));
+
+function placeOptions(state) {
   var resStr = '';
-  places.places.forEach(function (place) {
+  state.getPlaces().places.forEach(function (place) {
     return resStr += sharedActions_1.option(place.title + " + " + place.delivery_cost + " \u20BD");
   });
+  jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).html(resStr);
+  jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).html(resStr);
   return resStr;
 }
 
 exports.placeOptions = placeOptions;
-},{"../shared/sharedActions":"dist/app/shared/sharedActions.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+
+var selectPlace = function selectPlace(state) {
+  jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).on('change', function () {
+    var txt = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val();
+  });
+};
+
+exports.selectPlace = selectPlace;
+},{"../shared/sharedActions":"dist/app/shared/sharedActions.js","../shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14801,7 +14923,9 @@ var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInter
 
 var sharedActions_1 = require("../shared/sharedActions");
 
-function timeSelectorBy15Min(idModificator) {
+var jquery_1 = __importDefault(require("jquery"));
+
+function timeSelectorBy15Min(idModificator, domId) {
   var dateA = new Date(2021, 1, 1, 0, 0, 0);
   var dateB = new Date(2021, 1, 2, 0, 0, 0);
   var dateArr = eachMinuteOfInterval_1.default({
@@ -14820,11 +14944,166 @@ function timeSelectorBy15Min(idModificator) {
   shortTime.forEach(function (str) {
     resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator);
   });
+  jquery_1.default("#" + domId).html(resStr);
   return resStr;
 }
 
 exports.timeSelectorBy15Min = timeSelectorBy15Min;
-},{"date-fns/eachMinuteOfInterval":"node_modules/date-fns/esm/eachMinuteOfInterval/index.js","../shared/sharedActions":"dist/app/shared/sharedActions.js"}],"dist/bundle.js":[function(require,module,exports) {
+},{"date-fns/eachMinuteOfInterval":"node_modules/date-fns/esm/eachMinuteOfInterval/index.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","jquery":"node_modules/jquery/dist/jquery.js"}],"dist/app/components/customersPhone.js":[function(require,module,exports) {
+"use strict";
+/**
+ * @module customersPhone.ts
+*/
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.customersPhoneValidateAndSave = void 0;
+
+var jquery_1 = __importDefault(require("jquery"));
+
+var shared = __importStar(require("../shared/sharedData"));
+/**
+ * @description первый обязательный плюс и запрет на ввод других символов кроме чисел
+*/
+
+
+var customersPhoneValidateAndSave = function customersPhoneValidateAndSave(state) {
+  jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focus', function () {
+    var a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val();
+    if (a) jquery_1.default("#" + shared.domElementId.customersPhoneId).val(a);else jquery_1.default("#" + shared.domElementId.customersPhoneId).val('+7');
+  });
+  jquery_1.default("#" + shared.domElementId.customersPhoneId).on('input', function () {
+    var _a;
+
+    var a = '+' + ((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString().replace(/[^\d]/g, ''));
+    jquery_1.default("#" + shared.domElementId.customersPhoneId).val("" + a);
+  });
+  jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focusout', function () {
+    var _a;
+
+    state.savePhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+  });
+};
+
+exports.customersPhoneValidateAndSave = customersPhoneValidateAndSave;
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"dist/app/components/customersName.js":[function(require,module,exports) {
+"use strict";
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.nameValidateAndSave = void 0;
+/**
+ * @module customersName.ts
+*/
+
+var jquery_1 = __importDefault(require("jquery"));
+
+var shared = __importStar(require("../shared/sharedData"));
+/**
+ * @description смысл преобразований имени в том, что недопускаются небуквенные символы и не пробелы
+ * кроме того допускается только 2 слова, первый символ каждого слова преобразуется в верхний регистр
+*/
+
+
+var nameValidateAndSave = function nameValidateAndSave(state) {
+  jquery_1.default("#" + shared.domElementId.custonersNameId).on('input', function () {
+    var _a;
+
+    var a = (_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString().replace(/[^А-я|\s|A-z]/g, '');
+    a = a.split(' ').slice(0, 2).map(function (str) {
+      return "" + String(str.charAt(0)).toUpperCase() + str.slice(1, str.length);
+    }).join(' ');
+    jquery_1.default("#" + shared.domElementId.custonersNameId).val(a);
+  });
+  jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () {
+    return state.saveName(jquery_1.default("#" + shared.domElementId.custonersNameId).val());
+  });
+};
+
+exports.nameValidateAndSave = nameValidateAndSave;
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"dist/bundle.js":[function(require,module,exports) {
 "use strict";
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
@@ -15028,9 +15307,13 @@ var placeSelect_1 = require("./app/components/placeSelect");
 
 var timeSelect_1 = require("./app/components/timeSelect");
 
+var customersPhone_1 = require("./app/components/customersPhone");
+
+var customersName_1 = require("./app/components/customersName");
+
 (function () {
   return __awaiter(void 0, void 0, void 0, function () {
-    var state, placeOpts;
+    var state;
     return __generator(this, function (_a) {
       switch (_a.label) {
         case 0:
@@ -15040,10 +15323,15 @@ var timeSelect_1 = require("./app/components/timeSelect");
 
         case 1:
           state = _a.sent();
-          placeOpts = placeSelect_1.placeOptions(state.getPlaces());
           jquery_1.default.when(jquery_1.default.ready).then(function () {
-            jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection(placeOpts, timeSelect_1.timeSelectorBy15Min('receive'), timeSelect_1.timeSelectorBy15Min('return')));
+            jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
             CalendarEnjection_1.CalendarEnjector();
+            customersPhone_1.customersPhoneValidateAndSave(state);
+            customersName_1.nameValidateAndSave(state);
+            timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
+            timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
+            placeSelect_1.placeOptions(state);
+            placeSelect_1.selectPlace(state);
           });
           return [2
           /*return*/
@@ -15052,7 +15340,7 @@ var timeSelect_1 = require("./app/components/timeSelect");
     });
   });
 })();
-},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/components/CalendarEnjection":"dist/app/components/CalendarEnjection.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/components/CalendarEnjection":"dist/app/components/CalendarEnjection.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js","./app/components/customersPhone":"dist/app/components/customersPhone.js","./app/components/customersName":"dist/app/components/customersName.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15080,7 +15368,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43489" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36061" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

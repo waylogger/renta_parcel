@@ -65,17 +65,24 @@ var CalendarEnjection_1 = require("./app/components/CalendarEnjection");
 var state_1 = require("./app/state/state");
 var placeSelect_1 = require("./app/components/placeSelect");
 var timeSelect_1 = require("./app/components/timeSelect");
+var customersPhone_1 = require("./app/components/customersPhone");
+var customersName_1 = require("./app/components/customersName");
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var state, placeOpts;
+    var state;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, state_1.BookingState()];
             case 1:
                 state = _a.sent();
-                placeOpts = placeSelect_1.placeOptions(state.getPlaces());
                 jquery_1.default.when(jquery_1.default.ready).then(function () {
-                    jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection(placeOpts, timeSelect_1.timeSelectorBy15Min('receive'), timeSelect_1.timeSelectorBy15Min('return')));
+                    jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
                     CalendarEnjection_1.CalendarEnjector();
+                    customersPhone_1.customersPhoneValidateAndSave(state);
+                    customersName_1.nameValidateAndSave(state);
+                    timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
+                    timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
+                    placeSelect_1.placeOptions(state);
+                    placeSelect_1.selectPlace(state);
                 });
                 return [2 /*return*/];
         }

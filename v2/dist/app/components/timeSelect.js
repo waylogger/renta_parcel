@@ -10,7 +10,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.timeSelectorBy15Min = void 0;
 var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
 var sharedActions_1 = require("../shared/sharedActions");
-function timeSelectorBy15Min(idModificator) {
+var jquery_1 = __importDefault(require("jquery"));
+function timeSelectorBy15Min(idModificator, domId) {
     var dateA = new Date(2021, 1, 1, 0, 0, 0);
     var dateB = new Date(2021, 1, 2, 0, 0, 0);
     var dateArr = eachMinuteOfInterval_1.default({ start: dateA, end: dateB }, { step: 15 });
@@ -23,6 +24,7 @@ function timeSelectorBy15Min(idModificator) {
     shortTime.forEach(function (str) {
         resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator);
     });
+    jquery_1.default("#" + domId).html(resStr);
     return resStr;
 }
 exports.timeSelectorBy15Min = timeSelectorBy15Min;

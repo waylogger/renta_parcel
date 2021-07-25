@@ -117,10 +117,8 @@ function CalendarEnjector() {
                 // }
             });
             // When the inputs gain focus, show the date range picker
-            jquery_1.default('#dateListener').bind('focusin', showPicker);
             txtStart.addEventListener('focus', showPicker);
             txtEnd.addEventListener('focus', showPicker);
-            // root.addEventListener('focusout', hidePicker);
             jquery_1.default('.dr-cal-end').detach();
             jquery_1.default('.dp-next').css('visibility', 'visible');
             return [2 /*return*/];

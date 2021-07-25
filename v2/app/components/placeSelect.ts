@@ -5,13 +5,29 @@
 
 import { PlacesResponse } from "../CORS/entities/apiExchange/serverTypes";
 import { option } from "../shared/sharedActions";
+import * as shared from '../shared/sharedData';
+import $ from 'jquery'
+import {State} from '../state/state';
 
-export function placeOptions (places:PlacesResponse): string {
+export function placeOptions (state:State): string {
 	let resStr: string = '';
-	places.places.forEach(
+	state.getPlaces().places.forEach(
 		(place) => resStr += option(`${place.title} + ${place.delivery_cost} ₽`)
 	);	
+	$(`#${shared.domElementId.returnPlaceSelectId}`).html(resStr);
+	$(`#${shared.domElementId.receivePlaceSelectId}`).html(resStr);
 	return resStr;
+}
+
+export const selectPlace = (state: State): void => {
+	$(`#${shared.domElementId.receivePlaceSelectId}`).on(
+		'change',
+		() => {
+			const txt: any = $(`#${shared.domElementId.receivePlaceSelectId}`).val();
+
+			
+		}
+	);
 }
 
 

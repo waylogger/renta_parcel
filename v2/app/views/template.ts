@@ -1,11 +1,15 @@
+/**
+ * @module template.ts
+*/
+
+import * as shared from '../shared/sharedData';
 
 
 
 
 
 
-
-export const rootSection = (placeSelect: string, receiveTimeSelect: string, returnTimeSelect: string): any => {
+export const rootSection = (): any => {
 	return ` <div style="background: #FAFAFB; padding: 15px">
 	<div class="book__title">Забронировать
 	    <span class="bool_title-price" id="carPrice"></span>
@@ -16,8 +20,7 @@ export const rootSection = (placeSelect: string, receiveTimeSelect: string, retu
 		<div class="book__field-subtitle">Дата получения</div>
 		</div>
 		<div id="receiveSelects" class="receiveSelects">
-		    <select id="selectReceiveDate" size="1" class="dateTimeSelect" placeholder="--:--">
-		    	${receiveTimeSelect}
+		    <select id="${shared.domElementId.selectReceiveTimeId}" size="1" class="dateTimeSelect" placeholder="--:--">
 		    </select>
 		</div> 
 	    <div id="rightDateFrame" class="book__field-end book__field-wrap">
@@ -25,8 +28,7 @@ export const rootSection = (placeSelect: string, receiveTimeSelect: string, retu
 		<div class="book__field-subtitle">Дата возврата</div>
 	    </div>
 	    <div id="returnSelects" class="returnSelects">
-		<select id="selectReturnDate" class="dateTimeSelect" placeholder="--:--">
-		${returnTimeSelect}
+		<select id="${shared.domElementId.selectReturnTimeId}" class="dateTimeSelect" placeholder="--:--">
 		</select>
 	    </div>
 	    <div class="row">
@@ -34,18 +36,16 @@ export const rootSection = (placeSelect: string, receiveTimeSelect: string, retu
 	    </div>
 	</div>
     <div class="book__field-wrap">
-	<select class="book__field book__field-receivePlaceSelect" id="receivePlaceSelect">
-	    ${placeSelect}
+	<select class="book__field book__field-receivePlaceSelect" id="${shared.domElementId.receivePlaceSelectId}">
 	</select>
 	<div class="book__field-subtitle">Место получения</div>
     </div>
-    <div id="receiveCustomPlace-wrap" class="book__field-wrap customPlace-wrap-start">
+    <div id="${shared.domElementId.receiveCustomPlaceId}" class="book__field-wrap customPlace-wrap-start">
 	<input type="text" id="receiveCustomPlace" class="book__field customPlace-hidden" placeholder="Введите адрес">
 	<div class="book__field-subtitle">Куда подать авто?</div>
     </div>
     <div class="book__field-wrap">
-	<select class="book__field book__field-receivePlaceSelect" id="returnPlaceSelect">
-	    ${placeSelect}
+	<select class="book__field book__field-receivePlaceSelect" id="${shared.domElementId.returnPlaceSelectId}">
 	</select>
 	<div class="book__field-subtitle">Место возврата</div>
     </div>
@@ -56,11 +56,11 @@ export const rootSection = (placeSelect: string, receiveTimeSelect: string, retu
     <div class="book__subtitle">Ваши данные</div>
     <form autocomplete="on">
 	<div class="book__field-wrap">
-	    <input class="book__field" id="customerName" name="name" type="text" required placeholder="Введите имя" />
+	    <input class="book__field" id="${shared.domElementId.custonersNameId}" name="name" maxlength="50" type="text" required placeholder="Введите имя" />
 	    <div class="book__field-subtitle">Имя и фамилия</div>
 	</div>
 	<div class="book__field-wrap">
-	    <input class="book__field" id="customerPhone" name="phone" type="tel" required placeholder="+7" />
+	    <input class="book__field" id="${shared.domElementId.customersPhoneId}" maxlength="14" name="phone" type="tel" required placeholder="+7" />
 	    <div class="book__field-subtitle">Телефон</div>
 	</div>
     </form>
@@ -74,12 +74,6 @@ export const rootSection = (placeSelect: string, receiveTimeSelect: string, retu
     </div>
     
     <button class="book__btn" type="submit" id="bookButtonId">Забронировать</button>
-    <div class="book__checkup">
-	<span id="carName"></span>
-	<span id="periodRent"></span>
-	<br>
-	<span id="bidCost"></span>
-	<span id="deposit"></span>
-	<br>
-	<span id="resolution"></span>
+    <div id="${shared.domElementId.bidTextId}" class="book__checkup">
+
     </div>`}

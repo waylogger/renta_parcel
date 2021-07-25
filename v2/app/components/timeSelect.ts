@@ -5,9 +5,10 @@
 
 import eachMinuteOfInterval from "date-fns/eachMinuteOfInterval";
 import { option } from "../shared/sharedActions";
+import $ from 'jquery'
 
 
-export function  timeSelectorBy15Min (idModificator: string): string {
+export function  timeSelectorBy15Min (idModificator: string, domId: string): string {
 
 	const dateA = new Date(2021,1,1,0,0,0);
 	const dateB = new Date(2021,1,2,0,0,0);
@@ -29,6 +30,8 @@ export function  timeSelectorBy15Min (idModificator: string): string {
 			resStr += option(str,`${str.replace(':','-')}-${idModificator}`);
 		}
 	);
+	$(`#${domId}`).html(resStr);
+
 	return resStr;
 }
 

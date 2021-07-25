@@ -78,7 +78,6 @@ export async function CalendarEnjector() {
         // }
     });
     // When the inputs gain focus, show the date range picker
-    $('#dateListener').bind('focusin', showPicker);
     txtStart.addEventListener('focus', showPicker); txtEnd.addEventListener('focus', showPicker);
     function showPicker() {
         container.classList.add('ex-inputs-picker-visible');
@@ -96,7 +95,6 @@ export async function CalendarEnjector() {
 
     }
 
-    // root.addEventListener('focusout', hidePicker);
     $('.dr-cal-end').detach();
     $('.dp-next').css('visibility', 'visible');
 }
