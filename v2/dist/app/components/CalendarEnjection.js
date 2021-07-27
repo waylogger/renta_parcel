@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40,9 +59,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalendarEnjector = void 0;
+/**
+ * @module CalendarEnjector.js
+ * @author Chris Davies <https://github.com/chrisdavies>
+ * @remarks кое-что правил wlr986 <wayloggerman@gmail.com>
+*/
 var Calendar_1 = require("./Calendar");
+var shared = __importStar(require("../shared/sharedData"));
+var bidPreview_1 = require("./bidPreview");
 var jquery_1 = __importDefault(require("jquery"));
-function CalendarEnjector() {
+function CalendarEnjector(myState) {
     return __awaiter(this, void 0, void 0, function () {
         function showPicker() {
             container.classList.add('ex-inputs-picker-visible');
@@ -62,25 +88,12 @@ function CalendarEnjector() {
             txtEnd = root.querySelector('.ex-inputs-end');
             container = root.querySelector('.ex-inputs-picker');
             // Inject DateRangePicker into our container
-            Calendar_1.DateRangePicker(container).on('statechange', function (_, rp) {
+            Calendar_1.DateRangePicker(container, null, myState).on('statechange', function (_, rp) {
                 var range = rp.state;
                 /**
                  * @author wlr986
                  * @description saving time data when change date
                 */
-                // let startModifier = '';
-                // let endModifier = '';
-                // dataFromServer.dateIsBad = true;
-                // const currDateStart = $('#leftDate').val();
-                // const dataArrStart = currDateStart.split(' ');
-                // const currDateEnd = $('#rightDate').val();
-                // const dataArrEnd = currDateEnd.split(' ');
-                // if (currDateStart.length > 0 && dataArrStart.length > 1 && dataArrStart[1] != '') {
-                //     startModifier = dataArrStart[1];
-                // }
-                // if (currDateEnd.length > 0 && dataArrEnd.length > 1 && dataArrEnd[1] != '') {
-                //     endModifier = dataArrEnd[1];
-                // }
                 txtStart.value = range.start
                     ? range.start.toLocaleDateString()
                     : '';
@@ -90,31 +103,26 @@ function CalendarEnjector() {
                         : '';
                 else
                     txtEnd.value = '';
-                // let leftDateInsert = false;
-                // let rightDateInsert = false;
-                // if (txtStart.value) {
-                //     $('#selectReceiveDate').attr('disabled', null);
-                //     leftDateInsert = true;
-                // } else {
-                //     $('#selectReceiveDate').attr('disabled', true);
-                // }
-                // if (txtEnd.value) {
-                //     $('#selectReturnDate').attr('disabled', null);
-                //     rightDateInsert = true;
-                // } else {
-                //     $('#selectReturnDate').attr('disabled', true);
-                // }
-                // if (leftDateInsert && rightDateInsert) {
-                //     state[dateObj.inx] = true;
-                //     coloringBorder(dateObj.inx, fieldClasses.validationPassed);
-                //     datePreview();
-                //     costPreview();
-                // } else {
-                //     datePreview();
-                //     costPreview();
-                //     state[dateObj.inx] = false;
-                //     deColoringBorder(dateObj.inx, fieldClasses.validationPassed);
-                // }
+                var leftDateInsert = false;
+                var rightDateInsert = false;
+                if (txtStart.value) {
+                    jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', null);
+                    leftDateInsert = true;
+                    bidPreview_1.bidPreview(myState);
+                }
+                else {
+                    jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', true);
+                    bidPreview_1.bidPreview(myState);
+                }
+                if (txtEnd.value) {
+                    jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', null);
+                    rightDateInsert = true;
+                    bidPreview_1.bidPreview(myState);
+                }
+                else {
+                    jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', true);
+                    bidPreview_1.bidPreview(myState);
+                }
             });
             // When the inputs gain focus, show the date range picker
             txtStart.addEventListener('focus', showPicker);

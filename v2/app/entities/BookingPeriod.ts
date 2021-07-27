@@ -3,8 +3,7 @@
 /**
  * @module BookingPeriod.ts
 */
-import { Car } from "./Car";
-
+import { SingleCar } from "../CORS/entities/apiExchange/serverTypes";
 
 /**
  * @description способ хранения периодов времени полученных от сервера
@@ -12,5 +11,9 @@ import { Car } from "./Car";
 export interface BookingPeriod{
 	begin: Date;
 	end: Date;
-	car: Car;
+}
+
+export interface BookingPeriods{
+	car_id: number,
+	periods: BookingPeriod[],
 }

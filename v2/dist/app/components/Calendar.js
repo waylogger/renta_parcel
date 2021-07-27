@@ -7,6 +7,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateRangePicker = void 0;
 var dateRangePicker = 0;
+var myState;
 var num = 0;
 !function (t, e) {
     "object" == typeof exports && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : e(t.DateRangePicker = {});
@@ -226,7 +227,7 @@ var num = 0;
                     // e === true if currenthMonth не равен t.Month(). Смысл переменной в том, что она используется для установления класса пограничного дня
                     var onBorder = t.getMonth() !== currentMonth; //Boolean
                     // var n = !i.inRange(t);//Boolean 
-                    var shouldToDisabled = false; //isDateShouldBeDisabled(t);
+                    var shouldToDisabled = myState.isDateBusy(t);
                     var attr = shouldToDisabled ? 'disabled' : '';
                     // Если а установлено, то дата помечается как сегодняшнее число
                     var isToday = shouldToDisabled ? false : t.getTime() === c; //Boolean
@@ -483,7 +484,8 @@ var num = 0;
     function C(t) {
         return 12 * t.getYear() + t.getMonth();
     }
-    t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e) {
+    t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e, mstate) {
+        myState = mstate;
         e = e || {};
         var o, n = x(), a = (c = t, "string" == typeof c && (c = document.querySelector(c)), c.innerHTML = '<div class="dr-cals"><div class="dr-cal-start"></div><div class="dr-cal-end"></div></div>', c.querySelector(".dr-cals")), r = {
             start: void 0,

@@ -1,8 +1,7 @@
 /**
  * @module BussinesTimeSlot.ts
 */
-import {Car} from './Car'
-
+import { SingleCar } from "../CORS/entities/apiExchange/serverTypes";
 
 
 /**
@@ -17,7 +16,7 @@ export class BussinesTimeSlot {
 	/**
 	 * @remarks массив автомобилей, которые в это время заняты
 	*/
-	private carsInBook: Array<Car>;
+	private carsInBook: Array<SingleCar>;
 	//----------------------------------------------------------------------
 	public constructor(timestamp: Date) {
 		this.timestamp = timestamp;
@@ -33,13 +32,13 @@ export class BussinesTimeSlot {
 	/**
 	 * @remarks функция возвращает массив машин, забранированных в этом слоте
 	*/
-	public getCarInBook(): Array<Car> {
+	public getCarInBook(): Array<SingleCar> {
 		return this.carsInBook;
 	}
 	/**
 	 * @remarks функция помещает авто в список забронированных
 	*/
-	public bookingCar(car: Car): Boolean {
+	public bookingCar(car: SingleCar): Boolean {
 		if (this.carsInBook.push(car))
 			return true;
 		return false;
@@ -48,9 +47,9 @@ export class BussinesTimeSlot {
 	 * @remark функция извлекает авто из списка забронированных
 	*/
 
-	public releaseCar(car: Car): Boolean {
+	public releaseCar(car: SingleCar): Boolean {
 		const carInx = this.carsInBook.findIndex((item): Boolean => {
-			return item.id === car.id;
+			return item.car_id === car.car_id;
 		});
 		if (carInx < 0) return false;
 

@@ -1,16 +1,16 @@
 // ------------------------------------------------------------------------------------------------
 export interface PeriodsRequest{
     car_id: number,
-    begin: Date,
-    end: Date,
+    begin: string,
+    end: string,
     include_reserves: boolean,
     include_idles: boolean,
 }
 // ------------------------------------------------------------------------------------------------
 export interface BidCostRequest{
     car_id: number,
-    begin: Date,
-    end: Date,
+    begin: string,
+    end: string,
     begin_place_id: number,
     end_place_id: number,
     services: number[],

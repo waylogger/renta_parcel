@@ -5,9 +5,8 @@
  * @author wlr986 <wayloggerman@gmail.com>
 */
 import { BussinesTimeSlot } from './BussinesTimeSlot'
-import { Car } from './Car';
 import { addHours, eachMinuteOfInterval, isAfter, isBefore, isEqual } from 'date-fns'
-import { CallExpression } from '@babel/types';
+import { SingleCar } from '../CORS/entities/apiExchange/serverTypes';
 
 /**
  * @remark класс дня, он включает в себя 96 отрезков по 15 минут и методы для обеспечания работы каждого из отрезков, а также пречень машин, которые заняты в этот день 
@@ -24,7 +23,7 @@ export class BussinesDay {
 	/**
 	 * @description массив содержит данные каждого автомобиля, который занят в этот день хотябы 1 слот
 	*/
-	private readonly carsIncludedInDay: Car[];
+	private readonly carsIncludedInDay: SingleCar[];
 	/**
 	 * @description timestamp текущего дня, если его время не равно 00:00, то он должен быть приведен к этому времени
 	*/
@@ -98,7 +97,7 @@ export class BussinesDay {
 	 * @returns true в случае успешного установленя брони
 	 * @description side-effect при успехе авто сохраняется в carIncludedInDay
 	*/
-	public bookingCar(car: Car, timestamp: Date): Boolean {
+	public bookingCar(car: SingleCar, timestamp: Date): Boolean {
 		this.checkTimestamp(timestamp);
 		/**
 		 * теперь мы знаем, что полученная дата кратная 15 минутам и находится в границах текущего дня
@@ -118,7 +117,7 @@ export class BussinesDay {
 	 * @param car - проверяем есть ли бронь на эту машину в этот день
 	 * @returns true если авто найдено
 	*/
-	public carIsBusy(car: Car): Boolean{
+	public carIsBusy(car: SingleCar): Boolean{
 		return this.carsIncludedInDay.findIndex((item)=>car === car) >= 0 ? true : false;
 	}
 

@@ -1,8 +1,9 @@
 import 'regenerator-runtime/runtime'
 import { server, port, dataApiEndpoint, getAccess } from './auth'
 import queryString from 'query-string';
-import { CarListResponse, PlacesResponse } from './entities/apiExchange/serverTypes';
+import { BidCostResponse, CarListResponse, FreePeriodResponse, PlacesResponse } from './entities/apiExchange/serverTypes';
 import $ from 'jquery';
+import { BidCostRequest, PeriodsRequest } from './entities/apiExchange/clientTypes';
 
 
 
@@ -35,6 +36,21 @@ export async function getPlaceList() {
 		$(location).attr('href', '/');
 	return res;
 }
+
+
+export async function getCost(reqObj: BidCostRequest): Promise<BidCostResponse> {
+	return (await getRequestBuilder('bid_cost', queryString.stringify(reqObj, { arrayFormat: 'bracket' })));
+
+}
+
+export async function getCarPeriodList(reqObj: PeriodsRequest): Promise<FreePeriodResponse> {
+	const res = (await getRequestBuilder<FreePeriodResponse>('car_period_list', queryString.stringify(reqObj)));
+	if (res.result_code != 0)
+		$(location).attr('href', '/');
+	return res;
+}
+
+
 /*
 export async function getTarrifs(reqObj) {
 	return (await getRequestBuilder('tariff_list', queryString.stringify(reqObj))).cars;
@@ -52,13 +68,6 @@ export async function getServiceList() {
 export async function getCarFreeList(reqObj) {
 	const res = (await getRequestBuilder('car_free_list', queryString.stringify(reqObj))).cars;
 	return res;
-}
-export async function getCarPeriodList(reqObj) {
-	return (await getRequestBuilder('car_period_list', queryString.stringify(reqObj))).car_periods;
-}
-
-export async function getCost(reqObj) {
-	return (await getRequestBuilder('bid_cost', queryString.stringify(reqObj, { arrayFormat: 'bracket' })));
 }
 
 export async function sendRequest(body){

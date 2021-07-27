@@ -5,7 +5,7 @@
 
 
 import { BussinesTimeSlot } from '../BussinesTimeSlot';
-import { Car } from '../Car';
+import {SingleCar} from '../../CORS/entities/apiExchange/serverTypes';
 
 
 
@@ -15,7 +15,7 @@ describe('Name of the group', () => {
 
 	let date: Date = new Date(Date.now());
 	const slot: BussinesTimeSlot = new BussinesTimeSlot(date);
-	const car: Car = { id: 0, model: 'test' };
+	const car: SingleCar = { car_id: 0, model: 'test', year: 0 };
 	test('constructor should save timestamp', () => {
 		expect(slot.getTimestamp()).toEqual(date);
 	});

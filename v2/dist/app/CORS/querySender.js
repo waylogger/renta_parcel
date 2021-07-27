@@ -39,9 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
+exports.getCarPeriodList = exports.getCost = exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
 require("regenerator-runtime/runtime");
 var auth_1 = require("./auth");
+var query_string_1 = __importDefault(require("query-string"));
 var jquery_1 = __importDefault(require("jquery"));
 function getRequestBuilder(urlSuffix, query) {
     return __awaiter(this, void 0, void 0, function () {
@@ -102,6 +103,33 @@ function getPlaceList() {
     });
 }
 exports.getPlaceList = getPlaceList;
+function getCost(reqObj) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getRequestBuilder('bid_cost', query_string_1.default.stringify(reqObj, { arrayFormat: 'bracket' }))];
+                case 1: return [2 /*return*/, (_a.sent())];
+            }
+        });
+    });
+}
+exports.getCost = getCost;
+function getCarPeriodList(reqObj) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getRequestBuilder('car_period_list', query_string_1.default.stringify(reqObj))];
+                case 1:
+                    res = (_a.sent());
+                    if (res.result_code != 0)
+                        jquery_1.default(location).attr('href', '/');
+                    return [2 /*return*/, res];
+            }
+        });
+    });
+}
+exports.getCarPeriodList = getCarPeriodList;
 /*
 export async function getTarrifs(reqObj) {
     return (await getRequestBuilder('tariff_list', queryString.stringify(reqObj))).cars;
@@ -119,13 +147,6 @@ export async function getServiceList() {
 export async function getCarFreeList(reqObj) {
     const res = (await getRequestBuilder('car_free_list', queryString.stringify(reqObj))).cars;
     return res;
-}
-export async function getCarPeriodList(reqObj) {
-    return (await getRequestBuilder('car_period_list', queryString.stringify(reqObj))).car_periods;
-}
-
-export async function getCost(reqObj) {
-    return (await getRequestBuilder('bid_cost', queryString.stringify(reqObj, { arrayFormat: 'bracket' })));
 }
 
 export async function sendRequest(body){

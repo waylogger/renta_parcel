@@ -41,6 +41,6 @@ var nameValidateAndSave = function (state) {
         }).join(' ');
         jquery_1.default("#" + shared.domElementId.custonersNameId).val(a);
     });
-    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () { return state.saveName(jquery_1.default("#" + shared.domElementId.custonersNameId).val()); });
+    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () { var _a; return state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString()); });
 };
 exports.nameValidateAndSave = nameValidateAndSave;

@@ -38,8 +38,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var state_1 = require("./state");
 describe('Testing state initialization', function () {
+    var phone = "+79155244228";
+    var Name = "Qwerty qwerty";
     test('Состояние инициализированно и защищено от случайных изменений', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var a, places;
+        var a, places, cars;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, state_1.BookingState()];
@@ -47,9 +49,17 @@ describe('Testing state initialization', function () {
                     a = _a.sent();
                     return [4 /*yield*/, state_1.BookingState()];
                 case 2:
-                    places = (_a.sent()).getPlaces();
+                    places = (_a.sent()).getPlacesForReceiveAndReturnCars();
                     places.result_code = 5;
-                    expect(a.getPlaces().result_code).not.toBe(5);
+                    expect(a.getPlacesForReceiveAndReturnCars().result_code).not.toBe(5);
+                    a.saveCustomersPhone(phone);
+                    expect(a.getCustomersPhone()).toBe(phone);
+                    a.saveCustomersName(Name);
+                    expect(a.getCustomersName()).toBe(Name);
+                    cars = a.getAllCarsForRent();
+                    cars.result_code = 23;
+                    expect(a.getAllCarsForRent().result_code).not.toBe(23);
+                    a.selectCar('toyota_rav4');
                     return [2 /*return*/];
             }
         });

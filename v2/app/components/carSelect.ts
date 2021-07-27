@@ -4,21 +4,21 @@
 
 import $ from 'jquery';
 import { State } from '../state/state';
-import {option, clearColor, formatCarModel} from '../shared/sharedActions';
+import { option, clearColor, formatCarModelFromBaseToSelect, formatCarModelFromSelectToHash} from '../shared/sharedActions';
 import * as shared from '../shared/sharedData';
-import _ from 'lodash';
+import _, { Primitive } from 'lodash';
+import {DateRangePicker} from '../components/Calendar'
 
 
 
-
-export const carSelect = (state: State): string => {
+export const carSelect = async (state: State): Promise<string> => {
 	let resStr = '';
-	const cars = state.getCars().cars;
+	const cars = state.getAllCarsForRent().cars;
 	const modelArr: string[] = [];
-	
+
 	cars.forEach(
 		(car) => {
-			const c = formatCarModel(car.model);
+			const c = formatCarModelFromBaseToSelect(car.model);
 			modelArr.push(
 				c.trim()
 			);
@@ -27,17 +27,22 @@ export const carSelect = (state: State): string => {
 
 	resStr += _.uniq(modelArr).map(
 		(item) => {
-			return option(item,item.toLowerCase().replace(' ','_'));
+			return option(item, item.toLowerCase().replace(' ', '_'));
 		}
 	).join('\n');
+	
 	$(`#${shared.domElementId.carSelectId}`).html(resStr);
-	$(`#${shared.domElementId.carSelectId}`).on('change',()=>{
-		const car = $(`#${shared.domElementId.carSelectId}`).val()?.toString().toLocaleLowerCase().replace(/\s/g,'_');
+	$(`#${shared.domElementId.carSelectId}`).on('change', () => {
+		const stringValueFromSelect =  $(`#${shared.domElementId.carSelectId}`).val()?.toString();
+		if (!stringValueFromSelect)
+			throw new Error('CarSelectCallback::cant take car value');
+		const car = formatCarModelFromSelectToHash(stringValueFromSelect);
 		location.href = `/#${car}`;
 		$(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
+
+		state.selectCar(stringValueFromSelect);
 	})
 	$(`#${shared.domElementId.carSelectId}`).trigger('change');
-	state.selectCar(location.hash.slice(1,location.hash.length));
-	
+
 	return resStr;
 }

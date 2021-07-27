@@ -68,6 +68,7 @@ var timeSelect_1 = require("./app/components/timeSelect");
 var customersPhone_1 = require("./app/components/customersPhone");
 var customersName_1 = require("./app/components/customersName");
 var carSelect_1 = require("./app/components/carSelect");
+var bidPreview_1 = require("./app/components/bidPreview");
 var checkHash = function () {
     if (location.hash = '#') {
         jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
@@ -83,18 +84,29 @@ var checkHash = function () {
             case 0: return [4 /*yield*/, state_1.BookingState()];
             case 1:
                 state = _a.sent();
-                jquery_1.default.when(jquery_1.default.ready).then(function () {
-                    jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
-                    checkHash();
-                    CalendarEnjection_1.CalendarEnjector();
-                    customersPhone_1.customersPhoneValidateAndSave(state);
-                    customersName_1.nameValidateAndSave(state);
-                    timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
-                    timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
-                    placeSelect_1.placeOptions(state);
-                    placeSelect_1.selectPlace(state);
-                    carSelect_1.carSelect(state);
-                });
+                jquery_1.default.when(jquery_1.default.ready).then(function () { return __awaiter(void 0, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
+                                checkHash();
+                                return [4 /*yield*/, CalendarEnjection_1.CalendarEnjector(state)];
+                            case 1:
+                                _a.sent();
+                                return [4 /*yield*/, carSelect_1.carSelect(state)];
+                            case 2:
+                                _a.sent();
+                                customersPhone_1.customersPhoneValidateAndSave(state);
+                                customersName_1.nameValidateAndSave(state);
+                                timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
+                                timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
+                                placeSelect_1.placeOptions(state);
+                                placeSelect_1.selectPlace(state);
+                                bidPreview_1.onPreview(state);
+                                return [2 /*return*/];
+                        }
+                    });
+                }); });
                 return [2 /*return*/];
         }
     });

@@ -46,7 +46,7 @@ var customersPhoneValidateAndSave = function (state) {
     });
     jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focusout', function () {
         var _a;
-        state.savePhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+        state.saveCustomersPhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
     });
 };
 exports.customersPhoneValidateAndSave = customersPhoneValidateAndSave;

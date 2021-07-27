@@ -1,7 +1,7 @@
 
 
-interface SinglePlace {
-    id: number,
+export interface SinglePlace {
+    place_id: number,
     title: string,
     city_id: number,
     delivery_cost: number,
@@ -15,7 +15,7 @@ export interface PlacesResponse {
 }
 // ------------------------------------------------------------------------------------------------
 export interface SingleCar{
-    id: number,
+    car_id: number,
     model: string,
     year: number,
 }
@@ -24,9 +24,13 @@ export interface CarListResponse {
     cars: SingleCar[],
 }
 // ------------------------------------------------------------------------------------------------
+export interface SinglePeriod{
+    begin: string | Date,
+    end: string | Date,
+}
 export interface FreePeriodResponse {
-    begin: Date,
-    end: Date,
+    result_code: number,
+    car_periods: SinglePeriod[],
 }
 // ------------------------------------------------------------------------------------------------
 export interface BidCostResponse {

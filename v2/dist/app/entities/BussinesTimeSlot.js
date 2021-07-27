@@ -36,7 +36,7 @@ var BussinesTimeSlot = /** @class */ (function () {
     */
     BussinesTimeSlot.prototype.releaseCar = function (car) {
         var carInx = this.carsInBook.findIndex(function (item) {
-            return item.id === car.id;
+            return item.car_id === car.car_id;
         });
         if (carInx < 0)
             return false;

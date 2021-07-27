@@ -128,6 +128,10 @@ exports.domElementId = {
   rootSectionId: 'rootSection',
   bookModuleId: 'bookModuleId',
   carSelectId: 'carSelectId',
+  carNameId: 'carNameId',
+  periodRentId: 'periodRentId',
+  bidCostId: 'bidCostId',
+  costResolutionId: 'costResolutionId',
   //------------------------------------------
   customersPhoneId: 'customersPhoneId',
   custonersNameId: 'customersNameId',
@@ -142,7 +146,9 @@ exports.domElementId = {
   selectReceiveTimeId: 'selectReceiveTimeId',
   selectReturnTimeId: 'selectReturnTimeId',
   //-------------------------------------------
-  bidTextId: 'bidTextId'
+  bidTextId: 'bidTextId',
+  receiveDataId: 'leftDate',
+  returnDataId: 'rightDate'
 };
 },{}],"dist/app/views/template.js":[function(require,module,exports) {
 "use strict";
@@ -192,7 +198,7 @@ exports.rootSection = void 0;
 var shared = __importStar(require("../shared/sharedData"));
 
 var rootSection = function rootSection() {
-  return "\n\n<div class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n<div style=\"background: #FAFAFB; padding: 15px\">\n\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t<input id=\"leftDate\" class=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\treadonly />\n\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t</div>\n\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\" class=\"dateTimeSelect\"\n\t\t\t\tplaceholder=\"--:--\">\n\t\t\t</select>\n\t\t</div>\n\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t<input id=\"rightDate\" class=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\treadonly />\n\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t</div>\n\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\tplaceholder=\"--:--\">\n\t\t\t</select>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t</div>\n\t</div>\n\t<div class=\"book__field-wrap\">\n\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t</select>\n\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t</div>\n\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\" class=\"book__field-wrap customPlace-wrap-start\">\n\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t</div>\n\t<div class=\"book__field-wrap\">\n\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t</select>\n\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t</div>\n\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\" class=\"book__field-wrap customPlace-wrap-end\">\n\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t</div>\n\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t<form autocomplete=\"on\">\n\t\t<div class=\"book__field-wrap\">\n\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\" name=\"name\"\n\t\t\t\tmaxlength=\"50\" type=\"text\" required placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t</div>\n\t\t<div class=\"book__field-wrap\">\n\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\" maxlength=\"14\"\n\t\t\t\tname=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t</div>\n\t</form>\n\t<div id=\"lawAgreement\">\n\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"age\" value=\"yes\" checked>\n\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438 \u043C\u043E\u0439 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"agree\" value=\"yes\" checked>\n\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t</div>\n\t<button class=\"book__btn\" type=\"submit\" id=\"bookButtonId\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t\t<!-- </div> -->\n\t</div>";
+  return "\n\n<div class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div style=\"background: #FAFAFB; padding: 15px\">\n\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\" readonly />\n\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\" class=\"dateTimeSelect\"\n\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\" class=\"ex-inputs-end book__field-value\"\n\t\t\t\t\tplaceholder=\"DD.MM.YYYY\" readonly />\n\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\" disabled\n\t\t\t\t\tplaceholder=\"--:--\">\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"book__field-wrap\">\n\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t</select>\n\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t</div>\n\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\" class=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t</div>\n\t\t<div class=\"book__field-wrap\">\n\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t</select>\n\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t</div>\n\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\" class=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t</div>\n\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t<form autocomplete=\"on\">\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\" name=\"name\"\n\t\t\t\t\tmaxlength=\"50\" type=\"text\" required placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\" maxlength=\"14\"\n\t\t\t\t\tname=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t</div>\n\t\t</form>\n\t\t<div id=\"lawAgreement\">\n\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"age\" value=\"yes\" checked>\n\t\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438 \u043C\u043E\u0439\n\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"agree\" value=\"yes\" checked>\n\t\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t\t</div>\n\t\t<button class=\"book__btn\" type=\"submit\" id=\"bookButtonId\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t\t</div>\n\t</div>\n</div>";
 };
 
 exports.rootSection = rootSection;
@@ -11307,6 +11313,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DateRangePicker = void 0;
 var dateRangePicker = 0;
+var myState;
 var num = 0;
 !function (t, e) {
   "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : e(t.DateRangePicker = {});
@@ -11560,8 +11567,7 @@ var num = 0;
           var onBorder = t.getMonth() !== currentMonth; //Boolean
           // var n = !i.inRange(t);//Boolean 
 
-          var shouldToDisabled = false; //isDateShouldBeDisabled(t);
-
+          var shouldToDisabled = myState.isDateBusy(t);
           var attr = shouldToDisabled ? 'disabled' : ''; // Если а установлено, то дата помечается как сегодняшнее число
 
           var isToday = shouldToDisabled ? false : t.getTime() === c; //Boolean
@@ -11860,7 +11866,8 @@ var num = 0;
     return 12 * t.getYear() + t.getMonth();
   }
 
-  t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e) {
+  t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e, mstate) {
+    myState = mstate;
     e = e || {};
     var o,
         n = x(),
@@ -11936,250 +11943,137 @@ var num = 0;
   });
 });
 exports.DateRangePicker = dateRangePicker;
-},{}],"dist/app/components/CalendarEnjection.js":[function(require,module,exports) {
+},{}],"dist/app/shared/sharedActions.js":[function(require,module,exports) {
 "use strict";
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CalendarEnjector = void 0;
+exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+/**
+ * @module sharedActions.ts
+ * @description некоторые переиспользуемые функции
+*/
 
-var Calendar_1 = require("./Calendar");
+function option(text, id, className) {
+  if (id === void 0) {
+    id = '';
+  }
 
-var jquery_1 = __importDefault(require("jquery"));
+  if (className === void 0) {
+    className = '';
+  }
 
-function CalendarEnjector() {
-  return __awaiter(this, void 0, void 0, function () {
-    function showPicker() {
-      container.classList.add('ex-inputs-picker-visible');
-    }
-
-    function hidePicker() {
-      clearTimeout(previousTimeout);
-      previousTimeout = setTimeout(function () {
-        if (!root.contains(document.activeElement)) {
-          container.classList.remove('ex-inputs-picker-visible');
-        }
-      }, 10);
-    }
-
-    var root, txtStart, txtEnd, container, previousTimeout;
-    return __generator(this, function (_a) {
-      root = document.querySelector('.ex-inputs');
-      txtStart = root.querySelector('.ex-inputs-start');
-      txtEnd = root.querySelector('.ex-inputs-end');
-      container = root.querySelector('.ex-inputs-picker'); // Inject DateRangePicker into our container
-
-      Calendar_1.DateRangePicker(container).on('statechange', function (_, rp) {
-        var range = rp.state;
-        /**
-         * @author wlr986
-         * @description saving time data when change date
-        */
-        // let startModifier = '';
-        // let endModifier = '';
-        // dataFromServer.dateIsBad = true;
-        // const currDateStart = $('#leftDate').val();
-        // const dataArrStart = currDateStart.split(' ');
-        // const currDateEnd = $('#rightDate').val();
-        // const dataArrEnd = currDateEnd.split(' ');
-        // if (currDateStart.length > 0 && dataArrStart.length > 1 && dataArrStart[1] != '') {
-        //     startModifier = dataArrStart[1];
-        // }
-        // if (currDateEnd.length > 0 && dataArrEnd.length > 1 && dataArrEnd[1] != '') {
-        //     endModifier = dataArrEnd[1];
-        // }
-
-        txtStart.value = range.start ? range.start.toLocaleDateString() : '';
-        if (txtStart.value) txtEnd.value = range.end ? range.end.toLocaleDateString() : '';else txtEnd.value = ''; // let leftDateInsert = false;
-        // let rightDateInsert = false;
-        // if (txtStart.value) {
-        //     $('#selectReceiveDate').attr('disabled', null);
-        //     leftDateInsert = true;
-        // } else {
-        //     $('#selectReceiveDate').attr('disabled', true);
-        // }
-        // if (txtEnd.value) {
-        //     $('#selectReturnDate').attr('disabled', null);
-        //     rightDateInsert = true;
-        // } else {
-        //     $('#selectReturnDate').attr('disabled', true);
-        // }
-        // if (leftDateInsert && rightDateInsert) {
-        //     state[dateObj.inx] = true;
-        //     coloringBorder(dateObj.inx, fieldClasses.validationPassed);
-        //     datePreview();
-        //     costPreview();
-        // } else {
-        //     datePreview();
-        //     costPreview();
-        //     state[dateObj.inx] = false;
-        //     deColoringBorder(dateObj.inx, fieldClasses.validationPassed);
-        // }
-      }); // When the inputs gain focus, show the date range picker
-
-      txtStart.addEventListener('focus', showPicker);
-      txtEnd.addEventListener('focus', showPicker);
-      jquery_1.default('.dr-cal-end').detach();
-      jquery_1.default('.dp-next').css('visibility', 'visible');
-      return [2
-      /*return*/
-      ];
-    });
-  });
+  return "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
 }
 
-exports.CalendarEnjector = CalendarEnjector;
-},{"./Calendar":"dist/app/components/Calendar.js","jquery":"node_modules/jquery/dist/jquery.js"}],"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+exports.option = option;
+/**
+ * @param model имя машины, которое получаем от сервера в формате: Toyota Rav4(бел.)
+ * @returns то же имя, но без цвета в скобках
+*/
+
+function clearColor(model) {
+  return model.replace(/\([^)]+\)/, '');
+}
+
+exports.clearColor = clearColor; //--------------------------------------------------------------------------------------------------------
+// форматирование имени авто из hash, от сервера и из select
+
+function formatCarModelFromBaseToSelect(model) {
+  return clearColor(model.trim().toLocaleLowerCase()).split(' ').map(function (item) {
+    return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length);
+  }).join(' ').trim();
+}
+
+exports.formatCarModelFromBaseToSelect = formatCarModelFromBaseToSelect;
+
+function formatCarModelFromSelectToHash(model) {
+  return model.toLocaleLowerCase().replace(/\s/g, '_');
+}
+
+exports.formatCarModelFromSelectToHash = formatCarModelFromSelectToHash;
+
+function formatCarModelFromHashToSelect(model) {
+  return model.replace('_', ' ').split(' ').map(function (item) {
+    return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length);
+  }).join(' ');
+}
+
+exports.formatCarModelFromHashToSelect = formatCarModelFromHashToSelect; //--------------------------------------------------------------------------------------------------------
+
+/**
+ * @function
+ * @param {Date} start
+ * @param {Date} end
+ * @returns {string} duration
+ * @example ('01-01-2000 10:00', '02-01-2000 10:00') => (на 1 день с 01.01.2000 г. 10:00 по 02.02.2000 10:00)
+ */
+
+function translateDate(d1, d2, t1, t2) {
+  var numOfDays = Math.floor((d2.valueOf() - d1.valueOf()) / 1000 / (24 * 3600) + 1);
+  var numOfDaysStr = numOfDays.toString();
+  var dayWord = '';
+  var last2num = parseInt(numOfDaysStr, 10);
+
+  if (last2num >= 10 && last2num <= 19) {
+    dayWord = 'дней';
+    return "\u043D\u0430 " + numOfDaysStr + " " + dayWord + " \u0441 " + d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
+  }
+
+  var lastNum = parseInt(numOfDaysStr.charAt(numOfDaysStr.length - 1), 10);
+  if (lastNum === 1) dayWord = 'день';else if (lastNum === 0) dayWord = 'дней';else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';else if (lastNum >= 5) dayWord = 'дней';
+  return numOfDaysStr + " " + dayWord + " \u0441 " + d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
+}
+
+exports.translateDate = translateDate;
+/**
+ * @description получаем текущий date в формате для сервера: yyyy-mm-dd hh:mm:ssZ
+*/
+
+function dateForServer(customDate) {
+  if (customDate === void 0) {
+    customDate = new Date();
+  }
+
+  return customDate.toLocaleDateString().split('.').reverse().join('-') + " " + customDate.toLocaleTimeString() + "Z";
+}
+
+exports.dateForServer = dateForServer;
+
+function customDateForServer(customDate) {
+  return customDate.toLocaleDateString().split('.').reverse().join('-') + " " + customDate.toLocaleTimeString() + "Z";
+}
+
+exports.customDateForServer = customDateForServer;
+
+function currentYearForServer() {
+  var dt = new Date();
+  dt.setMonth(0);
+  dt.setDate(1);
+  dt.setHours(0);
+  dt.setMinutes(0);
+  dt.setSeconds(0);
+  dt.setMilliseconds(0);
+  return dateForServer(dt);
+}
+
+exports.currentYearForServer = currentYearForServer;
+
+function nextYearForServer() {
+  var dt = new Date();
+  dt.setFullYear(dt.getFullYear() + 1);
+  dt.setMonth(0);
+  dt.setDate(1);
+  dt.setHours(0);
+  dt.setMinutes(0);
+  dt.setSeconds(0);
+  dt.setMilliseconds(0);
+  return dateForServer(dt);
+}
+
+exports.nextYearForServer = nextYearForServer;
+},{}],"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var define;
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -13999,7 +13893,601 @@ function getAccess() {
 }
 
 exports.getAccess = getAccess;
-},{"whatwg-fetch":"node_modules/whatwg-fetch/fetch.js","./entities/SessionKey":"dist/app/CORS/entities/SessionKey.js"}],"dist/app/CORS/querySender.js":[function(require,module,exports) {
+},{"whatwg-fetch":"node_modules/whatwg-fetch/fetch.js","./entities/SessionKey":"dist/app/CORS/entities/SessionKey.js"}],"node_modules/strict-uri-encode/index.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => "%".concat(x.charCodeAt(0).toString(16).toUpperCase()));
+},{}],"node_modules/decode-uri-component/index.js":[function(require,module,exports) {
+'use strict';
+
+var token = '%[a-f0-9]{2}';
+var singleMatcher = new RegExp(token, 'gi');
+var multiMatcher = new RegExp('(' + token + ')+', 'gi');
+
+function decodeComponents(components, split) {
+  try {
+    // Try to decode the entire string first
+    return decodeURIComponent(components.join(''));
+  } catch (err) {// Do nothing
+  }
+
+  if (components.length === 1) {
+    return components;
+  }
+
+  split = split || 1; // Split the array in 2 parts
+
+  var left = components.slice(0, split);
+  var right = components.slice(split);
+  return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
+}
+
+function decode(input) {
+  try {
+    return decodeURIComponent(input);
+  } catch (err) {
+    var tokens = input.match(singleMatcher);
+
+    for (var i = 1; i < tokens.length; i++) {
+      input = decodeComponents(tokens, i).join('');
+      tokens = input.match(singleMatcher);
+    }
+
+    return input;
+  }
+}
+
+function customDecodeURIComponent(input) {
+  // Keep track of all the replacements and prefill the map with the `BOM`
+  var replaceMap = {
+    '%FE%FF': '\uFFFD\uFFFD',
+    '%FF%FE': '\uFFFD\uFFFD'
+  };
+  var match = multiMatcher.exec(input);
+
+  while (match) {
+    try {
+      // Decode as big chunks as possible
+      replaceMap[match[0]] = decodeURIComponent(match[0]);
+    } catch (err) {
+      var result = decode(match[0]);
+
+      if (result !== match[0]) {
+        replaceMap[match[0]] = result;
+      }
+    }
+
+    match = multiMatcher.exec(input);
+  } // Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
+
+
+  replaceMap['%C2'] = '\uFFFD';
+  var entries = Object.keys(replaceMap);
+
+  for (var i = 0; i < entries.length; i++) {
+    // Replace all decoded components
+    var key = entries[i];
+    input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
+  }
+
+  return input;
+}
+
+module.exports = function (encodedURI) {
+  if (typeof encodedURI !== 'string') {
+    throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
+  }
+
+  try {
+    encodedURI = encodedURI.replace(/\+/g, ' '); // Try the built in decoder first
+
+    return decodeURIComponent(encodedURI);
+  } catch (err) {
+    // Fallback to a more advanced decoder
+    return customDecodeURIComponent(encodedURI);
+  }
+};
+},{}],"node_modules/split-on-first/index.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = function (string, separator) {
+  if (!(typeof string === 'string' && typeof separator === 'string')) {
+    throw new TypeError('Expected the arguments to be of type `string`');
+  }
+
+  if (separator === '') {
+    return [string];
+  }
+
+  var separatorIndex = string.indexOf(separator);
+
+  if (separatorIndex === -1) {
+    return [string];
+  }
+
+  return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
+};
+},{}],"node_modules/filter-obj/index.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = function (obj, predicate) {
+  var ret = {};
+  var keys = Object.keys(obj);
+  var isArr = Array.isArray(predicate);
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = obj[key];
+
+    if (isArr ? predicate.indexOf(key) !== -1 : predicate(key, val, obj)) {
+      ret[key] = val;
+    }
+  }
+
+  return ret;
+};
+},{}],"node_modules/query-string/index.js":[function(require,module,exports) {
+'use strict';
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function (obj) { return typeof obj; }; } else { _typeof = function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var strictUriEncode = require('strict-uri-encode');
+
+var decodeComponent = require('decode-uri-component');
+
+var splitOnFirst = require('split-on-first');
+
+var filterObject = require('filter-obj');
+
+var isNullOrUndefined = function (value) {
+  return value === null || value === undefined;
+};
+
+var encodeFragmentIdentifier = Symbol('encodeFragmentIdentifier');
+
+function encoderForArrayFormat(options) {
+  switch (options.arrayFormat) {
+    case 'index':
+      return function (key) {
+        return function (result, value) {
+          var index = result.length;
+
+          if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+            return result;
+          }
+
+          if (value === null) {
+            return [].concat(_toConsumableArray(result), [[encode(key, options), '[', index, ']'].join('')]);
+          }
+
+          return [].concat(_toConsumableArray(result), [[encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('')]);
+        };
+      };
+
+    case 'bracket':
+      return function (key) {
+        return function (result, value) {
+          if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+            return result;
+          }
+
+          if (value === null) {
+            return [].concat(_toConsumableArray(result), [[encode(key, options), '[]'].join('')]);
+          }
+
+          return [].concat(_toConsumableArray(result), [[encode(key, options), '[]=', encode(value, options)].join('')]);
+        };
+      };
+
+    case 'comma':
+    case 'separator':
+    case 'bracket-separator':
+      {
+        var keyValueSep = options.arrayFormat === 'bracket-separator' ? '[]=' : '=';
+        return function (key) {
+          return function (result, value) {
+            if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+              return result;
+            } // Translate null to an empty string so that it doesn't serialize as 'null'
+
+
+            value = value === null ? '' : value;
+
+            if (result.length === 0) {
+              return [[encode(key, options), keyValueSep, encode(value, options)].join('')];
+            }
+
+            return [[result, encode(value, options)].join(options.arrayFormatSeparator)];
+          };
+        };
+      }
+
+    default:
+      return function (key) {
+        return function (result, value) {
+          if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+            return result;
+          }
+
+          if (value === null) {
+            return [].concat(_toConsumableArray(result), [encode(key, options)]);
+          }
+
+          return [].concat(_toConsumableArray(result), [[encode(key, options), '=', encode(value, options)].join('')]);
+        };
+      };
+  }
+}
+
+function parserForArrayFormat(options) {
+  var result;
+
+  switch (options.arrayFormat) {
+    case 'index':
+      return function (key, value, accumulator) {
+        result = /\[(\d*)\]$/.exec(key);
+        key = key.replace(/\[\d*\]$/, '');
+
+        if (!result) {
+          accumulator[key] = value;
+          return;
+        }
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = {};
+        }
+
+        accumulator[key][result[1]] = value;
+      };
+
+    case 'bracket':
+      return function (key, value, accumulator) {
+        result = /(\[\])$/.exec(key);
+        key = key.replace(/\[\]$/, '');
+
+        if (!result) {
+          accumulator[key] = value;
+          return;
+        }
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = [value];
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], value);
+      };
+
+    case 'comma':
+    case 'separator':
+      return function (key, value, accumulator) {
+        var isArray = typeof value === 'string' && value.includes(options.arrayFormatSeparator);
+        var isEncodedArray = typeof value === 'string' && !isArray && decode(value, options).includes(options.arrayFormatSeparator);
+        value = isEncodedArray ? decode(value, options) : value;
+        var newValue = isArray || isEncodedArray ? value.split(options.arrayFormatSeparator).map(function (item) {
+          return decode(item, options);
+        }) : value === null ? value : decode(value, options);
+        accumulator[key] = newValue;
+      };
+
+    case 'bracket-separator':
+      return function (key, value, accumulator) {
+        var isArray = /(\[\])$/.test(key);
+        key = key.replace(/\[\]$/, '');
+
+        if (!isArray) {
+          accumulator[key] = value ? decode(value, options) : value;
+          return;
+        }
+
+        var arrayValue = value === null ? [] : value.split(options.arrayFormatSeparator).map(function (item) {
+          return decode(item, options);
+        });
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = arrayValue;
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], arrayValue);
+      };
+
+    default:
+      return function (key, value, accumulator) {
+        if (accumulator[key] === undefined) {
+          accumulator[key] = value;
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], value);
+      };
+  }
+}
+
+function validateArrayFormatSeparator(value) {
+  if (typeof value !== 'string' || value.length !== 1) {
+    throw new TypeError('arrayFormatSeparator must be single character string');
+  }
+}
+
+function encode(value, options) {
+  if (options.encode) {
+    return options.strict ? strictUriEncode(value) : encodeURIComponent(value);
+  }
+
+  return value;
+}
+
+function decode(value, options) {
+  if (options.decode) {
+    return decodeComponent(value);
+  }
+
+  return value;
+}
+
+function keysSorter(input) {
+  if (Array.isArray(input)) {
+    return input.sort();
+  }
+
+  if (_typeof(input) === 'object') {
+    return keysSorter(Object.keys(input)).sort(function (a, b) {
+      return Number(a) - Number(b);
+    }).map(function (key) {
+      return input[key];
+    });
+  }
+
+  return input;
+}
+
+function removeHash(input) {
+  var hashStart = input.indexOf('#');
+
+  if (hashStart !== -1) {
+    input = input.slice(0, hashStart);
+  }
+
+  return input;
+}
+
+function getHash(url) {
+  var hash = '';
+  var hashStart = url.indexOf('#');
+
+  if (hashStart !== -1) {
+    hash = url.slice(hashStart);
+  }
+
+  return hash;
+}
+
+function extract(input) {
+  input = removeHash(input);
+  var queryStart = input.indexOf('?');
+
+  if (queryStart === -1) {
+    return '';
+  }
+
+  return input.slice(queryStart + 1);
+}
+
+function parseValue(value, options) {
+  if (options.parseNumbers && !Number.isNaN(Number(value)) && typeof value === 'string' && value.trim() !== '') {
+    value = Number(value);
+  } else if (options.parseBooleans && value !== null && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')) {
+    value = value.toLowerCase() === 'true';
+  }
+
+  return value;
+}
+
+function parse(query, options) {
+  options = Object.assign({
+    decode: true,
+    sort: true,
+    arrayFormat: 'none',
+    arrayFormatSeparator: ',',
+    parseNumbers: false,
+    parseBooleans: false
+  }, options);
+  validateArrayFormatSeparator(options.arrayFormatSeparator);
+  var formatter = parserForArrayFormat(options); // Create an object with no prototype
+
+  var ret = Object.create(null);
+
+  if (typeof query !== 'string') {
+    return ret;
+  }
+
+  query = query.trim().replace(/^[?#&]/, '');
+
+  if (!query) {
+    return ret;
+  }
+
+  for (var param of query.split('&')) {
+    if (param === '') {
+      continue;
+    }
+
+    var [key, value] = splitOnFirst(options.decode ? param.replace(/\+/g, ' ') : param, '='); // Missing `=` should be `null`:
+    // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+
+    value = value === undefined ? null : ['comma', 'separator', 'bracket-separator'].includes(options.arrayFormat) ? value : decode(value, options);
+    formatter(decode(key, options), value, ret);
+  }
+
+  for (var _key of Object.keys(ret)) {
+    var _value = ret[_key];
+
+    if (_typeof(_value) === 'object' && _value !== null) {
+      for (var k of Object.keys(_value)) {
+        _value[k] = parseValue(_value[k], options);
+      }
+    } else {
+      ret[_key] = parseValue(_value, options);
+    }
+  }
+
+  if (options.sort === false) {
+    return ret;
+  }
+
+  return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce(function (result, key) {
+    var value = ret[key];
+
+    if (Boolean(value) && _typeof(value) === 'object' && !Array.isArray(value)) {
+      // Sort object keys, not values
+      result[key] = keysSorter(value);
+    } else {
+      result[key] = value;
+    }
+
+    return result;
+  }, Object.create(null));
+}
+
+exports.extract = extract;
+exports.parse = parse;
+
+exports.stringify = function (object, options) {
+  if (!object) {
+    return '';
+  }
+
+  options = Object.assign({
+    encode: true,
+    strict: true,
+    arrayFormat: 'none',
+    arrayFormatSeparator: ','
+  }, options);
+  validateArrayFormatSeparator(options.arrayFormatSeparator);
+
+  var shouldFilter = function (key) {
+    return options.skipNull && isNullOrUndefined(object[key]) || options.skipEmptyString && object[key] === '';
+  };
+
+  var formatter = encoderForArrayFormat(options);
+  var objectCopy = {};
+
+  for (var key of Object.keys(object)) {
+    if (!shouldFilter(key)) {
+      objectCopy[key] = object[key];
+    }
+  }
+
+  var keys = Object.keys(objectCopy);
+
+  if (options.sort !== false) {
+    keys.sort(options.sort);
+  }
+
+  return keys.map(function (key) {
+    var value = object[key];
+
+    if (value === undefined) {
+      return '';
+    }
+
+    if (value === null) {
+      return encode(key, options);
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length === 0 && options.arrayFormat === 'bracket-separator') {
+        return encode(key, options) + '[]';
+      }
+
+      return value.reduce(formatter(key), []).join('&');
+    }
+
+    return encode(key, options) + '=' + encode(value, options);
+  }).filter(function (x) {
+    return x.length > 0;
+  }).join('&');
+};
+
+exports.parseUrl = function (url, options) {
+  options = Object.assign({
+    decode: true
+  }, options);
+  var [url_, hash] = splitOnFirst(url, '#');
+  return Object.assign({
+    url: url_.split('?')[0] || '',
+    query: parse(extract(url), options)
+  }, options && options.parseFragmentIdentifier && hash ? {
+    fragmentIdentifier: decode(hash, options)
+  } : {});
+};
+
+exports.stringifyUrl = function (object, options) {
+  options = Object.assign(_defineProperty({
+    encode: true,
+    strict: true
+  }, encodeFragmentIdentifier, true), options);
+  var url = removeHash(object.url).split('?')[0] || '';
+  var queryFromUrl = exports.extract(object.url);
+  var parsedQueryFromUrl = exports.parse(queryFromUrl, {
+    sort: false
+  });
+  var query = Object.assign(parsedQueryFromUrl, object.query);
+  var queryString = exports.stringify(query, options);
+
+  if (queryString) {
+    queryString = "?".concat(queryString);
+  }
+
+  var hash = getHash(object.url);
+
+  if (object.fragmentIdentifier) {
+    hash = "#".concat(options[encodeFragmentIdentifier] ? encode(object.fragmentIdentifier, options) : object.fragmentIdentifier);
+  }
+
+  return "".concat(url).concat(queryString).concat(hash);
+};
+
+exports.pick = function (input, filter, options) {
+  options = Object.assign(_defineProperty({
+    parseFragmentIdentifier: true
+  }, encodeFragmentIdentifier, false), options);
+  var {
+    url: url,
+    query: query,
+    fragmentIdentifier: fragmentIdentifier
+  } = exports.parseUrl(input, options);
+  return exports.stringifyUrl({
+    url: url,
+    query: filterObject(query, filter),
+    fragmentIdentifier: fragmentIdentifier
+  }, options);
+};
+
+exports.exclude = function (input, filter, options) {
+  var exclusionFilter = Array.isArray(filter) ? function (key) {
+    return !filter.includes(key);
+  } : function (key, value) {
+    return !filter(key, value);
+  };
+  return exports.pick(input, exclusionFilter, options);
+};
+},{"strict-uri-encode":"node_modules/strict-uri-encode/index.js","decode-uri-component":"node_modules/decode-uri-component/index.js","split-on-first":"node_modules/split-on-first/index.js","filter-obj":"node_modules/filter-obj/index.js"}],"dist/app/CORS/querySender.js":[function(require,module,exports) {
 "use strict";
 
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -14154,11 +14642,13 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
+exports.getCarPeriodList = exports.getCost = exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
 
 require("regenerator-runtime/runtime");
 
 var auth_1 = require("./auth");
+
+var query_string_1 = __importDefault(require("query-string"));
 
 var jquery_1 = __importDefault(require("jquery"));
 
@@ -14242,6 +14732,51 @@ function getPlaceList() {
 }
 
 exports.getPlaceList = getPlaceList;
+
+function getCost(reqObj) {
+  return __awaiter(this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , getRequestBuilder('bid_cost', query_string_1.default.stringify(reqObj, {
+            arrayFormat: 'bracket'
+          }))];
+
+        case 1:
+          return [2
+          /*return*/
+          , _a.sent()];
+      }
+    });
+  });
+}
+
+exports.getCost = getCost;
+
+function getCarPeriodList(reqObj) {
+  return __awaiter(this, void 0, void 0, function () {
+    var res;
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , getRequestBuilder('car_period_list', query_string_1.default.stringify(reqObj))];
+
+        case 1:
+          res = _a.sent();
+          if (res.result_code != 0) jquery_1.default(location).attr('href', '/');
+          return [2
+          /*return*/
+          , res];
+      }
+    });
+  });
+}
+
+exports.getCarPeriodList = getCarPeriodList;
 /*
 export async function getTarrifs(reqObj) {
     return (await getRequestBuilder('tariff_list', queryString.stringify(reqObj))).cars;
@@ -14260,13 +14795,6 @@ export async function getCarFreeList(reqObj) {
     const res = (await getRequestBuilder('car_free_list', queryString.stringify(reqObj))).cars;
     return res;
 }
-export async function getCarPeriodList(reqObj) {
-    return (await getRequestBuilder('car_period_list', queryString.stringify(reqObj))).car_periods;
-}
-
-export async function getCost(reqObj) {
-    return (await getRequestBuilder('bid_cost', queryString.stringify(reqObj, { arrayFormat: 'bracket' })));
-}
 
 export async function sendRequest(body){
     const urlSuffix = 'bid_create';
@@ -14282,51 +14810,45 @@ export async function sendRequest(body){
     return res.json();
 }
 */
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./auth":"dist/app/CORS/auth.js","jquery":"node_modules/jquery/dist/jquery.js"}],"dist/app/shared/sharedActions.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./auth":"dist/app/CORS/auth.js","query-string":"node_modules/query-string/index.js","jquery":"node_modules/jquery/dist/jquery.js"}],"dist/app/components/bidPreview.js":[function(require,module,exports) {
 "use strict";
+/**
+ * @module bitText.ts
+*/
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
 });
-exports.formatCarModel = exports.clearColor = exports.option = void 0;
-/**
- * @module sharedActions.ts
- * @description некоторые переиспользуемые функции
-*/
 
-function option(text, id, className) {
-  if (id === void 0) {
-    id = '';
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   }
 
-  if (className === void 0) {
-    className = '';
-  }
+  __setModuleDefault(result, mod);
 
-  return "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
-}
-
-exports.option = option;
-/**
- * @param model имя машины, которое получаем от сервера в формате: Toyota Rav4(бел.)
- * @returns то же имя, но без цвета в скобках
-*/
-
-function clearColor(model) {
-  return model.replace(/\([^)]+\)/, '');
-}
-
-exports.clearColor = clearColor;
-
-function formatCarModel(model) {
-  return clearColor(model.trim().toLocaleLowerCase()).split(' ').map(function (item) {
-    return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length);
-  }).join(' ');
-}
-
-exports.formatCarModel = formatCarModel;
-},{}],"dist/app/state/state.js":[function(require,module,exports) {
-"use strict";
+  return result;
+};
 
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
@@ -14471,12 +14993,546 @@ var __generator = this && this.__generator || function (thisArg, body) {
   }
 };
 
-var __spreadArray = this && this.__spreadArray || function (to, from) {
-  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) {
-    to[j] = from[i];
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.onPreview = exports.bidPreview = void 0;
+
+var jquery_1 = __importDefault(require("jquery"));
+
+var shared = __importStar(require("../shared/sharedData"));
+
+var sharedActions_1 = require("../shared/sharedActions");
+
+var querySender_1 = require("../CORS/querySender");
+
+function bidPreview(state) {
+  var _a, _b, _c, _d, _e, _f, _g;
+
+  return __awaiter(this, void 0, void 0, function () {
+    var resStr, carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, d1, d2, placeBegin, placeEnd, bidRequest, bidCost, cost, deposit, deliveryCost;
+    return __generator(this, function (_h) {
+      switch (_h.label) {
+        case 0:
+          resStr = '';
+          carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+          leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
+          leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
+          leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
+          rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
+          rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
+          rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+
+          if (carModel) {
+            resStr += "<span id=\"" + shared.domElementId.carNameId + "\">\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel + "</span>";
+          }
+
+          if (!(leftDate && leftTime && rightDate && rightDate)) return [3
+          /*break*/
+          , 2];
+          d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
+          d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+          placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+            return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]);
+          })[0];
+          placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+            return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]);
+          })[0];
+          resStr += "<span id=\"" + shared.domElementId.periodRentId + "\"> \u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime) + "</span>";
+          bidRequest = {
+            car_id: 9,
+            begin: d1,
+            end: d2,
+            begin_place_id: placeBegin.place_id,
+            end_place_id: placeEnd.place_id,
+            services: []
+          };
+          return [4
+          /*yield*/
+          , querySender_1.getCost(bidRequest)];
+
+        case 1:
+          bidCost = _h.sent();
+          cost = bidCost.cost;
+          deposit = bidCost.deposit;
+          deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
+          if (deliveryCost > 0) resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";else resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
+          resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
+          resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+          _h.label = 2;
+
+        case 2:
+          jquery_1.default("#" + shared.domElementId.bidTextId).html(resStr);
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+
+exports.bidPreview = bidPreview;
+
+function onPreview(state) {
+  var onChangeList = ["" + shared.domElementId.carSelectId, "" + shared.domElementId.selectReceiveTimeId, "" + shared.domElementId.selectReturnTimeId, "" + shared.domElementId.receivePlaceSelectId, "" + shared.domElementId.returnPlaceSelectId];
+  var onFocusList = ["" + shared.domElementId.receiveDataId, "" + shared.domElementId.returnDataId];
+  onChangeList.forEach(function (id) {
+    jquery_1.default("#" + id).on('change', function () {
+      bidPreview(state);
+    });
+  });
+  onFocusList.forEach(function (id) {
+    jquery_1.default("#" + id).on('change', function () {
+      bidPreview(state);
+    });
+  });
+}
+
+exports.onPreview = onPreview;
+/**
+ * 	<span id="carName"></span>
+    <span id="periodRent"></span>
+    <br>
+    <span id="bidCost"></span>
+    <span id="deposit"></span>
+    <br>
+    <span id="resolution"></span>
+*/
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../CORS/querySender":"dist/app/CORS/querySender.js"}],"dist/app/components/CalendarEnjection.js":[function(require,module,exports) {
+"use strict";
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   }
 
-  return to;
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CalendarEnjector = void 0;
+/**
+ * @module CalendarEnjector.js
+ * @author Chris Davies <https://github.com/chrisdavies>
+ * @remarks кое-что правил wlr986 <wayloggerman@gmail.com>
+*/
+
+var Calendar_1 = require("./Calendar");
+
+var shared = __importStar(require("../shared/sharedData"));
+
+var bidPreview_1 = require("./bidPreview");
+
+var jquery_1 = __importDefault(require("jquery"));
+
+function CalendarEnjector(myState) {
+  return __awaiter(this, void 0, void 0, function () {
+    function showPicker() {
+      container.classList.add('ex-inputs-picker-visible');
+    }
+
+    function hidePicker() {
+      clearTimeout(previousTimeout);
+      previousTimeout = setTimeout(function () {
+        if (!root.contains(document.activeElement)) {
+          container.classList.remove('ex-inputs-picker-visible');
+        }
+      }, 10);
+    }
+
+    var root, txtStart, txtEnd, container, previousTimeout;
+    return __generator(this, function (_a) {
+      root = document.querySelector('.ex-inputs');
+      txtStart = root.querySelector('.ex-inputs-start');
+      txtEnd = root.querySelector('.ex-inputs-end');
+      container = root.querySelector('.ex-inputs-picker'); // Inject DateRangePicker into our container
+
+      Calendar_1.DateRangePicker(container, null, myState).on('statechange', function (_, rp) {
+        var range = rp.state;
+        /**
+         * @author wlr986
+         * @description saving time data when change date
+        */
+
+        txtStart.value = range.start ? range.start.toLocaleDateString() : '';
+        if (txtStart.value) txtEnd.value = range.end ? range.end.toLocaleDateString() : '';else txtEnd.value = '';
+        var leftDateInsert = false;
+        var rightDateInsert = false;
+
+        if (txtStart.value) {
+          jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', null);
+          leftDateInsert = true;
+          bidPreview_1.bidPreview(myState);
+        } else {
+          jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', true);
+          bidPreview_1.bidPreview(myState);
+        }
+
+        if (txtEnd.value) {
+          jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', null);
+          rightDateInsert = true;
+          bidPreview_1.bidPreview(myState);
+        } else {
+          jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', true);
+          bidPreview_1.bidPreview(myState);
+        }
+      }); // When the inputs gain focus, show the date range picker
+
+      txtStart.addEventListener('focus', showPicker);
+      txtEnd.addEventListener('focus', showPicker);
+      jquery_1.default('.dr-cal-end').detach();
+      jquery_1.default('.dp-next').css('visibility', 'visible');
+      return [2
+      /*return*/
+      ];
+    });
+  });
+}
+
+exports.CalendarEnjector = CalendarEnjector;
+},{"./Calendar":"dist/app/components/Calendar.js","../shared/sharedData":"dist/app/shared/sharedData.js","./bidPreview":"dist/app/components/bidPreview.js","jquery":"node_modules/jquery/dist/jquery.js"}],"dist/app/state/state.js":[function(require,module,exports) {
+"use strict";
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
 };
 
 Object.defineProperty(exports, "__esModule", {
@@ -14493,44 +15549,176 @@ var querySender_1 = require("../CORS/querySender");
 
 var sharedActions_1 = require("../shared/sharedActions");
 
+var defultCarListResponse = {
+  result_code: 0,
+  cars: []
+};
+var defaultPlacesResponse = {
+  result_code: 0,
+  places: []
+}; // const convertFreePeriodsToBusyPeriods = function (singleCarWithFreePeriods: SingleCarWithPeriods): SingleCarWithPeriods {
+// 	console.log(Object.values(singleCarWithFreePeriods.car_periods));
+// }
+
 var State =
 /** @class */
 function () {
   function State() {
-    this.places = {
+    /**
+     * @description адреса места для выдачи и возврата арендованных авто
+    */
+    this.placesForReceiveAndReturnCars = {
       result_code: 0,
       places: []
     };
-    this.cars = {
-      result_code: 0,
-      cars: []
-    };
-    this.selectedCar = [];
+    /**
+     * @description все авто, доступные для бронирования у заказчика
+    */
+
+    this.allCarsForRent = defultCarListResponse;
+    /**
+     * @description все авто одной модели, которая бронируется в настоящее время
+    */
+
+    this.allCarsForCurrentBooking = [];
+    /**
+     * @description телефон арендатора
+    */
+
     this.customersPhone = '';
+    /**
+     * @description телефон имя арендатора
+    */
+
     this.customersName = '';
+    /**
+     * массив данных, который содержит данные о периодах брони в отношении allCarsForCurrentBooking
+    */
+
+    this.busyPeriodsForCurrentBookingCar = [];
+    /**
+     * @description массив данных, который содержит исходные значения периодов для текущих машин
+    */
+
+    this.freePeriodsForCurrentBookingCar = [];
+    /**
+     * @description массив данных, который содержит исходные значения периодов для всех машин
+    */
+
+    this.freePeriodsForAllBookingCar = [];
+    /**
+     * Массив дней, которые полностью недоступны для брони всех allCarsForCurrentBooking
+    */
+
+    this.fulldaysNotAvaivableForBooking = [];
+    /**
+     * Массив дней, которые частично недоступны для брони всех allCarsForCurrentBooking - ключи, значения - это массив недоступных отрезков по 15 мину
+    */
+
+    this.partedDayNotAvaiableForBooking = [];
   }
+  /**
+   * @description сервер принимет дату в виде "2021-11-01 10:00Z", поэтому timestamp требуется постоянно переводить в этот формат, для чего служит эта функция
+  */
+
+
+  State.prototype.reformatDate = function (dt) {
+    return dt.toLocaleDateString().split('.').reverse().join('-') + " " + dt.toLocaleTimeString() + "Z";
+  };
+
+  State.prototype.fetchFreePeriodsForAllCars = function () {
+    return __awaiter(this, void 0, void 0, function () {
+      var carsIdOfAllCars, promisesForFetctFreePeriodsDate, beginDateForAllCars, endDateForAllCars, resultOfFetchFreePeriods;
+
+      var _this = this;
+
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            carsIdOfAllCars = [];
+            promisesForFetctFreePeriodsDate = [];
+            this.allCarsForRent.cars.forEach(function (car) {
+              carsIdOfAllCars.push(car.car_id);
+            });
+            beginDateForAllCars = sharedActions_1.currentYearForServer();
+            endDateForAllCars = sharedActions_1.nextYearForServer();
+            carsIdOfAllCars.forEach(function (id) {
+              var requestForFreePeriods = {
+                car_id: id,
+                begin: beginDateForAllCars,
+                end: endDateForAllCars,
+                include_idles: true,
+                include_reserves: true
+              };
+              promisesForFetctFreePeriodsDate.push(querySender_1.getCarPeriodList(requestForFreePeriods));
+            });
+            return [4
+            /*yield*/
+            , Promise.all(promisesForFetctFreePeriodsDate)];
+
+          case 1:
+            resultOfFetchFreePeriods = _a.sent();
+            resultOfFetchFreePeriods.forEach(function (res, inx) {
+              _this.freePeriodsForAllBookingCar.push(__assign(__assign({}, _this.allCarsForRent.cars[inx]), {
+                car_periods: res.car_periods
+              }));
+            });
+            this.freePeriodsForCurrentBookingCar = this.freePeriodsForAllBookingCar.filter(function (carPeriodItem) {
+              return _this.allCarsForCurrentBooking.find(function (item, inx) {
+                return item.car_id === carPeriodItem.car_id;
+              }) ? true : false;
+            });
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+  /**
+   * @description инициализация данных через асинхронные запросы
+  */
+
 
   State.prototype.init = function () {
     return __awaiter(this, void 0, void 0, function () {
-      var places, cars;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
+      var places, _a, carNameFromHash;
+
+      return __generator(this, function (_b) {
+        switch (_b.label) {
           case 0:
             return [4
             /*yield*/
             , querySender_1.getPlaceList()];
 
           case 1:
-            places = _a.sent();
-            places.places.splice(0, 3);
-            this.places = places;
+            places = _b.sent();
+            places.places.splice(0, 3); //смысл убрать первые 3 элемента в том, что об этот попросил заказчик
+
+            this.placesForReceiveAndReturnCars = places; //список машин
+            // --------------------------------------------------
+
+            _a = this;
             return [4
             /*yield*/
             , querySender_1.getCarList()];
 
           case 2:
-            cars = _a.sent();
-            this.cars = cars;
+            //список машин
+            // --------------------------------------------------
+            _a.allCarsForRent = _b.sent();
+            carNameFromHash = location.hash.replace('#', '');
+            this.selectCar(sharedActions_1.formatCarModelFromHashToSelect(carNameFromHash)); //периоды свободы и занятости авто
+
+            return [4
+            /*yield*/
+            , this.fetchFreePeriodsForAllCars()];
+
+          case 3:
+            //периоды свободы и занятости авто
+            _b.sent(); // convertFreePeriodsToBusyPeriods
+
+
             return [2
             /*return*/
             , this];
@@ -14539,49 +15727,67 @@ function () {
     });
   };
 
-  State.prototype.getPlaces = function () {
-    var places = this.places;
+  State.prototype.getPlacesForReceiveAndReturnCars = function () {
+    var places = this.placesForReceiveAndReturnCars;
     return {
       result_code: places.result_code,
       places: places.places
     };
   };
 
-  State.prototype.savePhone = function (num) {
+  State.prototype.saveCustomersPhone = function (num) {
     this.customersPhone = num;
   };
 
-  State.prototype.getPhone = function () {
-    return new String(this.customersPhone);
+  State.prototype.getCustomersPhone = function () {
+    return new String(this.customersPhone).toString();
   };
 
-  State.prototype.saveName = function (name) {
+  State.prototype.saveCustomersName = function (name) {
     this.customersName = name;
   };
 
-  State.prototype.getName = function () {
-    return new String(this.customersName);
+  State.prototype.getCustomersName = function () {
+    return new String(this.customersName).toString();
   };
 
-  State.prototype.getCars = function () {
-    var res = this.cars;
+  State.prototype.getAllCarsForRent = function () {
+    var res = this.allCarsForRent;
     return {
       result_code: res.result_code,
       cars: res.cars
     };
   };
 
-  State.prototype.selectCar = function (carStr) {
-    var res = this.cars.cars.filter(function (car) {
-      return sharedActions_1.formatCarModel(car.model).trim().replace(/\s/g, '_').toLowerCase() === carStr;
+  State.prototype.selectCar = function (nameOfCarFromCarSelectOrHash) {
+    return __awaiter(this, void 0, void 0, function () {
+      var carModelNamesForCompare;
+      return __generator(this, function (_a) {
+        if (!nameOfCarFromCarSelectOrHash) throw new Error('State::selectCar: badArg');
+        carModelNamesForCompare = []; //step0 преобразуем имена для сравнения
+
+        this.getAllCarsForRent().cars.forEach(function (car) {
+          carModelNamesForCompare.push(sharedActions_1.formatCarModelFromBaseToSelect(car.model));
+        }); //step1 фильтруем массив по совпадению с select
+
+        this.allCarsForCurrentBooking = this.allCarsForRent.cars.filter(function (_, inx) {
+          return carModelNamesForCompare[inx] === nameOfCarFromCarSelectOrHash;
+        });
+        return [2
+        /*return*/
+        ];
+      });
     });
-    this.selectedCar = res;
   };
 
-  State.prototype.getSelectedCars = function () {
-    var a = __spreadArray([], this.selectedCar);
-
-    return a;
+  State.prototype.isDateBusy = function (dt) {
+    // if ( isPast(dt) ) return true;
+    // if (this.fullbusyDates.find(
+    // 	(d) => isSameDay(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0, 0), d))) {
+    // 	return true;
+    // }
+    // return false;
+    return false;
   };
 
   return State;
@@ -14654,7 +15860,7 @@ var jquery_1 = __importDefault(require("jquery"));
 
 function placeOptions(state) {
   var resStr = '';
-  state.getPlaces().places.forEach(function (place) {
+  state.getPlacesForReceiveAndReturnCars().places.forEach(function (place) {
     return resStr += sharedActions_1.option(place.title + " + " + place.delivery_cost + " \u20BD");
   });
   jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).html(resStr);
@@ -14670,7 +15876,7 @@ var selectPlace = function selectPlace(state) {
 
     var txt = (_a = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
 
-    if (txt === state.getPlaces().places[4].title) {
+    if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-wrap-start');
@@ -14687,7 +15893,7 @@ var selectPlace = function selectPlace(state) {
 
     var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
 
-    if (txt === state.getPlaces().places[4].title) {
+    if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-wrap-end');
@@ -15121,7 +16327,7 @@ var customersPhoneValidateAndSave = function customersPhoneValidateAndSave(state
   jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focusout', function () {
     var _a;
 
-    state.savePhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+    state.saveCustomersPhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
   });
 };
 
@@ -15197,7 +16403,9 @@ var nameValidateAndSave = function nameValidateAndSave(state) {
     jquery_1.default("#" + shared.domElementId.custonersNameId).val(a);
   });
   jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () {
-    return state.saveName(jquery_1.default("#" + shared.domElementId.custonersNameId).val());
+    var _a;
+
+    return state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString());
   });
 };
 
@@ -34495,6 +35703,149 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -34515,27 +35866,36 @@ var shared = __importStar(require("../shared/sharedData"));
 var lodash_1 = __importDefault(require("lodash"));
 
 var carSelect = function carSelect(state) {
-  var resStr = '';
-  var cars = state.getCars().cars;
-  var modelArr = [];
-  cars.forEach(function (car) {
-    var c = sharedActions_1.formatCarModel(car.model);
-    modelArr.push(c.trim());
-  });
-  resStr += lodash_1.default.uniq(modelArr).map(function (item) {
-    return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
-  }).join('\n');
-  jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
-  jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () {
-    var _a;
+  return __awaiter(void 0, void 0, void 0, function () {
+    var resStr, cars, modelArr;
+    return __generator(this, function (_a) {
+      resStr = '';
+      cars = state.getAllCarsForRent().cars;
+      modelArr = [];
+      cars.forEach(function (car) {
+        var c = sharedActions_1.formatCarModelFromBaseToSelect(car.model);
+        modelArr.push(c.trim());
+      });
+      resStr += lodash_1.default.uniq(modelArr).map(function (item) {
+        return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
+      }).join('\n');
+      jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
+      jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () {
+        var _a;
 
-    var car = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().toLocaleLowerCase().replace(/\s/g, '_');
-    location.href = "/#" + car;
-    jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
+        var stringValueFromSelect = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+        if (!stringValueFromSelect) throw new Error('CarSelectCallback::cant take car value');
+        var car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
+        location.href = "/#" + car;
+        jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
+        state.selectCar(stringValueFromSelect);
+      });
+      jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
+      return [2
+      /*return*/
+      , resStr];
+    });
   });
-  jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
-  state.selectCar(location.hash.slice(1, location.hash.length));
-  return resStr;
 };
 
 exports.carSelect = carSelect;
@@ -34749,6 +36109,8 @@ var customersName_1 = require("./app/components/customersName");
 
 var carSelect_1 = require("./app/components/carSelect");
 
+var bidPreview_1 = require("./app/components/bidPreview");
+
 var checkHash = function checkHash() {
   if (location.hash = '#') {
     jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
@@ -34770,16 +36132,39 @@ var checkHash = function checkHash() {
         case 1:
           state = _a.sent();
           jquery_1.default.when(jquery_1.default.ready).then(function () {
-            jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
-            checkHash();
-            CalendarEnjection_1.CalendarEnjector();
-            customersPhone_1.customersPhoneValidateAndSave(state);
-            customersName_1.nameValidateAndSave(state);
-            timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
-            timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
-            placeSelect_1.placeOptions(state);
-            placeSelect_1.selectPlace(state);
-            carSelect_1.carSelect(state);
+            return __awaiter(void 0, void 0, void 0, function () {
+              return __generator(this, function (_a) {
+                switch (_a.label) {
+                  case 0:
+                    jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
+                    checkHash();
+                    return [4
+                    /*yield*/
+                    , CalendarEnjection_1.CalendarEnjector(state)];
+
+                  case 1:
+                    _a.sent();
+
+                    return [4
+                    /*yield*/
+                    , carSelect_1.carSelect(state)];
+
+                  case 2:
+                    _a.sent();
+
+                    customersPhone_1.customersPhoneValidateAndSave(state);
+                    customersName_1.nameValidateAndSave(state);
+                    timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
+                    timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
+                    placeSelect_1.placeOptions(state);
+                    placeSelect_1.selectPlace(state);
+                    bidPreview_1.onPreview(state);
+                    return [2
+                    /*return*/
+                    ];
+                }
+              });
+            });
           });
           return [2
           /*return*/
@@ -34788,7 +36173,7 @@ var checkHash = function checkHash() {
     });
   });
 })();
-},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/components/CalendarEnjection":"dist/app/components/CalendarEnjection.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js","./app/components/customersPhone":"dist/app/components/customersPhone.js","./app/components/customersName":"dist/app/components/customersName.js","./app/components/carSelect":"dist/app/components/carSelect.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/components/CalendarEnjection":"dist/app/components/CalendarEnjection.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js","./app/components/customersPhone":"dist/app/components/customersPhone.js","./app/components/customersName":"dist/app/components/customersName.js","./app/components/carSelect":"dist/app/components/carSelect.js","./app/components/bidPreview":"dist/app/components/bidPreview.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34816,7 +36201,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36687" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33623" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

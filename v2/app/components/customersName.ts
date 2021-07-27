@@ -19,7 +19,7 @@ export const nameValidateAndSave = (state: State) => {
 		}).join(' ');
 		$(`#${shared.domElementId.custonersNameId}`).val(a);
 	});
-	$(`#${shared.domElementId.custonersNameId}`).on('focusout',() => state.saveName($(`#${shared.domElementId.custonersNameId}`).val()));
+	$(`#${shared.domElementId.custonersNameId}`).on('focusout',() => state.saveCustomersName($(`#${shared.domElementId.custonersNameId}`).val()?.toString()));
 }
 
 

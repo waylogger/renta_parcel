@@ -8,6 +8,7 @@
 // import { dataFromServer } from './state/dataFromServer'
 import $ from 'jquery'
 let dateRangePicker = 0;
+let myState;
 
 let num = 0;
 !function (t, e) {
@@ -278,7 +279,7 @@ let num = 0;
 					// e === true if currenthMonth не равен t.Month(). Смысл переменной в том, что она используется для установления класса пограничного дня
 					var onBorder = t.getMonth() !== currentMonth;//Boolean
 					// var n = !i.inRange(t);//Boolean 
-					var shouldToDisabled = false;//isDateShouldBeDisabled(t);
+					var shouldToDisabled = myState.isDateBusy(t);
 					var attr = shouldToDisabled ? 'disabled' : '';
 					// Если а установлено, то дата помечается как сегодняшнее число
 					var isToday = shouldToDisabled ? false : t.getTime() === c;//Boolean
@@ -571,7 +572,8 @@ let num = 0;
 		return 12 * t.getYear() + t.getMonth()
 	}
 
-	t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e) {
+	t.TinyDatePicker = e, dateRangePicker = t.DateRangePicker = function (t, e, mstate) {
+		myState = mstate;
 
 		e = e || {};
 		var o, n = x(),

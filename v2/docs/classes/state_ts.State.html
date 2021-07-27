@@ -89,20 +89,30 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#busyCarPeriods" class="tsd-kind-icon">busy<wbr>Car<wbr>Periods</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#busyTimestamps" class="tsd-kind-icon">busy<wbr>Timestamps</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#cars" class="tsd-kind-icon">cars</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#customersName" class="tsd-kind-icon">customers<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#customersPhone" class="tsd-kind-icon">customers<wbr>Phone</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#fullbusyDates" class="tsd-kind-icon">fullbusy<wbr>Dates</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#places" class="tsd-kind-icon">places</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#selectedCar" class="tsd-kind-icon">selected<wbr>Car</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#getCars" class="tsd-kind-icon">get<wbr>Cars</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#getName" class="tsd-kind-icon">get<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#getPhone" class="tsd-kind-icon">get<wbr>Phone</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#getPlaces" class="tsd-kind-icon">get<wbr>Places</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#getSelectedCars" class="tsd-kind-icon">get<wbr>Selected<wbr>Cars</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#isDateBusy" class="tsd-kind-icon">is<wbr>Date<wbr>Busy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="state_ts.State.html#reformatDate" class="tsd-kind-icon">reformat<wbr>Date</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#saveName" class="tsd-kind-icon">save<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#savePhone" class="tsd-kind-icon">save<wbr>Phone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state_ts.State.html#selectCar" class="tsd-kind-icon">select<wbr>Car</a></li>
 							</ul>
 						</section>
 					</div>
@@ -120,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L13">state/state.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L42">state/state.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="state_ts.State.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></h4>
@@ -131,12 +141,42 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="busyCarPeriods" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> busy<wbr>Car<wbr>Periods</h3>
+					<div class="tsd-signature tsd-kind-icon">busy<wbr>Car<wbr>Periods<span class="tsd-signature-symbol">:</span> <a href="../interfaces/app_entities_carPeriods.SingleCarWithPeriods.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCarWithPeriods</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L30">state/state.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="busyTimestamps" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> busy<wbr>Timestamps</h3>
+					<div class="tsd-signature tsd-kind-icon">busy<wbr>Timestamps<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L32">state/state.ts:32</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="cars" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cars</h3>
+					<div class="tsd-signature tsd-kind-icon">cars<span class="tsd-signature-symbol">:</span> <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.CarListResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">CarListResponse</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L26">state/state.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="customersName" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> customers<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">customers<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L12">state/state.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L29">state/state.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -146,7 +186,17 @@
 					<div class="tsd-signature tsd-kind-icon">customers<wbr>Phone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L11">state/state.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L28">state/state.ts:28</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="fullbusyDates" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> fullbusy<wbr>Dates</h3>
+					<div class="tsd-signature tsd-kind-icon">fullbusy<wbr>Dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L31">state/state.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,13 +206,40 @@
 					<div class="tsd-signature tsd-kind-icon">places<span class="tsd-signature-symbol">:</span> <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.PlacesResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">PlacesResponse</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L10">state/state.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L25">state/state.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="selectedCar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> selected<wbr>Car</h3>
+					<div class="tsd-signature tsd-kind-icon">selected<wbr>Car<span class="tsd-signature-symbol">:</span> <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L27">state/state.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getCars" class="tsd-anchor"></a>
+					<h3>get<wbr>Cars</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Cars<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.CarListResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">CarListResponse</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L78">state/state.ts:78</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.CarListResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">CarListResponse</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getName" class="tsd-anchor"></a>
 					<h3>get<wbr>Name</h3>
@@ -173,7 +250,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L40">state/state.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L73">state/state.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">String</span></h4>
@@ -190,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L32">state/state.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L64">state/state.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">String</span></h4>
@@ -207,10 +284,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L23">state/state.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L55">state/state.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.PlacesResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">PlacesResponse</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getSelectedCars" class="tsd-anchor"></a>
+					<h3>get<wbr>Selected<wbr>Cars</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Selected<wbr>Cars<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L100">state/state.ts:100</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -224,10 +318,63 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L15">state/state.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L44">state/state.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="state_ts.State.html" class="tsd-signature-type" data-tsd-kind="Class">State</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="isDateBusy" class="tsd-anchor"></a>
+					<h3>is<wbr>Date<wbr>Busy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Date<wbr>Busy<span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L108">state/state.ts:108</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dt: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="reformatDate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> reformat<wbr>Date</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">reformat<wbr>Date<span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L37">state/state.ts:37</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>сервер принимет дату в виде &quot;2021-11-01 10:00Z&quot;, поэтому timestamp требуется постоянно переводить в этот формат, для чего служит эта функция</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dt: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -241,7 +388,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L36">state/state.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L68">state/state.ts:68</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -264,7 +411,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/aa3c5cb/v2/app/state/state.ts#L28">state/state.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L60">state/state.ts:60</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -274,6 +421,29 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="selectCar" class="tsd-anchor"></a>
+					<h3>select<wbr>Car</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">select<wbr>Car<span class="tsd-signature-symbol">(</span>carStr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/state/state.ts#L84">state/state.ts:84</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>carStr: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -293,9 +463,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/BussinesTimeSlot_ts.html">Bussines<wbr>Time<wbr>Slot.ts</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/BussinesYear_ts_.html">Bussines<wbr>Year.ts;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/Calendar_js.html">Calendar.js</a>
@@ -325,7 +492,22 @@
 						<a href="../modules/app_CORS_querySender.html">app/CORS/query<wbr>Sender</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/app_entities_carPeriods.html">app/entities/car<wbr>Periods</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/app_shared_sharedData.html">app/shared/shared<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/bitText_ts.html">bit<wbr>Text.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/carSelect_ts.html">car<wbr>Select.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/checkDayAvaiable_ts.html">check<wbr>Day<wbr>Avaiable.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/customersName_ts.html">customers<wbr>Name.ts</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/customersPhone_ts.html">customers<wbr>Phone.ts</a>
@@ -358,13 +540,31 @@
 								<a href="state_ts.State.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#busyCarPeriods" class="tsd-kind-icon">busy<wbr>Car<wbr>Periods</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#busyTimestamps" class="tsd-kind-icon">busy<wbr>Timestamps</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#cars" class="tsd-kind-icon">cars</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="state_ts.State.html#customersName" class="tsd-kind-icon">customers<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="state_ts.State.html#customersPhone" class="tsd-kind-icon">customers<wbr>Phone</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#fullbusyDates" class="tsd-kind-icon">fullbusy<wbr>Dates</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="state_ts.State.html#places" class="tsd-kind-icon">places</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#selectedCar" class="tsd-kind-icon">selected<wbr>Car</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state_ts.State.html#getCars" class="tsd-kind-icon">get<wbr>Cars</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="state_ts.State.html#getName" class="tsd-kind-icon">get<wbr>Name</a>
@@ -376,13 +576,25 @@
 								<a href="state_ts.State.html#getPlaces" class="tsd-kind-icon">get<wbr>Places</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state_ts.State.html#getSelectedCars" class="tsd-kind-icon">get<wbr>Selected<wbr>Cars</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="state_ts.State.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state_ts.State.html#isDateBusy" class="tsd-kind-icon">is<wbr>Date<wbr>Busy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="state_ts.State.html#reformatDate" class="tsd-kind-icon">reformat<wbr>Date</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="state_ts.State.html#saveName" class="tsd-kind-icon">save<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="state_ts.State.html#savePhone" class="tsd-kind-icon">save<wbr>Phone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state_ts.State.html#selectCar" class="tsd-kind-icon">select<wbr>Car</a>
 							</li>
 						</ul>
 					</li>
@@ -411,10 +623,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>

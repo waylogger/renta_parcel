@@ -11,7 +11,7 @@ import { State } from '../state/state';
 
 export function placeOptions(state: State): string {
 	let resStr: string = '';
-	state.getPlaces().places.forEach(
+	state.getPlacesForReceiveAndReturnCars().places.forEach(
 		(place) => resStr += option(`${place.title} + ${place.delivery_cost} ₽`)
 	);
 	$(`#${shared.domElementId.returnPlaceSelectId}`).html(resStr);
@@ -25,7 +25,7 @@ export const selectPlace = (state: State): void => {
 		() => {
 			let txt: any = $(`#${shared.domElementId.receivePlaceSelectId}`).val()?.toString().trim().split(' + ')[0];
 
-			if (txt === state.getPlaces().places[4].title) {
+			if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
 				$(`#${shared.domElementId.receiveCustomPlaceInputId}`).removeClass('customPlace-hidden');
 				$(`#${shared.domElementId.receiveCustomPlaceId}`).removeClass('customPlace-hidden')
 				$(`#${shared.domElementId.receiveCustomPlaceId}`).removeClass('customPlace-wrap-start')
@@ -44,7 +44,7 @@ export const selectPlace = (state: State): void => {
 		() => {
 			let txt: any = $(`#${shared.domElementId.returnPlaceSelectId}`).val()?.toString().trim().split(' + ')[0];
 
-			if (txt === state.getPlaces().places[4].title) {
+			if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
 				$(`#${shared.domElementId.returnCustomPlaceInputId}`).removeClass('customPlace-hidden');
 				$(`#${shared.domElementId.returnCustomPlaceId}`).removeClass('customPlace-hidden')
 				$(`#${shared.domElementId.returnCustomPlaceId}`).removeClass('customPlace-wrap-end')

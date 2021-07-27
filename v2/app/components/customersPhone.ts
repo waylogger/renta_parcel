@@ -24,7 +24,7 @@ export const customersPhoneValidateAndSave = (state: State): void => {
 
 
 	$(`#${shared.domElementId.customersPhoneId}`).on('focusout', () => {
-		state.savePhone($(`#${shared.domElementId.customersPhoneId}`).val()?.toString());
+		state.saveCustomersPhone($(`#${shared.domElementId.customersPhoneId}`).val()?.toString());
 	});
 
 }

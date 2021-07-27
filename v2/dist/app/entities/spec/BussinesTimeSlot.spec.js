@@ -7,7 +7,7 @@ var BussinesTimeSlot_1 = require("../BussinesTimeSlot");
 describe('Name of the group', function () {
     var date = new Date(Date.now());
     var slot = new BussinesTimeSlot_1.BussinesTimeSlot(date);
-    var car = { id: 0, model: 'test' };
+    var car = { car_id: 0, model: 'test', year: 0 };
     test('constructor should save timestamp', function () {
         expect(slot.getTimestamp()).toEqual(date);
     });

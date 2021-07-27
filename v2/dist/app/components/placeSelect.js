@@ -32,7 +32,7 @@ var shared = __importStar(require("../shared/sharedData"));
 var jquery_1 = __importDefault(require("jquery"));
 function placeOptions(state) {
     var resStr = '';
-    state.getPlaces().places.forEach(function (place) { return resStr += sharedActions_1.option(place.title + " + " + place.delivery_cost + " \u20BD"); });
+    state.getPlacesForReceiveAndReturnCars().places.forEach(function (place) { return resStr += sharedActions_1.option(place.title + " + " + place.delivery_cost + " \u20BD"); });
     jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).html(resStr);
     jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).html(resStr);
     return resStr;
@@ -42,7 +42,7 @@ var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).on('change', function () {
         var _a;
         var txt = (_a = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
-        if (txt === state.getPlaces().places[4].title) {
+        if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-wrap-start');
@@ -58,7 +58,7 @@ var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).on('change', function () {
         var _a;
         var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
-        if (txt === state.getPlaces().places[4].title) {
+        if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-wrap-end');

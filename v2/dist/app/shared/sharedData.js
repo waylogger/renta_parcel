@@ -5,6 +5,10 @@ exports.domElementId = {
     rootSectionId: 'rootSection',
     bookModuleId: 'bookModuleId',
     carSelectId: 'carSelectId',
+    carNameId: 'carNameId',
+    periodRentId: 'periodRentId',
+    bidCostId: 'bidCostId',
+    costResolutionId: 'costResolutionId',
     //------------------------------------------
     customersPhoneId: 'customersPhoneId',
     custonersNameId: 'customersNameId',
@@ -20,4 +24,6 @@ exports.domElementId = {
     selectReturnTimeId: 'selectReturnTimeId',
     //-------------------------------------------
     bidTextId: 'bidTextId',
+    receiveDataId: 'leftDate',
+    returnDataId: 'rightDate',
 };
