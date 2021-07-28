@@ -129,7 +129,7 @@ export class State {
 		// --------------------------------------------------
 		this.allCarsForRent = await getCarList();
 		const carNameFromHash = location.hash.replace('#', '');
-		this.selectCar(formatCarModelFromHashToSelect(carNameFromHash));
+		// await this.selectCar(formatCarModelFromHashToSelect(carNameFromHash));
 		//периоды свободы и занятости авто
 		await this.fetchFreePeriodsForAllCars();
 
@@ -168,6 +168,7 @@ export class State {
 	}
 
 	public async selectCar(nameOfCarFromCarSelectOrHash: string | undefined): Promise<void> {
+		
 		if (!nameOfCarFromCarSelectOrHash)
 			throw new Error('State::selectCar: badArg');
 		//localdata			

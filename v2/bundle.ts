@@ -26,17 +26,16 @@ const checkHash = (): void => {
 
 (
 	async (): Promise<void> => {
+		$(`#${shared.domElementId.rootSectionId}`).html(
+			rootSection()
+		);
 
+		checkHash();
 		const state = await BookingState();
 		$.when($.ready).then(
 			async () => {
-				$(`#${shared.domElementId.rootSectionId}`).html(
-					rootSection()
-				);
-				checkHash();
-
-				await CalendarEnjector(state);
-				await carSelect(state);
+				 CalendarEnjector(state);
+				 carSelect(state);
 				customersPhoneValidateAndSave(state);
 				nameValidateAndSave(state);
 				timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);

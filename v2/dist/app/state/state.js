@@ -170,10 +170,11 @@ var State = /** @class */ (function () {
                         // --------------------------------------------------
                         _a.allCarsForRent = _b.sent();
                         carNameFromHash = location.hash.replace('#', '');
-                        this.selectCar(sharedActions_1.formatCarModelFromHashToSelect(carNameFromHash));
+                        // await this.selectCar(formatCarModelFromHashToSelect(carNameFromHash));
                         //периоды свободы и занятости авто
                         return [4 /*yield*/, this.fetchFreePeriodsForAllCars()];
                     case 3:
+                        // await this.selectCar(formatCarModelFromHashToSelect(carNameFromHash));
                         //периоды свободы и занятости авто
                         _b.sent();
                         // convertFreePeriodsToBusyPeriods
