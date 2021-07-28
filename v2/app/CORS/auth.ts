@@ -116,6 +116,6 @@ class Auth {
  * @returns ключ доступа для включения в заголовок Authorization
  * */
 export async function getAccess(): Promise<string> {
-	const token: SessionKey = await new Auth({ PasswordHash: passwordHash, UserName: login }).auth();
+	const token: SessionKey = await new Auth({ PasswordHash: passwordHash, UserName: login, LongToken: true }).auth();
 	return token[accessTokenKey];
 }

@@ -187,16 +187,11 @@ export class State {
 
 
 	public isDateBusy(dt: Date): Boolean {
-		// if ( isPast(dt) ) return true;
+		const splitDate: Date[] = eachMinuteOfInterval({start: dt, end: dt.setDate(dt.getDate())});
+		console.log(this.allCarsForCurrentBooking);
+		
 
-		// if (this.fullbusyDates.find(
-		// 	(d) => isSameDay(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0, 0), d))) {
-
-		// 	return true;
-		// }
-		// return false;
 		return false;
-
 	}
 
 }

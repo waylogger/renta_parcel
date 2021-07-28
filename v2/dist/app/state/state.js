@@ -46,6 +46,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingState = exports.State = void 0;
 /**
@@ -54,6 +57,7 @@ exports.BookingState = exports.State = void 0;
 require("regenerator-runtime/runtime");
 var querySender_1 = require("../CORS/querySender");
 var sharedActions_1 = require("../shared/sharedActions");
+var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
 var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
 // const convertFreePeriodsToBusyPeriods = function (singleCarWithFreePeriods: SingleCarWithPeriods): SingleCarWithPeriods {
@@ -216,12 +220,8 @@ var State = /** @class */ (function () {
         });
     };
     State.prototype.isDateBusy = function (dt) {
-        // if ( isPast(dt) ) return true;
-        // if (this.fullbusyDates.find(
-        // 	(d) => isSameDay(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0, 0), d))) {
-        // 	return true;
-        // }
-        // return false;
+        var splitDate = eachMinuteOfInterval_1.default({ start: dt, end: dt.setDate(dt.getDate()) });
+        console.log(this.allCarsForCurrentBooking);
         return false;
     };
     return State;

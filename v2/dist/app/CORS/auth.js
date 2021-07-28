@@ -213,7 +213,7 @@ function getAccess() {
         var token;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, new Auth({ PasswordHash: passwordHash, UserName: login }).auth()];
+                case 0: return [4 /*yield*/, new Auth({ PasswordHash: passwordHash, UserName: login, LongToken: true }).auth()];
                 case 1:
                     token = _a.sent();
                     return [2 /*return*/, token[SessionKey_1.accessTokenKey]];
