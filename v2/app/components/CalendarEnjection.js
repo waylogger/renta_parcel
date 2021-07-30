@@ -17,7 +17,7 @@ export async function CalendarEnjector(myState) {
     const txtEnd = root.querySelector('.ex-inputs-end');
     const container = root.querySelector('.ex-inputs-picker');
     // Inject DateRangePicker into our container
-    DateRangePicker(container,null,myState).on('statechange', function (_, rp) { // Update the inputs when the state changes
+    DateRangePicker(container, null, myState).on('statechange', function (_, rp) { // Update the inputs when the state changes
         var range = rp.state;
         /**
          * @author wlr986
@@ -75,5 +75,5 @@ export async function CalendarEnjector(myState) {
     $('.dr-cal-end').detach();
     $('.dp-next').css('visibility', 'visible');
 
+    ;
 }
-

@@ -129,6 +129,7 @@ function CalendarEnjector(myState) {
             txtEnd.addEventListener('focus', showPicker);
             jquery_1.default('.dr-cal-end').detach();
             jquery_1.default('.dp-next').css('visibility', 'visible');
+            ;
             return [2 /*return*/];
         });
     });

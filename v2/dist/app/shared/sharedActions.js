@@ -1,14 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
 /**
  * @module sharedActions.ts
  * @description некоторые переиспользуемые функции
 */
-function option(text, id, className) {
+function option(text, id, className, isDisabled) {
     if (id === void 0) { id = ''; }
     if (className === void 0) { className = ''; }
-    return "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
+    if (isDisabled === void 0) { isDisabled = false; }
+    return isDisabled ? "<option id=\"" + id + "\" class=\"" + className + "\" disabled>" + text + "</option>" : "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
 }
 exports.option = option;
 /**
@@ -97,3 +102,7 @@ function nextYearForServer() {
     return dateForServer(dt);
 }
 exports.nextYearForServer = nextYearForServer;
+function splitDateByMinutes(dt, minutes) {
+    return eachMinuteOfInterval_1.default({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: minutes });
+}
+exports.splitDateByMinutes = splitDateByMinutes;

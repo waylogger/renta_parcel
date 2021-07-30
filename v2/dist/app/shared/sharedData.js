@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.domElementId = void 0;
+exports.badDateEqualNull = exports.domElementId = void 0;
 exports.domElementId = {
     rootSectionId: 'rootSection',
     bookModuleId: 'bookModuleId',
@@ -27,3 +27,4 @@ exports.domElementId = {
     receiveDataId: 'leftDate',
     returnDataId: 'rightDate',
 };
+exports.badDateEqualNull = new Date(0, 0, 0, 0, 0);

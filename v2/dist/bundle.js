@@ -61,7 +61,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var template_1 = require("./app/views/template");
 var shared = __importStar(require("./app/shared/sharedData"));
 var jquery_1 = __importDefault(require("jquery"));
-var CalendarEnjection_1 = require("./app/components/CalendarEnjection");
 var state_1 = require("./app/state/state");
 var placeSelect_1 = require("./app/components/placeSelect");
 var timeSelect_1 = require("./app/components/timeSelect");
@@ -87,17 +86,17 @@ var checkHash = function () {
                 return [4 /*yield*/, state_1.BookingState()];
             case 1:
                 state = _a.sent();
+                return [4 /*yield*/, carSelect_1.carSelect(state)];
+            case 2:
+                _a.sent();
                 jquery_1.default.when(jquery_1.default.ready).then(function () { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
-                        CalendarEnjection_1.CalendarEnjector(state);
-                        carSelect_1.carSelect(state);
                         customersPhone_1.customersPhoneValidateAndSave(state);
                         customersName_1.nameValidateAndSave(state);
-                        timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
-                        timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
                         placeSelect_1.placeOptions(state);
                         placeSelect_1.selectPlace(state);
                         bidPreview_1.onPreview(state);
+                        jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () { return timeSelect_1.correctionSecondTimeAfterFirst(state); });
                         return [2 /*return*/];
                     });
                 }); });

@@ -6,9 +6,9 @@ import * as shared from './app/shared/sharedData'
 import $, { when } from 'jquery';
 import { CalendarEnjector } from './app/components/CalendarEnjection';
 import { getPlaceList } from './app/CORS/querySender'
-import { BookingState } from './app/state/state'
+import { State, BookingState } from './app/state/state'
 import { placeOptions, selectPlace } from "./app/components/placeSelect";
-import { timeSelectorBy15Min } from "./app/components/timeSelect";
+import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from "./app/components/timeSelect";
 import { customersPhoneValidateAndSave } from "./app/components/customersPhone";
 import { nameValidateAndSave } from "./app/components/customersName";
 import { carSelect } from "./app/components/carSelect";
@@ -32,20 +32,22 @@ const checkHash = (): void => {
 
 		checkHash();
 		const state = await BookingState();
+		await carSelect(state);
+
 		$.when($.ready).then(
 			async () => {
-				 CalendarEnjector(state);
-				 carSelect(state);
 				customersPhoneValidateAndSave(state);
 				nameValidateAndSave(state);
-				timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId);
-				timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId);
 				placeOptions(state);
 				selectPlace(state);
 				onPreview(state);
 
+				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change',() => correctionSecondTimeAfterFirst(state))
 			}
+
+
 		);
+
 	}
 )();
 

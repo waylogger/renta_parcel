@@ -134,35 +134,40 @@ let num = 0;
 			onClick: {
 				"dp-day": function (t, e) {
 					var dt = new Date(parseInt(t.target.getAttribute("data-date")));
-					// if (firstDateIsSelect) {
-					// 	var days = $(`.dp-day`).toArray();
-					// 	days = days.filter(
-					// 		(item) => $(item).hasClass('dr-in-range')
-					// 	);
-					// 	var bad = '';
-					// 	days.forEach(
-					// 		(item) => {
-					// 			const d = $(item).hasClass('dp-day-disabled');
-					// 			if (d) bad = true;
-					// 		}
-					// 	);
-					// 	if (bad) return;
-					// };
+
+					if (myState.isFirstDateOfRangeWasSelect()) {
+						var days = $(`.dp-day`).toArray();
+						days = days.filter(
+							(item) => $(item).hasClass('dr-in-range')
+						);
+						var bad = '';
+						days.forEach(
+							(item) => {
+								const d = $(item).hasClass('dp-day-disabled');
+								if (d) bad = true;
+							}
+						);
+						if (bad) return;
+					};
 					e.setState({
 						selectedDate: dt,
 					})
+					r("statechange");
+					e.render();
 					/**
 					 * @author wlr986
 					*/
-					// if (firstDateIsSelect && secondDateIsSelect) {
-					// 	dropFirstDate();
-					// 	dropSecondDate();
-					// }
-					// if (firstDateIsSelect) {
-					// 	setSecondDate(dt);
-					// 	return;
-					// }
-					// setFirstDate(dt);
+					if (myState.isFirstDateOfRangeWasSelect() && myState.isSecondDateOfRangeWasSelect()) {
+						myState.dropFirstDateOfRange();
+						myState.dropSecondDateOfRange();
+					}
+					if (myState.isFirstDateOfRangeWasSelect()) {
+
+						$('#dp-close-btn').html('Сохранить');
+						myState.setSecondDateOfRange(dt);
+						return;
+					}
+					myState.setFirstDateOfRange(dt);
 				},
 				"dp-next": function (t, e) {
 					var n = e.state.hilightedDate;
@@ -182,8 +187,8 @@ let num = 0;
 					})
 				},
 				"dp-clear": function (t, e) {
-					// dropFirstDate();
-					// dropSecondDate();
+					myState.dropFirstDateOfRange();
+					myState.dropSecondDateOfRange();
 					// dataFromServer.clickedCars = [];
 					e.setState({
 						selectedDate: null
@@ -235,12 +240,9 @@ let num = 0;
 						<div class="dp-days">
 					`
 
-				// const select = `<select class="car-select" "> 
-				// <option value="Белый">Белый</option>
-				// </select>`
+
 				const select = '';
-				// const closeOrSaveName = firstDateIsSelect ? "Сохранить" : "Закрыть";
-				 const closeOrSaveName = "Закрыть";
+				const closeOrSaveName = myState.isFirstDateOfRangeWasSelect() && myState.isSecondDateOfRangeWasSelect() ? "Сохранить" : "Закрыть";
 				const footer = `
 				</div>
 				<footer class="dp-cal-footer">
@@ -252,7 +254,6 @@ let num = 0;
 
 				</footer>
 				</div>`
-				// < button tabindex = "-1" type = "button" class="dp-today" > ${ t.today } </button >
 
 				function resHTML(timestamp, e, n) {
 					var res = "";
@@ -287,7 +288,7 @@ let num = 0;
 					var res = "dp-day";//String
 
 					var isCurrent = false; //shouldToDisabled ? false : (t.getTime() === c) && (d === new Date().getMonth() + 1)
-					 var isSelected = false; //shouldToDisabled ? false : h(t, s);
+					var isSelected = false; //shouldToDisabled ? false : h(t, s);
 
 					res += onBorder ? " dp-edge-day" : "";
 					res += isCurrent ? " dp-current" : "";
@@ -390,7 +391,6 @@ let num = 0;
 						return i
 					},
 					set selectedDate(t) {
-
 						/**update input here !!!  */
 						t && !a.inRange(t) || (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t, c.updateInput(i), r("select"), c.close())
 					},
@@ -403,7 +403,6 @@ let num = 0;
 					document.body.appendChild(c.el)
 				},
 				updateInput: function (t) {
-
 					var e = new y("change", {
 						bubbles: !0
 					});
@@ -475,7 +474,7 @@ let num = 0;
 					for (var e in t) {
 						c.state[e] = t[e];
 					}
-					r("statechange"), c.render()
+					r("statechange"), c.render();
 				}
 			};
 		return e = o, n = c, s = f(5, function () {
@@ -637,6 +636,12 @@ let num = 0;
 			if (t.target.classList.contains("dp-day")) {
 				var e = new Date(parseInt(t.target.dataset.date));
 				!h(e, o) && (o = e, f())
+			}
+		}) || a.addEventListener("click", function (t) {
+			if (t.target.classList.contains("dp-day")) {
+				var e = new Date(parseInt(t.target.dataset.date));
+				h(e, o) && (o = e, f())
+
 			}
 		}), d
 	}, Object.defineProperty(t, "__esModule", {

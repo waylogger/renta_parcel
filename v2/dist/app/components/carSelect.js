@@ -66,6 +66,7 @@ var jquery_1 = __importDefault(require("jquery"));
 var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 var lodash_1 = __importDefault(require("lodash"));
+var CalendarEnjection_1 = require("./CalendarEnjection");
 var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, function () {
     var resStr, cars, modelArr;
     return __generator(this, function (_a) {
@@ -80,16 +81,30 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
             return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
         }).join('\n');
         jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
-        jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () {
+        jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () { return __awaiter(void 0, void 0, void 0, function () {
+            var stringValueFromSelect, car;
             var _a;
-            var stringValueFromSelect = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
-            if (!stringValueFromSelect)
-                throw new Error('CarSelectCallback::cant take car value');
-            var car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
-            location.href = "/#" + car;
-            jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
-            state.selectCar(stringValueFromSelect);
-        });
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        stringValueFromSelect = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+                        if (!stringValueFromSelect)
+                            throw new Error('CarSelectCallback::cant take car value');
+                        car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
+                        location.href = "/#" + car;
+                        jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
+                        state.dropFirstDateOfRange();
+                        state.dropSecondDateOfRange();
+                        return [4 /*yield*/, state.selectCar(stringValueFromSelect)];
+                    case 1:
+                        _b.sent();
+                        return [4 /*yield*/, CalendarEnjection_1.CalendarEnjector(state)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
         jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
         return [2 /*return*/, resStr];
     });

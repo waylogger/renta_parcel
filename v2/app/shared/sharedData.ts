@@ -29,3 +29,6 @@ export const domElementId = {
 	receiveDataId: 'leftDate',
 	returnDataId: 'rightDate',
 }
+
+
+export const badDateEqualNull = new Date(0,0,0,0,0);

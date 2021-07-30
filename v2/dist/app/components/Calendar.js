@@ -4,8 +4,14 @@
  * @author Chris Davies <https://github.com/chrisdavies>
  * @remarks кое-что правил wlr986 <wayloggerman@gmail.com>
 */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateRangePicker = void 0;
+// import { firstDateIsSelect, secondDateIsSelect, firstDate, secondDate, isDateShouldBeDisabled, datePreview, hideCal, setFirstDate, dropFirstDate, setSecondDate, dropSecondDate } from './handlers'
+// import { dataFromServer } from './state/dataFromServer'
+var jquery_1 = __importDefault(require("jquery"));
 var dateRangePicker = 0;
 var myState;
 var num = 0;
@@ -119,35 +125,37 @@ var num = 0;
             onClick: {
                 "dp-day": function (t, e) {
                     var dt = new Date(parseInt(t.target.getAttribute("data-date")));
-                    // if (firstDateIsSelect) {
-                    // 	var days = $(`.dp-day`).toArray();
-                    // 	days = days.filter(
-                    // 		(item) => $(item).hasClass('dr-in-range')
-                    // 	);
-                    // 	var bad = '';
-                    // 	days.forEach(
-                    // 		(item) => {
-                    // 			const d = $(item).hasClass('dp-day-disabled');
-                    // 			if (d) bad = true;
-                    // 		}
-                    // 	);
-                    // 	if (bad) return;
-                    // };
+                    if (myState.isFirstDateOfRangeWasSelect()) {
+                        var days = jquery_1.default(".dp-day").toArray();
+                        days = days.filter(function (item) { return jquery_1.default(item).hasClass('dr-in-range'); });
+                        var bad = '';
+                        days.forEach(function (item) {
+                            var d = jquery_1.default(item).hasClass('dp-day-disabled');
+                            if (d)
+                                bad = true;
+                        });
+                        if (bad)
+                            return;
+                    }
+                    ;
                     e.setState({
                         selectedDate: dt,
                     });
+                    r("statechange");
+                    e.render();
                     /**
                      * @author wlr986
                     */
-                    // if (firstDateIsSelect && secondDateIsSelect) {
-                    // 	dropFirstDate();
-                    // 	dropSecondDate();
-                    // }
-                    // if (firstDateIsSelect) {
-                    // 	setSecondDate(dt);
-                    // 	return;
-                    // }
-                    // setFirstDate(dt);
+                    if (myState.isFirstDateOfRangeWasSelect() && myState.isSecondDateOfRangeWasSelect()) {
+                        myState.dropFirstDateOfRange();
+                        myState.dropSecondDateOfRange();
+                    }
+                    if (myState.isFirstDateOfRangeWasSelect()) {
+                        jquery_1.default('#dp-close-btn').html('Сохранить');
+                        myState.setSecondDateOfRange(dt);
+                        return;
+                    }
+                    myState.setFirstDateOfRange(dt);
                 },
                 "dp-next": function (t, e) {
                     var n = e.state.hilightedDate;
@@ -167,8 +175,8 @@ var num = 0;
                     });
                 },
                 "dp-clear": function (t, e) {
-                    // dropFirstDate();
-                    // dropSecondDate();
+                    myState.dropFirstDateOfRange();
+                    myState.dropSecondDateOfRange();
                     // dataFromServer.clickedCars = [];
                     e.setState({
                         selectedDate: null
@@ -194,14 +202,9 @@ var num = 0;
                     return "<span class=\"dp-col-header\"> " + n[(e + a) % n.length] + " </span>";
                 }).join("") + "\n\t\t\t\t\t";
                 var header = "\n\t\t\t\t\t<div class=\"dp-cal\"> \n\t\t\t\t\t<header class=\"dp-cal-header\"> \n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-prev\">Prev</button> \n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-cal-month\" id=\"dp-cal-month-text\">\n\t\t\t\t\t" + t.months[d] + " </button>\n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-cal-year\">\n\t\t\t\t\t " + u.getFullYear() + " \n\t\t\t\t\t</button>\n\t\t\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-next\">Next</button>\n\t\t\t\t\t\t</header>\n\t\t\t\t\t\t<div class=\"dp-days\">\n\t\t\t\t\t";
-                // const select = `<select class="car-select" "> 
-                // <option value="Белый">Белый</option>
-                // </select>`
                 var select = '';
-                // const closeOrSaveName = firstDateIsSelect ? "Сохранить" : "Закрыть";
-                var closeOrSaveName = "Закрыть";
+                var closeOrSaveName = myState.isFirstDateOfRangeWasSelect() && myState.isSecondDateOfRangeWasSelect() ? "Сохранить" : "Закрыть";
                 var footer = "\n\t\t\t\t</div>\n\t\t\t\t<footer class=\"dp-cal-footer\">\n\t\t\t\t\n\t\t\t\t<button tabindex=\"-1\" type=\"button\" class=\"dp-clear\">  " + t.clear + " </button>\n\t\t\t\t</script>\n\t\t\t\t<button onClick=\"\n\t\t\t\tdocument.querySelector('.ex-inputs-picker').classList.remove('ex-inputs-picker-visible');\" tabindex=\"-1\" type=\"button\" class=\"dp-close\" id=\"dp-close-btn\">" + closeOrSaveName + "</button>\n\n\t\t\t\t</footer>\n\t\t\t\t</div>";
-                // < button tabindex = "-1" type = "button" class="dp-today" > ${ t.today } </button >
                 function resHTML(timestamp, e, n) {
                     var res = "";
                     var newDate = new Date(timestamp);
@@ -539,6 +542,11 @@ var num = 0;
             if (t.target.classList.contains("dp-day")) {
                 var e = new Date(parseInt(t.target.dataset.date));
                 !h(e, o) && (o = e, f());
+            }
+        }) || a.addEventListener("click", function (t) {
+            if (t.target.classList.contains("dp-day")) {
+                var e = new Date(parseInt(t.target.dataset.date));
+                h(e, o) && (o = e, f());
             }
         }), d;
     }, Object.defineProperty(t, "__esModule", {

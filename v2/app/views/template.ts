@@ -28,6 +28,9 @@ return `
 			<div id="receiveSelects" class="receiveSelects">
 				<select id="${shared.domElementId.selectReceiveTimeId}" size="1" class="dateTimeSelect"
 					disabled placeholder="--:--">
+					<option>
+					00:00
+					</option>
 				</select>
 			</div>
 			<div id="rightDateFrame" class="book__field-end book__field-wrap">
@@ -38,6 +41,9 @@ return `
 			<div id="returnSelects" class="returnSelects">
 				<select id="${shared.domElementId.selectReturnTimeId}" class="dateTimeSelect" disabled
 					placeholder="--:--">
+					<option>
+					00:00
+					</option>
 				</select>
 			</div>
 			<div class="row">
