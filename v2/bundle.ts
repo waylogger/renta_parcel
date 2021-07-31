@@ -31,7 +31,7 @@ const checkHash = (): void => {
 			rootSection()
 		);
 
-		checkHash();
+		// checkHash();
 		const state = await BookingState();
 		await carSelect(state);
 

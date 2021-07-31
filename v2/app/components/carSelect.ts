@@ -38,7 +38,7 @@ export const carSelect = async (state: State): Promise<string> => {
 		if (!stringValueFromSelect)
 			throw new Error('CarSelectCallback::cant take car value');
 		const car = formatCarModelFromSelectToHash(stringValueFromSelect);
-		location.href = `/#${car}`;
+		location.hash = `${car}`;
 		$(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
 		state.dropFirstDateOfRange();
 		state.dropSecondDateOfRange();
