@@ -68,6 +68,7 @@ var customersPhone_1 = require("./app/components/customersPhone");
 var customersName_1 = require("./app/components/customersName");
 var carSelect_1 = require("./app/components/carSelect");
 var bidPreview_1 = require("./app/components/bidPreview");
+var createBid_1 = require("./app/components/createBid");
 var checkHash = function () {
     if (location.hash = '#') {
         jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
@@ -91,12 +92,38 @@ var checkHash = function () {
                 _a.sent();
                 jquery_1.default.when(jquery_1.default.ready).then(function () { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
+                        bidPreview_1.onPreview(state);
                         customersPhone_1.customersPhoneValidateAndSave(state);
                         customersName_1.nameValidateAndSave(state);
                         placeSelect_1.placeOptions(state);
                         placeSelect_1.selectPlace(state);
-                        bidPreview_1.onPreview(state);
                         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () { return timeSelect_1.correctionSecondTimeAfterFirst(state); });
+                        jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () {
+                            var _a;
+                            var strT = (_a = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _a === void 0 ? void 0 : _a.toString().split(':');
+                            if (!strT)
+                                return;
+                            var h = parseInt(strT[0], 10);
+                            var m = parseInt(strT[1], 10);
+                            var timestamp = state.getFirstDateOfRange();
+                            timestamp.setHours(h);
+                            timestamp.setMinutes(m);
+                            state.setFirstTimeOfRange(timestamp);
+                        });
+                        jquery_1.default("#" + shared.domElementId.selectReturnTimeId).on('change', function () {
+                            var _a;
+                            var strT = (_a = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _a === void 0 ? void 0 : _a.toString().split(':');
+                            if (!strT)
+                                return;
+                            var h = parseInt(strT[0], 10);
+                            var m = parseInt(strT[1], 10);
+                            var timestamp = state.getSecondDateOfRange();
+                            timestamp.setHours(h);
+                            timestamp.setMinutes(m);
+                            state.setSecondTimeOfRange(timestamp);
+                            state.setMainCar();
+                        });
+                        jquery_1.default("#" + shared.domElementId.bookButtonId).on('click', function () { return createBid_1.createBid(state); });
                         return [2 /*return*/];
                     });
                 }); });

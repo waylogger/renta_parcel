@@ -20,12 +20,10 @@ export interface BidCreateRequest{
     fio: string,
     phone: string,
     car_id: number,
-    begin: Date,
-    end: Date,
+    begin: string,
+    end: string,
     begin_place_id: number,
     end_place_id: number,
-    services: number[],
-    prepayment: number,
-    file: string,
+    file: File | string,
 }
 // ------------------------------------------------------------------------------------------------

@@ -26,5 +26,13 @@ exports.domElementId = {
     bidTextId: 'bidTextId',
     receiveDataId: 'leftDate',
     returnDataId: 'rightDate',
+    //--------------------------------------------
+    bookButtonId: 'bookButtonId',
+    policyAgree: 'policyAgree',
+    ageAgree: 'ageAgree',
+    //--------------------------------------------
+    formInputId: "formInputId",
+    bigBidTextClass: 'bigBidTextClass',
+    bookSelectDivId: 'bookSelectDivId',
 };
 exports.badDateEqualNull = new Date(0, 0, 0, 0, 0);

@@ -78,7 +78,6 @@ var querySender_1 = require("../CORS/querySender");
 var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
-var lodash_1 = require("lodash");
 var jquery_1 = __importDefault(require("jquery"));
 var date_fns_1 = require("date-fns");
 var timeSelect_1 = require("../components/timeSelect");
@@ -134,9 +133,12 @@ var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
 var State = /** @class */ (function () {
     function State() {
+        this.mainCarForBid = 0;
         //-----------------------------------------------------------------------------------------
         this.firstDateOfRange = undefined;
         //-----------------------------------------------------------------------------------------
+        this.firstTimeOfRange = undefined;
+        this.secondTimeOfRange = undefined;
         this.secondDateOfRange = undefined;
         /**
          * @description адреса места для выдачи и возврата арендованных авто
@@ -180,6 +182,9 @@ var State = /** @class */ (function () {
         */
         this.partedDayNotAvaiableForBooking = [];
     }
+    State.prototype.getMainCar = function () {
+        return this.mainCarForBid;
+    };
     State.prototype.isFirstDateOfRangeWasSelect = function () {
         return this.firstDateOfRange ? true : false;
     };
@@ -201,6 +206,10 @@ var State = /** @class */ (function () {
         this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
         this.firstDateOfRange = undefined;
     };
+    State.prototype.setFirstTimeOfRange = function (ftr) { this.firstTimeOfRange = ftr; };
+    State.prototype.getFirstTimeOfRange = function () { var ftr = this.firstTimeOfRange; return ftr; };
+    State.prototype.setSecondTimeOfRange = function (ftr) { this.secondTimeOfRange = ftr; };
+    State.prototype.getSecondTimeOfRange = function () { var ftr = this.firstTimeOfRange; return ftr; };
     State.prototype.isSecondDateOfRangeWasSelect = function () {
         return this.secondDateOfRange ? true : false;
     };
@@ -216,36 +225,9 @@ var State = /** @class */ (function () {
             dt === null || dt === void 0 ? void 0 : dt.setMinutes(selectedTime[1]);
         if (dt)
             this.filterCurrentCarForBookingBySelection(dt);
-        var secondDate = this.getSecondDateOfRange();
-        if (secondDate) {
-            var arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(secondDate);
-            if (lodash_1.isEqual(firstDate, secondDate))
-                for (var i = 0; i < arrayForGenerateHTML.length; ++i) {
-                    var date = arrayForGenerateHTML[i];
-                    var hour = date.getHours();
-                    var min = date.getMinutes();
-                    if (hour > (dt === null || dt === void 0 ? void 0 : dt.getHours())) {
-                        continue;
-                    }
-                    else if (hour < dt.getHours()) {
-                        arrayForGenerateHTML[i] = shared.badDateEqualNull;
-                        continue;
-                    }
-                    else if (hour === dt.getHours()) {
-                        if (min <= dt.getMinutes()) {
-                            arrayForGenerateHTML[i] = shared.badDateEqualNull;
-                            continue;
-                        }
-                    }
-                }
-            var firstDisableElement = arrayForGenerateHTML.indexOf(shared.badDateEqualNull);
-            if (firstDisableElement >= 0) {
-                // arrayForGenerateHTML.fill(shared.badDateEqualNull,firstDisableElement,arrayForGenerateHTML.length);
-            }
-            timeSelect_1.timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId, arrayForGenerateHTML);
-            jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', null);
-        }
-        // $(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
+        jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
+        timeSelect_1.correctionSecondTimeAfterFirst(this);
+        this.setMainCar();
     };
     State.prototype.dropSecondDateOfRange = function () {
         jquery_1.default("#" + shared.domElementId.returnDataId).val('');
@@ -258,6 +240,12 @@ var State = /** @class */ (function () {
             return new Date(this.secondDateOfRange);
         else
             return shared.badDateEqualNull;
+    };
+    State.prototype.setMainCar = function () {
+        this.mainCarForBid = this.freePeriodsForCurrentBookingCarAfterFirstSelect[0].car_id;
+    };
+    State.prototype.carIdForBidCost = function () {
+        return this.allCarsForCurrentBooking[0].car_id;
     };
     State.prototype.filterCurrentCarForBookingBySelection = function (timestamp) {
         var splitDate = eachMinuteOfInterval_1.default({ start: timestamp, end: new Date(timestamp.getFullYear(), timestamp.getMonth(), timestamp.getDate() + 1) }, { step: 15 });
@@ -471,6 +459,25 @@ var State = /** @class */ (function () {
                 var findItInFreeTimeSlotsArr = freeTimeSlotsForReceiveAndReturnCar.indexOf(filledArrayOfFreeTimeSlots[i]) >= 0 ? true : false;
                 if (!findItInFreeTimeSlotsArr)
                     filledArrayOfFreeTimeSlots[i] = shared.badDateEqualNull;
+            }
+            if (this.firstDateOfRange) {
+                var findedPeriod = [];
+                var lastEndOfLatestInterval_2 = shared.badDateEqualNull;
+                for (var i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
+                    var periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
+                    var finded = isWithinIntervalsAndFindIt(periods, sharedActions_1.splitDateByMinutes(this.firstDateOfRange, 15));
+                    if (finded)
+                        findedPeriod.push(finded);
+                }
+                findedPeriod.forEach(function (period) {
+                    if (date_fns_1.isAfter(new Date(period.end), lastEndOfLatestInterval_2))
+                        lastEndOfLatestInterval_2 = new Date(period.end);
+                });
+                for (var i = 0; i < filledArrayOfFreeTimeSlots.length; ++i) {
+                    if (date_fns_1.isAfter(filledArrayOfFreeTimeSlots[i], lastEndOfLatestInterval_2)) {
+                        filledArrayOfFreeTimeSlots[i] = shared.badDateEqualNull;
+                    }
+                }
             }
             return filledArrayOfFreeTimeSlots;
         }

@@ -10,9 +10,13 @@ import { translateDate } from '../shared/sharedActions';
 import { BidCostRequest } from '../CORS/entities/apiExchange/clientTypes';
 import { BidCostResponse, PlacesResponse, SingleCar, SinglePlace } from '../CORS/entities/apiExchange/serverTypes';
 import { getCost } from '../CORS/querySender';
+import isBefore from 'date-fns/isBefore';
+import { startOfYesterday } from 'date-fns';
+import { lowerFirst } from 'lodash';
 
 
 export async function bidPreview(state: State): Promise<void> {
+	
 	let resStr: string = '';
 	const carModel: string | undefined = $(`#${shared.domElementId.carSelectId}`).val()?.toString();
 	const leftDate: string | undefined = $(`#${shared.domElementId.receiveDataId}`).val()?.toString();
@@ -22,14 +26,14 @@ export async function bidPreview(state: State): Promise<void> {
 	const rightTime: string | undefined = $(`#${shared.domElementId.selectReturnTimeId}`).val()?.toString();
 	const rightPlace: string | undefined = $(`#${shared.domElementId.returnPlaceSelectId}`).val()?.toString();
 
-
 	if (carModel) {
 		resStr += `<span id="${shared.domElementId.carNameId}">Аренда: ${carModel}</span>`;
 	}
 
-	if (leftDate && leftTime && rightDate && rightDate) {
-		const d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
-		const d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
+
+	if (leftDate && leftTime && rightTime && rightDate) {
+		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
+		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
 
 		const placeBegin: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === leftPlace?.split(' + ')[0])[0];
 		const placeEnd: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === rightPlace?.split(' + ')[0])[0];
@@ -37,7 +41,7 @@ export async function bidPreview(state: State): Promise<void> {
 		resStr += `<span id="${shared.domElementId.periodRentId}"> на ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}</span>`;
 
 		const bidRequest: BidCostRequest = {
-			car_id: 9,//state.getSelectedCars()[0].car_id,
+			car_id: state.carIdForBidCost(),
 			begin: d1,
 			end: d2,
 			begin_place_id: placeBegin.place_id,
@@ -46,19 +50,24 @@ export async function bidPreview(state: State): Promise<void> {
 		}
 
 		const bidCost: BidCostResponse = await getCost(bidRequest);
+
+
 		const cost: number = bidCost.cost;
 		const deposit: number = bidCost.deposit;
-
 		const deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
+		if (!cost || !deposit) {
+		}
+		else {
 
-		if (deliveryCost > 0)
-			resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost - deliveryCost} ₽ + доставка авто ${deliveryCost} ₽`
-		else
-			resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost} ₽`
+			if (deliveryCost > 0)
+				resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost - deliveryCost} ₽ + доставка авто ${deliveryCost} ₽`
+			else
+				resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost} ₽`
 
-		resStr += ` + залог ${deposit} ₽ (возвращаем полностью по окончанию аренды).</span><br>`;
+			resStr += ` + залог ${deposit} ₽ (возвращаем полностью по окончанию аренды).</span><br>`;
 
-		resStr += `<span id="${shared.domElementId.costResolutionId}">Итого: ${cost + deposit} ₽</span>`;
+			resStr += `<span id="${shared.domElementId.costResolutionId}">Итого: ${cost + deposit} ₽</span>`;
+		}
 
 	}
 

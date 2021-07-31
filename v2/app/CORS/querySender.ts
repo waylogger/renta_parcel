@@ -3,7 +3,7 @@ import { server, port, dataApiEndpoint, getAccess } from './auth'
 import queryString from 'query-string';
 import { BidCostResponse, CarListResponse, FreePeriodResponse, PlacesResponse } from './entities/apiExchange/serverTypes';
 import $ from 'jquery';
-import { BidCostRequest, PeriodsRequest } from './entities/apiExchange/clientTypes';
+import { BidCostRequest, BidCreateRequest, PeriodsRequest } from './entities/apiExchange/clientTypes';
 
 
 
@@ -70,7 +70,8 @@ export async function getCarFreeList(reqObj) {
 	return res;
 }
 
-export async function sendRequest(body){
+*/
+export async function sendRequest(body: FormData ){
 	const urlSuffix = 'bid_create';
 	let url = `${server}:${port}/${dataApiEndpoint}/${urlSuffix}`;
 	const token = await getAccess();
@@ -80,7 +81,7 @@ export async function sendRequest(body){
 			'Authorization': `Bearer ${token}`,
 		},
 		body: body,
+		
 	});
 	return res.json();
 }
-*/

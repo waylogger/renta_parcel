@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCarPeriodList = exports.getCost = exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
+exports.sendRequest = exports.getCarPeriodList = exports.getCost = exports.getPlaceList = exports.getCarList = exports.getRequestBuilder = void 0;
 require("regenerator-runtime/runtime");
 var auth_1 = require("./auth");
 var query_string_1 = __importDefault(require("query-string"));
@@ -149,17 +149,30 @@ export async function getCarFreeList(reqObj) {
     return res;
 }
 
-export async function sendRequest(body){
-    const urlSuffix = 'bid_create';
-    let url = `${server}:${port}/${dataApiEndpoint}/${urlSuffix}`;
-    const token = await getAccess();
-    const res = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        },
-        body: body,
+*/
+function sendRequest(body) {
+    return __awaiter(this, void 0, void 0, function () {
+        var urlSuffix, url, token, res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    urlSuffix = 'bid_create';
+                    url = auth_1.server + ":" + auth_1.port + "/" + auth_1.dataApiEndpoint + "/" + urlSuffix;
+                    return [4 /*yield*/, auth_1.getAccess()];
+                case 1:
+                    token = _a.sent();
+                    return [4 /*yield*/, fetch(url, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': "Bearer " + token,
+                            },
+                            body: body,
+                        })];
+                case 2:
+                    res = _a.sent();
+                    return [2 /*return*/, res.json()];
+            }
+        });
     });
-    return res.json();
 }
-*/ 
+exports.sendRequest = sendRequest;

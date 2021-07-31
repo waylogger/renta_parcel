@@ -13,7 +13,7 @@ import { PeriodsRequest } from '../CORS/entities/apiExchange/clientTypes';
 import $ from 'jquery'
 import { DateRangePicker } from '../components/Calendar';
 import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
-import { timeSelectorBy15Min } from '../components/timeSelect';
+import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
 
 
@@ -83,9 +83,14 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 
 
 export class State {
+	private mainCarForBid: number = 0;
+	public getMainCar(): number {
+		return this.mainCarForBid;
+	}
 
 	//-----------------------------------------------------------------------------------------
 	private firstDateOfRange: Date | undefined = undefined;
+
 	public isFirstDateOfRangeWasSelect(): boolean {
 		return this.firstDateOfRange ? true : false;
 	}
@@ -96,6 +101,7 @@ export class State {
 	}
 	public setFirstDateOfRange(timestampOfFirstSelectDate: Date): void {
 		const arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(timestampOfFirstSelectDate);
+
 		this.firstDateOfRange = timestampOfFirstSelectDate;
 		timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
 	}
@@ -109,7 +115,13 @@ export class State {
 	}
 	//-----------------------------------------------------------------------------------------
 
+	private firstTimeOfRange: Date | undefined = undefined;
+	public setFirstTimeOfRange(ftr: Date|undefined): void  {this.firstTimeOfRange = ftr;}
+	public getFirstTimeOfRange(): Date|undefined {const ftr = this.firstTimeOfRange; return ftr;}
 
+	private secondTimeOfRange: Date | undefined = undefined;
+	public setSecondTimeOfRange(ftr: Date|undefined): void  {this.secondTimeOfRange = ftr;}
+	public getSecondTimeOfRange(): Date|undefined {const ftr = this.firstTimeOfRange; return ftr;}
 
 	private secondDateOfRange: Date | undefined = undefined;
 	public isSecondDateOfRangeWasSelect(): boolean {
@@ -128,41 +140,12 @@ export class State {
 			dt?.setMinutes(selectedTime[1])
 		if (dt)
 			this.filterCurrentCarForBookingBySelection(dt);
-		const secondDate = this.getSecondDateOfRange();
-		if (secondDate) {
-			let arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(secondDate);
-
-			if (isEqual(firstDate, secondDate))
-				for (let i = 0; i < arrayForGenerateHTML.length; ++i) {
-					const date = arrayForGenerateHTML[i];
-					const hour = date.getHours();
-					const min = date.getMinutes();
-
-					if (hour > dt?.getHours()) {
-						continue;
-					}
-					else if (hour < dt.getHours()) {
-						arrayForGenerateHTML[i] = shared.badDateEqualNull;
-						continue;
-					}
-					else if (hour === dt.getHours()) {
-						if (min <= dt.getMinutes()) {
-							arrayForGenerateHTML[i] = shared.badDateEqualNull;
-							continue;
-						}
-
-					}
-				}
-			const firstDisableElement = arrayForGenerateHTML.indexOf(shared.badDateEqualNull);
-			if (firstDisableElement >= 0) {
-				// arrayForGenerateHTML.fill(shared.badDateEqualNull,firstDisableElement,arrayForGenerateHTML.length);
-			}
 
 
-			timeSelectorBy15Min('return', shared.domElementId.selectReturnTimeId, arrayForGenerateHTML);
-			$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', null);
-		}
-		// $(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
+		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
+		correctionSecondTimeAfterFirst(this);
+		this.setMainCar();
+
 	}
 	public dropSecondDateOfRange() {
 		$(`#${shared.domElementId.returnDataId}`).val('');
@@ -178,8 +161,9 @@ export class State {
 			return shared.badDateEqualNull;
 	}
 
-
-
+	public setMainCar(){
+		this.mainCarForBid =  this.freePeriodsForCurrentBookingCarAfterFirstSelect[0].car_id;
+	}
 	/**
 	 * @description адреса места для выдачи и возврата арендованных авто
 	*/
@@ -192,6 +176,10 @@ export class State {
 	 * @description все авто одной модели, которая бронируется в настоящее время
 	*/
 	private allCarsForCurrentBooking: SingleCar[] = [];
+
+	public carIdForBidCost(): number {
+		return this.allCarsForCurrentBooking[0].car_id;
+	}
 	/**
 	 * @description телефон арендатора
 	*/
@@ -389,16 +377,16 @@ export class State {
 			let lastEndOfLatestInterval: Date = shared.badDateEqualNull;
 
 			let findedPeriod: SinglePeriod[] = [];
-			
+
 			for (let i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
 				const periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
-				const finded = isWithinIntervalsAndFindIt(periods, splitDateByMinutes(this.firstDateOfRange,15));
+				const finded = isWithinIntervalsAndFindIt(periods, splitDateByMinutes(this.firstDateOfRange, 15));
 				if (finded) findedPeriod.push(finded);
 			}
-			findedPeriod.forEach((period: SinglePeriod)=>{
-				if ( isAfter(new Date(period.end),lastEndOfLatestInterval)) lastEndOfLatestInterval = new Date(period.end);
+			findedPeriod.forEach((period: SinglePeriod) => {
+				if (isAfter(new Date(period.end), lastEndOfLatestInterval)) lastEndOfLatestInterval = new Date(period.end);
 			});
-			
+
 			if (isAfter(dt, lastEndOfLatestInterval)) {
 				return true;
 			}
@@ -448,6 +436,7 @@ export class State {
 		let freeTimeSlotsForReceiveAndReturnCar: Date[] = [];
 		const numberTimeSlotsInFourHours = 1 * 4; //seven hours
 
+
 		let continuesDurationOfFreePeriods = 0;
 		for (let j = 0; j < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++j) {
 
@@ -486,7 +475,28 @@ export class State {
 				const findItInFreeTimeSlotsArr: boolean = freeTimeSlotsForReceiveAndReturnCar.indexOf(filledArrayOfFreeTimeSlots[i]) >= 0 ? true : false;
 				if (!findItInFreeTimeSlotsArr) filledArrayOfFreeTimeSlots[i] = shared.badDateEqualNull;
 			}
+			if (this.firstDateOfRange) {
 
+				let findedPeriod: SinglePeriod[] = [];
+				let lastEndOfLatestInterval: Date = shared.badDateEqualNull;
+				for (let i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
+					const periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
+					const finded = isWithinIntervalsAndFindIt(periods, splitDateByMinutes(this.firstDateOfRange, 15));
+					if (finded) findedPeriod.push(finded);
+				}
+
+				findedPeriod.forEach((period: SinglePeriod) => {
+					if (isAfter(new Date(period.end), lastEndOfLatestInterval)) lastEndOfLatestInterval = new Date(period.end);
+				});
+
+				for (let i = 0; i < filledArrayOfFreeTimeSlots.length; ++i) {
+					if (isAfter(filledArrayOfFreeTimeSlots[i], lastEndOfLatestInterval)) {
+
+						filledArrayOfFreeTimeSlots[i] = shared.badDateEqualNull;
+					}
+				}
+
+			}
 			return filledArrayOfFreeTimeSlots;
 		}
 		return [];

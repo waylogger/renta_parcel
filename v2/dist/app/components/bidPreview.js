@@ -84,14 +84,14 @@ function bidPreview(state) {
                     if (carModel) {
                         resStr += "<span id=\"" + shared.domElementId.carNameId + "\">\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel + "</span>";
                     }
-                    if (!(leftDate && leftTime && rightDate && rightDate)) return [3 /*break*/, 2];
+                    if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
                     d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
                     d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
                     placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
                     placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
                     resStr += "<span id=\"" + shared.domElementId.periodRentId + "\"> \u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime) + "</span>";
                     bidRequest = {
-                        car_id: 9,
+                        car_id: state.carIdForBidCost(),
                         begin: d1,
                         end: d2,
                         begin_place_id: placeBegin.place_id,
@@ -104,12 +104,16 @@ function bidPreview(state) {
                     cost = bidCost.cost;
                     deposit = bidCost.deposit;
                     deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
-                    if (deliveryCost > 0)
-                        resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";
-                    else
-                        resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
-                    resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
-                    resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+                    if (!cost || !deposit) {
+                    }
+                    else {
+                        if (deliveryCost > 0)
+                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";
+                        else
+                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
+                        resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
+                        resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+                    }
                     _h.label = 2;
                 case 2:
                     jquery_1.default("#" + shared.domElementId.bidTextId).html(resStr);

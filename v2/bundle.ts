@@ -13,6 +13,7 @@ import { customersPhoneValidateAndSave } from "./app/components/customersPhone";
 import { nameValidateAndSave } from "./app/components/customersName";
 import { carSelect } from "./app/components/carSelect";
 import { bidPreview, onPreview } from "./app/components/bidPreview";
+import { createBid } from "./app/components/createBid";
 
 
 const checkHash = (): void => {
@@ -36,13 +37,45 @@ const checkHash = (): void => {
 
 		$.when($.ready).then(
 			async () => {
+
+				onPreview(state);
 				customersPhoneValidateAndSave(state);
 				nameValidateAndSave(state);
 				placeOptions(state);
 				selectPlace(state);
-				onPreview(state);
 
-				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change',() => correctionSecondTimeAfterFirst(state))
+				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => correctionSecondTimeAfterFirst(state))
+
+				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => {
+					let strT = $(`#${shared.domElementId.selectReceiveTimeId}`).val()?.toString().split(':');
+					if (!strT) return;
+
+					const h = parseInt(strT[0], 10);
+					const m = parseInt(strT[1], 10);
+
+					const timestamp = state.getFirstDateOfRange();
+					timestamp.setHours(h);
+					timestamp.setMinutes(m);
+					state.setFirstTimeOfRange(timestamp)
+				})
+				$(`#${shared.domElementId.selectReturnTimeId}`).on('change', () => {
+					let strT = $(`#${shared.domElementId.selectReturnTimeId}`).val()?.toString().split(':');
+					if (!strT) return;
+
+					const h = parseInt(strT[0], 10);
+					const m = parseInt(strT[1], 10);
+
+					const timestamp = state.getSecondDateOfRange();
+					timestamp.setHours(h);
+					timestamp.setMinutes(m);
+					state.setSecondTimeOfRange(timestamp)
+
+					state.setMainCar();
+				})
+
+
+				$(`#${shared.domElementId.bookButtonId}`).on('click', () => createBid(state));
+
 			}
 
 

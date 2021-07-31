@@ -18,7 +18,7 @@ export const domElementId = {
 	receiveCustomPlaceInputId: 'receiveCustomPlaceInputId',
 	returnCustomPlaceInputId: 'returnCustomPlaceInputId',
 	returnCustomPlaceId: 'returnCustomPlace-wrap',
-	
+
 	receivePlaceSelectId: 'receivePlaceSelect',
 	returnPlaceSelectId: 'returnPlaceSelect',
 	//-------------------------------------------
@@ -28,7 +28,16 @@ export const domElementId = {
 	bidTextId: 'bidTextId',
 	receiveDataId: 'leftDate',
 	returnDataId: 'rightDate',
+	//--------------------------------------------
+	bookButtonId: 'bookButtonId',
+	policyAgree: 'policyAgree',
+	ageAgree: 'ageAgree',
+	//--------------------------------------------
+	formInputId: "formInputId",
+	bigBidTextClass: 'bigBidTextClass',
+	bookSelectDivId: 'bookSelectDivId',
+
 }
 
 
-export const badDateEqualNull = new Date(0,0,0,0,0);
+export const badDateEqualNull = new Date(0, 0, 0, 0, 0);
