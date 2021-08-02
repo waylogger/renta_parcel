@@ -17,7 +17,6 @@ import { lowerFirst } from 'lodash';
 
 export async function bidPreview(state: State): Promise<void> {
 	
-	let resStr: string = '';
 	const carModel: string | undefined = $(`#${shared.domElementId.carSelectId}`).val()?.toString();
 	const leftDate: string | undefined = $(`#${shared.domElementId.receiveDataId}`).val()?.toString();
 	const leftTime: string | undefined = $(`#${shared.domElementId.selectReceiveTimeId}`).val()?.toString();
@@ -26,19 +25,33 @@ export async function bidPreview(state: State): Promise<void> {
 	const rightTime: string | undefined = $(`#${shared.domElementId.selectReturnTimeId}`).val()?.toString();
 	const rightPlace: string | undefined = $(`#${shared.domElementId.returnPlaceSelectId}`).val()?.toString();
 
+	
+	let placeBegin: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === leftPlace?.split(' + ')[0])[0];
+	let placeEnd: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === rightPlace?.split(' + ')[0])[0];
+
+
+	const deliveryCost: number = placeBegin.delivery_cost + placeEnd.delivery_cost;
+
 	if (carModel) {
-		resStr += `<span id="${shared.domElementId.carNameId}">Аренда: ${carModel}</span>`;
+		$(`#${shared.domElementId.carNameId}`).html(`Аренда: ${carModel}`);
 	}
 
+	if (leftPlace && rightPlace) {
+		if (deliveryCost > 0)
+			$(`#${shared.domElementId.deliveryCostId}`).html(
+				` + доставка авто ${deliveryCost} ₽`
+			);
+		else {
 
+			$(`#${shared.domElementId.deliveryCostId}`).html('');
+		}
+	}
 	if (leftDate && leftTime && rightTime && rightDate) {
 		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
 		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
 
-		const placeBegin: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === leftPlace?.split(' + ')[0])[0];
-		const placeEnd: SinglePlace = state.getPlacesForReceiveAndReturnCars().places.filter(a => a.title === rightPlace?.split(' + ')[0])[0];
-
-		resStr += `<span id="${shared.domElementId.periodRentId}"> на ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}</span>`;
+		const rentTime = `на ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}`;
+		$(`#${shared.domElementId.periodRentId}`).html(rentTime);
 
 		const bidRequest: BidCostRequest = {
 			car_id: state.carIdForBidCost(),
@@ -49,29 +62,26 @@ export async function bidPreview(state: State): Promise<void> {
 			services: [],
 		}
 
-		const bidCost: BidCostResponse = await getCost(bidRequest);
-
-
-		const cost: number = bidCost.cost;
-		const deposit: number = bidCost.deposit;
-		const deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
-		if (!cost || !deposit) {
-		}
-		else {
-
-			if (deliveryCost > 0)
-				resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost - deliveryCost} ₽ + доставка авто ${deliveryCost} ₽`
-			else
-				resStr += `<span id="${shared.domElementId.bidCostId}"> cтоимость аренды ${cost} ₽`
-
-			resStr += ` + залог ${deposit} ₽ (возвращаем полностью по окончанию аренды).</span><br>`;
-
-			resStr += `<span id="${shared.domElementId.costResolutionId}">Итого: ${cost + deposit} ₽</span>`;
-		}
-
+		await getCost(bidRequest).then(
+			(bidCost: BidCostResponse) => {
+				const cost: number = bidCost.cost;
+				let deposit: number = bidCost.deposit;
+				if (deposit === null) deposit = 10000;
+				let bidCostStr = `, cтоимость аренды ${cost - deliveryCost} ₽ + залог ${deposit} ₽ (возвращаем полностью по окончанию аренды)`;
+				let resCostStr = `Итого: ${cost + deposit} ₽</span>`;
+				$(`#${shared.domElementId.bidCostId}`).html(bidCostStr);
+				$(`#${shared.domElementId.costResolutionId}`).html(resCostStr);
+			}
+		);
 	}
-
-	$(`#${shared.domElementId.bidTextId}`).html(resStr);
+	else {
+		let bidCostStr = '';
+		let resCostStr = '';
+		const rentTime = '';
+		$(`#${shared.domElementId.periodRentId}`).html(rentTime);
+		$(`#${shared.domElementId.bidCostId}`).html(bidCostStr);
+		$(`#${shared.domElementId.costResolutionId}`).html(resCostStr);
+	}
 }
 
 export function onPreview(state: State): void {
@@ -83,32 +93,22 @@ export function onPreview(state: State): void {
 		`${shared.domElementId.receivePlaceSelectId}`,
 		`${shared.domElementId.returnPlaceSelectId}`,
 	];
-
 	const onFocusList: string[] = [
-		`${shared.domElementId.receiveDataId}`,
-		`${shared.domElementId.returnDataId}`,
+		// `${shared.domElementId.receiveDataId}`,
+		// `${shared.domElementId.returnDataId}`,
 	]
 	onChangeList.forEach((id: string) => {
 		$(`#${id}`).on('change', () => {
-			bidPreview(state);
+			setTimeout( () => bidPreview(state), 10000)
 		});
 	});
 	onFocusList.forEach((id: string) => {
 		$(`#${id}`).on('change', () => {
-			bidPreview(state);
+			setTimeout( () => bidPreview(state), 10000)
 		});
 	});
+
+
+	$(`#${shared.domElementId.carSelectId}`).trigger('change');
 }
-
-
-/**
- * 	<span id="carName"></span>
-	<span id="periodRent"></span>
-	<br>
-	<span id="bidCost"></span>
-	<span id="deposit"></span>
-	<br>
-	<span id="resolution"></span>
-*/
-
 

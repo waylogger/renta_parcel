@@ -553,6 +553,9 @@ var checkHash = function () {
                             state.setMainCar();
                         });
                         jquery_1.default("#" + shared.domElementId.bookButtonId).on('click', function () { return createBid_1.createBid(state); });
+                        jquery_1.default("#proofOfAgeAndExperience").on('click', function () {
+                            jquery_1.default("" + shared.domElementId.ageAgree).attr('checked', 'true');
+                        });
                         return [2 /*return*/];
                     });
                 }); });
@@ -561,7 +564,7 @@ var checkHash = function () {
     });
 }); })();
 
-},{"./app/views/template":"4e0Q8","./app/shared/sharedData":"1LPO2","jquery":"6Oaih","./app/state/state":"7H36s","./app/components/placeSelect":"7FUTD","./app/components/timeSelect":"3560X","./app/components/customersPhone":"10VD9","./app/components/customersName":"2Gn6z","./app/components/carSelect":"mkCpc","./app/components/bidPreview":"1JizP","./app/components/createBid":"515qb"}],"4e0Q8":[function(require,module,exports) {
+},{"./app/views/template":"4e0Q8","./app/shared/sharedData":"1LPO2","jquery":"6Oaih","./app/state/state":"7H36s","./app/components/placeSelect":"7FUTD","./app/components/timeSelect":"3560X","./app/components/customersPhone":"10VD9","./app/components/customersName":"2Gn6z","./app/components/carSelect":"mkCpc","./app/components/createBid":"515qb","./app/components/bidPreview":"1JizP"}],"4e0Q8":[function(require,module,exports) {
 "use strict";
 /**
 * @module template.ts
@@ -589,7 +592,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.rootSection = void 0;
 var shared = __importStar(require("../shared/sharedData"));
 var rootSection = function () {
-    return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div style=\"background: #FAFAFB; padding: 15px\">\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\" checked>\n\t\t\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\" checked>\n\t\t\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t</div>\n\t</div>\n\n\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t</div>\n</div>";
+    return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title tn-atom\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div style=\"background: #FAFAFB; padding: 15px\">\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t</div>\n\t</div>\n\n\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t</div>\n</div>";
 };
 exports.rootSection = rootSection;
 
@@ -48151,8 +48154,6 @@ var num = 0;
           e.setState({
             selectedDate: dt
           });
-          r("statechange");
-          e.render();
           /**
           * @author wlr986
           */
@@ -48553,7 +48554,8 @@ var num = 0;
         var e = new Date(parseInt(t.target.dataset.date));
         !h(e, o) && (o = e, f());
       }
-    }) || a.addEventListener("click", function (t) {
+    }) || a.addEventListener("focusin", function (t) {
+      console.log('focus');
       if (t.target.classList.contains("dp-day")) {
         var e = new Date(parseInt(t.target.dataset.date));
         h(e, o) && (o = e, f());
@@ -48632,61 +48634,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.onPreview = exports.bidPreview = void 0;
 var jquery_1 = __importDefault(require("jquery"));
 var shared = __importStar(require("../shared/sharedData"));
-var sharedActions_1 = require("../shared/sharedActions");
-var querySender_1 = require("../CORS/querySender");
 function bidPreview(state) {
-    var _a, _b, _c, _d, _e, _f, _g;
     return __awaiter(this, void 0, void 0, function () {
-        var resStr, carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, d1, d2, placeBegin, placeEnd, bidRequest, bidCost, cost, deposit, deliveryCost;
-        return __generator(this, function (_h) {
-            switch (_h.label) {
-                case 0:
-                    resStr = '';
-                    carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
-                    leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
-                    leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
-                    leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
-                    rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
-                    rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
-                    rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
-                    if (carModel) {
-                        resStr += "<span id=\"" + shared.domElementId.carNameId + "\">\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel + "</span>";
-                    }
-                    if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
-                    d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
-                    d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
-                    placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
-                    placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
-                    resStr += "<span id=\"" + shared.domElementId.periodRentId + "\"> \u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime) + "</span>";
-                    bidRequest = {
-                        car_id: state.carIdForBidCost(),
-                        begin: d1,
-                        end: d2,
-                        begin_place_id: placeBegin.place_id,
-                        end_place_id: placeEnd.place_id,
-                        services: [],
-                    };
-                    return [4 /*yield*/, querySender_1.getCost(bidRequest)];
-                case 1:
-                    bidCost = _h.sent();
-                    cost = bidCost.cost;
-                    deposit = bidCost.deposit;
-                    deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
-                    if (!cost || !deposit) {
-                    }
-                    else {
-                        if (deliveryCost > 0)
-                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";
-                        else
-                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
-                        resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
-                        resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
-                    }
-                    _h.label = 2;
-                case 2:
-                    jquery_1.default("#" + shared.domElementId.bidTextId).html(resStr);
-                    return [2 /*return*/];
-            }
+        return __generator(this, function (_a) {
+            return [2 /*return*/];
         });
     });
 }
@@ -48725,7 +48676,7 @@ exports.onPreview = onPreview;
     <span id="resolution"></span>
 */
 
-},{"jquery":"6Oaih","../shared/sharedData":"1LPO2","../shared/sharedActions":"3HTLc","../CORS/querySender":"4Cv2h"}],"515qb":[function(require,module,exports) {
+},{"jquery":"6Oaih","../shared/sharedData":"1LPO2"}],"515qb":[function(require,module,exports) {
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;

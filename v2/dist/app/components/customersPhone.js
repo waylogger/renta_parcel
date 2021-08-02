@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.customersPhoneValidateAndSave = void 0;
 var jquery_1 = __importDefault(require("jquery"));
+var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description первый обязательный плюс и запрет на ввод других символов кроме чисел
@@ -47,6 +48,7 @@ var customersPhoneValidateAndSave = function (state) {
     jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focusout', function () {
         var _a;
         state.saveCustomersPhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+        sharedActions_1.validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId);
     });
 };
 exports.customersPhoneValidateAndSave = customersPhoneValidateAndSave;

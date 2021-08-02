@@ -4,6 +4,7 @@
 
 
 import $ from 'jquery'
+import { validateField } from '../shared/sharedActions';
 import * as shared from '../shared/sharedData';
 import { State } from '../state/state';
 
@@ -25,6 +26,8 @@ export const customersPhoneValidateAndSave = (state: State): void => {
 
 	$(`#${shared.domElementId.customersPhoneId}`).on('focusout', () => {
 		state.saveCustomersPhone($(`#${shared.domElementId.customersPhoneId}`).val()?.toString());
+
+		validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId);
 	});
 
 }

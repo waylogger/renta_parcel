@@ -16,9 +16,10 @@ export const domElementId = {
 	//------------------------------------------
 	receiveCustomPlaceId: 'receiveCustomPlace-wrap',
 	receiveCustomPlaceInputId: 'receiveCustomPlaceInputId',
+	receiveCustomTextId: "receiveCustomTextId",
+	returnCustomTextId: "returnCustomTextId",
 	returnCustomPlaceInputId: 'returnCustomPlaceInputId',
 	returnCustomPlaceId: 'returnCustomPlace-wrap',
-
 	receivePlaceSelectId: 'receivePlaceSelect',
 	returnPlaceSelectId: 'returnPlaceSelect',
 	//-------------------------------------------
@@ -28,6 +29,7 @@ export const domElementId = {
 	bidTextId: 'bidTextId',
 	receiveDataId: 'leftDate',
 	returnDataId: 'rightDate',
+	deliveryCostId: 'deliveryCostId',
 	//--------------------------------------------
 	bookButtonId: 'bookButtonId',
 	policyAgree: 'policyAgree',
@@ -36,6 +38,18 @@ export const domElementId = {
 	formInputId: "formInputId",
 	bigBidTextClass: 'bigBidTextClass',
 	bookSelectDivId: 'bookSelectDivId',
+	receiveDateTextId: 'receiveDateTextId',
+	returnDateTextId: 'returnDateTextId',
+	customersPhoneTextId: 'customersPhoneTextId',
+	customersNameTextId: 'customersNameTextId',
+
+	proofOfAgeId: 'proofOfAgeAndExperience',
+	proofOfPolicyId: 'agreementWithPolicy',
+	//--------------------------------------------
+	incorrectFieldClass: 'incorrectFieldClass',
+	correctFieldClass: 'correctFieldClass',
+	closePickerId: 'closeIt',
+	closePickerClass: 'closeIt',
 
 }
 

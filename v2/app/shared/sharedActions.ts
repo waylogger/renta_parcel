@@ -1,5 +1,8 @@
 import eachMinuteOfInterval from "date-fns/eachMinuteOfInterval";
+import { findLastKey } from "lodash";
 import { isFunctionDeclaration } from "typescript";
+import { domElementId } from "./sharedData";
+import $ from 'jquery'
 
 /**
  * @module sharedActions.ts
@@ -29,7 +32,7 @@ export function formatCarModelFromSelectToHash(model: string) {
 }
 
 export function formatCarModelFromHashToSelect(model: string) {
-	return model.replace('_', ' ').split(' ').map(
+	return model.replace(/_/g,' ').split(' ').map(
 		(item) => `${item.charAt(0).toUpperCase()}${item.slice(1, item.length)}`
 	).join(' ');
 }
@@ -93,9 +96,39 @@ export function nextYearForServer() {
 	return dateForServer(dt);
 }
 
-
-
 export function splitDateByMinutes(dt: Date, minutes: number): Date[] {
 
 	return eachMinuteOfInterval({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: minutes });
+}
+
+export function validateField(domId: string, domIdOfIndicator: string): boolean {
+	const domElement = $(`#${domIdOfIndicator}`);
+
+	const target: string | undefined | number | string[] = $(`#${domId}`).val();
+
+	if (!target) {
+
+		domElement.addClass(domElementId.incorrectFieldClass);
+		domElement.removeClass(domElementId.correctFieldClass);
+		return false;
+	}
+	domElement.removeClass(domElementId.incorrectFieldClass);
+	domElement.addClass(domElementId.correctFieldClass);
+	return true;
+
+}
+
+export function validateChecker(domId: string, domIdOfIndicator: string): boolean {
+	const domElement = $(`#${domIdOfIndicator}`);
+	const val: boolean | undefined =  $(`#${domId}`).is(':checked');
+	
+	if (!val) {
+		domElement.addClass(domElementId.incorrectFieldClass);
+		domElement.removeClass(domElementId.correctFieldClass);
+		return false;
+	}
+	domElement.removeClass(domElementId.incorrectFieldClass);
+	domElement.addClass(domElementId.correctFieldClass);
+	return true;
+
 }

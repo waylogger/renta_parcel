@@ -3,8 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+exports.validateChecker = exports.validateField = exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
 var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
+var sharedData_1 = require("./sharedData");
+var jquery_1 = __importDefault(require("jquery"));
 /**
  * @module sharedActions.ts
  * @description некоторые переиспользуемые функции
@@ -35,7 +37,7 @@ function formatCarModelFromSelectToHash(model) {
 }
 exports.formatCarModelFromSelectToHash = formatCarModelFromSelectToHash;
 function formatCarModelFromHashToSelect(model) {
-    return model.replace('_', ' ').split(' ').map(function (item) { return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length); }).join(' ');
+    return model.replace(/_/g, ' ').split(' ').map(function (item) { return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length); }).join(' ');
 }
 exports.formatCarModelFromHashToSelect = formatCarModelFromHashToSelect;
 //--------------------------------------------------------------------------------------------------------
@@ -106,3 +108,29 @@ function splitDateByMinutes(dt, minutes) {
     return eachMinuteOfInterval_1.default({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: minutes });
 }
 exports.splitDateByMinutes = splitDateByMinutes;
+function validateField(domId, domIdOfIndicator) {
+    var domElement = jquery_1.default("#" + domIdOfIndicator);
+    var target = jquery_1.default("#" + domId).val();
+    if (!target) {
+        domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+        domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+        return false;
+    }
+    domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+    return true;
+}
+exports.validateField = validateField;
+function validateChecker(domId, domIdOfIndicator) {
+    var domElement = jquery_1.default("#" + domIdOfIndicator);
+    var val = jquery_1.default("#" + domId).is(':checked');
+    if (!val) {
+        domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+        domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+        return false;
+    }
+    domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+    return true;
+}
+exports.validateChecker = validateChecker;

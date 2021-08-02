@@ -37,12 +37,12 @@ export interface BidCostResponse {
     cost: number,
     prepay: number,
     deposit: number,
-    error_message: string,
+    error_message: string | null,
 }
 // ------------------------------------------------------------------------------------------------
 export interface BidCreateResponse {
     bid_id: number,
     bid_number: number,
-    error_message: string,
+    error_message: string | null,
 }
 // ------------------------------------------------------------------------------------------------

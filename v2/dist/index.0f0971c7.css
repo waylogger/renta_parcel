@@ -866,57 +866,5 @@ body {
       display: flex;
       justify-content: space-around;
     }
-    /**
-       <div id="timeSelects" class="timeSelects">
-	    <div id="receiveSelects">
-		<select id="selectReceiveDate"></select>
-		<select id="selectReceiveTime"></select>
-	    </div>
-	    <div id="returnSelects">
-		<select id="selectReturnDate"></select>
-		<select id="selectReturnTime"></select>
-	    </div>
-	</div>
-    </div>
-    */
-    /* 
-    .time_notifics-hide{
-      display: none;
-    }
-    
-    
-    .time_notifics-show{
-      display: flex;
-    }
-    
-    .time_notifics{
-    
-      justify-content:space-between;
-    
-      width: 100%;
-      height: 50px;
-    }
-    
-    .notifics-time-left,
-    .notifics-time-right{
-      display: none;
-      background-color: red;
-      border: 1px;
-      border-radius: 10px;
-      width: 48%;
-      height: inherit;
-      font-size: 10px;
-      text-align: center;
-      padding-top: 15px;
-    }
-    
-    
-    .notifics-time-left-show,
-    .notifics-time-right-show{
-      display: inherit;
-    }
-     */
-    
-    
     
 /*# sourceMappingURL=index.0f0971c7.css.map */

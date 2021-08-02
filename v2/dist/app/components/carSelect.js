@@ -68,7 +68,7 @@ var shared = __importStar(require("../shared/sharedData"));
 var lodash_1 = __importDefault(require("lodash"));
 var CalendarEnjection_1 = require("./CalendarEnjection");
 var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, function () {
-    var resStr, cars, modelArr;
+    var resStr, cars, modelArr, hashCar, hashInx, tempCar, selArray;
     return __generator(this, function (_a) {
         resStr = '';
         cars = state.getAllCarsForRent().cars;
@@ -77,9 +77,16 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
             var c = sharedActions_1.formatCarModelFromBaseToSelect(car.model);
             modelArr.push(c.trim());
         });
-        resStr += lodash_1.default.uniq(modelArr).map(function (item) {
-            return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
-        }).join('\n');
+        hashCar = location.hash;
+        hashCar = hashCar.replace('#', '');
+        hashInx = modelArr.findIndex(function (el) { return el === sharedActions_1.formatCarModelFromHashToSelect(hashCar); });
+        tempCar = modelArr[0];
+        modelArr[0] = modelArr[hashInx];
+        modelArr[hashInx] = tempCar;
+        selArray = lodash_1.default.uniq(modelArr).map(function (item, inx) {
+            return sharedActions_1.option(item, item.toLowerCase().replace(/\s/g, '_'));
+        });
+        resStr += selArray.join('\n');
         jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
         jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () { return __awaiter(void 0, void 0, void 0, function () {
             var stringValueFromSelect, car;
@@ -91,10 +98,12 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
                         if (!stringValueFromSelect)
                             throw new Error('CarSelectCallback::cant take car value');
                         car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
-                        location.hash = "" + car;
+                        location.hash = "#" + car;
                         jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
-                        state.dropFirstDateOfRange();
-                        state.dropSecondDateOfRange();
+                        if (state.isFirstDateOfRangeWasSelect())
+                            state.dropFirstDateOfRange();
+                        if (state.isSecondDateOfRangeWasSelect())
+                            state.dropSecondDateOfRange();
                         return [4 /*yield*/, state.selectCar(stringValueFromSelect)];
                     case 1:
                         _b.sent();

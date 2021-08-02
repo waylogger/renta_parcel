@@ -27,6 +27,7 @@ exports.nameValidateAndSave = void 0;
  * @module customersName.ts
 */
 var jquery_1 = __importDefault(require("jquery"));
+var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description смысл преобразований имени в том, что недопускаются небуквенные символы и не пробелы
@@ -41,6 +42,10 @@ var nameValidateAndSave = function (state) {
         }).join(' ');
         jquery_1.default("#" + shared.domElementId.custonersNameId).val(a);
     });
-    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () { var _a; return state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString()); });
+    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () {
+        var _a;
+        state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+        sharedActions_1.validateField(shared.domElementId.custonersNameId, shared.domElementId.customersNameTextId);
+    });
 };
 exports.nameValidateAndSave = nameValidateAndSave;

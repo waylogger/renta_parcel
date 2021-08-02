@@ -5,7 +5,7 @@ import 'regenerator-runtime/runtime';
 import { CarListResponse, FreePeriodResponse, PlacesResponse, SingleCar, SinglePeriod } from "../CORS/entities/apiExchange/serverTypes"
 import { getCarList, getPlaceList, getCarPeriodList } from "../CORS/querySender";
 import { SingleCarWithPeriods } from '../entities/carPeriods';
-import { formatCarModelFromBaseToSelect, formatCarModelFromHashToSelect, dateForServer, currentYearForServer, nextYearForServer, splitDateByMinutes } from '../shared/sharedActions';
+import { formatCarModelFromBaseToSelect, formatCarModelFromHashToSelect, dateForServer, currentYearForServer, nextYearForServer, splitDateByMinutes, validateField } from '../shared/sharedActions';
 import * as shared from '../shared/sharedData'
 import eachMinuteOfInterval from 'date-fns/eachMinuteOfInterval';
 import _, { find, isEqual } from 'lodash'
@@ -83,6 +83,21 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 
 
 export class State {
+
+	private ageChecker: boolean = false;
+	public toggleAgeChecker(): boolean {
+		this.ageChecker = !this.ageChecker;
+		return this.ageChecker;
+	}
+
+	private policyChecker: boolean = false;
+	public togglePolicyChecker(): boolean {
+		this.policyChecker = !this.policyChecker;
+		return this.policyChecker;
+	}
+
+
+
 	private mainCarForBid: number = 0;
 	public getMainCar(): number {
 		return this.mainCarForBid;
@@ -101,9 +116,10 @@ export class State {
 	}
 	public setFirstDateOfRange(timestampOfFirstSelectDate: Date): void {
 		const arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(timestampOfFirstSelectDate);
-
 		this.firstDateOfRange = timestampOfFirstSelectDate;
 		timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
+
+		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	public dropFirstDateOfRange() {
 		$(`#${shared.domElementId.receiveDataId}`).val('');
@@ -112,16 +128,18 @@ export class State {
 
 		this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
 		this.firstDateOfRange = undefined;
+			
+		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	//-----------------------------------------------------------------------------------------
 
 	private firstTimeOfRange: Date | undefined = undefined;
-	public setFirstTimeOfRange(ftr: Date|undefined): void  {this.firstTimeOfRange = ftr;}
-	public getFirstTimeOfRange(): Date|undefined {const ftr = this.firstTimeOfRange; return ftr;}
+	public setFirstTimeOfRange(ftr: Date | undefined): void { this.firstTimeOfRange = ftr; }
+	public getFirstTimeOfRange(): Date | undefined { const ftr = this.firstTimeOfRange; return ftr; }
 
 	private secondTimeOfRange: Date | undefined = undefined;
-	public setSecondTimeOfRange(ftr: Date|undefined): void  {this.secondTimeOfRange = ftr;}
-	public getSecondTimeOfRange(): Date|undefined {const ftr = this.firstTimeOfRange; return ftr;}
+	public setSecondTimeOfRange(ftr: Date | undefined): void { this.secondTimeOfRange = ftr; }
+	public getSecondTimeOfRange(): Date | undefined { const ftr = this.firstTimeOfRange; return ftr; }
 
 	private secondDateOfRange: Date | undefined = undefined;
 	public isSecondDateOfRangeWasSelect(): boolean {
@@ -145,6 +163,7 @@ export class State {
 		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
 		correctionSecondTimeAfterFirst(this);
 		this.setMainCar();
+		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
 
 	}
 	public dropSecondDateOfRange() {
@@ -152,6 +171,7 @@ export class State {
 		$(`#${shared.domElementId.selectReturnTimeId}`).val('00:00');
 		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
 		this.secondDateOfRange = undefined;
+		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
 	}
 
 	public getSecondDateOfRange() {
@@ -161,8 +181,8 @@ export class State {
 			return shared.badDateEqualNull;
 	}
 
-	public setMainCar(){
-		this.mainCarForBid =  this.freePeriodsForCurrentBookingCarAfterFirstSelect[0].car_id;
+	public setMainCar() {
+		this.mainCarForBid = this.freePeriodsForCurrentBookingCarAfterFirstSelect[0].car_id;
 	}
 	/**
 	 * @description адреса места для выдачи и возврата арендованных авто

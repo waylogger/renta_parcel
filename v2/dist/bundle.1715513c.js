@@ -138,6 +138,8 @@ exports.domElementId = {
   //------------------------------------------
   receiveCustomPlaceId: 'receiveCustomPlace-wrap',
   receiveCustomPlaceInputId: 'receiveCustomPlaceInputId',
+  receiveCustomTextId: "receiveCustomTextId",
+  returnCustomTextId: "returnCustomTextId",
   returnCustomPlaceInputId: 'returnCustomPlaceInputId',
   returnCustomPlaceId: 'returnCustomPlace-wrap',
   receivePlaceSelectId: 'receivePlaceSelect',
@@ -149,6 +151,7 @@ exports.domElementId = {
   bidTextId: 'bidTextId',
   receiveDataId: 'leftDate',
   returnDataId: 'rightDate',
+  deliveryCostId: 'deliveryCostId',
   //--------------------------------------------
   bookButtonId: 'bookButtonId',
   policyAgree: 'policyAgree',
@@ -156,7 +159,18 @@ exports.domElementId = {
   //--------------------------------------------
   formInputId: "formInputId",
   bigBidTextClass: 'bigBidTextClass',
-  bookSelectDivId: 'bookSelectDivId'
+  bookSelectDivId: 'bookSelectDivId',
+  receiveDateTextId: 'receiveDateTextId',
+  returnDateTextId: 'returnDateTextId',
+  customersPhoneTextId: 'customersPhoneTextId',
+  customersNameTextId: 'customersNameTextId',
+  proofOfAgeId: 'proofOfAgeAndExperience',
+  proofOfPolicyId: 'agreementWithPolicy',
+  //--------------------------------------------
+  incorrectFieldClass: 'incorrectFieldClass',
+  correctFieldClass: 'correctFieldClass',
+  closePickerId: 'closeIt',
+  closePickerClass: 'closeIt'
 };
 exports.badDateEqualNull = new Date(0, 0, 0, 0, 0);
 },{}],"dist/app/views/template.js":[function(require,module,exports) {
@@ -207,7 +221,7 @@ exports.rootSection = void 0;
 var shared = __importStar(require("../shared/sharedData"));
 
 var rootSection = function rootSection() {
-  return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div style=\"background: #FAFAFB; padding: 15px\">\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\" checked>\n\t\t\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\" checked>\n\t\t\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t</div>\n\t</div>\n\n\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t</div>\n</div>";
+  return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title tn-atom\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div id=\"somes\" style=\"background: #FAFAFB; padding: 15px\">\n\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div id=\"" + shared.domElementId.receiveDateTextId + "\" class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div id=\"" + shared.domElementId.returnDateTextId + "\" class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\" id=\"" + shared.domElementId.receiveCustomTextId + "\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\" id=\"" + shared.domElementId.returnCustomTextId + "\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div id=\"" + shared.domElementId.customersNameTextId + "\" class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div id=\"" + shared.domElementId.customersPhoneTextId + "\" class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"" + shared.domElementId.proofOfAgeId + "\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"" + shared.domElementId.proofOfPolicyId + "\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t\t\t\t<span id=\"" + shared.domElementId.carNameId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.periodRentId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.bidCostId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.deliveryCostId + "\"></span>\n\t\t\t\t<br>\n\t\t\t\t<span id=\"" + shared.domElementId.costResolutionId + "\"></span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div id=\"console\"></div>\n\n</div>";
 };
 
 exports.rootSection = rootSection;
@@ -12860,9 +12874,7 @@ exports.signInEndpoint = '/api/v1/tokens/signin';
 exports.refreshEndpoint = '/api/v1/tokens/refresh';
 exports.dataApiEndpoint = 'data_api';
 
-var Auth =
-/** @class */
-function () {
+var Auth = function () {
   // --------------------------------------------------------------------------------------------
   function Auth(accessData) {
     var _a;
@@ -14377,9 +14389,13 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+exports.validateChecker = exports.validateField = exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
 
 var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
+
+var sharedData_1 = require("./sharedData");
+
+var jquery_1 = __importDefault(require("jquery"));
 /**
  * @module sharedActions.ts
  * @description некоторые переиспользуемые функции
@@ -14430,7 +14446,7 @@ function formatCarModelFromSelectToHash(model) {
 exports.formatCarModelFromSelectToHash = formatCarModelFromSelectToHash;
 
 function formatCarModelFromHashToSelect(model) {
-  return model.replace('_', ' ').split(' ').map(function (item) {
+  return model.replace(/_/g, ' ').split(' ').map(function (item) {
     return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length);
   }).join(' ');
 }
@@ -14519,7 +14535,41 @@ function splitDateByMinutes(dt, minutes) {
 }
 
 exports.splitDateByMinutes = splitDateByMinutes;
-},{"date-fns/eachMinuteOfInterval":"node_modules/date-fns/esm/eachMinuteOfInterval/index.js"}],"node_modules/date-fns/esm/addDays/index.js":[function(require,module,exports) {
+
+function validateField(domId, domIdOfIndicator) {
+  var domElement = jquery_1.default("#" + domIdOfIndicator);
+  var target = jquery_1.default("#" + domId).val();
+
+  if (!target) {
+    domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+    return false;
+  }
+
+  domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+  domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+  return true;
+}
+
+exports.validateField = validateField;
+
+function validateChecker(domId, domIdOfIndicator) {
+  var domElement = jquery_1.default("#" + domIdOfIndicator);
+  var val = jquery_1.default("#" + domId).is(':checked');
+
+  if (!val) {
+    domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+    return false;
+  }
+
+  domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+  domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+  return true;
+}
+
+exports.validateChecker = validateChecker;
+},{"date-fns/eachMinuteOfInterval":"node_modules/date-fns/esm/eachMinuteOfInterval/index.js","./sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js"}],"node_modules/date-fns/esm/addDays/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34634,10 +34684,10 @@ var defaultPlacesResponse = {
   places: []
 };
 
-var State =
-/** @class */
-function () {
+var State = function () {
   function State() {
+    this.ageChecker = false;
+    this.policyChecker = false;
     this.mainCarForBid = 0; //-----------------------------------------------------------------------------------------
 
     this.firstDateOfRange = undefined; //-----------------------------------------------------------------------------------------
@@ -34701,6 +34751,16 @@ function () {
     this.partedDayNotAvaiableForBooking = [];
   }
 
+  State.prototype.toggleAgeChecker = function () {
+    this.ageChecker = !this.ageChecker;
+    return this.ageChecker;
+  };
+
+  State.prototype.togglePolicyChecker = function () {
+    this.policyChecker = !this.policyChecker;
+    return this.policyChecker;
+  };
+
   State.prototype.getMainCar = function () {
     return this.mainCarForBid;
   };
@@ -34717,6 +34777,7 @@ function () {
     var arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(timestampOfFirstSelectDate);
     this.firstDateOfRange = timestampOfFirstSelectDate;
     timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
+    sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
   };
 
   State.prototype.dropFirstDateOfRange = function () {
@@ -34725,6 +34786,7 @@ function () {
     jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', 'disabled');
     this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
     this.firstDateOfRange = undefined;
+    sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
   };
 
   State.prototype.setFirstTimeOfRange = function (ftr) {
@@ -34764,6 +34826,7 @@ function () {
     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
     timeSelect_1.correctionSecondTimeAfterFirst(this);
     this.setMainCar();
+    sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
   };
 
   State.prototype.dropSecondDateOfRange = function () {
@@ -34771,6 +34834,7 @@ function () {
     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val('00:00');
     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
     this.secondDateOfRange = undefined;
+    sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
   };
 
   State.prototype.getSecondDateOfRange = function () {
@@ -35279,6 +35343,8 @@ exports.customersPhoneValidateAndSave = void 0;
 
 var jquery_1 = __importDefault(require("jquery"));
 
+var sharedActions_1 = require("../shared/sharedActions");
+
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description первый обязательный плюс и запрет на ввод других символов кроме чисел
@@ -35300,11 +35366,12 @@ var customersPhoneValidateAndSave = function customersPhoneValidateAndSave(state
     var _a;
 
     state.saveCustomersPhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+    sharedActions_1.validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId);
   });
 };
 
 exports.customersPhoneValidateAndSave = customersPhoneValidateAndSave;
-},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"dist/app/components/customersName.js":[function(require,module,exports) {
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"dist/app/components/customersName.js":[function(require,module,exports) {
 "use strict";
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
@@ -35357,6 +35424,8 @@ exports.nameValidateAndSave = void 0;
 
 var jquery_1 = __importDefault(require("jquery"));
 
+var sharedActions_1 = require("../shared/sharedActions");
+
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description смысл преобразований имени в том, что недопускаются небуквенные символы и не пробелы
@@ -35377,12 +35446,13 @@ var nameValidateAndSave = function nameValidateAndSave(state) {
   jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () {
     var _a;
 
-    return state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+    state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+    sharedActions_1.validateField(shared.domElementId.custonersNameId, shared.domElementId.customersNameTextId);
   });
 };
 
 exports.nameValidateAndSave = nameValidateAndSave;
-},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../shared/sharedData":"dist/app/shared/sharedData.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -54635,7 +54705,319 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"dist/app/components/Calendar.js":[function(require,module,exports) {
+},{"buffer":"../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/buffer/index.js"}],"dist/app/components/bidPreview.js":[function(require,module,exports) {
+"use strict";
+/**
+ * @module bitText.ts
+*/
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.onPreview = exports.bidPreview = void 0;
+
+var jquery_1 = __importDefault(require("jquery"));
+
+var shared = __importStar(require("../shared/sharedData"));
+
+var sharedActions_1 = require("../shared/sharedActions");
+
+var querySender_1 = require("../CORS/querySender");
+
+function bidPreview(state) {
+  var _a, _b, _c, _d, _e, _f, _g;
+
+  return __awaiter(this, void 0, void 0, function () {
+    var carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, placeBegin, placeEnd, deliveryCost, d1, d2, rentTime, bidRequest, bidCostStr, resCostStr, rentTime;
+    return __generator(this, function (_h) {
+      switch (_h.label) {
+        case 0:
+          carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+          leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
+          leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
+          leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
+          rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
+          rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
+          rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+          placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+            return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]);
+          })[0];
+          placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+            return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]);
+          })[0];
+          deliveryCost = placeBegin.delivery_cost + placeEnd.delivery_cost;
+
+          if (carModel) {
+            jquery_1.default("#" + shared.domElementId.carNameId).html("\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel);
+          }
+
+          if (leftPlace && rightPlace) {
+            if (deliveryCost > 0) jquery_1.default("#" + shared.domElementId.deliveryCostId).html(" + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD");else {
+              jquery_1.default("#" + shared.domElementId.deliveryCostId).html('');
+            }
+          }
+
+          if (!(leftDate && leftTime && rightTime && rightDate)) return [3
+          /*break*/
+          , 2];
+          d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
+          d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+          rentTime = "\u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
+          jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
+          bidRequest = {
+            car_id: state.carIdForBidCost(),
+            begin: d1,
+            end: d2,
+            begin_place_id: placeBegin.place_id,
+            end_place_id: placeEnd.place_id,
+            services: []
+          };
+          return [4
+          /*yield*/
+          , querySender_1.getCost(bidRequest).then(function (bidCost) {
+            var cost = bidCost.cost;
+            var deposit = bidCost.deposit;
+            if (deposit === null) deposit = 10000;
+            var bidCostStr = ", c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B)";
+            var resCostStr = "\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+            jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+            jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+          })];
+
+        case 1:
+          _h.sent();
+
+          return [3
+          /*break*/
+          , 3];
+
+        case 2:
+          bidCostStr = '';
+          resCostStr = '';
+          rentTime = '';
+          jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
+          jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+          jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+          _h.label = 3;
+
+        case 3:
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+
+exports.bidPreview = bidPreview;
+
+function onPreview(state) {
+  var onChangeList = ["" + shared.domElementId.carSelectId, "" + shared.domElementId.selectReceiveTimeId, "" + shared.domElementId.selectReturnTimeId, "" + shared.domElementId.receivePlaceSelectId, "" + shared.domElementId.returnPlaceSelectId];
+  var onFocusList = [// `${shared.domElementId.receiveDataId}`,
+    // `${shared.domElementId.returnDataId}`,
+  ];
+  onChangeList.forEach(function (id) {
+    jquery_1.default("#" + id).on('change', function () {
+      setTimeout(function () {
+        return bidPreview(state);
+      }, 10000);
+    });
+  });
+  onFocusList.forEach(function (id) {
+    jquery_1.default("#" + id).on('change', function () {
+      setTimeout(function () {
+        return bidPreview(state);
+      }, 10000);
+    });
+  });
+  jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
+}
+
+exports.onPreview = onPreview;
+},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../CORS/querySender":"dist/app/CORS/querySender.js"}],"dist/app/components/Calendar.js":[function(require,module,exports) {
 var define;
 "use strict";
 /**
@@ -54659,6 +55041,8 @@ exports.DateRangePicker = void 0; // import { firstDateIsSelect, secondDateIsSel
 // import { dataFromServer } from './state/dataFromServer'
 
 var jquery_1 = __importDefault(require("jquery"));
+
+var bidPreview_1 = require("./bidPreview");
 
 var dateRangePicker = 0;
 var myState;
@@ -54812,8 +55196,6 @@ var num = 0;
           e.setState({
             selectedDate: dt
           });
-          r("statechange");
-          e.render();
           /**
            * @author wlr986
           */
@@ -54836,12 +55218,14 @@ var num = 0;
           e.setState({
             hilightedDate: v(n, 1)
           });
+          t.stopPropagation();
         },
         "dp-prev": function dpPrev(t, e) {
           var n = e.state.hilightedDate;
           e.setState({
             hilightedDate: v(n, -1)
           });
+          t.stopPropagation();
         },
         "dp-today": function dpToday(t, e) {
           e.setState({
@@ -54850,11 +55234,13 @@ var num = 0;
         },
         "dp-clear": function dpClear(t, e) {
           myState.dropFirstDateOfRange();
-          myState.dropSecondDateOfRange(); // dataFromServer.clickedCars = [];
+          myState.dropSecondDateOfRange();
+          bidPreview_1.bidPreview(myState); // dataFromServer.clickedCars = [];
 
           e.setState({
             selectedDate: null
           });
+          t.stopPropagation();
         },
         "dp-close": function dpClose(t, e) {
           e.close();
@@ -54863,11 +55249,13 @@ var num = 0;
           e.setState({
             view: "month"
           });
+          t.stopPropagation();
         },
         "dp-cal-year": function dpCalYear(t, e) {
           e.setState({
             view: "year"
           });
+          t.stopPropagation();
         }
       },
       render: function render(r) {
@@ -54979,6 +55367,7 @@ var num = 0;
             view: "day"
           });
           var n, a;
+          t.stopPropagation();
         }
       }
     },
@@ -54999,6 +55388,7 @@ var num = 0;
             view: "day"
           });
           var n, a;
+          t.stopPropagation();
         }
       },
       render: function render(t) {
@@ -55283,15 +55673,23 @@ var num = 0;
       return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "");
     }
 
-    return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+    a.addEventListener("click", function (t) {
       if (t.target.classList.contains("dp-day")) {
-        var e = new Date(parseInt(t.target.dataset.date));
-        !h(e, o) && (o = e, f());
+        // var e = new Date(parseInt(t.target.dataset.date));
+        f();
+        t.stopPropagation(); // h(e, o) && (o = e, f())
       }
-    }) || a.addEventListener("click", function (t) {
+    });
+    a.addEventListener("touchstart", function (t) {
       if (t.target.classList.contains("dp-day")) {
-        var e = new Date(parseInt(t.target.dataset.date));
-        h(e, o) && (o = e, f());
+        // var e = new Date(parseInt(t.target.dataset.date));
+        f();
+        t.stopPropagation(); // h(e, o) && (o = e, f())
+      }
+    });
+    return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+      if (t.target.classList.contains("dp-day")) {// var e = new Date(parseInt(t.target.dataset.date));
+        // !h(e, o) && (o = e, f())
       }
     }), d;
   }, Object.defineProperty(t, "__esModule", {
@@ -55299,305 +55697,7 @@ var num = 0;
   });
 });
 exports.DateRangePicker = dateRangePicker;
-},{"jquery":"node_modules/jquery/dist/jquery.js"}],"dist/app/components/bidPreview.js":[function(require,module,exports) {
-"use strict";
-/**
- * @module bitText.ts
-*/
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.onPreview = exports.bidPreview = void 0;
-
-var jquery_1 = __importDefault(require("jquery"));
-
-var shared = __importStar(require("../shared/sharedData"));
-
-var sharedActions_1 = require("../shared/sharedActions");
-
-var querySender_1 = require("../CORS/querySender");
-
-function bidPreview(state) {
-  var _a, _b, _c, _d, _e, _f, _g;
-
-  return __awaiter(this, void 0, void 0, function () {
-    var resStr, carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, d1, d2, placeBegin, placeEnd, bidRequest, bidCost, cost, deposit, deliveryCost;
-    return __generator(this, function (_h) {
-      switch (_h.label) {
-        case 0:
-          resStr = '';
-          carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
-          leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
-          leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
-          leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
-          rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
-          rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
-          rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
-
-          if (carModel) {
-            resStr += "<span id=\"" + shared.domElementId.carNameId + "\">\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel + "</span>";
-          }
-
-          if (!(leftDate && leftTime && rightTime && rightDate)) return [3
-          /*break*/
-          , 2];
-          d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
-          d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
-          placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
-            return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]);
-          })[0];
-          placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
-            return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]);
-          })[0];
-          resStr += "<span id=\"" + shared.domElementId.periodRentId + "\"> \u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime) + "</span>";
-          bidRequest = {
-            car_id: state.carIdForBidCost(),
-            begin: d1,
-            end: d2,
-            begin_place_id: placeBegin.place_id,
-            end_place_id: placeEnd.place_id,
-            services: []
-          };
-          return [4
-          /*yield*/
-          , querySender_1.getCost(bidRequest)];
-
-        case 1:
-          bidCost = _h.sent();
-          cost = bidCost.cost;
-          deposit = bidCost.deposit;
-          deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
-
-          if (!cost || !deposit) {} else {
-            if (deliveryCost > 0) resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";else resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
-            resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
-            resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
-          }
-
-          _h.label = 2;
-
-        case 2:
-          jquery_1.default("#" + shared.domElementId.bidTextId).html(resStr);
-          return [2
-          /*return*/
-          ];
-      }
-    });
-  });
-}
-
-exports.bidPreview = bidPreview;
-
-function onPreview(state) {
-  var onChangeList = ["" + shared.domElementId.carSelectId, "" + shared.domElementId.selectReceiveTimeId, "" + shared.domElementId.selectReturnTimeId, "" + shared.domElementId.receivePlaceSelectId, "" + shared.domElementId.returnPlaceSelectId];
-  var onFocusList = ["" + shared.domElementId.receiveDataId, "" + shared.domElementId.returnDataId];
-  onChangeList.forEach(function (id) {
-    jquery_1.default("#" + id).on('change', function () {
-      bidPreview(state);
-    });
-  });
-  onFocusList.forEach(function (id) {
-    jquery_1.default("#" + id).on('change', function () {
-      bidPreview(state);
-    });
-  });
-}
-
-exports.onPreview = onPreview;
-/**
- * 	<span id="carName"></span>
-    <span id="periodRent"></span>
-    <br>
-    <span id="bidCost"></span>
-    <span id="deposit"></span>
-    <br>
-    <span id="resolution"></span>
-*/
-},{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedData":"dist/app/shared/sharedData.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../CORS/querySender":"dist/app/CORS/querySender.js"}],"dist/app/components/CalendarEnjection.js":[function(require,module,exports) {
+},{"jquery":"node_modules/jquery/dist/jquery.js","./bidPreview":"dist/app/components/bidPreview.js"}],"dist/app/components/CalendarEnjection.js":[function(require,module,exports) {
 "use strict";
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
@@ -55807,8 +55907,10 @@ function CalendarEnjector(myState) {
       container.classList.add('ex-inputs-picker-visible');
     }
 
-    function hidePicker() {
+    function hidePicker(e) {
       clearTimeout(previousTimeout);
+      var related = jquery_1.default(e.relatedTarget);
+      if (related && related.hasClass('dp-day') || related.hasClass('dp-next') || related.hasClass('dp-clear')) return;
       previousTimeout = setTimeout(function () {
         if (!root.contains(document.activeElement)) {
           container.classList.remove('ex-inputs-picker-visible');
@@ -55856,6 +55958,7 @@ function CalendarEnjector(myState) {
 
       txtStart.addEventListener('focus', showPicker);
       txtEnd.addEventListener('focus', showPicker);
+      jquery_1.default(document).on('click', hidePicker);
       jquery_1.default('.dr-cal-end').detach();
       jquery_1.default('.dp-next').css('visibility', 'visible');
       ;
@@ -56073,7 +56176,7 @@ var CalendarEnjection_1 = require("./CalendarEnjection");
 
 var carSelect = function carSelect(state) {
   return __awaiter(void 0, void 0, void 0, function () {
-    var resStr, cars, modelArr;
+    var resStr, cars, modelArr, hashCar, hashInx, tempCar, selArray;
     return __generator(this, function (_a) {
       resStr = '';
       cars = state.getAllCarsForRent().cars;
@@ -56082,9 +56185,18 @@ var carSelect = function carSelect(state) {
         var c = sharedActions_1.formatCarModelFromBaseToSelect(car.model);
         modelArr.push(c.trim());
       });
-      resStr += lodash_1.default.uniq(modelArr).map(function (item) {
-        return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
-      }).join('\n');
+      hashCar = location.hash;
+      hashCar = hashCar.replace('#', '');
+      hashInx = modelArr.findIndex(function (el) {
+        return el === sharedActions_1.formatCarModelFromHashToSelect(hashCar);
+      });
+      tempCar = modelArr[0];
+      modelArr[0] = modelArr[hashInx];
+      modelArr[hashInx] = tempCar;
+      selArray = lodash_1.default.uniq(modelArr).map(function (item, inx) {
+        return sharedActions_1.option(item, item.toLowerCase().replace(/\s/g, '_'));
+      });
+      resStr += selArray.join('\n');
       jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
       jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () {
         return __awaiter(void 0, void 0, void 0, function () {
@@ -56098,10 +56210,10 @@ var carSelect = function carSelect(state) {
                 stringValueFromSelect = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
                 if (!stringValueFromSelect) throw new Error('CarSelectCallback::cant take car value');
                 car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
-                location.href = "/#" + car;
+                location.hash = "#" + car;
                 jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
-                state.dropFirstDateOfRange();
-                state.dropSecondDateOfRange();
+                if (state.isFirstDateOfRangeWasSelect()) state.dropFirstDateOfRange();
+                if (state.isSecondDateOfRangeWasSelect()) state.dropSecondDateOfRange();
                 return [4
                 /*yield*/
                 , state.selectCar(stringValueFromSelect)];
@@ -56327,91 +56439,122 @@ var shared = __importStar(require("../shared/sharedData"));
 
 var jquery_1 = __importDefault(require("jquery"));
 
-var querySender_1 = require("../CORS/querySender");
+var sharedActions_1 = require("../shared/sharedActions");
+
+function validateForm() {
+  var validateArr = [];
+  validateArr.push(sharedActions_1.validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId));
+  validateArr.push(sharedActions_1.validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId));
+  validateArr.push(sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId));
+  validateArr.push(sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId));
+  validateArr.push(sharedActions_1.validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId));
+  validateArr.push(sharedActions_1.validateField(shared.domElementId.custonersNameId, shared.domElementId.customersNameTextId));
+  return validateArr.indexOf(false) >= 0 ? false : true;
+}
 
 function createBid(state) {
   var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 
   return __awaiter(this, void 0, void 0, function () {
-    var resStr, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, fio, phone, ageAgree, policyAgree, placeBegin, placeEnd, otherReceivePlace, otherReturnPlace, fileArr, d1, d2, bidRequest, form_1, keys, vals_1, bid;
+    var leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, fio, phone, ageAgree, policyAgree, placeBegin, placeEnd, otherReceivePlace, otherReturnPlace, customPlace, fileArr, fArr, d1, d2, bidRequest, form_1, keys, vals_1, bid, thankStr_1, thankStr;
     return __generator(this, function (_l) {
-      switch (_l.label) {
-        case 0:
-          resStr = '';
-          leftDate = (_a = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _a === void 0 ? void 0 : _a.toString();
-          leftTime = (_b = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _b === void 0 ? void 0 : _b.toString();
-          leftPlace = (_c = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _c === void 0 ? void 0 : _c.toString();
-          rightDate = (_d = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _d === void 0 ? void 0 : _d.toString();
-          rightTime = (_e = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _e === void 0 ? void 0 : _e.toString();
-          rightPlace = (_f = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _f === void 0 ? void 0 : _f.toString();
-          fio = (_g = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _g === void 0 ? void 0 : _g.toString();
-          phone = (_h = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _h === void 0 ? void 0 : _h.toString();
-          ageAgree = jquery_1.default("#" + shared.domElementId.ageAgree).is(':checked');
-          policyAgree = jquery_1.default("#" + shared.domElementId.policyAgree).is(':checked');
-          placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
-            return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]);
-          })[0];
-          placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
-            return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]);
-          })[0];
-          otherReceivePlace = (_j = jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).val()) === null || _j === void 0 ? void 0 : _j.toString();
-          otherReturnPlace = (_k = jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).val()) === null || _k === void 0 ? void 0 : _k.toString();
-          if (!(leftDate && leftTime && rightTime && rightDate && fio && phone && policyAgree && ageAgree && placeBegin && placeEnd)) return [3
-          /*break*/
-          , 2];
-          fileArr = '';
-          if (placeBegin.place_id === 179 && otherReceivePlace === '' || placeEnd.place_id === 179 && otherReturnPlace === '') return [2
-          /*return*/
-          ];else if (placeBegin.place_id === 179 && otherReceivePlace != '' && placeEnd.place_id === 179 && otherReturnPlace != '') {
-            if (otherReturnPlace && otherReceivePlace) fileArr = new File([otherReceivePlace, otherReturnPlace], 'получение-возврат');
-          }
-          d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
-          d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
-          bidRequest = {
-            car_id: state.getMainCar(),
-            begin: d1,
-            end: d2,
-            fio: fio,
-            phone: phone,
-            begin_place_id: placeBegin.place_id,
-            end_place_id: placeEnd.place_id,
-            file: fileArr
-          };
-          form_1 = new FormData();
-          keys = Object.keys(bidRequest);
-          vals_1 = Object.values(bidRequest);
-          keys.forEach(function (key, inx) {
-            form_1.append(key, vals_1[inx]);
-          });
-          return [4
-          /*yield*/
-          , querySender_1.sendRequest(form_1)];
+      leftDate = (_a = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+      leftTime = (_b = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _b === void 0 ? void 0 : _b.toString();
+      leftPlace = (_c = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _c === void 0 ? void 0 : _c.toString();
+      rightDate = (_d = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _d === void 0 ? void 0 : _d.toString();
+      rightTime = (_e = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _e === void 0 ? void 0 : _e.toString();
+      rightPlace = (_f = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _f === void 0 ? void 0 : _f.toString();
+      fio = (_g = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+      phone = (_h = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _h === void 0 ? void 0 : _h.toString();
+      ageAgree = jquery_1.default("#" + shared.domElementId.ageAgree).is(':checked');
+      policyAgree = jquery_1.default("#" + shared.domElementId.policyAgree).is(':checked');
+      placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+        return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]);
+      })[0];
+      placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) {
+        return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]);
+      })[0];
+      otherReceivePlace = (_j = jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).val()) === null || _j === void 0 ? void 0 : _j.toString();
+      otherReturnPlace = (_k = jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).val()) === null || _k === void 0 ? void 0 : _k.toString();
+      customPlace = true;
 
-        case 1:
-          bid = _l.sent();
+      if (placeBegin.place_id === 179) {
+        customPlace = sharedActions_1.validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId) ? true : false;
+      }
 
-          if (bid.error_message == null) {
-            jquery_1.default("#" + shared.domElementId.formInputId).html('');
-            jquery_1.default("#" + shared.domElementId.bookSelectDivId).html('');
-            jquery_1.default("#" + shared.domElementId.bidTextId).addClass(shared.domElementId.bigBidTextClass);
-            return [2
-            /*return*/
-            ];
-          }
+      if (placeEnd.place_id === 179) {
+        customPlace = sharedActions_1.validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId) ? true : false;
+      }
 
-          _l.label = 2;
+      if (!validateForm()) return [2
+      /*return*/
+      ];
+      if (!customPlace) return [2
+      /*return*/
+      ];
 
-        case 2:
+      if (leftDate && leftTime && rightTime && rightDate && fio && phone && policyAgree && ageAgree && placeBegin && placeEnd) {
+        fileArr = '';
+        if (placeBegin.place_id === 179 && otherReceivePlace === '' || placeEnd.place_id === 179 && otherReturnPlace === '') return [2
+        /*return*/
+        ];else if (placeBegin.place_id === 179 && otherReceivePlace != '' || placeEnd.place_id === 179 && otherReturnPlace != '') {
+          fArr = [];
+          if (otherReturnPlace) fArr.push(otherReturnPlace);
+          if (otherReceivePlace) fArr.push(otherReceivePlace);
+          fileArr = new File(fArr, 'получение-возврат');
+        }
+        d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
+        d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+        bidRequest = {
+          car_id: state.getMainCar(),
+          begin: d1,
+          end: d2,
+          fio: fio,
+          phone: phone,
+          begin_place_id: placeBegin.place_id,
+          end_place_id: placeEnd.place_id,
+          file: fileArr
+        };
+        form_1 = new FormData();
+        keys = Object.keys(bidRequest);
+        vals_1 = Object.values(bidRequest);
+        keys.forEach(function (key, inx) {
+          form_1.append(key, vals_1[inx]);
+        });
+        bid = {
+          bid_id: 2,
+          bid_number: 1,
+          error_message: null
+        };
+
+        if (bid.error_message == null) {
+          thankStr_1 = "<div class=\"thankyou__book\">\u0412\u0430\u0448\u0430 \u0437\u0430\u044F\u0432\u043A\u0430 \u043D\u0430 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 " + jquery_1.default("#" + shared.domElementId.carNameId).html().split(':')[1] + " " + jquery_1.default("#" + shared.domElementId.periodRentId).html() + " \u043F\u0440\u0438\u043D\u044F\u0442\u0430. <br><br>\u0415\u0441\u043B\u0438 \u044D\u0442\u043E \u043F\u0435\u0440\u0432\u043E\u0435 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441 \u043D\u0430\u043C\u0438, \u043F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u044C\u0442\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B (\u043F\u0430\u0441\u043F\u043E\u0440\u0442 \u0438 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0435 \u043F\u0440\u0430\u0432\u0430) \u043F\u043E <a href=\"https://wa.me/+79999151515\" target=\"_blank\">WhatsApp \u043D\u0430 \u043D\u043E\u043C\u0435\u0440 +7 (999) 915-15-15</a><br> </div><a href=\"https://wa.me/+79999151514\" target=\"_blank\"><div class=\"book__btn\" style=\"display: flex;\njustify-content: center;\nalign-items: center;text-decoration: none;\">\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B</div></a>";
+          jquery_1.default("#" + shared.domElementId.formInputId).html(thankStr_1);
+          jquery_1.default("#" + shared.domElementId.bookSelectDivId).html('');
+          jquery_1.default("#" + shared.domElementId.bidTextId).addClass(shared.domElementId.bigBidTextClass);
           return [2
           /*return*/
           ];
+        }
+
+        thankStr = "<div class=\"thankyou__book\" style=\"color: red;\">\u0412\u0430\u0448\u0430 \u0437\u0430\u044F\u0432\u043A\u0430 \u043D\u0430 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 " + jquery_1.default("#" + shared.domElementId.carNameId).html().split(':')[1] + " " + jquery_1.default("#" + shared.domElementId.periodRentId).html() + " \u043D\u0435 \u043F\u0440\u0438\u043D\u044F\u0442\u0430. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0434\u043D\u0435\u0435.";
+        jquery_1.default("#" + shared.domElementId.formInputId).html(thankStr);
+        jquery_1.default("#" + shared.domElementId.bookSelectDivId).html('');
+        jquery_1.default("#" + shared.domElementId.bidTextId).addClass(shared.domElementId.bigBidTextClass);
+        return [2
+        /*return*/
+        ];
       }
+
+      return [2
+      /*return*/
+      ];
     });
   });
 }
 
 exports.createBid = createBid;
-},{"../shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","../CORS/querySender":"dist/app/CORS/querySender.js"}],"dist/bundle.js":[function(require,module,exports) {
+},{"../shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedActions":"dist/app/shared/sharedActions.js"}],"dist/bundle.js":[function(require,module,exports) {
 "use strict";
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
@@ -56623,8 +56766,10 @@ var bidPreview_1 = require("./app/components/bidPreview");
 
 var createBid_1 = require("./app/components/createBid");
 
+var sharedActions_1 = require("./app/shared/sharedActions");
+
 var checkHash = function checkHash() {
-  if (location.hash = '#') {
+  if (location.hash === '#') {
     jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
   } else {
     jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
@@ -56655,11 +56800,11 @@ var checkHash = function checkHash() {
           jquery_1.default.when(jquery_1.default.ready).then(function () {
             return __awaiter(void 0, void 0, void 0, function () {
               return __generator(this, function (_a) {
-                bidPreview_1.onPreview(state);
                 customersPhone_1.customersPhoneValidateAndSave(state);
                 customersName_1.nameValidateAndSave(state);
                 placeSelect_1.placeOptions(state);
                 placeSelect_1.selectPlace(state);
+                bidPreview_1.onPreview(state);
                 jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () {
                   return timeSelect_1.correctionSecondTimeAfterFirst(state);
                 });
@@ -56691,6 +56836,22 @@ var checkHash = function checkHash() {
                 jquery_1.default("#" + shared.domElementId.bookButtonId).on('click', function () {
                   return createBid_1.createBid(state);
                 });
+                jquery_1.default("#proofOfAgeAndExperience").on('click', function () {
+                  var check = state.toggleAgeChecker();
+                  if (check) jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', 'true');else jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', null);
+                  sharedActions_1.validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId);
+                });
+                jquery_1.default("#agreementWithPolicy").on('click', function () {
+                  var check = state.togglePolicyChecker();
+                  if (check) jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', 'true');else jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', null);
+                  sharedActions_1.validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId);
+                });
+                jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).on('focusout', function () {
+                  sharedActions_1.validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId);
+                });
+                jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).on('focusout', function () {
+                  sharedActions_1.validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId);
+                });
                 return [2
                 /*return*/
                 ];
@@ -56704,7 +56865,7 @@ var checkHash = function checkHash() {
     });
   });
 })();
-},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js","./app/components/customersPhone":"dist/app/components/customersPhone.js","./app/components/customersName":"dist/app/components/customersName.js","./app/components/carSelect":"dist/app/components/carSelect.js","./app/components/bidPreview":"dist/app/components/bidPreview.js","./app/components/createBid":"dist/app/components/createBid.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./app/views/template":"dist/app/views/template.js","./app/shared/sharedData":"dist/app/shared/sharedData.js","jquery":"node_modules/jquery/dist/jquery.js","./app/state/state":"dist/app/state/state.js","./app/components/placeSelect":"dist/app/components/placeSelect.js","./app/components/timeSelect":"dist/app/components/timeSelect.js","./app/components/customersPhone":"dist/app/components/customersPhone.js","./app/components/customersName":"dist/app/components/customersName.js","./app/components/carSelect":"dist/app/components/carSelect.js","./app/components/bidPreview":"dist/app/components/bidPreview.js","./app/components/createBid":"dist/app/components/createBid.js","./app/shared/sharedActions":"dist/app/shared/sharedActions.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -56732,7 +56893,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36699" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34581" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

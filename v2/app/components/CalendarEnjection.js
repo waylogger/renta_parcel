@@ -62,8 +62,12 @@ export async function CalendarEnjector(myState) {
     // If focus leaves the root element, it is not in the date picker or the inputs, so we should hide the date picker we do
     // this in a setTimeout because redraws cause temporary loss of focus.
     let previousTimeout;
-    function hidePicker() {
+    function hidePicker(e) {
+
         clearTimeout(previousTimeout);
+        const related = $(e.relatedTarget); 
+        if (related && related.hasClass('dp-day') || related.hasClass('dp-next') || related.hasClass('dp-clear')) return;
+
         previousTimeout = setTimeout(function () {
             if (!root.contains(document.activeElement)) {
                 container.classList.remove('ex-inputs-picker-visible');
@@ -71,6 +75,8 @@ export async function CalendarEnjector(myState) {
         }, 10);
 
     }
+    
+    $(document).on('click',hidePicker);
 
     $('.dr-cal-end').detach();
     $('.dp-next').css('visibility', 'visible');

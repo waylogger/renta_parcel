@@ -69,11 +69,10 @@ var querySender_1 = require("../CORS/querySender");
 function bidPreview(state) {
     var _a, _b, _c, _d, _e, _f, _g;
     return __awaiter(this, void 0, void 0, function () {
-        var resStr, carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, d1, d2, placeBegin, placeEnd, bidRequest, bidCost, cost, deposit, deliveryCost;
+        var carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, placeBegin, placeEnd, deliveryCost, d1, d2, rentTime, bidRequest, bidCostStr, resCostStr, rentTime;
         return __generator(this, function (_h) {
             switch (_h.label) {
                 case 0:
-                    resStr = '';
                     carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
                     leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
                     leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
@@ -81,15 +80,24 @@ function bidPreview(state) {
                     rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
                     rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
                     rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+                    placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
+                    placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
+                    deliveryCost = placeBegin.delivery_cost + placeEnd.delivery_cost;
                     if (carModel) {
-                        resStr += "<span id=\"" + shared.domElementId.carNameId + "\">\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel + "</span>";
+                        jquery_1.default("#" + shared.domElementId.carNameId).html("\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel);
+                    }
+                    if (leftPlace && rightPlace) {
+                        if (deliveryCost > 0)
+                            jquery_1.default("#" + shared.domElementId.deliveryCostId).html(" + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD");
+                        else {
+                            jquery_1.default("#" + shared.domElementId.deliveryCostId).html('');
+                        }
                     }
                     if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
                     d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
                     d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
-                    placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
-                    placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
-                    resStr += "<span id=\"" + shared.domElementId.periodRentId + "\"> \u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime) + "</span>";
+                    rentTime = "\u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
+                    jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
                     bidRequest = {
                         car_id: state.carIdForBidCost(),
                         begin: d1,
@@ -98,26 +106,28 @@ function bidPreview(state) {
                         end_place_id: placeEnd.place_id,
                         services: [],
                     };
-                    return [4 /*yield*/, querySender_1.getCost(bidRequest)];
+                    return [4 /*yield*/, querySender_1.getCost(bidRequest).then(function (bidCost) {
+                            var cost = bidCost.cost;
+                            var deposit = bidCost.deposit;
+                            if (deposit === null)
+                                deposit = 10000;
+                            var bidCostStr = ", c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B)";
+                            var resCostStr = "\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+                            jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+                            jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+                        })];
                 case 1:
-                    bidCost = _h.sent();
-                    cost = bidCost.cost;
-                    deposit = bidCost.deposit;
-                    deliveryCost = placeEnd.delivery_cost + placeBegin.delivery_cost;
-                    if (!cost || !deposit) {
-                    }
-                    else {
-                        if (deliveryCost > 0)
-                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD";
-                        else
-                            resStr += "<span id=\"" + shared.domElementId.bidCostId + "\"> c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + cost + " \u20BD";
-                        resStr += " + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B).</span><br>";
-                        resStr += "<span id=\"" + shared.domElementId.costResolutionId + "\">\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
-                    }
-                    _h.label = 2;
+                    _h.sent();
+                    return [3 /*break*/, 3];
                 case 2:
-                    jquery_1.default("#" + shared.domElementId.bidTextId).html(resStr);
-                    return [2 /*return*/];
+                    bidCostStr = '';
+                    resCostStr = '';
+                    rentTime = '';
+                    jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
+                    jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+                    jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+                    _h.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     });
@@ -132,27 +142,19 @@ function onPreview(state) {
         "" + shared.domElementId.returnPlaceSelectId,
     ];
     var onFocusList = [
-        "" + shared.domElementId.receiveDataId,
-        "" + shared.domElementId.returnDataId,
+    // `${shared.domElementId.receiveDataId}`,
+    // `${shared.domElementId.returnDataId}`,
     ];
     onChangeList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            bidPreview(state);
+            setTimeout(function () { return bidPreview(state); }, 10000);
         });
     });
     onFocusList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            bidPreview(state);
+            setTimeout(function () { return bidPreview(state); }, 10000);
         });
     });
+    jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
 }
 exports.onPreview = onPreview;
-/**
- * 	<span id="carName"></span>
-    <span id="periodRent"></span>
-    <br>
-    <span id="bidCost"></span>
-    <span id="deposit"></span>
-    <br>
-    <span id="resolution"></span>
-*/

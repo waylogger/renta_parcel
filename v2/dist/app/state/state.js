@@ -133,6 +133,8 @@ var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
 var State = /** @class */ (function () {
     function State() {
+        this.ageChecker = false;
+        this.policyChecker = false;
         this.mainCarForBid = 0;
         //-----------------------------------------------------------------------------------------
         this.firstDateOfRange = undefined;
@@ -182,6 +184,14 @@ var State = /** @class */ (function () {
         */
         this.partedDayNotAvaiableForBooking = [];
     }
+    State.prototype.toggleAgeChecker = function () {
+        this.ageChecker = !this.ageChecker;
+        return this.ageChecker;
+    };
+    State.prototype.togglePolicyChecker = function () {
+        this.policyChecker = !this.policyChecker;
+        return this.policyChecker;
+    };
     State.prototype.getMainCar = function () {
         return this.mainCarForBid;
     };
@@ -198,6 +208,7 @@ var State = /** @class */ (function () {
         var arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(timestampOfFirstSelectDate);
         this.firstDateOfRange = timestampOfFirstSelectDate;
         timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
+        sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
     };
     State.prototype.dropFirstDateOfRange = function () {
         jquery_1.default("#" + shared.domElementId.receiveDataId).val('');
@@ -205,6 +216,7 @@ var State = /** @class */ (function () {
         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', 'disabled');
         this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
         this.firstDateOfRange = undefined;
+        sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
     };
     State.prototype.setFirstTimeOfRange = function (ftr) { this.firstTimeOfRange = ftr; };
     State.prototype.getFirstTimeOfRange = function () { var ftr = this.firstTimeOfRange; return ftr; };
@@ -228,12 +240,14 @@ var State = /** @class */ (function () {
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
         timeSelect_1.correctionSecondTimeAfterFirst(this);
         this.setMainCar();
+        sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
     };
     State.prototype.dropSecondDateOfRange = function () {
         jquery_1.default("#" + shared.domElementId.returnDataId).val('');
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val('00:00');
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
         this.secondDateOfRange = undefined;
+        sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
     };
     State.prototype.getSecondDateOfRange = function () {
         if (this.secondDateOfRange)

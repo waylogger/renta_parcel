@@ -73,8 +73,11 @@ function CalendarEnjector(myState) {
         function showPicker() {
             container.classList.add('ex-inputs-picker-visible');
         }
-        function hidePicker() {
+        function hidePicker(e) {
             clearTimeout(previousTimeout);
+            var related = jquery_1.default(e.relatedTarget);
+            if (related && related.hasClass('dp-day') || related.hasClass('dp-next') || related.hasClass('dp-clear'))
+                return;
             previousTimeout = setTimeout(function () {
                 if (!root.contains(document.activeElement)) {
                     container.classList.remove('ex-inputs-picker-visible');
@@ -127,6 +130,7 @@ function CalendarEnjector(myState) {
             // When the inputs gain focus, show the date range picker
             txtStart.addEventListener('focus', showPicker);
             txtEnd.addEventListener('focus', showPicker);
+            jquery_1.default(document).on('click', hidePicker);
             jquery_1.default('.dr-cal-end').detach();
             jquery_1.default('.dp-next').css('visibility', 'visible');
             ;

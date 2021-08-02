@@ -14,10 +14,11 @@ import { nameValidateAndSave } from "./app/components/customersName";
 import { carSelect } from "./app/components/carSelect";
 import { bidPreview, onPreview } from "./app/components/bidPreview";
 import { createBid } from "./app/components/createBid";
+import { validateChecker, validateField } from "./app/shared/sharedActions";
 
 
 const checkHash = (): void => {
-	if (location.hash = '#') {
+	if (location.hash === '#') {
 		$(`#${shared.domElementId.bookModuleId}`).addClass('carNotSelect');
 	}
 	else {
@@ -31,19 +32,20 @@ const checkHash = (): void => {
 			rootSection()
 		);
 
-		// checkHash();
+		checkHash();
 		const state = await BookingState();
+
 		await carSelect(state);
 
 		$.when($.ready).then(
 			async () => {
 
-				onPreview(state);
 				customersPhoneValidateAndSave(state);
 				nameValidateAndSave(state);
 				placeOptions(state);
 				selectPlace(state);
 
+				onPreview(state);
 				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => correctionSecondTimeAfterFirst(state))
 
 				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => {
@@ -75,6 +77,36 @@ const checkHash = (): void => {
 
 
 				$(`#${shared.domElementId.bookButtonId}`).on('click', () => createBid(state));
+				$(`#proofOfAgeAndExperience`).on('click', () => {
+					const check = state.toggleAgeChecker();
+					if (check)
+						$(`#${shared.domElementId.ageAgree}`).attr('checked', 'true');
+					else
+						$(`#${shared.domElementId.ageAgree}`).attr('checked', null);
+
+					validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId);
+				})
+
+				$(`#agreementWithPolicy`).on('click', () => {
+					const check = state.togglePolicyChecker();
+					if (check)
+						$(`#${shared.domElementId.policyAgree}`).attr('checked', 'true');
+					else
+						$(`#${shared.domElementId.policyAgree}`).attr('checked', null);
+
+
+					validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId);
+				})
+
+				$(`#${shared.domElementId.receiveCustomPlaceInputId}`).on('focusout', () => {
+					validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId);
+				});
+
+				$(`#${shared.domElementId.returnCustomPlaceInputId}`).on('focusout', () => {
+					validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId);
+				});
+
+
 
 			}
 

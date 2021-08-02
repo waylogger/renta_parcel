@@ -21,6 +21,7 @@ export async function getRequestBuilder<T>(urlSuffix: string, query: string): Pr
 			'Authorization': `Bearer ${token}`
 		},
 	});
+	
 	return res.json();
 }
 

@@ -69,8 +69,9 @@ var customersName_1 = require("./app/components/customersName");
 var carSelect_1 = require("./app/components/carSelect");
 var bidPreview_1 = require("./app/components/bidPreview");
 var createBid_1 = require("./app/components/createBid");
+var sharedActions_1 = require("./app/shared/sharedActions");
 var checkHash = function () {
-    if (location.hash = '#') {
+    if (location.hash === '#') {
         jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
     }
     else {
@@ -83,6 +84,7 @@ var checkHash = function () {
         switch (_a.label) {
             case 0:
                 jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
+                checkHash();
                 return [4 /*yield*/, state_1.BookingState()];
             case 1:
                 state = _a.sent();
@@ -91,11 +93,11 @@ var checkHash = function () {
                 _a.sent();
                 jquery_1.default.when(jquery_1.default.ready).then(function () { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
-                        bidPreview_1.onPreview(state);
                         customersPhone_1.customersPhoneValidateAndSave(state);
                         customersName_1.nameValidateAndSave(state);
                         placeSelect_1.placeOptions(state);
                         placeSelect_1.selectPlace(state);
+                        bidPreview_1.onPreview(state);
                         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () { return timeSelect_1.correctionSecondTimeAfterFirst(state); });
                         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () {
                             var _a;
@@ -123,6 +125,28 @@ var checkHash = function () {
                             state.setMainCar();
                         });
                         jquery_1.default("#" + shared.domElementId.bookButtonId).on('click', function () { return createBid_1.createBid(state); });
+                        jquery_1.default("#proofOfAgeAndExperience").on('click', function () {
+                            var check = state.toggleAgeChecker();
+                            if (check)
+                                jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', 'true');
+                            else
+                                jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', null);
+                            sharedActions_1.validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId);
+                        });
+                        jquery_1.default("#agreementWithPolicy").on('click', function () {
+                            var check = state.togglePolicyChecker();
+                            if (check)
+                                jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', 'true');
+                            else
+                                jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', null);
+                            sharedActions_1.validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId);
+                        });
+                        jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).on('focusout', function () {
+                            sharedActions_1.validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId);
+                        });
+                        jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).on('focusout', function () {
+                            sharedActions_1.validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId);
+                        });
                         return [2 /*return*/];
                     });
                 }); });

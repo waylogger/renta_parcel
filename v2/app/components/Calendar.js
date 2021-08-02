@@ -7,6 +7,7 @@
 // import { firstDateIsSelect, secondDateIsSelect, firstDate, secondDate, isDateShouldBeDisabled, datePreview, hideCal, setFirstDate, dropFirstDate, setSecondDate, dropSecondDate } from './handlers'
 // import { dataFromServer } from './state/dataFromServer'
 import $ from 'jquery'
+import { bidPreview } from './bidPreview';
 let dateRangePicker = 0;
 let myState;
 
@@ -152,8 +153,6 @@ let num = 0;
 					e.setState({
 						selectedDate: dt,
 					})
-					r("statechange");
-					e.render();
 					/**
 					 * @author wlr986
 					*/
@@ -174,12 +173,16 @@ let num = 0;
 					e.setState({
 						hilightedDate: v(n, 1)
 					})
+					t.stopPropagation();					
+
 				},
 				"dp-prev": function (t, e) {
 					var n = e.state.hilightedDate;
 					e.setState({
 						hilightedDate: v(n, -1)
 					})
+
+					t.stopPropagation();					
 				},
 				"dp-today": function (t, e) {
 					e.setState({
@@ -189,10 +192,13 @@ let num = 0;
 				"dp-clear": function (t, e) {
 					myState.dropFirstDateOfRange();
 					myState.dropSecondDateOfRange();
+
+					bidPreview(myState);
 					// dataFromServer.clickedCars = [];
 					e.setState({
 						selectedDate: null
 					})
+					t.stopPropagation();
 				},
 				"dp-close": function (t, e) {
 					e.close()
@@ -201,11 +207,15 @@ let num = 0;
 					e.setState({
 						view: "month"
 					})
+
+					t.stopPropagation();					
 				},
 				"dp-cal-year": function (t, e) {
 					e.setState({
 						view: "year"
 					})
+
+					t.stopPropagation();					
 				}
 			},
 			render: function (r) {
@@ -346,6 +356,8 @@ let num = 0;
 						view: "day"
 					});
 					var n, a
+
+					t.stopPropagation();
 				}
 			}
 		},
@@ -366,6 +378,7 @@ let num = 0;
 						view: "day"
 					});
 					var n, a
+					t.stopPropagation();
 				}
 			},
 			render: function (t) {
@@ -632,18 +645,34 @@ let num = 0;
 			var e, n, a;
 			return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "")
 		}
-		return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+
+		a.addEventListener("click", function (t) {
 			if (t.target.classList.contains("dp-day")) {
-				var e = new Date(parseInt(t.target.dataset.date));
-				!h(e, o) && (o = e, f())
-			}
-		}) || a.addEventListener("click", function (t) {
-			if (t.target.classList.contains("dp-day")) {
-				var e = new Date(parseInt(t.target.dataset.date));
-				h(e, o) && (o = e, f())
+				// var e = new Date(parseInt(t.target.dataset.date));
+				f();
+				t.stopPropagation();
+				// h(e, o) && (o = e, f())
 
 			}
-		}), d
+		});
+		a.addEventListener("touchstart", function (t) {
+			if (t.target.classList.contains("dp-day")) {
+				// var e = new Date(parseInt(t.target.dataset.date));
+				f();
+				t.stopPropagation();
+				// h(e, o) && (o = e, f())
+
+			}
+		});
+
+
+		return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+			if (t.target.classList.contains("dp-day")) {
+				// var e = new Date(parseInt(t.target.dataset.date));
+				// !h(e, o) && (o = e, f())
+			}
+		}),
+			d
 	}, Object.defineProperty(t, "__esModule", {
 		value: !0
 	})
