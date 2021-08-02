@@ -499,8 +499,9 @@ var customersName_1 = require("./app/components/customersName");
 var carSelect_1 = require("./app/components/carSelect");
 var bidPreview_1 = require("./app/components/bidPreview");
 var createBid_1 = require("./app/components/createBid");
+var sharedActions_1 = require("./app/shared/sharedActions");
 var checkHash = function () {
-    if (location.hash = '#') {
+    if (location.hash === '#') {
         jquery_1.default("#" + shared.domElementId.bookModuleId).addClass('carNotSelect');
     }
     else {
@@ -513,6 +514,7 @@ var checkHash = function () {
         switch (_a.label) {
             case 0:
                 jquery_1.default("#" + shared.domElementId.rootSectionId).html(template_1.rootSection());
+                checkHash();
                 return [4 /*yield*/, state_1.BookingState()];
             case 1:
                 state = _a.sent();
@@ -521,11 +523,11 @@ var checkHash = function () {
                 _a.sent();
                 jquery_1.default.when(jquery_1.default.ready).then(function () { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
-                        bidPreview_1.onPreview(state);
                         customersPhone_1.customersPhoneValidateAndSave(state);
                         customersName_1.nameValidateAndSave(state);
                         placeSelect_1.placeOptions(state);
                         placeSelect_1.selectPlace(state);
+                        bidPreview_1.onPreview(state);
                         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () { return timeSelect_1.correctionSecondTimeAfterFirst(state); });
                         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).on('change', function () {
                             var _a;
@@ -554,7 +556,26 @@ var checkHash = function () {
                         });
                         jquery_1.default("#" + shared.domElementId.bookButtonId).on('click', function () { return createBid_1.createBid(state); });
                         jquery_1.default("#proofOfAgeAndExperience").on('click', function () {
-                            jquery_1.default("" + shared.domElementId.ageAgree).attr('checked', 'true');
+                            var check = state.toggleAgeChecker();
+                            if (check)
+                                jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', 'true');
+                            else
+                                jquery_1.default("#" + shared.domElementId.ageAgree).attr('checked', null);
+                            sharedActions_1.validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId);
+                        });
+                        jquery_1.default("#agreementWithPolicy").on('click', function () {
+                            var check = state.togglePolicyChecker();
+                            if (check)
+                                jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', 'true');
+                            else
+                                jquery_1.default("#" + shared.domElementId.policyAgree).attr('checked', null);
+                            sharedActions_1.validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId);
+                        });
+                        jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).on('focusout', function () {
+                            sharedActions_1.validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId);
+                        });
+                        jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).on('focusout', function () {
+                            sharedActions_1.validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId);
                         });
                         return [2 /*return*/];
                     });
@@ -564,7 +585,7 @@ var checkHash = function () {
     });
 }); })();
 
-},{"./app/views/template":"4e0Q8","./app/shared/sharedData":"1LPO2","jquery":"6Oaih","./app/state/state":"7H36s","./app/components/placeSelect":"7FUTD","./app/components/timeSelect":"3560X","./app/components/customersPhone":"10VD9","./app/components/customersName":"2Gn6z","./app/components/carSelect":"mkCpc","./app/components/createBid":"515qb","./app/components/bidPreview":"1JizP"}],"4e0Q8":[function(require,module,exports) {
+},{"./app/views/template":"4e0Q8","./app/shared/sharedData":"1LPO2","jquery":"6Oaih","./app/state/state":"7H36s","./app/components/placeSelect":"7FUTD","./app/components/timeSelect":"3560X","./app/components/customersPhone":"10VD9","./app/components/customersName":"2Gn6z","./app/components/carSelect":"mkCpc","./app/components/bidPreview":"1JizP","./app/components/createBid":"515qb","./app/shared/sharedActions":"3HTLc"}],"4e0Q8":[function(require,module,exports) {
 "use strict";
 /**
 * @module template.ts
@@ -592,7 +613,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.rootSection = void 0;
 var shared = __importStar(require("../shared/sharedData"));
 var rootSection = function () {
-    return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title tn-atom\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div style=\"background: #FAFAFB; padding: 15px\">\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"proofOfAgeAndExperience\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"agreementWithPolicy\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t\t\t<br>\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t</div>\n\t</div>\n\n\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t</div>\n</div>";
+    return "\n<div id=\"" + shared.domElementId.bookSelectDivId + "\" class=\"book__title tn-atom\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C\n\t<span class=\"bool_title-price\" id=\"carPrice\"></span>\n\t<select id=\"" + shared.domElementId.carSelectId + "\">\n\t</select>\n</div>\n<div id=\"" + shared.domElementId.bookModuleId + "\" class=\"carNotSelect\">\n\t<div id=\"" + shared.domElementId.formInputId + "\">\n\t\t<div id=\"somes\" style=\"background: #FAFAFB; padding: 15px\">\n\n\t\t\t<div id=\"dateListener\" class=\"book__dates ex-inputs\">\n\t\t\t\t<div id=\"leftDateFrame\" class=\"book__field-start book__field-wrap book__outline\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.receiveDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-start book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div id=\"" + shared.domElementId.receiveDateTextId + "\" class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"receiveSelects\" class=\"receiveSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReceiveTimeId + "\" size=\"1\"\n\t\t\t\t\t\tclass=\"dateTimeSelect\" disabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"rightDateFrame\" class=\"book__field-end book__field-wrap\">\n\t\t\t\t\t<input id=\"" + shared.domElementId.returnDataId + "\"\n\t\t\t\t\t\tclass=\"ex-inputs-end book__field-value\" placeholder=\"DD.MM.YYYY\"\n\t\t\t\t\t\treadonly />\n\t\t\t\t\t<div id=\"" + shared.domElementId.returnDateTextId + "\" class=\"book__field-subtitle\">\u0414\u0430\u0442\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"returnSelects\" class=\"returnSelects\">\n\t\t\t\t\t<select id=\"" + shared.domElementId.selectReturnTimeId + "\" class=\"dateTimeSelect\"\n\t\t\t\t\t\tdisabled placeholder=\"--:--\">\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t00:00\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"ex-inputs-picker\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.receivePlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.receiveCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-start\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.receiveCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\" id=\"" + shared.domElementId.receiveCustomTextId + "\">\u041A\u0443\u0434\u0430 \u043F\u043E\u0434\u0430\u0442\u044C \u0430\u0432\u0442\u043E?</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t<select class=\"book__field book__field-receivePlaceSelect\"\n\t\t\t\t\tid=\"" + shared.domElementId.returnPlaceSelectId + "\">\n\t\t\t\t</select>\n\t\t\t\t<div class=\"book__field-subtitle\">\u041C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430</div>\n\t\t\t</div>\n\t\t\t<div id=\"" + shared.domElementId.returnCustomPlaceId + "\"\n\t\t\t\tclass=\"book__field-wrap customPlace-wrap-end\">\n\t\t\t\t<input maxlength=\"200\" type=\"text\" id=\"" + shared.domElementId.returnCustomPlaceInputId + "\"\n\t\t\t\t\tclass=\"book__field customPlace-hidden\" placeholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441\">\n\t\t\t\t<div class=\"book__field-subtitle\" id=\"" + shared.domElementId.returnCustomTextId + "\">\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u0430\u0432\u0442\u043E</div>\n\t\t\t</div>\n\t\t\t<div class=\"book__subtitle\">\u0412\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435</div>\n\t\t\t<form autocomplete=\"on\">\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.custonersNameId + "\"\n\t\t\t\t\t\tname=\"name\" maxlength=\"50\" type=\"text\" required\n\t\t\t\t\t\tplaceholder=\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F\" />\n\t\t\t\t\t<div id=\"" + shared.domElementId.customersNameTextId + "\" class=\"book__field-subtitle\">\u0418\u043C\u044F \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"book__field-wrap\">\n\t\t\t\t\t<input class=\"book__field\" id=\"" + shared.domElementId.customersPhoneId + "\"\n\t\t\t\t\t\tmaxlength=\"14\" name=\"phone\" type=\"tel\" required placeholder=\"+7\" />\n\t\t\t\t\t<div id=\"" + shared.domElementId.customersPhoneTextId + "\" class=\"book__field-subtitle\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</div>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t\t<div id=\"lawAgreement\">\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.ageAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"" + shared.domElementId.proofOfAgeId + "\" class=\"book__radio\" for=\"age\">\u041C\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 23 \u043B\u0435\u0442 \u0438\n\t\t\t\t\t\u043C\u043E\u0439\n\t\t\t\t\t\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439\n\t\t\t\t\t\u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 3 \u043B\u0435\u0442</label><br>\n\t\t\t\t<input type=\"checkbox\" class=\"book__checkbox\" id=\"" + shared.domElementId.policyAgree + "\"\n\t\t\t\t\tvalue=\"yes\">\n\t\t\t\t<label id=\"" + shared.domElementId.proofOfPolicyId + "\" class=\"book__radio\" for=\"agree\">\u042F \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439\n\t\t\t\t\t\u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438\n\t\t\t\t\t\u0434\u0430\u043D\u043D\u044B\u0445.</label>\n\n\t\t\t</div>\n\t\t\t<button class=\"book__btn\" type=\"submit\"\n\t\t\t\tid=\"" + shared.domElementId.bookButtonId + "\">\u0417\u0430\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C</button>\n\t\t\t<div id=\"" + shared.domElementId.bidTextId + "\" class=\"book__checkup\">\n\t\t\t\t<span id=\"" + shared.domElementId.carNameId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.periodRentId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.bidCostId + "\"></span>\n\t\t\t\t<span id=\"" + shared.domElementId.deliveryCostId + "\"></span>\n\t\t\t\t<br>\n\t\t\t\t<span id=\"" + shared.domElementId.costResolutionId + "\"></span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div id=\"console\"></div>\n\n</div>";
 };
 exports.rootSection = rootSection;
 
@@ -614,6 +635,8 @@ exports.domElementId = {
     //------------------------------------------
     receiveCustomPlaceId: 'receiveCustomPlace-wrap',
     receiveCustomPlaceInputId: 'receiveCustomPlaceInputId',
+    receiveCustomTextId: "receiveCustomTextId",
+    returnCustomTextId: "returnCustomTextId",
     returnCustomPlaceInputId: 'returnCustomPlaceInputId',
     returnCustomPlaceId: 'returnCustomPlace-wrap',
     receivePlaceSelectId: 'receivePlaceSelect',
@@ -625,6 +648,7 @@ exports.domElementId = {
     bidTextId: 'bidTextId',
     receiveDataId: 'leftDate',
     returnDataId: 'rightDate',
+    deliveryCostId: 'deliveryCostId',
     //--------------------------------------------
     bookButtonId: 'bookButtonId',
     policyAgree: 'policyAgree',
@@ -633,6 +657,17 @@ exports.domElementId = {
     formInputId: "formInputId",
     bigBidTextClass: 'bigBidTextClass',
     bookSelectDivId: 'bookSelectDivId',
+    receiveDateTextId: 'receiveDateTextId',
+    returnDateTextId: 'returnDateTextId',
+    customersPhoneTextId: 'customersPhoneTextId',
+    customersNameTextId: 'customersNameTextId',
+    proofOfAgeId: 'proofOfAgeAndExperience',
+    proofOfPolicyId: 'agreementWithPolicy',
+    //--------------------------------------------
+    incorrectFieldClass: 'incorrectFieldClass',
+    correctFieldClass: 'correctFieldClass',
+    closePickerId: 'closeIt',
+    closePickerClass: 'closeIt',
 };
 exports.badDateEqualNull = new Date(0, 0, 0, 0, 0);
 
@@ -8508,6 +8543,8 @@ var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
 var State = /** @class */ (function () {
     function State() {
+        this.ageChecker = false;
+        this.policyChecker = false;
         this.mainCarForBid = 0;
         //-----------------------------------------------------------------------------------------
         this.firstDateOfRange = undefined;
@@ -8557,6 +8594,14 @@ var State = /** @class */ (function () {
         */
         this.partedDayNotAvaiableForBooking = [];
     }
+    State.prototype.toggleAgeChecker = function () {
+        this.ageChecker = !this.ageChecker;
+        return this.ageChecker;
+    };
+    State.prototype.togglePolicyChecker = function () {
+        this.policyChecker = !this.policyChecker;
+        return this.policyChecker;
+    };
     State.prototype.getMainCar = function () {
         return this.mainCarForBid;
     };
@@ -8573,6 +8618,7 @@ var State = /** @class */ (function () {
         var arrayForGenerateHTML = this.getFreeTimeSlotsForReceiveAndReturnCar(timestampOfFirstSelectDate);
         this.firstDateOfRange = timestampOfFirstSelectDate;
         timeSelect_1.timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
+        sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
     };
     State.prototype.dropFirstDateOfRange = function () {
         jquery_1.default("#" + shared.domElementId.receiveDataId).val('');
@@ -8580,6 +8626,7 @@ var State = /** @class */ (function () {
         jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', 'disabled');
         this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
         this.firstDateOfRange = undefined;
+        sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
     };
     State.prototype.setFirstTimeOfRange = function (ftr) { this.firstTimeOfRange = ftr; };
     State.prototype.getFirstTimeOfRange = function () { var ftr = this.firstTimeOfRange; return ftr; };
@@ -8603,12 +8650,14 @@ var State = /** @class */ (function () {
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
         timeSelect_1.correctionSecondTimeAfterFirst(this);
         this.setMainCar();
+        sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
     };
     State.prototype.dropSecondDateOfRange = function () {
         jquery_1.default("#" + shared.domElementId.returnDataId).val('');
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val('00:00');
         jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', 'disabled');
         this.secondDateOfRange = undefined;
+        sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
     };
     State.prototype.getSecondDateOfRange = function () {
         if (this.secondDateOfRange)
@@ -8754,6 +8803,8 @@ var State = /** @class */ (function () {
         var dateIsBusy = true;
         var dateIsFree = false;
         var numberTimeSlotsInFourHours = 1 * 4; //one
+        if (date_fns_1.isBefore(dt, new Date()))
+            return dateIsBusy;
         if (this.isFirstDateOfRangeWasSelect()) {
             if (!this.firstDateOfRange)
                 return false;
@@ -11157,8 +11208,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
+exports.validateChecker = exports.validateField = exports.splitDateByMinutes = exports.nextYearForServer = exports.currentYearForServer = exports.customDateForServer = exports.dateForServer = exports.translateDate = exports.formatCarModelFromHashToSelect = exports.formatCarModelFromSelectToHash = exports.formatCarModelFromBaseToSelect = exports.clearColor = exports.option = void 0;
 var eachMinuteOfInterval_1 = __importDefault(require("date-fns/eachMinuteOfInterval"));
+var sharedData_1 = require("./sharedData");
+var jquery_1 = __importDefault(require("jquery"));
 /**
  * @module sharedActions.ts
  * @description некоторые переиспользуемые функции
@@ -11189,7 +11242,7 @@ function formatCarModelFromSelectToHash(model) {
 }
 exports.formatCarModelFromSelectToHash = formatCarModelFromSelectToHash;
 function formatCarModelFromHashToSelect(model) {
-    return model.replace('_', ' ').split(' ').map(function (item) { return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length); }).join(' ');
+    return model.replace(/_/g, ' ').split(' ').map(function (item) { return "" + item.charAt(0).toUpperCase() + item.slice(1, item.length); }).join(' ');
 }
 exports.formatCarModelFromHashToSelect = formatCarModelFromHashToSelect;
 //--------------------------------------------------------------------------------------------------------
@@ -11260,8 +11313,34 @@ function splitDateByMinutes(dt, minutes) {
     return eachMinuteOfInterval_1.default({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: minutes });
 }
 exports.splitDateByMinutes = splitDateByMinutes;
+function validateField(domId, domIdOfIndicator) {
+    var domElement = jquery_1.default("#" + domIdOfIndicator);
+    var target = jquery_1.default("#" + domId).val();
+    if (!target) {
+        domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+        domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+        return false;
+    }
+    domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+    return true;
+}
+exports.validateField = validateField;
+function validateChecker(domId, domIdOfIndicator) {
+    var domElement = jquery_1.default("#" + domIdOfIndicator);
+    var val = jquery_1.default("#" + domId).is(':checked');
+    if (!val) {
+        domElement.addClass(sharedData_1.domElementId.incorrectFieldClass);
+        domElement.removeClass(sharedData_1.domElementId.correctFieldClass);
+        return false;
+    }
+    domElement.removeClass(sharedData_1.domElementId.incorrectFieldClass);
+    domElement.addClass(sharedData_1.domElementId.correctFieldClass);
+    return true;
+}
+exports.validateChecker = validateChecker;
 
-},{"date-fns/eachMinuteOfInterval":"1u0Kv"}],"1u0Kv":[function(require,module,exports) {
+},{"date-fns/eachMinuteOfInterval":"1u0Kv","./sharedData":"1LPO2","jquery":"6Oaih"}],"1u0Kv":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _addMinutesIndexJs = require("../addMinutes/index.js");
@@ -32157,6 +32236,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.customersPhoneValidateAndSave = void 0;
 var jquery_1 = __importDefault(require("jquery"));
+var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description первый обязательный плюс и запрет на ввод других символов кроме чисел
@@ -32177,11 +32257,12 @@ var customersPhoneValidateAndSave = function (state) {
     jquery_1.default("#" + shared.domElementId.customersPhoneId).on('focusout', function () {
         var _a;
         state.saveCustomersPhone((_a = jquery_1.default("#" + shared.domElementId.customersPhoneId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+        sharedActions_1.validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId);
     });
 };
 exports.customersPhoneValidateAndSave = customersPhoneValidateAndSave;
 
-},{"jquery":"6Oaih","../shared/sharedData":"1LPO2"}],"2Gn6z":[function(require,module,exports) {
+},{"jquery":"6Oaih","../shared/sharedActions":"3HTLc","../shared/sharedData":"1LPO2"}],"2Gn6z":[function(require,module,exports) {
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -32211,6 +32292,7 @@ exports.nameValidateAndSave = void 0;
  * @module customersName.ts
 */
 var jquery_1 = __importDefault(require("jquery"));
+var sharedActions_1 = require("../shared/sharedActions");
 var shared = __importStar(require("../shared/sharedData"));
 /**
  * @description смысл преобразований имени в том, что недопускаются небуквенные символы и не пробелы
@@ -32225,11 +32307,15 @@ var nameValidateAndSave = function (state) {
         }).join(' ');
         jquery_1.default("#" + shared.domElementId.custonersNameId).val(a);
     });
-    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () { var _a; return state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString()); });
+    jquery_1.default("#" + shared.domElementId.custonersNameId).on('focusout', function () {
+        var _a;
+        state.saveCustomersName((_a = jquery_1.default("#" + shared.domElementId.custonersNameId).val()) === null || _a === void 0 ? void 0 : _a.toString());
+        sharedActions_1.validateField(shared.domElementId.custonersNameId, shared.domElementId.customersNameTextId);
+    });
 };
 exports.nameValidateAndSave = nameValidateAndSave;
 
-},{"jquery":"6Oaih","../shared/sharedData":"1LPO2"}],"mkCpc":[function(require,module,exports) {
+},{"jquery":"6Oaih","../shared/sharedActions":"3HTLc","../shared/sharedData":"1LPO2"}],"mkCpc":[function(require,module,exports) {
 "use strict";
 /**
  * @module carSelect.ts
@@ -32300,7 +32386,7 @@ var shared = __importStar(require("../shared/sharedData"));
 var lodash_1 = __importDefault(require("lodash"));
 var CalendarEnjection_1 = require("./CalendarEnjection");
 var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, function () {
-    var resStr, cars, modelArr;
+    var resStr, cars, modelArr, hashCar, hashInx, tempCar, selArray;
     return __generator(this, function (_a) {
         resStr = '';
         cars = state.getAllCarsForRent().cars;
@@ -32309,9 +32395,16 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
             var c = sharedActions_1.formatCarModelFromBaseToSelect(car.model);
             modelArr.push(c.trim());
         });
-        resStr += lodash_1.default.uniq(modelArr).map(function (item) {
-            return sharedActions_1.option(item, item.toLowerCase().replace(' ', '_'));
-        }).join('\n');
+        hashCar = location.hash;
+        hashCar = hashCar.replace('#', '');
+        hashInx = modelArr.findIndex(function (el) { return el === sharedActions_1.formatCarModelFromHashToSelect(hashCar); });
+        tempCar = modelArr[0];
+        modelArr[0] = modelArr[hashInx];
+        modelArr[hashInx] = tempCar;
+        selArray = lodash_1.default.uniq(modelArr).map(function (item, inx) {
+            return sharedActions_1.option(item, item.toLowerCase().replace(/\s/g, '_'));
+        });
+        resStr += selArray.join('\n');
         jquery_1.default("#" + shared.domElementId.carSelectId).html(resStr);
         jquery_1.default("#" + shared.domElementId.carSelectId).on('change', function () { return __awaiter(void 0, void 0, void 0, function () {
             var stringValueFromSelect, car;
@@ -32323,10 +32416,12 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
                         if (!stringValueFromSelect)
                             throw new Error('CarSelectCallback::cant take car value');
                         car = sharedActions_1.formatCarModelFromSelectToHash(stringValueFromSelect);
-                        location.hash = "" + car;
+                        location.hash = "#" + car;
                         jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
-                        state.dropFirstDateOfRange();
-                        state.dropSecondDateOfRange();
+                        if (state.isFirstDateOfRangeWasSelect())
+                            state.dropFirstDateOfRange();
+                        if (state.isSecondDateOfRangeWasSelect())
+                            state.dropSecondDateOfRange();
                         return [4 /*yield*/, state.selectCar(stringValueFromSelect)];
                     case 1:
                         _b.sent();
@@ -47944,8 +48039,11 @@ function CalendarEnjector(myState) {
         function showPicker() {
             container.classList.add('ex-inputs-picker-visible');
         }
-        function hidePicker() {
+        function hidePicker(e) {
             clearTimeout(previousTimeout);
+            var related = jquery_1.default(e.relatedTarget);
+            if (related && related.hasClass('dp-day') || related.hasClass('dp-next') || related.hasClass('dp-clear'))
+                return;
             previousTimeout = setTimeout(function () {
                 if (!root.contains(document.activeElement)) {
                     container.classList.remove('ex-inputs-picker-visible');
@@ -47998,6 +48096,7 @@ function CalendarEnjector(myState) {
             // When the inputs gain focus, show the date range picker
             txtStart.addEventListener('focus', showPicker);
             txtEnd.addEventListener('focus', showPicker);
+            jquery_1.default(document).on('click', hidePicker);
             jquery_1.default('.dr-cal-end').detach();
             jquery_1.default('.dp-next').css('visibility', 'visible');
             ;
@@ -48027,6 +48126,7 @@ exports.DateRangePicker = void 0;
 // import { firstDateIsSelect, secondDateIsSelect, firstDate, secondDate, isDateShouldBeDisabled, datePreview, hideCal, setFirstDate, dropFirstDate, setSecondDate, dropSecondDate } from './handlers'
 // import { dataFromServer } from './state/dataFromServer'
 var jquery_1 = __importDefault(require("jquery"));
+var bidPreview_1 = require("./bidPreview");
 var dateRangePicker = 0;
 var myState;
 var num = 0;
@@ -48173,12 +48273,14 @@ var num = 0;
           e.setState({
             hilightedDate: v(n, 1)
           });
+          t.stopPropagation();
         },
         "dp-prev": function (t, e) {
           var n = e.state.hilightedDate;
           e.setState({
             hilightedDate: v(n, -1)
           });
+          t.stopPropagation();
         },
         "dp-today": function (t, e) {
           e.setState({
@@ -48188,10 +48290,12 @@ var num = 0;
         "dp-clear": function (t, e) {
           myState.dropFirstDateOfRange();
           myState.dropSecondDateOfRange();
+          bidPreview_1.bidPreview(myState);
           // dataFromServer.clickedCars = [];
           e.setState({
             selectedDate: null
           });
+          t.stopPropagation();
         },
         "dp-close": function (t, e) {
           e.close();
@@ -48200,11 +48304,13 @@ var num = 0;
           e.setState({
             view: "month"
           });
+          t.stopPropagation();
         },
         "dp-cal-year": function (t, e) {
           e.setState({
             view: "year"
           });
+          t.stopPropagation();
         }
       },
       render: function (r) {
@@ -48295,6 +48401,7 @@ var num = 0;
             view: "day"
           });
           var n, a;
+          t.stopPropagation();
         }
       }
     },
@@ -48314,6 +48421,7 @@ var num = 0;
             view: "day"
           });
           var n, a;
+          t.stopPropagation();
         }
       },
       render: function (t) {
@@ -48549,17 +48657,22 @@ var num = 0;
       var e, n, a;
       return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "");
     }
+    a.addEventListener("click", function (t) {
+      if (t.target.classList.contains("dp-day")) {
+        // var e = new Date(parseInt(t.target.dataset.date));
+        f();
+        t.stopPropagation();
+      }
+    });
+    a.addEventListener("touchstart", function (t) {
+      if (t.target.classList.contains("dp-day")) {
+        // var e = new Date(parseInt(t.target.dataset.date));
+        f();
+        t.stopPropagation();
+      }
+    });
     return (i.on(u), s.on(u), (/iPhone|iPad|iPod/i).test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
-      if (t.target.classList.contains("dp-day")) {
-        var e = new Date(parseInt(t.target.dataset.date));
-        !h(e, o) && (o = e, f());
-      }
-    }) || a.addEventListener("focusin", function (t) {
-      console.log('focus');
-      if (t.target.classList.contains("dp-day")) {
-        var e = new Date(parseInt(t.target.dataset.date));
-        h(e, o) && (o = e, f());
-      }
+      if (t.target.classList.contains("dp-day")) {}
     }), d);
   }, Object.defineProperty(t, "__esModule", {
     value: !0
@@ -48567,7 +48680,7 @@ var num = 0;
 });
 exports.DateRangePicker = dateRangePicker;
 
-},{"jquery":"6Oaih"}],"1JizP":[function(require,module,exports) {
+},{"jquery":"6Oaih","./bidPreview":"1JizP"}],"1JizP":[function(require,module,exports) {
 "use strict";
 /**
  * @module bitText.ts
@@ -48634,10 +48747,71 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.onPreview = exports.bidPreview = void 0;
 var jquery_1 = __importDefault(require("jquery"));
 var shared = __importStar(require("../shared/sharedData"));
+var sharedActions_1 = require("../shared/sharedActions");
+var querySender_1 = require("../CORS/querySender");
 function bidPreview(state) {
+    var _a, _b, _c, _d, _e, _f, _g;
     return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/];
+        var carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, placeBegin, placeEnd, deliveryCost, d1, d2, rentTime, bidRequest, bidCostStr, resCostStr, rentTime;
+        return __generator(this, function (_h) {
+            switch (_h.label) {
+                case 0:
+                    carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+                    leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
+                    leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
+                    leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
+                    rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
+                    rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
+                    rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+                    placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
+                    placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
+                    deliveryCost = placeBegin.delivery_cost + placeEnd.delivery_cost;
+                    if (carModel) {
+                        jquery_1.default("#" + shared.domElementId.carNameId).html("\u0410\u0440\u0435\u043D\u0434\u0430: " + carModel);
+                    }
+                    if (leftPlace && rightPlace) {
+                        if (deliveryCost > 0)
+                            jquery_1.default("#" + shared.domElementId.deliveryCostId).html(" + \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0430\u0432\u0442\u043E " + deliveryCost + " \u20BD");
+                        else {
+                            jquery_1.default("#" + shared.domElementId.deliveryCostId).html('');
+                        }
+                    }
+                    if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
+                    d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
+                    d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+                    rentTime = "\u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
+                    jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
+                    bidRequest = {
+                        car_id: state.carIdForBidCost(),
+                        begin: d1,
+                        end: d2,
+                        begin_place_id: placeBegin.place_id,
+                        end_place_id: placeEnd.place_id,
+                        services: [],
+                    };
+                    return [4 /*yield*/, querySender_1.getCost(bidRequest).then(function (bidCost) {
+                            var cost = bidCost.cost;
+                            var deposit = bidCost.deposit;
+                            if (deposit === null)
+                                deposit = 10000;
+                            var bidCostStr = ", c\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0430\u0440\u0435\u043D\u0434\u044B " + (cost - deliveryCost) + " \u20BD + \u0437\u0430\u043B\u043E\u0433 " + deposit + " \u20BD (\u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u043F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0430\u0440\u0435\u043D\u0434\u044B)";
+                            var resCostStr = "\u0418\u0442\u043E\u0433\u043E: " + (cost + deposit) + " \u20BD</span>";
+                            jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+                            jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+                        })];
+                case 1:
+                    _h.sent();
+                    return [3 /*break*/, 3];
+                case 2:
+                    bidCostStr = '';
+                    resCostStr = '';
+                    rentTime = '';
+                    jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
+                    jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
+                    jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
+                    _h.label = 3;
+                case 3: return [2 /*return*/];
+            }
         });
     });
 }
@@ -48651,32 +48825,24 @@ function onPreview(state) {
         "" + shared.domElementId.returnPlaceSelectId,
     ];
     var onFocusList = [
-        "" + shared.domElementId.receiveDataId,
-        "" + shared.domElementId.returnDataId,
+    // `${shared.domElementId.receiveDataId}`,
+    // `${shared.domElementId.returnDataId}`,
     ];
     onChangeList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            bidPreview(state);
+            setTimeout(function () { return bidPreview(state); }, 10000);
         });
     });
     onFocusList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            bidPreview(state);
+            setTimeout(function () { return bidPreview(state); }, 10000);
         });
     });
+    jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
 }
 exports.onPreview = onPreview;
-/**
- * 	<span id="carName"></span>
-    <span id="periodRent"></span>
-    <br>
-    <span id="bidCost"></span>
-    <span id="deposit"></span>
-    <br>
-    <span id="resolution"></span>
-*/
 
-},{"jquery":"6Oaih","../shared/sharedData":"1LPO2"}],"515qb":[function(require,module,exports) {
+},{"jquery":"6Oaih","../shared/sharedData":"1LPO2","../shared/sharedActions":"3HTLc","../CORS/querySender":"4Cv2h"}],"515qb":[function(require,module,exports) {
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -48741,14 +48907,24 @@ exports.createBid = void 0;
 var shared = __importStar(require("../shared/sharedData"));
 var jquery_1 = __importDefault(require("jquery"));
 var querySender_1 = require("../CORS/querySender");
+var sharedActions_1 = require("../shared/sharedActions");
+function validateForm() {
+    var validateArr = [];
+    validateArr.push(sharedActions_1.validateChecker(shared.domElementId.ageAgree, shared.domElementId.proofOfAgeId));
+    validateArr.push(sharedActions_1.validateChecker(shared.domElementId.policyAgree, shared.domElementId.proofOfPolicyId));
+    validateArr.push(sharedActions_1.validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId));
+    validateArr.push(sharedActions_1.validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId));
+    validateArr.push(sharedActions_1.validateField(shared.domElementId.customersPhoneId, shared.domElementId.customersPhoneTextId));
+    validateArr.push(sharedActions_1.validateField(shared.domElementId.custonersNameId, shared.domElementId.customersNameTextId));
+    return validateArr.indexOf(false) >= 0 ? false : true;
+}
 function createBid(state) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     return __awaiter(this, void 0, void 0, function () {
-        var resStr, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, fio, phone, ageAgree, policyAgree, placeBegin, placeEnd, otherReceivePlace, otherReturnPlace, fileArr, d1, d2, bidRequest, form_1, keys, vals_1, bid;
+        var leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, fio, phone, ageAgree, policyAgree, placeBegin, placeEnd, otherReceivePlace, otherReturnPlace, customPlace, fileArr, fArr, d1, d2, bidRequest, form_1, keys, vals_1, bid, thankStr_1, thankStr;
         return __generator(this, function (_l) {
             switch (_l.label) {
                 case 0:
-                    resStr = '';
                     leftDate = (_a = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _a === void 0 ? void 0 : _a.toString();
                     leftTime = (_b = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _b === void 0 ? void 0 : _b.toString();
                     leftPlace = (_c = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _c === void 0 ? void 0 : _c.toString();
@@ -48763,13 +48939,28 @@ function createBid(state) {
                     placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
                     otherReceivePlace = (_j = jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).val()) === null || _j === void 0 ? void 0 : _j.toString();
                     otherReturnPlace = (_k = jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).val()) === null || _k === void 0 ? void 0 : _k.toString();
+                    customPlace = true;
+                    if (placeBegin.place_id === 179) {
+                        customPlace = sharedActions_1.validateField(shared.domElementId.receiveCustomPlaceInputId, shared.domElementId.receiveCustomTextId) ? true : false;
+                    }
+                    if (placeEnd.place_id === 179) {
+                        customPlace = sharedActions_1.validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId) ? true : false;
+                    }
+                    if (!validateForm())
+                        return [2 /*return*/];
+                    if (!customPlace)
+                        return [2 /*return*/];
                     if (!(leftDate && leftTime && rightTime && rightDate && fio && phone && policyAgree && ageAgree && placeBegin && placeEnd)) return [3 /*break*/, 2];
                     fileArr = '';
                     if (placeBegin.place_id === 179 && otherReceivePlace === '' || placeEnd.place_id === 179 && otherReturnPlace === '')
                         return [2 /*return*/];
-                    else if (placeBegin.place_id === 179 && otherReceivePlace != '' && placeEnd.place_id === 179 && otherReturnPlace != '') {
-                        if (otherReturnPlace && otherReceivePlace)
-                            fileArr = new File([otherReceivePlace, otherReturnPlace], 'получение-возврат');
+                    else if (placeBegin.place_id === 179 && otherReceivePlace != '' || placeEnd.place_id === 179 && otherReturnPlace != '') {
+                        fArr = [];
+                        if (otherReturnPlace)
+                            fArr.push(otherReturnPlace);
+                        if (otherReceivePlace)
+                            fArr.push(otherReceivePlace);
+                        fileArr = new File(fArr, 'получение-возврат');
                     }
                     d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
                     d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
@@ -48792,13 +48983,19 @@ function createBid(state) {
                     return [4 /*yield*/, querySender_1.sendRequest(form_1)];
                 case 1:
                     bid = _l.sent();
+                    // const bid: BidCreateResponse = { bid_id: 2, bid_number: 1, error_message: null }
                     if (bid.error_message == null) {
-                        jquery_1.default("#" + shared.domElementId.formInputId).html('');
+                        thankStr_1 = "<div class=\"thankyou__book\">\u0412\u0430\u0448\u0430 \u0437\u0430\u044F\u0432\u043A\u0430 \u043D\u0430 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 " + jquery_1.default("#" + shared.domElementId.carNameId).html().split(':')[1] + " " + jquery_1.default("#" + shared.domElementId.periodRentId).html() + " \u043F\u0440\u0438\u043D\u044F\u0442\u0430. <br><br>\u0415\u0441\u043B\u0438 \u044D\u0442\u043E \u043F\u0435\u0440\u0432\u043E\u0435 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441 \u043D\u0430\u043C\u0438, \u043F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u044C\u0442\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B (\u043F\u0430\u0441\u043F\u043E\u0440\u0442 \u0438 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0435 \u043F\u0440\u0430\u0432\u0430) \u043F\u043E <a href=\"https://wa.me/+79999151515\" target=\"_blank\">WhatsApp \u043D\u0430 \u043D\u043E\u043C\u0435\u0440 +7 (999) 915-15-15</a><br> </div><a href=\"https://wa.me/+79999151514\" target=\"_blank\"><div class=\"book__btn\" style=\"display: flex;\njustify-content: center;\nalign-items: center;text-decoration: none;\">\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B</div></a>";
+                        jquery_1.default("#" + shared.domElementId.formInputId).html(thankStr_1);
                         jquery_1.default("#" + shared.domElementId.bookSelectDivId).html('');
                         jquery_1.default("#" + shared.domElementId.bidTextId).addClass(shared.domElementId.bigBidTextClass);
                         return [2 /*return*/];
                     }
-                    _l.label = 2;
+                    thankStr = "<div class=\"thankyou__book\" style=\"color: red;\">\u0412\u0430\u0448\u0430 \u0437\u0430\u044F\u0432\u043A\u0430 \u043D\u0430 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 " + jquery_1.default("#" + shared.domElementId.carNameId).html().split(':')[1] + " " + jquery_1.default("#" + shared.domElementId.periodRentId).html() + " \u043D\u0435 \u043F\u0440\u0438\u043D\u044F\u0442\u0430. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u043F\u043E\u0437\u0434\u043D\u0435\u0435.";
+                    jquery_1.default("#" + shared.domElementId.formInputId).html(thankStr);
+                    jquery_1.default("#" + shared.domElementId.bookSelectDivId).html('');
+                    jquery_1.default("#" + shared.domElementId.bidTextId).addClass(shared.domElementId.bigBidTextClass);
+                    return [2 /*return*/];
                 case 2: return [2 /*return*/];
             }
         });
@@ -48806,6 +49003,6 @@ function createBid(state) {
 }
 exports.createBid = createBid;
 
-},{"../shared/sharedData":"1LPO2","jquery":"6Oaih","../CORS/querySender":"4Cv2h"}]},["4XrdP","1r6rF"], "1r6rF", "parcelRequireca50")
+},{"../shared/sharedData":"1LPO2","jquery":"6Oaih","../CORS/querySender":"4Cv2h","../shared/sharedActions":"3HTLc"}]},["4XrdP","1r6rF"], "1r6rF", "parcelRequireca50")
 
 //# sourceMappingURL=index.a3bd73d4.js.map

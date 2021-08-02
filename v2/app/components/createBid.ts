@@ -87,8 +87,8 @@ export async function createBid(state: State) {
 				form.append(key, vals[inx]);
 			}
 		);
-		// const bid: BidCreateResponse = await sendRequest(form);
-		const bid: BidCreateResponse = {bid_id:2,bid_number:1,error_message: null}
+		const bid: BidCreateResponse = await sendRequest(form);
+		// const bid: BidCreateResponse = { bid_id: 2, bid_number: 1, error_message: null }
 		if (bid.error_message == null) {
 
 			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительские права) по <a href="https://wa.me/+79999151515" target="_blank">WhatsApp на номер +7 (999) 915-15-15</a><br> </div><a href="https://wa.me/+79999151514" target="_blank"><div class="book__btn" style="display: flex;

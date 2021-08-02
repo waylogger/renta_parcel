@@ -1,0 +1,13 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _toDateIndexJs = require("../toDate/index.js");
+var _toDateIndexJsDefault = _parcelHelpers.interopDefault(_toDateIndexJs);
+var _libRequiredArgsIndexJs = require("../_lib/requiredArgs/index.js");
+var _libRequiredArgsIndexJsDefault = _parcelHelpers.interopDefault(_libRequiredArgsIndexJs);
+function startOfMinute(dirtyDate) {
+  _libRequiredArgsIndexJsDefault.default(1, arguments);
+  var date = _toDateIndexJsDefault.default(dirtyDate);
+  date.setSeconds(0, 0);
+  return date;
+}
+exports.default = startOfMinute;

@@ -388,6 +388,8 @@ export class State {
 		const dateIsBusy = true;
 		const dateIsFree = false;
 		const numberTimeSlotsInFourHours = 1 * 4; //one
+
+		if ( isBefore(dt,new Date())) return dateIsBusy;
 		if (this.isFirstDateOfRangeWasSelect()) {
 			if (!this.firstDateOfRange) return false;
 			if (this.firstDateOfRange)
