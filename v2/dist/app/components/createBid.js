@@ -119,6 +119,7 @@ function createBid(state) {
                     }
                     d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
                     d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+                    console.log(state.getMainCar());
                     bidRequest = {
                         car_id: state.getMainCar(),
                         begin: d1,

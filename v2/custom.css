@@ -997,16 +997,13 @@ font-size: 20px;
 font-family: 'FuturaPT',Arial,sans-serif;
 margin: 0 -20px 10px 10px;
 display: flex;
-justify-content: space-between;
 padding: 0 7px 0 0;
 }
 
 #carSelectId {
-padding: 8px 0 8px 8px;
-font-size: 16px;
-font-family: 'FuturaPT',Arial,sans-serif;
-background: transparent;
-margin: -5px 20px 0 0;
+      font-size: 20px;
+      font-family: 'FuturaPT',Arial,sans-serif;
+      margin: 0 -20px 10px 10px;
 }
 input,  textarea {   
       -webkit-appearance: none;

@@ -1,0 +1,10 @@
+var _bind = require("./bind");
+var _calinject = require("./calinject");
+var _clearForm = require("./clearForm");
+var _loadData = require("./loadData");
+require("./state/dataFromServer");
+_loadData.whenDataLoad().then(async () => {
+  await _clearForm.clearForm();
+  await _bind.binding();
+  await _calinject.calInject();
+});

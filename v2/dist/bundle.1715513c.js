@@ -37263,6 +37263,7 @@ function createBid(state) {
           }
           d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
           d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+          console.log(state.getMainCar());
           bidRequest = {
             car_id: state.getMainCar(),
             begin: d1,
@@ -37652,7 +37653,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38733" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34397" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

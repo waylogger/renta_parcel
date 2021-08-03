@@ -67,6 +67,8 @@ export async function createBid(state: State) {
 		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
 		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
 
+		console.log(state.getMainCar());
+		
 		const bidRequest: BidCreateRequest = {
 			car_id: state.getMainCar(),
 			begin: d1,

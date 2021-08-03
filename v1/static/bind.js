@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime'
 import $ from 'jquery';
 import { bookCar, transferReceiveTime, transferReturnTime, datePreview, lawAgreementHandlerAgeExpr, lawAgreementHandlerAgreePolicy, receivePlaceHandle, costPreview, showCustomReceivePlaceInput, returnPlaceHandle, showCustomReturnPlaceInput, carPreview, inputHandler, phoneAdditional, checkingReceiveTime, checkingReturnTime, getFreeReceiveTime, offReceiveTime, offReturnTime, saveReceiveTime } from './handlers'
 import { whenDataLoad } from './loadData';

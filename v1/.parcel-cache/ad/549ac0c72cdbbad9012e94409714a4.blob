@@ -1,0 +1,100 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "getFreePeriods", function () {
+  return getFreePeriods;
+});
+require('regenerator-runtime/runtime');
+var _stateDataFromServer = require('../state/dataFromServer');
+var _connectionIndex = require('../connection/index');
+var _dateFns = require('date-fns');
+var _dateFnsEsm = require('date-fns/esm');
+/**
+* @function
+* @param {Array}
+* @returns perriod with offset
+* @description смысл функции в том, чтобы скорректировать период времени на буфферное время, необходимое для подготовки авто к очередной аренде (3 часа)
+* Если период отдыха менее 3 часов, то он удаляется
+*/
+function correctingPeriodOnBufferTime(periods) {
+  const res = periods.map(period => {
+    let begin = new Date(period.begin);
+    let end = new Date(period.end);
+    end = _dateFns.addMinutes(end, end.getTimezoneOffset());
+    begin = _dateFns.addMinutes(begin, begin.getTimezoneOffset());
+    const diffOfEndAndBegin = end - begin;
+    if (diffOfEndAndBegin < 1000 * 60 * _stateDataFromServer.dataFromServer.bufferTimeMin * 2 + 1000 * 60 * 60) {
+      // если период свободы менее 4 часов, то он убирается, чтобы не допустить брони в этот период
+      return;
+    } else {
+      begin = _dateFns.addMinutes(begin, _stateDataFromServer.dataFromServer.bufferTimeMin);
+      end = _dateFns.addMinutes(end, -_stateDataFromServer.dataFromServer.bufferTimeMin);
+    }
+    end = _dateFns.format(end, 'yyyy-MM-dd HH:mm:ss');
+    begin = _dateFns.format(begin, 'yyyy-MM-dd HH:mm:ss');
+    end = `${end}Z`;
+    begin = `${begin}Z`;
+    return {
+      begin,
+      end
+    };
+  });
+  return res.filter(period => period);
+}
+/**
+* @function
+* @param {Array of Date} interval
+* @returns {Array}
+* @description массив промежутков и возвращает массивов массив timestamp по 1 на 1 день
+* @example  intervalToArray([{start: 01.11.2020, end: 03.11.2020}]) return 01.11.2020, 02.11.2020,03.11.2020
+*/
+function intervalToArray(arrayOfIntervals) {
+  if (!arrayOfIntervals) return undefined;
+  const res = [];
+  arrayOfIntervals.forEach(interval => {
+    let start = new Date(interval.begin);
+    let end = new Date(interval.end);
+    start = _dateFns.addMinutes(start, start.getTimezoneOffset());
+    end = _dateFns.addMinutes(end, end.getTimezoneOffset());
+    if (_dateFns.format(end, 'HH:mm:ss') === '00:00:00' && _dateFns.format(end, `yyyy:MM;dd`) != `${end.getFullYear()}:12;31`) {
+      end = _dateFns.addMinutes(end, -60);
+    }
+    start = new Date(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate());
+    end = new Date(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate());
+    res.push(_dateFnsEsm.eachDayOfInterval({
+      start: start,
+      end: end
+    }));
+  });
+  return res;
+}
+async function getFreePeriods() {
+  if (!_stateDataFromServer.dataFromServer.currentCar) return;
+  if (!(_stateDataFromServer.dataFromServer.currentCar instanceof Array)) return;
+  const promises = [];
+  const begin = _stateDataFromServer.dataFromServer.beginFetchPeriod;
+  const end = _stateDataFromServer.dataFromServer.endFetchPeriod;
+  _stateDataFromServer.dataFromServer.currentCar.forEach(item => {
+    const placeObj = {
+      car_id: item.car_id,
+      begin: begin,
+      end: end,
+      include_reserves: true,
+      include_idles: true
+    };
+    promises.push(_connectionIndex.getCarPeriodList(placeObj));
+  });
+  let res = await Promise.all(promises);
+  const reformat = res.map((item, inx) => {
+    return {
+      car_id: _stateDataFromServer.dataFromServer.currentCar[inx].car_id,
+      periods: intervalToArray(correctingPeriodOnBufferTime(item))
+    };
+  });
+  _stateDataFromServer.dataFromServer.freePeriods = reformat;
+  _stateDataFromServer.dataFromServer.rawPeriods = res.map((item, inx) => {
+    return {
+      car_id: _stateDataFromServer.dataFromServer.currentCar[inx].car_id,
+      periods: correctingPeriodOnBufferTime(item)
+    };
+  });
+}

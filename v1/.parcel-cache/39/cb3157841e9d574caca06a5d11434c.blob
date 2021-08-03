@@ -1,0 +1,27 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "validationPhone", function () {
+  return validationPhone;
+});
+_parcelHelpers.export(exports, "validationName", function () {
+  return validationName;
+});
+function validationPhone(phone) {
+  phone = phone.replace(/[^\d]/g, '');
+  phone = '+' + phone;
+  if (phone.length === 12) return true;
+  return false;
+}
+function validationName(name) {
+  name = name.trim();
+  const names = name.split(' ');
+  if (names.length != 2) return false;
+  let badName = false;
+  names.forEach((el, inx) => {
+    if (el.match(/\d|[!@#$%^&*()_+=1234567890\[\]\{\}:;\'\"\\\|<>,\./]/)) {
+      badName = true;
+      return;
+    }
+  });
+  return badName ? false : true;
+}
