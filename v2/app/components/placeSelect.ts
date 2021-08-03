@@ -24,8 +24,8 @@ export const selectPlace = (state: State): void => {
 		'change',
 		() => {
 			let txt: any = $(`#${shared.domElementId.receivePlaceSelectId}`).val()?.toString().trim().split(' + ')[0];
-
-			if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+			const customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex((item)=>item.title.match(/ДРУГОЕ/));
+			if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
 				$(`#${shared.domElementId.receiveCustomPlaceInputId}`).removeClass('customPlace-hidden');
 				$(`#${shared.domElementId.receiveCustomPlaceId}`).removeClass('customPlace-hidden')
 				$(`#${shared.domElementId.receiveCustomPlaceId}`).removeClass('customPlace-wrap-start')
@@ -43,8 +43,8 @@ export const selectPlace = (state: State): void => {
 		'change',
 		() => {
 			let txt: any = $(`#${shared.domElementId.returnPlaceSelectId}`).val()?.toString().trim().split(' + ')[0];
-			const customInx = '';
-			if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+			const customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex((item)=>item.title.match(/ДРУГОЕ/));
+			if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
 				$(`#${shared.domElementId.returnCustomPlaceInputId}`).removeClass('customPlace-hidden');
 				$(`#${shared.domElementId.returnCustomPlaceId}`).removeClass('customPlace-hidden')
 				$(`#${shared.domElementId.returnCustomPlaceId}`).removeClass('customPlace-wrap-end')

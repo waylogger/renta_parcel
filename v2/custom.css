@@ -1009,3 +1009,9 @@ border-radius: 8px;
 background: transparent;
 margin: -5px 20px 0 0;
 }
+input,  textarea {   
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: none;    
+  }

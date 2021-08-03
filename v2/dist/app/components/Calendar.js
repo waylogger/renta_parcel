@@ -125,7 +125,6 @@ var num = 0;
             },
             onClick: {
                 "dp-day": function (t, e) {
-                    t.stopPropagation();
                     var dt = new Date(parseInt(t.target.getAttribute("data-date")));
                     if (myState.isFirstDateOfRangeWasSelect()) {
                         var days = jquery_1.default(".dp-day").toArray();
@@ -156,6 +155,9 @@ var num = 0;
                         return;
                     }
                     myState.setFirstDateOfRange(dt);
+                    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                        e.stopPropagation();
+                    }
                 },
                 "dp-next": function (t, e) {
                     var n = e.state.hilightedDate;
@@ -330,9 +332,14 @@ var num = 0;
                 get selectedDate() {
                     return i;
                 },
+                //STATE
                 set selectedDate(t) {
                     /**update input here !!!  */
-                    t && !a.inRange(t) || (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t, c.updateInput(i), r("select"), c.close());
+                    t && !a.inRange(t) ||
+                        (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t);
+                    c.updateInput(i),
+                        r("select"),
+                        c.close();
                 },
                 view: "day"
             },
@@ -390,7 +397,7 @@ var num = 0;
                         n && n.removeChild(e);
                     }
                     var a;
-                    d = !0, t && c.shouldFocusOnBlur && ((a = o).focus(), /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && a.blur()), setTimeout(function () {
+                    d = !0, t && c.shouldFocusOnBlur && ((a = o).focus() && !window.MSStream && a.blur()), setTimeout(function () {
                         d = !1;
                     }, 100), r("close");
                 }
@@ -546,28 +553,31 @@ var num = 0;
             var e, n, a;
             return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "");
         }
-        // a.addEventListener("click", function (t) {
-        // 	if (t.target.classList.contains("dp-day")) {
-        // 		var e = new Date(parseInt(t.target.dataset.date));
-        // 		f();
-        // 		t.stopPropagation();
-        // 		o = e;
-        // 		// h(e, o) && (o = e, f())
-        // 	}
-        // });
-        // a.addEventListener("touchstart", function (t) {
-        // 	if (t.target.classList.contains("dp-day")) {
-        // 		var e = new Date(parseInt(t.target.dataset.date));
-        // 		f();
-        // 		t.stopPropagation();
-        // 		o = e;
-        // 		// h(e, o) && (o = e, f())
-        // 	}
-        // });
-        return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+        a.addEventListener("click", function (t) {
             if (t.target.classList.contains("dp-day")) {
                 // var e = new Date(parseInt(t.target.dataset.date));
-                // f();
+                f();
+                if (!/iPhone|iPad|iPod/i.test(navigator.userAgent))
+                    t.stopPropagation();
+                // h(e, o) && (o = e, f())
+            }
+        });
+        a.addEventListener("touchstart", function (t) {
+            if (t.target.classList.contains("dp-day")) {
+                if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    t.stopPropagation();
+                    f();
+                }
+                else {
+                    // const s = $(`#${shared.domElementId.carSelectId}`).html();
+                    // $(`#${shared.domElementId.carSelectId}`).html(`${s} touch`);
+                    // t.stopPropagation();
+                }
+            }
+        });
+        return i.on(u), s.on(u), a.addEventListener("mouseover", function (t) {
+            if (t.target.classList.contains("dp-day")) {
+                // var e = new Date(parseInt(t.target.dataset.date));
                 // !h(e, o) && (o = e, f())
             }
         }),

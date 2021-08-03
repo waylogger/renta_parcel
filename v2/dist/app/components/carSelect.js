@@ -73,6 +73,7 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
             case 0:
                 addr = location.pathname;
                 modelName = addr.replace(/.*\//g, '');
+                console.log(modelName);
                 stringValueFromSelect = sharedActions_1.formatCarModelFromHashToSelect(modelName);
                 jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
                 if (state.isFirstDateOfRangeWasSelect())
@@ -91,45 +92,3 @@ var carSelect = function (state) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 exports.carSelect = carSelect;
-// export const carSelect = async (state: State): Promise<string> => {
-// 	let resStr = '';
-// 	const cars = state.getAllCarsForRent().cars;
-// 	const modelArr: string[] = [];
-// 	cars.forEach(
-// 		(car) => {
-// 			const c = formatCarModelFromBaseToSelect(car.model);
-// 			modelArr.push(
-// 				c.trim()
-// 			);
-// 		}
-// 	);
-// 	let hashCar: string = location.hash;
-// 	hashCar = hashCar.replace('#','');
-// 	const hashInx = modelArr.findIndex( (el)=> el===formatCarModelFromHashToSelect(hashCar) );
-// 	const tempCar: string = modelArr[0];
-// 	modelArr[0] = modelArr[hashInx];
-// 	modelArr[hashInx] = tempCar;
-// 	const selArray: string[] = _.uniq(modelArr).map(
-// 		(item, inx) => {
-// 			return option(item, item.toLowerCase().replace(/\s/g,'_'));
-// 		}
-// 	);
-// 	resStr += selArray.join('\n');
-// 	$(`#${shared.domElementId.carSelectId}`).html(resStr);
-// 	$(`#${shared.domElementId.carSelectId}`).on('change', async () => {
-// 		const stringValueFromSelect =  $(`#${shared.domElementId.carSelectId}`).val()?.toString();
-// 		if (!stringValueFromSelect)
-// 			throw new Error('CarSelectCallback::cant take car value');
-// 		const car = formatCarModelFromSelectToHash(stringValueFromSelect);
-// 		location.hash = `#${car}`
-// 		$(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
-// 		if (state.isFirstDateOfRangeWasSelect())
-// 		state.dropFirstDateOfRange();
-// 		if (state.isSecondDateOfRangeWasSelect())
-// 		state.dropSecondDateOfRange();
-// 		await state.selectCar(stringValueFromSelect);
-// 		await CalendarEnjector(state);
-// 	})
-// 	$(`#${shared.domElementId.carSelectId}`).trigger('change');
-// 	return resStr;
-// }

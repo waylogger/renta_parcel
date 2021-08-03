@@ -42,7 +42,8 @@ var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).on('change', function () {
         var _a;
         var txt = (_a = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
-        if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+        var customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex(function (item) { return item.title.match(/ДРУГОЕ/); });
+        if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-wrap-start');
@@ -58,8 +59,8 @@ var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).on('change', function () {
         var _a;
         var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
-        var customInx = '';
-        if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+        var customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex(function (item) { return item.title.match(/ДРУГОЕ/); });
+        if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-wrap-end');

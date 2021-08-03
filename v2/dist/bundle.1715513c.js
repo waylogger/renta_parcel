@@ -35282,8 +35282,11 @@ var selectPlace = function selectPlace(state) {
     var _a;
 
     var txt = (_a = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
+    var customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex(function (item) {
+      return item.title.match(/ДРУГОЕ/);
+    });
 
-    if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+    if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceInputId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.receiveCustomPlaceId).removeClass('customPlace-wrap-start');
@@ -35299,9 +35302,11 @@ var selectPlace = function selectPlace(state) {
     var _a;
 
     var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
-    var customInx = '';
+    var customInx = state.getPlacesForReceiveAndReturnCars().places.findIndex(function (item) {
+      return item.title.match(/ДРУГОЕ/);
+    });
 
-    if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
+    if (txt === state.getPlacesForReceiveAndReturnCars().places[customInx].title) {
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');
       jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-wrap-end');
@@ -35950,7 +35955,6 @@ var num = 0;
       },
       onClick: {
         "dp-day": function dpDay(t, e) {
-          t.stopPropagation();
           var dt = new Date(parseInt(t.target.getAttribute("data-date")));
 
           if (myState.isFirstDateOfRangeWasSelect()) {
@@ -35986,6 +35990,10 @@ var num = 0;
           }
 
           myState.setFirstDateOfRange(dt);
+
+          if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            e.stopPropagation();
+          }
         },
         "dp-next": function dpNext(t, e) {
           var n = e.state.hilightedDate;
@@ -36194,9 +36202,11 @@ var num = 0;
           return i;
         },
 
+        //STATE
         set selectedDate(t) {
           /**update input here !!!  */
-          t && !a.inRange(t) || (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t, c.updateInput(i), r("select"), c.close());
+          t && !a.inRange(t) || (t ? (i = new Date(t), c.state.hilightedDate = i) : i = t);
+          c.updateInput(i), r("select"), c.close();
         },
 
         view: "day"
@@ -36260,7 +36270,7 @@ var num = 0;
           }
 
           var a;
-          d = !0, t && c.shouldFocusOnBlur && ((a = o).focus(), /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && a.blur()), setTimeout(function () {
+          d = !0, t && c.shouldFocusOnBlur && (a = o).focus() && !window.MSStream && a.blur(), setTimeout(function () {
             d = !1;
           }, 100), r("close");
         }
@@ -36445,29 +36455,28 @@ var num = 0;
     function p(t) {
       var e, n, a;
       return ((r.end || o) && r.start && (e = t, n = r.end || o, a = r.start, e < a && n <= e || e <= n && a < e) ? "dr-in-range " : "") + (h(t, r.start) || h(t, r.end) ? "dr-selected " : "");
-    } // a.addEventListener("click", function (t) {
-    // 	if (t.target.classList.contains("dp-day")) {
-    // 		var e = new Date(parseInt(t.target.dataset.date));
-    // 		f();
-    // 		t.stopPropagation();
-    // 		o = e;
-    // 		// h(e, o) && (o = e, f())
-    // 	}
-    // });
-    // a.addEventListener("touchstart", function (t) {
-    // 	if (t.target.classList.contains("dp-day")) {
-    // 		var e = new Date(parseInt(t.target.dataset.date));
-    // 		f();
-    // 		t.stopPropagation();
-    // 		o = e;
-    // 		// h(e, o) && (o = e, f())
-    // 	}
-    // });
+    }
 
-
-    return i.on(u), s.on(u), /iPhone|iPad|iPod/i.test(navigator.userAgent) || a.addEventListener("mouseover", function (t) {
+    a.addEventListener("click", function (t) {
+      if (t.target.classList.contains("dp-day")) {
+        // var e = new Date(parseInt(t.target.dataset.date));
+        f();
+        if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) t.stopPropagation(); // h(e, o) && (o = e, f())
+      }
+    });
+    a.addEventListener("touchstart", function (t) {
+      if (t.target.classList.contains("dp-day")) {
+        if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          t.stopPropagation();
+          f();
+        } else {// const s = $(`#${shared.domElementId.carSelectId}`).html();
+          // $(`#${shared.domElementId.carSelectId}`).html(`${s} touch`);
+          // t.stopPropagation();
+        }
+      }
+    });
+    return i.on(u), s.on(u), a.addEventListener("mouseover", function (t) {
       if (t.target.classList.contains("dp-day")) {// var e = new Date(parseInt(t.target.dataset.date));
-        // f();
         // !h(e, o) && (o = e, f())
       }
     }), d;
@@ -36959,6 +36968,7 @@ var carSelect = function carSelect(state) {
         case 0:
           addr = location.pathname;
           modelName = addr.replace(/.*\//g, '');
+          console.log(modelName);
           stringValueFromSelect = sharedActions_1.formatCarModelFromHashToSelect(modelName);
           jquery_1.default("#" + shared.domElementId.bookModuleId).removeClass('carNotSelect');
           if (state.isFirstDateOfRangeWasSelect()) state.dropFirstDateOfRange();
@@ -36986,48 +36996,7 @@ var carSelect = function carSelect(state) {
   });
 };
 
-exports.carSelect = carSelect; // export const carSelect = async (state: State): Promise<string> => {
-// 	let resStr = '';
-// 	const cars = state.getAllCarsForRent().cars;
-// 	const modelArr: string[] = [];
-// 	cars.forEach(
-// 		(car) => {
-// 			const c = formatCarModelFromBaseToSelect(car.model);
-// 			modelArr.push(
-// 				c.trim()
-// 			);
-// 		}
-// 	);
-// 	let hashCar: string = location.hash;
-// 	hashCar = hashCar.replace('#','');
-// 	const hashInx = modelArr.findIndex( (el)=> el===formatCarModelFromHashToSelect(hashCar) );
-// 	const tempCar: string = modelArr[0];
-// 	modelArr[0] = modelArr[hashInx];
-// 	modelArr[hashInx] = tempCar;
-// 	const selArray: string[] = _.uniq(modelArr).map(
-// 		(item, inx) => {
-// 			return option(item, item.toLowerCase().replace(/\s/g,'_'));
-// 		}
-// 	);
-// 	resStr += selArray.join('\n');
-// 	$(`#${shared.domElementId.carSelectId}`).html(resStr);
-// 	$(`#${shared.domElementId.carSelectId}`).on('change', async () => {
-// 		const stringValueFromSelect =  $(`#${shared.domElementId.carSelectId}`).val()?.toString();
-// 		if (!stringValueFromSelect)
-// 			throw new Error('CarSelectCallback::cant take car value');
-// 		const car = formatCarModelFromSelectToHash(stringValueFromSelect);
-// 		location.hash = `#${car}`
-// 		$(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
-// 		if (state.isFirstDateOfRangeWasSelect())
-// 		state.dropFirstDateOfRange();
-// 		if (state.isSecondDateOfRangeWasSelect())
-// 		state.dropSecondDateOfRange();
-// 		await state.selectCar(stringValueFromSelect);
-// 		await CalendarEnjector(state);
-// 	})
-// 	$(`#${shared.domElementId.carSelectId}`).trigger('change');
-// 	return resStr;
-// }
+exports.carSelect = carSelect;
 },{"jquery":"node_modules/jquery/dist/jquery.js","../shared/sharedActions":"dist/app/shared/sharedActions.js","../shared/sharedData":"dist/app/shared/sharedData.js","./CalendarEnjection":"dist/app/components/CalendarEnjection.js"}],"dist/app/components/createBid.js":[function(require,module,exports) {
 "use strict";
 
@@ -37683,7 +37652,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44717" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43561" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
