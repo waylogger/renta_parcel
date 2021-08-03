@@ -91,6 +91,7 @@ input.book__field-value {
       padding: 16px 2px 2px 12px;
       width: 100%;
       border: 1px solid transparent;
+      font-size: 14px;
 }
 .book__dates .book__field-start .book__field-subtitle,
 .book__dates .book__field-end .book__field-subtitle {
@@ -98,7 +99,7 @@ input.book__field-value {
 }
 .book__field-start,
 .book__field-end {
-      width: 35%;
+      width: 32%;
       display: inline-flex;
 }
 .book__field-end {
@@ -952,7 +953,7 @@ input[type="range"]:focus::-ms-fill-upper {
       background: transparent;
       width: 100%;
       border-bottom: 2px solid transparent;
-      font-size: 16px;
+      font-size: 14px;
 }
 
 .carNotSelect {
@@ -1004,8 +1005,6 @@ padding: 0 7px 0 0;
 padding: 8px 0 8px 8px;
 font-size: 16px;
 font-family: 'FuturaPT',Arial,sans-serif;
-border: 1px solid #dadee7;
-border-radius: 8px;
 background: transparent;
 margin: -5px 20px 0 0;
 }
