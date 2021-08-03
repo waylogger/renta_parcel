@@ -67,19 +67,19 @@ var shared = __importStar(require("../shared/sharedData"));
 var sharedActions_1 = require("../shared/sharedActions");
 var querySender_1 = require("../CORS/querySender");
 function bidPreview(state) {
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f;
     return __awaiter(this, void 0, void 0, function () {
         var carModel, leftDate, leftTime, leftPlace, rightDate, rightTime, rightPlace, placeBegin, placeEnd, deliveryCost, d1, d2, rentTime, bidRequest, bidCostStr, resCostStr, rentTime;
-        return __generator(this, function (_h) {
-            switch (_h.label) {
+        return __generator(this, function (_g) {
+            switch (_g.label) {
                 case 0:
-                    carModel = (_a = jquery_1.default("#" + shared.domElementId.carSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString();
-                    leftDate = (_b = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _b === void 0 ? void 0 : _b.toString();
-                    leftTime = (_c = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _c === void 0 ? void 0 : _c.toString();
-                    leftPlace = (_d = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _d === void 0 ? void 0 : _d.toString();
-                    rightDate = (_e = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _e === void 0 ? void 0 : _e.toString();
-                    rightTime = (_f = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _f === void 0 ? void 0 : _f.toString();
-                    rightPlace = (_g = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _g === void 0 ? void 0 : _g.toString();
+                    carModel = state.getSelectedCarModelName();
+                    leftDate = (_a = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _a === void 0 ? void 0 : _a.toString();
+                    leftTime = (_b = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _b === void 0 ? void 0 : _b.toString();
+                    leftPlace = (_c = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _c === void 0 ? void 0 : _c.toString();
+                    rightDate = (_d = jquery_1.default("#" + shared.domElementId.returnDataId).val()) === null || _d === void 0 ? void 0 : _d.toString();
+                    rightTime = (_e = jquery_1.default("#" + shared.domElementId.selectReturnTimeId).val()) === null || _e === void 0 ? void 0 : _e.toString();
+                    rightPlace = (_f = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _f === void 0 ? void 0 : _f.toString();
                     placeBegin = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (leftPlace === null || leftPlace === void 0 ? void 0 : leftPlace.split(' + ')[0]); })[0];
                     placeEnd = state.getPlacesForReceiveAndReturnCars().places.filter(function (a) { return a.title === (rightPlace === null || rightPlace === void 0 ? void 0 : rightPlace.split(' + ')[0]); })[0];
                     deliveryCost = placeBegin.delivery_cost + placeEnd.delivery_cost;
@@ -94,8 +94,8 @@ function bidPreview(state) {
                         }
                     }
                     if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
-                    d1 = leftDate.split('.').reverse().join('-') + " " + leftTime + "Z";
-                    d2 = rightDate.split('.').reverse().join('-') + " " + rightTime + "Z";
+                    d1 = leftDate.split('.').reverse().join('-') + "T" + leftTime + "Z";
+                    d2 = rightDate.split('.').reverse().join('-') + "T" + rightTime + "Z";
                     rentTime = "\u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
                     jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
                     bidRequest = {
@@ -117,7 +117,7 @@ function bidPreview(state) {
                             jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
                         })];
                 case 1:
-                    _h.sent();
+                    _g.sent();
                     return [3 /*break*/, 3];
                 case 2:
                     bidCostStr = '';
@@ -126,7 +126,7 @@ function bidPreview(state) {
                     jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
                     jquery_1.default("#" + shared.domElementId.bidCostId).html(bidCostStr);
                     jquery_1.default("#" + shared.domElementId.costResolutionId).html(resCostStr);
-                    _h.label = 3;
+                    _g.label = 3;
                 case 3: return [2 /*return*/];
             }
         });

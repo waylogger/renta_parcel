@@ -97,6 +97,14 @@ function trimPeriodBy3HoursOnEachSide(period) {
 function trimMultiplePeriodsBy3HoursOnEachSide(periods) {
     return periods.map(function (el) { return trimPeriodBy3HoursOnEachSide(el); });
 }
+function reformatPeriod(period) {
+    period.begin = period.begin.toString().replace(' ', 'T');
+    period.end = period.end.toString().replace(' ', 'T');
+    return period;
+}
+function reformatDateForIOS(periods) {
+    return periods.map(function (el) { return reformatPeriod(el); });
+}
 function isWithinIntervals(periods, timestamps) {
     var timeIsFound = true;
     var timeNotFound = false;
@@ -133,6 +141,7 @@ var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
 var State = /** @class */ (function () {
     function State() {
+        this.selectedCarModelName = '';
         this.ageChecker = false;
         this.policyChecker = false;
         this.mainCarForBid = 0;
@@ -184,6 +193,9 @@ var State = /** @class */ (function () {
         */
         this.partedDayNotAvaiableForBooking = [];
     }
+    State.prototype.getSelectedCarModelName = function () {
+        return new String(this.selectedCarModelName);
+    };
     State.prototype.toggleAgeChecker = function () {
         this.ageChecker = !this.ageChecker;
         return this.ageChecker;
@@ -297,6 +309,7 @@ var State = /** @class */ (function () {
                     case 1:
                         resultOfFetchFreePeriods = _a.sent();
                         resultOfFetchFreePeriods.forEach(function (res, inx) {
+                            res.car_periods = reformatDateForIOS(res.car_periods);
                             _this.freePeriodsForAllBookingCar.push(__assign(__assign({}, _this.allCarsForRent.cars[inx]), { car_periods: trimMultiplePeriodsBy3HoursOnEachSide(res.car_periods) }));
                         });
                         this.freePeriodsForCurrentBookingCar = this.freePeriodsForAllBookingCar.filter(function (carPeriodItem) {
@@ -328,6 +341,7 @@ var State = /** @class */ (function () {
                         res = _a.sent();
                         places = res[0];
                         places.places.splice(0, 3); //смысл убрать первые 3 элемента в том, что об этот попросил заказчик
+                        places.places = places.places.filter(function (place) { return !place.archive; });
                         this.placesForReceiveAndReturnCars = places;
                         //список машин
                         // --------------------------------------------------
@@ -375,6 +389,7 @@ var State = /** @class */ (function () {
                         return [4 /*yield*/, this.fetchFreePeriodsForAllCars()];
                     case 1:
                         _a.sent();
+                        this.selectedCarModelName = nameOfCarFromCarSelectOrHash;
                         return [2 /*return*/];
                 }
             });

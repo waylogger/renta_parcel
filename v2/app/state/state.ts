@@ -35,6 +35,14 @@ function trimPeriodBy3HoursOnEachSide(period: SinglePeriod): SinglePeriod {
 function trimMultiplePeriodsBy3HoursOnEachSide(periods: SinglePeriod[]): SinglePeriod[] {
 	return periods.map(el => trimPeriodBy3HoursOnEachSide(el));
 }
+function reformatPeriod(period: SinglePeriod): SinglePeriod {
+	period.begin = period.begin.toString().replace(' ','T');
+	period.end = period.end.toString().replace(' ','T');
+	return period;
+}
+function reformatDateForIOS(periods: SinglePeriod[]): SinglePeriod[] {
+	return periods.map(el => reformatPeriod(el));
+}
 
 function isWithinIntervals(periods: SinglePeriod[], timestamps: Date[]): boolean {
 	const timeIsFound = true;
@@ -83,6 +91,11 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 
 
 export class State {
+
+	private selectedCarModelName: string = '';
+	public getSelectedCarModelName():String {
+		return new String(this.selectedCarModelName);
+	}
 
 	private ageChecker: boolean = false;
 	public toggleAgeChecker(): boolean {
@@ -274,6 +287,8 @@ export class State {
 		const resultOfFetchFreePeriods = await Promise.all(promisesForFetctFreePeriodsDate);
 		resultOfFetchFreePeriods.forEach(
 			(res, inx) => {
+				res.car_periods = reformatDateForIOS(res.car_periods);
+				
 				this.freePeriodsForAllBookingCar.push({ ...this.allCarsForRent.cars[inx], car_periods: trimMultiplePeriodsBy3HoursOnEachSide(res.car_periods) })
 			}
 		);
@@ -310,6 +325,9 @@ export class State {
 		const places: PlacesResponse = res[0];
 
 		places.places.splice(0, 3);//смысл убрать первые 3 элемента в том, что об этот попросил заказчик
+		places.places = places.places.filter(
+			(place) => !place.archive
+		)
 		this.placesForReceiveAndReturnCars = places;
 		//список машин
 		// --------------------------------------------------
@@ -367,6 +385,7 @@ export class State {
 		);
 
 		await this.fetchFreePeriodsForAllCars();
+		this.selectedCarModelName = nameOfCarFromCarSelectOrHash;
 
 
 

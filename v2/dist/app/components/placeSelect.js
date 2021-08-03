@@ -58,6 +58,7 @@ var selectPlace = function (state) {
     jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).on('change', function () {
         var _a;
         var txt = (_a = jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).val()) === null || _a === void 0 ? void 0 : _a.toString().trim().split(' + ')[0];
+        var customInx = '';
         if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceInputId).removeClass('customPlace-hidden');
             jquery_1.default("#" + shared.domElementId.returnCustomPlaceId).removeClass('customPlace-hidden');

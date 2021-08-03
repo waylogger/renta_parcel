@@ -17,7 +17,7 @@ import { lowerFirst } from 'lodash';
 
 export async function bidPreview(state: State): Promise<void> {
 	
-	const carModel: string | undefined = $(`#${shared.domElementId.carSelectId}`).val()?.toString();
+	const carModel: String = state.getSelectedCarModelName();
 	const leftDate: string | undefined = $(`#${shared.domElementId.receiveDataId}`).val()?.toString();
 	const leftTime: string | undefined = $(`#${shared.domElementId.selectReceiveTimeId}`).val()?.toString();
 	const leftPlace: string | undefined = $(`#${shared.domElementId.receivePlaceSelectId}`).val()?.toString();
@@ -47,8 +47,9 @@ export async function bidPreview(state: State): Promise<void> {
 		}
 	}
 	if (leftDate && leftTime && rightTime && rightDate) {
-		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
-		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
+		let d1: string = `${leftDate.split('.').reverse().join('-')}T${leftTime}Z`;
+		let d2: string = `${rightDate.split('.').reverse().join('-')}T${rightTime}Z`;
+
 
 		const rentTime = `на ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}`;
 		$(`#${shared.domElementId.periodRentId}`).html(rentTime);

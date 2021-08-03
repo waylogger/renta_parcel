@@ -43,7 +43,7 @@ export const selectPlace = (state: State): void => {
 		'change',
 		() => {
 			let txt: any = $(`#${shared.domElementId.returnPlaceSelectId}`).val()?.toString().trim().split(' + ')[0];
-
+			const customInx = '';
 			if (txt === state.getPlacesForReceiveAndReturnCars().places[4].title) {
 				$(`#${shared.domElementId.returnCustomPlaceInputId}`).removeClass('customPlace-hidden');
 				$(`#${shared.domElementId.returnCustomPlaceId}`).removeClass('customPlace-hidden')
