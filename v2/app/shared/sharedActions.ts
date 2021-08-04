@@ -1,6 +1,6 @@
 import eachMinuteOfInterval from "date-fns/eachMinuteOfInterval";
 import { findLastKey } from "lodash";
-import { isFunctionDeclaration } from "typescript";
+import { isDoStatement, isFunctionDeclaration } from "typescript";
 import { domElementId } from "./sharedData";
 import $ from 'jquery'
 
@@ -8,7 +8,11 @@ import $ from 'jquery'
  * @module sharedActions.ts
  * @description некоторые переиспользуемые функции
 */
-export function option(text: string, id: string = '', className: string = '', isDisabled: boolean = false): string {
+export function option(text: string, id: string = '', className: string = '', isDisabled: boolean = false, selectedValue: string = ''): string {
+	if (!isDisabled && selectedValue === text)
+		return  `<option id="${id}" class="${className}" selected="selected">${text}</option>`;
+	console.log(selectedValue);
+	
 	return isDisabled ? `<option id="${id}" class="${className}" disabled>${text}</option>` : `<option id="${id}" class="${className}">${text}</option>`;
 }
 

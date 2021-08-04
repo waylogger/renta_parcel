@@ -86,7 +86,7 @@ function timeSelectorBy15Min(idModificator, domId, arrayForGenerateHTML) {
     var isDisabled = true;
     shortTime.forEach(function (str, inx) {
         date_fns_1.isEqual(arrayForGenerateHTML[inx], sharedData_1.badDateEqualNull) ? resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator, '', isDisabled) :
-            resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator);
+            resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator, '', false, '10:00');
     });
     jquery_1.default("#" + domId).html(resStr);
     return resStr;

@@ -14402,7 +14402,7 @@ var jquery_1 = __importDefault(require("jquery"));
 */
 
 
-function option(text, id, className, isDisabled) {
+function option(text, id, className, isDisabled, selectedValue) {
   if (id === void 0) {
     id = '';
   }
@@ -14415,6 +14415,12 @@ function option(text, id, className, isDisabled) {
     isDisabled = false;
   }
 
+  if (selectedValue === void 0) {
+    selectedValue = '';
+  }
+
+  if (!isDisabled && selectedValue === text) return "<option id=\"" + id + "\" class=\"" + className + "\" selected=\"selected\">" + text + "</option>";
+  console.log(selectedValue);
   return isDisabled ? "<option id=\"" + id + "\" class=\"" + className + "\" disabled>" + text + "</option>" : "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
 }
 
@@ -34379,7 +34385,7 @@ function timeSelectorBy15Min(idModificator, domId, arrayForGenerateHTML) {
   var resStr = '';
   var isDisabled = true;
   shortTime.forEach(function (str, inx) {
-    date_fns_1.isEqual(arrayForGenerateHTML[inx], sharedData_1.badDateEqualNull) ? resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator, '', isDisabled) : resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator);
+    date_fns_1.isEqual(arrayForGenerateHTML[inx], sharedData_1.badDateEqualNull) ? resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator, '', isDisabled) : resStr += sharedActions_1.option(str, str.replace(':', '-') + "-" + idModificator, '', false, '10:00');
   });
   jquery_1.default("#" + domId).html(resStr);
   return resStr;
@@ -37653,7 +37659,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34397" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34411" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

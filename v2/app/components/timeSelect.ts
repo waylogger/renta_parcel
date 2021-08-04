@@ -77,7 +77,7 @@ export function  timeSelectorBy15Min (idModificator: string, domId: string, arra
 	shortTime.forEach(
 		(str,inx) => {
 			isEqual(arrayForGenerateHTML[inx],badDateEqualNull) ? resStr += option(str,`${str.replace(':','-')}-${idModificator}`,'',isDisabled) :
-			resStr += option(str,`${str.replace(':','-')}-${idModificator}`);
+			resStr += option(str,`${str.replace(':','-')}-${idModificator}`,'',false,'10:00');
 		}
 	);
 	$(`#${domId}`).html(resStr);
