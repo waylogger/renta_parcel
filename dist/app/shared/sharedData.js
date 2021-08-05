@@ -5,7 +5,6 @@ exports.domElementId = {
     rootSectionId: 'rootSection',
     bookModuleId: 'bookModuleId',
     carSelectId: 'carSelectId',
-    carSelectSelectId: 'carSelectSelectId',
     carNameId: 'carNameId',
     periodRentId: 'periodRentId',
     bidCostId: 'bidCostId',

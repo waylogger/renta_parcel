@@ -8,13 +8,14 @@ import { SingleCarWithPeriods } from '../entities/carPeriods';
 import { formatCarModelFromBaseToSelect, formatCarModelFromHashToSelect, dateForServer, currentYearForServer, nextYearForServer, splitDateByMinutes, validateField, formatCarModelFromSelectToHash } from '../shared/sharedActions';
 import * as shared from '../shared/sharedData'
 import eachMinuteOfInterval from 'date-fns/eachMinuteOfInterval';
-import _, { find, isEqual } from 'lodash'
+import _, { find, isEqual, lowerFirst } from 'lodash'
 import { PeriodsRequest } from '../CORS/entities/apiExchange/clientTypes';
 import $ from 'jquery'
 import { DateRangePicker } from '../components/Calendar';
 import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
+import {transliterate} from 'transliteration'
 
 
 function trimPeriodBy3HoursOnEachSide(period: SinglePeriod): SinglePeriod {
@@ -362,6 +363,18 @@ export class State {
 
 	public getAllCarsForRent(): CarListResponse {
 		const res = this.allCarsForRent;
+		res.cars.map(
+			(
+				car
+			)=>{
+				// car.model = car.model.
+				// console.log(transliterate(car.model));
+				car.model = transliterate(car.model);
+				
+				
+				
+			}
+		)
 		return { result_code: res.result_code, cars: res.cars };
 
 	}
@@ -375,7 +388,7 @@ export class State {
 		//step0 преобразуем имена для сравнения
 		this.getAllCarsForRent().cars.forEach(
 			(car) => { 
-				console.log(formatCarModelFromSelectToHash(formatCarModelFromBaseToSelect(car.model)));
+				// console.log(formatCarModelFromSelectToHash(formatCarModelFromBaseToSelect(car.model)));
 				carModelNamesForCompare.push(formatCarModelFromBaseToSelect(car.model)) 
 			}
 		);

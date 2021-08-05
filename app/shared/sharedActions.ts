@@ -11,7 +11,6 @@ import $ from 'jquery'
 export function option(text: string, id: string = '', className: string = '', isDisabled: boolean = false, selectedValue: string = ''): string {
 	if (!isDisabled && selectedValue === text)
 		return  `<option id="${id}" class="${className}" selected="selected">${text}</option>`;
-	console.log(selectedValue);
 	
 	return isDisabled ? `<option id="${id}" class="${className}" disabled>${text}</option>` : `<option id="${id}" class="${className}">${text}</option>`;
 }

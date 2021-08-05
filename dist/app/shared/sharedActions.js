@@ -18,7 +18,6 @@ function option(text, id, className, isDisabled, selectedValue) {
     if (selectedValue === void 0) { selectedValue = ''; }
     if (!isDisabled && selectedValue === text)
         return "<option id=\"" + id + "\" class=\"" + className + "\" selected=\"selected\">" + text + "</option>";
-    console.log(selectedValue);
     return isDisabled ? "<option id=\"" + id + "\" class=\"" + className + "\" disabled>" + text + "</option>" : "<option id=\"" + id + "\" class=\"" + className + "\">" + text + "</option>";
 }
 exports.option = option;

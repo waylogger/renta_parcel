@@ -13,9 +13,7 @@ export const rootSection = (): any => {
 return `
 <div id="${shared.domElementId.bookSelectDivId}" class="book__title tn-atom">Забронировать
 	<span class="bool_title-price" id="carPrice"></span>
-	<span id="${shared.domElementId.carSelectId}">
-	</span>
-	<select id="${shared.domElementId.carSelectSelectId}">
+	<select id="${shared.domElementId.carSelectId}">
 	</select>
 </div>
 <div id="${shared.domElementId.bookModuleId}" class="carNotSelect">

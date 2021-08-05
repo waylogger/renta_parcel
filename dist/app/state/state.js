@@ -82,6 +82,7 @@ var jquery_1 = __importDefault(require("jquery"));
 var date_fns_1 = require("date-fns");
 var timeSelect_1 = require("../components/timeSelect");
 var isWithinInterval_1 = __importDefault(require("date-fns/isWithinInterval"));
+var transliteration_1 = require("transliteration");
 function trimPeriodBy3HoursOnEachSide(period) {
     var begin = new Date(period.begin);
     var end = new Date(period.end);
@@ -369,6 +370,11 @@ var State = /** @class */ (function () {
     };
     State.prototype.getAllCarsForRent = function () {
         var res = this.allCarsForRent;
+        res.cars.map(function (car) {
+            // car.model = car.model.
+            // console.log(transliterate(car.model));
+            car.model = transliteration_1.transliterate(car.model);
+        });
         return { result_code: res.result_code, cars: res.cars };
     };
     State.prototype.selectCar = function (nameOfCarFromCarSelectOrHash) {
@@ -382,7 +388,7 @@ var State = /** @class */ (function () {
                         carModelNamesForCompare = [];
                         //step0 преобразуем имена для сравнения
                         this.getAllCarsForRent().cars.forEach(function (car) {
-                            console.log(sharedActions_1.formatCarModelFromSelectToHash(sharedActions_1.formatCarModelFromBaseToSelect(car.model)));
+                            // console.log(formatCarModelFromSelectToHash(formatCarModelFromBaseToSelect(car.model)));
                             carModelNamesForCompare.push(sharedActions_1.formatCarModelFromBaseToSelect(car.model));
                         });
                         //step1 фильтруем массив по совпадению с select
