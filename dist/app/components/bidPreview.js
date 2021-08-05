@@ -74,6 +74,8 @@ function bidPreview(state) {
             switch (_g.label) {
                 case 0:
                     carModel = state.getSelectedCarModelName();
+                    carModel = carModel.replace('Mkpp', 'МКПП');
+                    carModel = carModel.replace('Akpp', 'АКПП');
                     leftDate = (_a = jquery_1.default("#" + shared.domElementId.receiveDataId).val()) === null || _a === void 0 ? void 0 : _a.toString();
                     leftTime = (_b = jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).val()) === null || _b === void 0 ? void 0 : _b.toString();
                     leftPlace = (_c = jquery_1.default("#" + shared.domElementId.receivePlaceSelectId).val()) === null || _c === void 0 ? void 0 : _c.toString();
@@ -96,7 +98,7 @@ function bidPreview(state) {
                     if (!(leftDate && leftTime && rightTime && rightDate)) return [3 /*break*/, 2];
                     d1 = leftDate.split('.').reverse().join('-') + "T" + leftTime + "Z";
                     d2 = rightDate.split('.').reverse().join('-') + "T" + rightTime + "Z";
-                    rentTime = "\u043D\u0430 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
+                    rentTime = "\u043D\u0430 \u043F\u0435\u0440\u0438\u043E\u0434 \u0441 " + sharedActions_1.translateDate(new Date(d1), new Date(d2), leftTime, rightTime);
                     jquery_1.default("#" + shared.domElementId.periodRentId).html(rentTime);
                     bidRequest = {
                         car_id: state.carIdForBidCost(),

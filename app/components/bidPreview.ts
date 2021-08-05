@@ -17,7 +17,9 @@ import { lowerFirst } from 'lodash';
 
 export async function bidPreview(state: State): Promise<void> {
 	
-	const carModel: String = state.getSelectedCarModelName();
+	let carModel: String = state.getSelectedCarModelName();
+	carModel = carModel.replace('Mkpp','МКПП');
+	carModel = carModel.replace('Akpp','АКПП');
 	const leftDate: string | undefined = $(`#${shared.domElementId.receiveDataId}`).val()?.toString();
 	const leftTime: string | undefined = $(`#${shared.domElementId.selectReceiveTimeId}`).val()?.toString();
 	const leftPlace: string | undefined = $(`#${shared.domElementId.receivePlaceSelectId}`).val()?.toString();
@@ -31,7 +33,7 @@ export async function bidPreview(state: State): Promise<void> {
 
 
 	const deliveryCost: number = placeBegin.delivery_cost + placeEnd.delivery_cost;
-
+	
 	if (carModel) {
 		$(`#${shared.domElementId.carNameId}`).html(`Аренда: ${carModel}`);
 	}
@@ -51,7 +53,7 @@ export async function bidPreview(state: State): Promise<void> {
 		let d2: string = `${rightDate.split('.').reverse().join('-')}T${rightTime}Z`;
 
 
-		const rentTime = `на ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}`;
+		const rentTime = `на период с ${translateDate(new Date(d1), new Date(d2), leftTime, rightTime)}`;
 		$(`#${shared.domElementId.periodRentId}`).html(rentTime);
 
 		const bidRequest: BidCostRequest = {

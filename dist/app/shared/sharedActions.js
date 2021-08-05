@@ -69,7 +69,7 @@ function translateDate(d1, d2, t1, t2) {
         dayWord = 'дня';
     else if (lastNum >= 5)
         dayWord = 'дней';
-    return numOfDaysStr + " " + dayWord + " \u0441 " + d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
+    return d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
 }
 exports.translateDate = translateDate;
 /**

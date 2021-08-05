@@ -61,7 +61,7 @@ export function translateDate(d1: Date, d2: Date, t1: string | undefined, t2: st
 	else if (lastNum === 0) dayWord = 'дней';
 	else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';
 	else if (lastNum >= 5) dayWord = 'дней';
-	return `${numOfDaysStr} ${dayWord} с ${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
+	return `${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
 }
 
 /**
