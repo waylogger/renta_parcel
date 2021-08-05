@@ -1,0 +1,341 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>sharedActions.ts | v2</title>
+	<meta name="description" content="Documentation for v2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">v2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">v2</a>
+				</li>
+				<li>
+					<a href="sharedActions_ts.html">sharedActions.ts</a>
+				</li>
+			</ul>
+			<h1>Module sharedActions.ts</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt>description</dt>
+						<dd><p>некоторые переиспользуемые функции</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="sharedActions_ts.html#clearColor" class="tsd-kind-icon">clear<wbr>Color</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="sharedActions_ts.html#formatCarModel" class="tsd-kind-icon">format<wbr>Car<wbr>Model</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="sharedActions_ts.html#option" class="tsd-kind-icon">option</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="sharedActions_ts.html#translateDate" class="tsd-kind-icon">translate<wbr>Date</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="clearColor" class="tsd-anchor"></a>
+					<h3>clear<wbr>Color</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Color<span class="tsd-signature-symbol">(</span>model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/shared/sharedActions.ts#L15">shared/sharedActions.ts:15</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>model: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>имя машины, которое получаем от сервера в формате: Toyota Rav4(бел.)</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>то же имя, но без цвета в скобках</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="formatCarModel" class="tsd-anchor"></a>
+					<h3>format<wbr>Car<wbr>Model</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">format<wbr>Car<wbr>Model<span class="tsd-signature-symbol">(</span>model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/shared/sharedActions.ts#L20">shared/sharedActions.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>model: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="option" class="tsd-anchor"></a>
+					<h3>option</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">option<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, className<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/shared/sharedActions.ts#L5">shared/sharedActions.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>text: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
+								</li>
+								<li>
+									<h5>className: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="translateDate" class="tsd-anchor"></a>
+					<h3>translate<wbr>Date</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">translate<wbr>Date<span class="tsd-signature-symbol">(</span>d1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span>, d2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span>, t1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, t2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/shared/sharedActions.ts#L33">shared/sharedActions.ts:33</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd></dd>
+									<dt>example</dt>
+									<dd><p>(&#39;01-01-2000 10:00&#39;, &#39;02-01-2000 10:00&#39;) =&gt; (на 1 день с 01.01.2000 г. 10:00 по 02.02.2000 10:00)</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>d1: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+								<li>
+									<h5>d2: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+								<li>
+									<h5>t1: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+								</li>
+								<li>
+									<h5>t2: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>duration</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="BookingPeriod_ts.html">Booking<wbr>Period.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="BussinesDay_ts.html">Bussines<wbr>Day.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="BussinesTimeSlot_ts.html">Bussines<wbr>Time<wbr>Slot.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="Calendar_js.html">Calendar.js</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="CalendarEnjector_js.html">Calendar<wbr>Enjector.js</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="Car_ts.html">Car.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="SessionKey_ts.html">Session<wbr>Key.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="accessData_ts.html">access<wbr>Data.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_CORS_auth.html">app/CORS/auth</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_CORS_entities_apiExchange_clientTypes.html">app/CORS/entities/api<wbr>Exchange/client<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_CORS_entities_apiExchange_serverTypes.html">app/CORS/entities/api<wbr>Exchange/server<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_CORS_querySender.html">app/CORS/query<wbr>Sender</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_entities_carPeriods.html">app/entities/car<wbr>Periods</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="app_shared_sharedData.html">app/shared/shared<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="bitText_ts.html">bit<wbr>Text.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="carSelect_ts.html">car<wbr>Select.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="checkDayAvaiable_ts.html">check<wbr>Day<wbr>Avaiable.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="customersName_ts.html">customers<wbr>Name.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="customersPhone_ts.html">customers<wbr>Phone.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="placeSelect_ts.html">place<wbr>Select.ts</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="sharedActions_ts.html">shared<wbr>Actions.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="state_ts.html">state.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="template_ts.html">template.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="timeSelect_ts.html">time<wbr>Select.ts</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="sharedActions_ts.html#clearColor" class="tsd-kind-icon">clear<wbr>Color</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="sharedActions_ts.html#formatCarModel" class="tsd-kind-icon">format<wbr>Car<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="sharedActions_ts.html#option" class="tsd-kind-icon">option</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="sharedActions_ts.html#translateDate" class="tsd-kind-icon">translate<wbr>Date</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest",
+    "start": "tsc && parcel index.html",
+    "dev": "npx tsc-watch --onSuccess \"npm run parcel\"",
+    "parcel": "parcel index.html",
+    "doc": "npx typedoc bundle.ts app/* && firefox ./docs/index.html",
+    "build": "tsc && npx parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/date-fns": "^2.6.0",
+    "@types/lodash": "^4.14.172",
+    "date-fns": "^2.23.0",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.6.1",
+    "query-string": "^7.0.1",
+    "regenerator-runtime": "^0.13.9",
+    "typedoc": "^0.21.4",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/jquery": "^3.5.6",
+    "cssnano": "^5.0.7",
+    "postcss": "^8.3.6",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.1.0",
+    "tsc-watch": "^4.4.0",
+    "typescript": "^4.3.5"
+  }
+}

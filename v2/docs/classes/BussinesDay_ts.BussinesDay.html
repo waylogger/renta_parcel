@@ -1,0 +1,555 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BussinesDay | v2</title>
+	<meta name="description" content="Documentation for v2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">v2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">v2</a>
+				</li>
+				<li>
+					<a href="../modules/BussinesDay_ts.html">BussinesDay.ts</a>
+				</li>
+				<li>
+					<a href="BussinesDay_ts.BussinesDay.html">BussinesDay</a>
+				</li>
+			</ul>
+			<h1>Class BussinesDay</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt>remark</dt>
+						<dd><p>класс дня, он включает в себя 96 отрезков по 15 минут и методы для обеспечания работы каждого из отрезков, а также пречень машин, которые заняты в этот день</p>
+							<pre><code><span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">instance</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BussinesDay</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #267F99">Date</span><span style="color: #000000">.</span><span style="color: #795E26">now</span><span style="color: #000000">()));</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">BussinesDay</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="BussinesDay_ts.BussinesDay.html#carsIncludedInDay" class="tsd-kind-icon">cars<wbr>Included<wbr>InDay</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="BussinesDay_ts.BussinesDay.html#timeslotsOfDay" class="tsd-kind-icon">timeslots<wbr>OfDay</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="BussinesDay_ts.BussinesDay.html#timestamp" class="tsd-kind-icon">timestamp</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#bookingCar" class="tsd-kind-icon">booking<wbr>Car</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#carIsBusy" class="tsd-kind-icon">car<wbr>IsBusy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="BussinesDay_ts.BussinesDay.html#checkTimestamp" class="tsd-kind-icon">check<wbr>Timestamp</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#getTimeSlot" class="tsd-kind-icon">get<wbr>Time<wbr>Slot</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#getTimestamp" class="tsd-kind-icon">get<wbr>Timestamp</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BussinesDay_ts.BussinesDay.html#roundTime" class="tsd-kind-icon">round<wbr>Time</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Bussines<wbr>Day<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BussinesDay_ts.BussinesDay.html" class="tsd-signature-type" data-tsd-kind="Class">BussinesDay</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L35">entities/BussinesDay.ts:35</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>смысл действий по инициализации нового объекта сводятся к тому, чтобы обнулить timestamp, а потом разбить день на отрезки по 15 минут, после чего сформировать вокруг каждого отрезка объект BussinesTimeSlot</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timestamp: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="BussinesDay_ts.BussinesDay.html" class="tsd-signature-type" data-tsd-kind="Class">BussinesDay</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="carsIncludedInDay" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> cars<wbr>Included<wbr>InDay</h3>
+					<div class="tsd-signature tsd-kind-icon">cars<wbr>Included<wbr>InDay<span class="tsd-signature-symbol">:</span> <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L26">entities/BussinesDay.ts:26</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>description</dt>
+							<dd><p>массив содержит данные каждого автомобиля, который занят в этот день хотябы 1 слот</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="timeslotsOfDay" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> timeslots<wbr>OfDay</h3>
+					<div class="tsd-signature tsd-kind-icon">timeslots<wbr>OfDay<span class="tsd-signature-symbol">:</span> <a href="BussinesTimeSlot_ts.BussinesTimeSlot.html" class="tsd-signature-type" data-tsd-kind="Class">BussinesTimeSlot</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L22">entities/BussinesDay.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>description</dt>
+							<dd><p>массив содержит 96 отрезков по 15 минут</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="timestamp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> timestamp</h3>
+					<div class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L30">entities/BussinesDay.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>description</dt>
+							<dd><p>timestamp текущего дня, если его время не равно 00:00, то он должен быть приведен к этому времени</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="bookingCar" class="tsd-anchor"></a>
+					<h3>booking<wbr>Car</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">booking<wbr>Car<span class="tsd-signature-symbol">(</span>car<span class="tsd-signature-symbol">: </span><a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a>, timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L100">entities/BussinesDay.ts:100</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>side-effect при успехе авто сохраняется в carIncludedInDay</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>car: <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>авто для установления брони</p>
+									</div>
+								</li>
+								<li>
+									<h5>timestamp: <span class="tsd-signature-type">Date</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>время для бронирования</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Boolean</span></h4>
+							<p>true в случае успешного установленя брони</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="carIsBusy" class="tsd-anchor"></a>
+					<h3>car<wbr>IsBusy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">car<wbr>IsBusy<span class="tsd-signature-symbol">(</span>car<span class="tsd-signature-symbol">: </span><a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L120">entities/BussinesDay.ts:120</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>car: <a href="../interfaces/app_CORS_entities_apiExchange_serverTypes.SingleCar.html" class="tsd-signature-type" data-tsd-kind="Interface">SingleCar</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>проверяем есть ли бронь на эту машину в этот день</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Boolean</span></h4>
+							<p>true если авто найдено</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="checkTimestamp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> check<wbr>Timestamp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">check<wbr>Timestamp<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L59">entities/BussinesDay.ts:59</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>принимает timestamp и выбрасывает исключение в случае неправильного времени (до текущей даты или после, либо время не кратно 15 минутам)</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timestamp: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getTimeSlot" class="tsd-anchor"></a>
+					<h3>get<wbr>Time<wbr>Slot</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Time<wbr>Slot<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="BussinesTimeSlot_ts.BussinesTimeSlot.html" class="tsd-signature-type" data-tsd-kind="Class">BussinesTimeSlot</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L83">entities/BussinesDay.ts:83</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>descriptrion</dt>
+									<dd><p>ищем слот по timestamp</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timestamp: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="BussinesTimeSlot_ts.BussinesTimeSlot.html" class="tsd-signature-type" data-tsd-kind="Class">BussinesTimeSlot</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getTimestamp" class="tsd-anchor"></a>
+					<h3>get<wbr>Timestamp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Timestamp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L76">entities/BussinesDay.ts:76</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>возращаем сохраненный timestamp (округленный)</p>
+										<pre><code><span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">day</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BussinesDay</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #098658">2021</span><span style="color: #000000">,</span><span style="color: #098658">07</span><span style="color: #000000">,</span><span style="color: #098658">11</span><span style="color: #000000">,</span><span style="color: #098658">15</span><span style="color: #000000">,</span><span style="color: #098658">30</span><span style="color: #000000">,</span><span style="color: #098658">55</span><span style="color: #000000">));</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">day</span><span style="color: #000000">.</span><span style="color: #795E26">getTimestamp</span><span style="color: #000000">().</span><span style="color: #795E26">toLocaleString</span><span style="color: #000000">());</span>
+<span style="color: #000000">    </span><span style="color: #008000">//expect 07.11.2021, 00:00:00</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="roundTime" class="tsd-anchor"></a>
+					<h3>round<wbr>Time</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">round<wbr>Time<span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/waylogger/renta_parcel/blob/7cf3d8d/v2/app/entities/BussinesDay.ts#L53">entities/BussinesDay.ts:53</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timestamp: <span class="tsd-signature-type">Date</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>текущего дня</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+							<p>тот же timestamp, но временем равным 00:00:00</p>
+							<pre><code><span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">time</span><span style="color: #000000">: </span><span style="color: #267F99">Date</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #098658">2021</span><span style="color: #000000">,</span><span style="color: #098658">07</span><span style="color: #000000">,</span><span style="color: #098658">11</span><span style="color: #000000">,</span><span style="color: #098658">15</span><span style="color: #000000">,</span><span style="color: #098658">30</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #795E26">roundTime</span><span style="color: #000000">(</span><span style="color: #001080">time</span><span style="color: #000000">).</span><span style="color: #795E26">toLocaleString</span><span style="color: #000000">());</span>
+<span style="color: #000000">    </span><span style="color: #008000">//expect 07.11.2021, 00:00:00 </span>
+</code></pre>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/BookingPeriod_ts.html">Booking<wbr>Period.ts</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/BussinesDay_ts.html">Bussines<wbr>Day.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/BussinesTimeSlot_ts.html">Bussines<wbr>Time<wbr>Slot.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/Calendar_js.html">Calendar.js</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/CalendarEnjector_js.html">Calendar<wbr>Enjector.js</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/Car_ts.html">Car.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/SessionKey_ts.html">Session<wbr>Key.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/accessData_ts.html">access<wbr>Data.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_CORS_auth.html">app/CORS/auth</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_CORS_entities_apiExchange_clientTypes.html">app/CORS/entities/api<wbr>Exchange/client<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_CORS_entities_apiExchange_serverTypes.html">app/CORS/entities/api<wbr>Exchange/server<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_CORS_querySender.html">app/CORS/query<wbr>Sender</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_entities_carPeriods.html">app/entities/car<wbr>Periods</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/app_shared_sharedData.html">app/shared/shared<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/bitText_ts.html">bit<wbr>Text.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/carSelect_ts.html">car<wbr>Select.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/checkDayAvaiable_ts.html">check<wbr>Day<wbr>Avaiable.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/customersName_ts.html">customers<wbr>Name.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/customersPhone_ts.html">customers<wbr>Phone.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/placeSelect_ts.html">place<wbr>Select.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/sharedActions_ts.html">shared<wbr>Actions.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/state_ts.html">state.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/template_ts.html">template.ts</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/timeSelect_ts.html">time<wbr>Select.ts</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="BussinesDay_ts.BussinesDay.html" class="tsd-kind-icon">Bussines<wbr>Day</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="BussinesDay_ts.BussinesDay.html#carsIncludedInDay" class="tsd-kind-icon">cars<wbr>Included<wbr>InDay</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="BussinesDay_ts.BussinesDay.html#timeslotsOfDay" class="tsd-kind-icon">timeslots<wbr>OfDay</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="BussinesDay_ts.BussinesDay.html#timestamp" class="tsd-kind-icon">timestamp</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#bookingCar" class="tsd-kind-icon">booking<wbr>Car</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#carIsBusy" class="tsd-kind-icon">car<wbr>IsBusy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="BussinesDay_ts.BussinesDay.html#checkTimestamp" class="tsd-kind-icon">check<wbr>Timestamp</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#getTimeSlot" class="tsd-kind-icon">get<wbr>Time<wbr>Slot</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#getTimestamp" class="tsd-kind-icon">get<wbr>Timestamp</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="BussinesDay_ts.BussinesDay.html#roundTime" class="tsd-kind-icon">round<wbr>Time</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
