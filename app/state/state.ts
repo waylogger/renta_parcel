@@ -15,7 +15,7 @@ import { DateRangePicker } from '../components/Calendar';
 import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
-import {transliterate} from 'transliteration'
+import { transliterate } from 'transliteration'
 
 
 function trimPeriodBy3HoursOnEachSide(period: SinglePeriod): SinglePeriod {
@@ -37,8 +37,8 @@ function trimMultiplePeriodsBy3HoursOnEachSide(periods: SinglePeriod[]): SingleP
 	return periods.map(el => trimPeriodBy3HoursOnEachSide(el));
 }
 function reformatPeriod(period: SinglePeriod): SinglePeriod {
-	period.begin = period.begin.toString().replace(' ','T');
-	period.end = period.end.toString().replace(' ','T');
+	period.begin = period.begin.toString().replace(' ', 'T');
+	period.end = period.end.toString().replace(' ', 'T');
 	return period;
 }
 function reformatDateForIOS(periods: SinglePeriod[]): SinglePeriod[] {
@@ -67,7 +67,20 @@ function isWithinIntervals(periods: SinglePeriod[], timestamps: Date[]): boolean
 
 function isWithinIntervalsAndFindIt(periods: SinglePeriod[], timestamps: Date[]): SinglePeriod | undefined {
 	const timeIsFound = true;
-	const timeNotFound = false;
+	const timeNotFound = undefined;
+
+	const periodsMoreThen2Days = periods.filter(
+		(period) => {
+			return (new Date(period.end).valueOf() - new Date(period.begin).valueOf()) > 1000 * 60 * 60 * 24 * 2;
+		}
+	);
+
+	//если период длится более 2 суток, то мне нужно произвести не более 2 сравнений: первого и последнего ts, если оба ts в периоде, то остальные 1438 ts можно не сравнивать 
+	periodsMoreThen2Days.forEach(
+		period => isAfter(timestamps[0], new Date(period.begin)) && isBefore(timestamps[timestamps.length-1],new Date(period.end))
+
+	);
+
 
 	for (let i = 0; i < timestamps.length; ++i) {
 		const dt = timestamps[i];
@@ -82,7 +95,7 @@ function isWithinIntervalsAndFindIt(periods: SinglePeriod[], timestamps: Date[])
 		}
 
 	}
-	return;
+	return timeNotFound;
 }
 
 
@@ -94,7 +107,7 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 export class State {
 
 	private selectedCarModelName: string = '';
-	public getSelectedCarModelName():String {
+	public getSelectedCarModelName(): String {
 		return new String(this.selectedCarModelName);
 	}
 
@@ -142,7 +155,7 @@ export class State {
 
 		this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
 		this.firstDateOfRange = undefined;
-			
+
 		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	//-----------------------------------------------------------------------------------------
@@ -289,7 +302,7 @@ export class State {
 		resultOfFetchFreePeriods.forEach(
 			(res, inx) => {
 				res.car_periods = reformatDateForIOS(res.car_periods);
-				
+
 				this.freePeriodsForAllBookingCar.push({ ...this.allCarsForRent.cars[inx], car_periods: trimMultiplePeriodsBy3HoursOnEachSide(res.car_periods) })
 			}
 		);
@@ -366,13 +379,13 @@ export class State {
 		res.cars.map(
 			(
 				car
-			)=>{
+			) => {
 				// car.model = car.model.
 				// console.log(transliterate(car.model));
 				car.model = transliterate(car.model);
-				
-				
-				
+
+
+
 			}
 		)
 		return { result_code: res.result_code, cars: res.cars };
@@ -387,9 +400,9 @@ export class State {
 		const carModelNamesForCompare: string[] = [];
 		//step0 преобразуем имена для сравнения
 		this.getAllCarsForRent().cars.forEach(
-			(car) => { 
+			(car) => {
 				// console.log(formatCarModelFromSelectToHash(formatCarModelFromBaseToSelect(car.model)));
-				carModelNamesForCompare.push(formatCarModelFromBaseToSelect(car.model)) 
+				carModelNamesForCompare.push(formatCarModelFromBaseToSelect(car.model))
 			}
 		);
 
@@ -411,6 +424,7 @@ export class State {
 	private findFirstPeriodWhichConsistTimestamt(periods: SinglePeriod[], timestamp: Date): boolean {
 		const findedPeriod: SinglePeriod | undefined = periods.find(
 			(item) => {
+
 				return isWithinInterval(timestamp, { start: new Date(item.begin), end: new Date(item.end) });
 			}
 		);
@@ -418,38 +432,59 @@ export class State {
 	}
 
 	public isDateBusy(dt: Date): Boolean {
+		// console.log('busy');
+
 		const splitDate: Date[] = eachMinuteOfInterval({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: 15 });
 		let fourHoursContinuesDurationFounded = false;
 		const dateIsBusy = true;
 		const dateIsFree = false;
 		const numberTimeSlotsInFourHours = 1 * 4; //one
 
-		if ( isBefore(dt,new Date())) return dateIsBusy;
+		if (isBefore(dt, new Date())) return dateIsBusy;
 		if (this.isFirstDateOfRangeWasSelect()) {
-			if (!this.firstDateOfRange) return false;
+
+			if (!this.firstDateOfRange) return dateIsFree;
+
 			if (this.firstDateOfRange)
 				this.filterCurrentCarForBookingBySelection(this.firstDateOfRange);
-			if (isBefore(dt, this.firstDateOfRange)) return true;
+
+				
+			if (isBefore(dt, this.firstDateOfRange)) return dateIsBusy;
 
 			let lastEndOfLatestInterval: Date = shared.badDateEqualNull;
 
 			let findedPeriod: SinglePeriod[] = [];
 
 			for (let i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
+
 				const periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
-				const finded = isWithinIntervalsAndFindIt(periods, splitDateByMinutes(this.firstDateOfRange, 15));
-				if (finded) findedPeriod.push(finded);
+				
+				let slicePeriods = periods.filter(//оставляем только периоды, которые заканчиваются после начала сравнимого дня
+					(period) => this.firstDateOfRange && isAfter(new Date(period.end), this.firstDateOfRange)
+				);
+
+				slicePeriods = slicePeriods.filter(//оставляем только те периоды, которые начинаются в течении сравнимого дня
+					(period) => this.firstDateOfRange && isBefore(new Date(period.begin), new Date(this.firstDateOfRange).setDate(this.firstDateOfRange.getDate()+1))
+				);
+				
+				const finded = isWithinIntervalsAndFindIt(slicePeriods, splitDateByMinutes(this.firstDateOfRange, 15));
+				if (finded) {
+					
+					findedPeriod.push(finded);
+					
+				}
 			}
 			findedPeriod.forEach((period: SinglePeriod) => {
+				
 				if (isAfter(new Date(period.end), lastEndOfLatestInterval)) lastEndOfLatestInterval = new Date(period.end);
 			});
-
+			
 			if (isAfter(dt, lastEndOfLatestInterval)) {
-				return true;
+				
+				return dateIsBusy;
 			}
-
-
-			return false;
+			
+			return dateIsFree;
 		}
 
 		this.freePeriodsForCurrentBookingCarAfterFirstSelect.forEach(
@@ -485,7 +520,10 @@ export class State {
 		if (fourHoursContinuesDurationFounded) return dateIsFree;
 		return dateIsBusy;
 	}
+
+
 	public getFreeTimeSlotsForReceiveAndReturnCar(dt: Date): Date[] {
+
 
 		const splitDate: Date[] = eachMinuteOfInterval({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: 15 });
 

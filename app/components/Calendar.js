@@ -135,7 +135,7 @@ let num = 0;
 			},
 			onClick: {
 				"dp-day": function (t, e) {
-
+					t.stopPropagation();
 					var dt = new Date(parseInt(t.target.getAttribute("data-date")));
 
 					if (myState.isFirstDateOfRangeWasSelect()) {
@@ -225,6 +225,7 @@ let num = 0;
 				}
 			},
 			render: function (r) {
+				console.log(321);
 				var i = r.opts,
 					t = i.lang,
 					e = r.state,
@@ -659,35 +660,14 @@ let num = 0;
 		a.addEventListener("click", function (t) {
 			if (t.target.classList.contains("dp-day")) {
 				// var e = new Date(parseInt(t.target.dataset.date));
-				f();
+				// f();
 
-				if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) t.stopPropagation();
+				// if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) t.stopPropagation();
 				// h(e, o) && (o = e, f())
 
 			}
 		});
-		a.addEventListener("touchstart", function (t) {
-			if (t.target.classList.contains("dp-day")) {
-				if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-					t.stopPropagation();
-					f();
-				}
-				else {
-					// const s = $(`#${shared.domElementId.carSelectId}`).html();
-					// $(`#${shared.domElementId.carSelectId}`).html(`${s} touch`);
-					// t.stopPropagation();
-				}
-
-
-			}
-		});
-
-		return i.on(u), s.on(u), a.addEventListener("mouseover", function (t) {
-			if (t.target.classList.contains("dp-day")) {
-				// var e = new Date(parseInt(t.target.dataset.date));
-				// !h(e, o) && (o = e, f())
-			}
-		}),
+			return i.on(u), s.on(u), 
 			d
 	}, Object.defineProperty(t, "__esModule", {
 		value: !0

@@ -48,19 +48,19 @@ export function formatCarModelFromHashToSelect(model: string) {
  * @example ('01-01-2000 10:00', '02-01-2000 10:00') => (на 1 день с 01.01.2000 г. 10:00 по 02.02.2000 10:00)
  */
 export function translateDate(d1: Date, d2: Date, t1: string | undefined, t2: string | undefined): string {
-	const numOfDays: number = Math.floor(((d2.valueOf() - d1.valueOf()) / 1000 / (24 * 3600)) + 1);
-	const numOfDaysStr: string = numOfDays.toString();
-	let dayWord: string = '';
-	let last2num: number = parseInt(numOfDaysStr, 10);
-	if (last2num >= 10 && last2num <= 19) {
-		dayWord = 'дней'
-		return `на ${numOfDaysStr} ${dayWord} с ${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
-	}
-	let lastNum: number = parseInt(numOfDaysStr.charAt(numOfDaysStr.length - 1), 10);
-	if (lastNum === 1) dayWord = 'день';
-	else if (lastNum === 0) dayWord = 'дней';
-	else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';
-	else if (lastNum >= 5) dayWord = 'дней';
+	// const numOfDays: number = Math.floor(((d2.valueOf() - d1.valueOf()) / 1000 / (24 * 3600)) + 1);
+	// const numOfDaysStr: string = numOfDays.toString();
+	// let dayWord: string = '';
+	// let last2num: number = parseInt(numOfDaysStr, 10);
+	// if (last2num >= 10 && last2num <= 19) {
+	// 	dayWord = 'дней'
+	// 	return `на ${numOfDaysStr} ${dayWord} с ${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
+	// }
+	// let lastNum: number = parseInt(numOfDaysStr.charAt(numOfDaysStr.length - 1), 10);
+	// if (lastNum === 1) dayWord = 'день';
+	// else if (lastNum === 0) dayWord = 'дней';
+	// else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';
+	// else if (lastNum >= 5) dayWord = 'дней';
 	return `${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
 }
 

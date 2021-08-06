@@ -124,7 +124,12 @@ function isWithinIntervals(periods, timestamps) {
 }
 function isWithinIntervalsAndFindIt(periods, timestamps) {
     var timeIsFound = true;
-    var timeNotFound = false;
+    var timeNotFound = undefined;
+    var periodsMoreThen2Days = periods.filter(function (period) {
+        return (new Date(period.end).valueOf() - new Date(period.begin).valueOf()) > 1000 * 60 * 60 * 24 * 2;
+    });
+    //если период длится более 2 суток, то мне нужно произвести не более 2 сравнений: первого и последнего ts, если оба ts в периоде, то остальные 1438 ts можно не сравнивать 
+    periodsMoreThen2Days.forEach(function (period) { return date_fns_1.isAfter(timestamps[0], new Date(period.begin)) && date_fns_1.isBefore(timestamps[timestamps.length - 1], new Date(period.end)); });
     for (var i = 0; i < timestamps.length; ++i) {
         var dt = timestamps[i];
         for (var j = 0; j < periods.length; ++j) {
@@ -136,7 +141,7 @@ function isWithinIntervalsAndFindIt(periods, timestamps) {
             }
         }
     }
-    return;
+    return timeNotFound;
 }
 var defultCarListResponse = { result_code: 0, cars: [] };
 var defaultPlacesResponse = { result_code: 0, places: [] };
@@ -411,6 +416,7 @@ var State = /** @class */ (function () {
         return findedPeriod ? true : false;
     };
     State.prototype.isDateBusy = function (dt) {
+        // console.log('busy');
         var _this = this;
         var splitDate = eachMinuteOfInterval_1.default({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: 15 });
         var fourHoursContinuesDurationFounded = false;
@@ -421,27 +427,32 @@ var State = /** @class */ (function () {
             return dateIsBusy;
         if (this.isFirstDateOfRangeWasSelect()) {
             if (!this.firstDateOfRange)
-                return false;
+                return dateIsFree;
             if (this.firstDateOfRange)
                 this.filterCurrentCarForBookingBySelection(this.firstDateOfRange);
             if (date_fns_1.isBefore(dt, this.firstDateOfRange))
-                return true;
+                return dateIsBusy;
             var lastEndOfLatestInterval_1 = shared.badDateEqualNull;
             var findedPeriod = [];
             for (var i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
                 var periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
-                var finded = isWithinIntervalsAndFindIt(periods, sharedActions_1.splitDateByMinutes(this.firstDateOfRange, 15));
-                if (finded)
+                var slicePeriods = periods.filter(//оставляем только периоды, которые заканчиваются после начала сравнимого дня
+                function (period) { return _this.firstDateOfRange && date_fns_1.isAfter(new Date(period.end), _this.firstDateOfRange); });
+                slicePeriods = slicePeriods.filter(//оставляем только те периоды, которые начинаются в течении сравнимого дня
+                function (period) { return _this.firstDateOfRange && date_fns_1.isBefore(new Date(period.begin), new Date(_this.firstDateOfRange).setDate(_this.firstDateOfRange.getDate() + 1)); });
+                var finded = isWithinIntervalsAndFindIt(slicePeriods, sharedActions_1.splitDateByMinutes(this.firstDateOfRange, 15));
+                if (finded) {
                     findedPeriod.push(finded);
+                }
             }
             findedPeriod.forEach(function (period) {
                 if (date_fns_1.isAfter(new Date(period.end), lastEndOfLatestInterval_1))
                     lastEndOfLatestInterval_1 = new Date(period.end);
             });
             if (date_fns_1.isAfter(dt, lastEndOfLatestInterval_1)) {
-                return true;
+                return dateIsBusy;
             }
-            return false;
+            return dateIsFree;
         }
         this.freePeriodsForCurrentBookingCarAfterFirstSelect.forEach(function (item, inx) {
             var continuesDurationOfFreePeriods = 0;

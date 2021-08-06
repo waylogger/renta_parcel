@@ -149,14 +149,14 @@ function onPreview(state) {
     ];
     onChangeList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            setTimeout(function () { return bidPreview(state); }, 10000);
+            bidPreview(state);
         });
     });
     onFocusList.forEach(function (id) {
         jquery_1.default("#" + id).on('change', function () {
-            setTimeout(function () { return bidPreview(state); }, 10000);
+            bidPreview(state);
         });
     });
-    jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
+    // $(`#${shared.domElementId.carSelectId}`).trigger('change');
 }
 exports.onPreview = onPreview;

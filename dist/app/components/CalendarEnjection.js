@@ -66,7 +66,6 @@ exports.CalendarEnjector = void 0;
 */
 var Calendar_1 = require("./Calendar");
 var shared = __importStar(require("../shared/sharedData"));
-var bidPreview_1 = require("./bidPreview");
 var jquery_1 = __importDefault(require("jquery"));
 function CalendarEnjector(myState) {
     return __awaiter(this, void 0, void 0, function () {
@@ -110,21 +109,23 @@ function CalendarEnjector(myState) {
                 var rightDateInsert = false;
                 if (txtStart.value) {
                     jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', null);
+                    jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).trigger('change');
                     leftDateInsert = true;
-                    bidPreview_1.bidPreview(myState);
+                    // bidPreview(myState);
                 }
                 else {
                     jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', true);
-                    bidPreview_1.bidPreview(myState);
+                    // bidPreview(myState);
                 }
                 if (txtEnd.value) {
                     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', null);
                     rightDateInsert = true;
-                    bidPreview_1.bidPreview(myState);
+                    // bidPreview(myState);
+                    jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).trigger('change');
                 }
                 else {
                     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', true);
-                    bidPreview_1.bidPreview(myState);
+                    // bidPreview(myState);
                 }
             });
             // When the inputs gain focus, show the date range picker

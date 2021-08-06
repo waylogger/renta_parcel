@@ -7856,7 +7856,14 @@ function isWithinIntervals(periods, timestamps) {
 }
 function isWithinIntervalsAndFindIt(periods, timestamps) {
     var timeIsFound = true;
-    var timeNotFound = false;
+    var timeNotFound = undefined;
+    var periodsMoreThen2Days = periods.filter(function(period) {
+        return new Date(period.end).valueOf() - new Date(period.begin).valueOf() > 172800000;
+    });
+    //если период длится более 2 суток, то мне нужно произвести не более 2 сравнений: первого и последнего ts, если оба ts в периоде, то остальные 1438 ts можно не сравнивать 
+    periodsMoreThen2Days.forEach(function(period) {
+        return date_fns_1.isAfter(timestamps[0], new Date(period.begin)) && date_fns_1.isBefore(timestamps[timestamps.length - 1], new Date(period.end));
+    });
     for(var i = 0; i < timestamps.length; ++i){
         var dt = timestamps[i];
         for(var j = 0; j < periods.length; ++j){
@@ -7866,7 +7873,7 @@ function isWithinIntervalsAndFindIt(periods, timestamps) {
             })) return periods[j];
         }
     }
-    return;
+    return timeNotFound;
 }
 var defultCarListResponse = {
     result_code: 0,
@@ -8183,6 +8190,7 @@ var State = function() {
         return findedPeriod ? true : false;
     };
     State1.prototype.isDateBusy = function(dt) {
+        // console.log('busy');
         var _this = this;
         var splitDate = eachMinuteOfInterval_1.default({
             start: dt,
@@ -8196,21 +8204,27 @@ var State = function() {
         var numberTimeSlotsInFourHours = 4; //one
         if (date_fns_1.isBefore(dt, new Date())) return dateIsBusy;
         if (this.isFirstDateOfRangeWasSelect()) {
-            if (!this.firstDateOfRange) return false;
+            if (!this.firstDateOfRange) return dateIsFree;
             if (this.firstDateOfRange) this.filterCurrentCarForBookingBySelection(this.firstDateOfRange);
-            if (date_fns_1.isBefore(dt, this.firstDateOfRange)) return true;
+            if (date_fns_1.isBefore(dt, this.firstDateOfRange)) return dateIsBusy;
             var lastEndOfLatestInterval_1 = shared.badDateEqualNull;
             var findedPeriod = [];
             for(var i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i){
                 var periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
-                var finded = isWithinIntervalsAndFindIt(periods, sharedActions_1.splitDateByMinutes(this.firstDateOfRange, 15));
+                var slicePeriods = periods.filter(function(period) {
+                    return _this.firstDateOfRange && date_fns_1.isAfter(new Date(period.end), _this.firstDateOfRange);
+                });
+                slicePeriods = slicePeriods.filter(function(period) {
+                    return _this.firstDateOfRange && date_fns_1.isBefore(new Date(period.begin), new Date(_this.firstDateOfRange).setDate(_this.firstDateOfRange.getDate() + 1));
+                });
+                var finded = isWithinIntervalsAndFindIt(slicePeriods, sharedActions_1.splitDateByMinutes(this.firstDateOfRange, 15));
                 if (finded) findedPeriod.push(finded);
             }
             findedPeriod.forEach(function(period) {
                 if (date_fns_1.isAfter(new Date(period.end), lastEndOfLatestInterval_1)) lastEndOfLatestInterval_1 = new Date(period.end);
             });
-            if (date_fns_1.isAfter(dt, lastEndOfLatestInterval_1)) return true;
-            return false;
+            if (date_fns_1.isAfter(dt, lastEndOfLatestInterval_1)) return dateIsBusy;
+            return dateIsFree;
         }
         this.freePeriodsForCurrentBookingCarAfterFirstSelect.forEach(function(item, inx) {
             var continuesDurationOfFreePeriods = 0;
@@ -10591,19 +10605,19 @@ exports.formatCarModelFromHashToSelect = formatCarModelFromHashToSelect;
  * @returns {string} duration
  * @example ('01-01-2000 10:00', '02-01-2000 10:00') => (на 1 день с 01.01.2000 г. 10:00 по 02.02.2000 10:00)
  */ function translateDate(d1, d2, t1, t2) {
-    var numOfDays = Math.floor((d2.valueOf() - d1.valueOf()) / 1000 / 86400 + 1);
-    var numOfDaysStr = numOfDays.toString();
-    var dayWord = '';
-    var last2num = parseInt(numOfDaysStr, 10);
-    if (last2num >= 10 && last2num <= 19) {
-        dayWord = 'дней';
-        return "\u043D\u0430 " + numOfDaysStr + " " + dayWord + " \u0441 " + d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
-    }
-    var lastNum = parseInt(numOfDaysStr.charAt(numOfDaysStr.length - 1), 10);
-    if (lastNum === 1) dayWord = 'день';
-    else if (lastNum === 0) dayWord = 'дней';
-    else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';
-    else if (lastNum >= 5) dayWord = 'дней';
+    // const numOfDays: number = Math.floor(((d2.valueOf() - d1.valueOf()) / 1000 / (24 * 3600)) + 1);
+    // const numOfDaysStr: string = numOfDays.toString();
+    // let dayWord: string = '';
+    // let last2num: number = parseInt(numOfDaysStr, 10);
+    // if (last2num >= 10 && last2num <= 19) {
+    // 	dayWord = 'дней'
+    // 	return `на ${numOfDaysStr} ${dayWord} с ${d1.toLocaleDateString()} ${t1} по ${d2.toLocaleDateString()} ${t2}`;
+    // }
+    // let lastNum: number = parseInt(numOfDaysStr.charAt(numOfDaysStr.length - 1), 10);
+    // if (lastNum === 1) dayWord = 'день';
+    // else if (lastNum === 0) dayWord = 'дней';
+    // else if (lastNum > 1 && lastNum < 5) dayWord = 'дня';
+    // else if (lastNum >= 5) dayWord = 'дней';
     return d1.toLocaleDateString() + " " + t1 + " \u043F\u043E " + d2.toLocaleDateString() + " " + t2;
 }
 exports.translateDate = translateDate;
@@ -64626,79 +64640,7 @@ var carSelect = function(state) {
         });
     });
 };
-exports.carSelect = carSelect; /**
- * @module carSelect.ts
-
-import $ from 'jquery';
-import { State } from '../state/state';
-import { option, clearColor, formatCarModelFromBaseToSelect, formatCarModelFromSelectToHash, formatCarModelFromHashToSelect} from '../shared/sharedActions';
-import * as shared from '../shared/sharedData';
-import _, { Primitive } from 'lodash';
-import {DateRangePicker} from '../components/Calendar'
-import { CalendarEnjector } from './CalendarEnjection';
-import { SingleCar } from '../CORS/entities/apiExchange/serverTypes';
-
-
-
-export const carSelect = async (state: State): Promise<string> => {
-    let resStr = '';
-    const cars = state.getAllCarsForRent().cars;
-
-    const modelArr: string[] = [];
-
-    cars.forEach(
-        (car) => {
-            const c = formatCarModelFromBaseToSelect(car.model);
-            modelArr.push(
-                c.trim()
-            );
-        }
-    );
-
-    let hashCar: string = location.hash;
-    hashCar = hashCar.replace('#','');
-    const hashInx = modelArr.findIndex( (el)=> el===formatCarModelFromHashToSelect(hashCar) );
-    const tempCar: string = modelArr[0];
-    modelArr[0] = modelArr[hashInx];
-    modelArr[hashInx] = tempCar;
-
-
-    const selArray: string[] = _.uniq(modelArr).map(
-        (item, inx) => {
-            return option(item, item.toLowerCase().replace(/\s/g,'_'));
-        }
-    );
-    resStr += selArray.join('\n');
-
-
-    $(`#${shared.domElementId.carSelectId}`).html(resStr);
-    $(`#${shared.domElementId.carSelectId}`).on('change', async () => {
-
-        const stringValueFromSelect =  $(`#${shared.domElementId.carSelectId}`).val()?.toString();
-        if (!stringValueFromSelect)
-            throw new Error('CarSelectCallback::cant take car value');
-        const car = formatCarModelFromSelectToHash(stringValueFromSelect);
-
-
-
-        location.hash = `#${car}`
-        $(`#${shared.domElementId.bookModuleId}`).removeClass('carNotSelect');
-        if (state.isFirstDateOfRangeWasSelect())
-        state.dropFirstDateOfRange();
-
-        if (state.isSecondDateOfRangeWasSelect())
-        state.dropSecondDateOfRange();
-
-        await state.selectCar(stringValueFromSelect);
-        await CalendarEnjector(state);
-
-
-    })
-    $(`#${shared.domElementId.carSelectId}`).trigger('change');
-
-    return resStr;
-}
-*/ 
+exports.carSelect = carSelect;
 
 },{"jquery":"igaHu","../shared/sharedActions":"htU3t","../shared/sharedData":"iUwdp","lodash":"f4H2C","./CalendarEnjection":"cn6bD"}],"f4H2C":[function(require,module,exports) {
 var global = arguments[3];
@@ -79132,7 +79074,6 @@ exports.CalendarEnjector = void 0;
  * @remarks кое-что правил wlr986 <wayloggerman@gmail.com>
 */ var Calendar_1 = require("./Calendar");
 var shared = __importStar(require("../shared/sharedData"));
-var bidPreview_1 = require("./bidPreview");
 var jquery_1 = __importDefault(require("jquery"));
 function CalendarEnjector(myState) {
     return __awaiter(this, void 0, void 0, function() {
@@ -79166,20 +79107,16 @@ function CalendarEnjector(myState) {
                 var rightDateInsert = false;
                 if (txtStart.value) {
                     jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', null);
+                    jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).trigger('change');
                     leftDateInsert = true;
-                    bidPreview_1.bidPreview(myState);
-                } else {
-                    jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', true);
-                    bidPreview_1.bidPreview(myState);
-                }
+                // bidPreview(myState);
+                } else jquery_1.default("#" + shared.domElementId.selectReceiveTimeId).attr('disabled', true);
                 if (txtEnd.value) {
                     jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', null);
                     rightDateInsert = true;
-                    bidPreview_1.bidPreview(myState);
-                } else {
-                    jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', true);
-                    bidPreview_1.bidPreview(myState);
-                }
+                    // bidPreview(myState);
+                    jquery_1.default("#" + shared.domElementId.returnPlaceSelectId).trigger('change');
+                } else jquery_1.default("#" + shared.domElementId.selectReturnTimeId).attr('disabled', true);
             });
             // When the inputs gain focus, show the date range picker
             txtStart.addEventListener('focus', showPicker);
@@ -79195,7 +79132,7 @@ function CalendarEnjector(myState) {
 }
 exports.CalendarEnjector = CalendarEnjector;
 
-},{"./Calendar":"gSnLb","../shared/sharedData":"iUwdp","./bidPreview":"1m9fP","jquery":"igaHu"}],"gSnLb":[function(require,module,exports) {
+},{"./Calendar":"gSnLb","../shared/sharedData":"iUwdp","jquery":"igaHu"}],"gSnLb":[function(require,module,exports) {
 "use strict";
 /**
  * @module Calendar.js
@@ -79352,6 +79289,7 @@ var num = 0;
             },
             onClick: {
                 "dp-day": function(t1, e) {
+                    t1.stopPropagation();
                     var dt = new Date(parseInt(t1.target.getAttribute("data-date")));
                     if (myState.isFirstDateOfRangeWasSelect()) {
                         var days = jquery_1.default(".dp-day").toArray();
@@ -79428,6 +79366,7 @@ var num = 0;
                 }
             },
             render: function(r2) {
+                console.log(321);
                 var i1 = r2.opts, t1 = i1.lang, e = r2.state, n = t1.days, a = i1.dayOffset || 1, s1 = e.selectedDate, u1 = e.hilightedDate, d = u1.getMonth(), c = o2().getTime();
                 var weekStr = "\n\t\t\t\t" + n.map(function(t2, e1) {
                     return "<span class=\"dp-col-header\"> " + n[(e1 + a) % n.length] + " </span>";
@@ -79778,23 +79717,10 @@ var num = 0;
             return ((r3.end || o3) && r3.start && (e4 = t3, n3 = r3.end || o3, a3 = r3.start, e4 < a3 && n3 <= e4 || e4 <= n3 && a3 < e4) ? "dr-in-range " : "") + (h(t3, r3.start) || h(t3, r3.end) ? "dr-selected " : "");
         }
         a2.addEventListener("click", function(t3) {
-            if (t3.target.classList.contains("dp-day")) {
-                // var e = new Date(parseInt(t.target.dataset.date));
-                f2();
-                if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) t3.stopPropagation();
-            // h(e, o) && (o = e, f())
-            }
+            t3.target.classList.contains("dp-day");
         });
         a2.addEventListener("touchstart", function(t3) {
-            if (t3.target.classList.contains("dp-day")) {
-                if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                    t3.stopPropagation();
-                    f2();
-                }
-            // const s = $(`#${shared.domElementId.carSelectId}`).html();
-            // $(`#${shared.domElementId.carSelectId}`).html(`${s} touch`);
-            // t.stopPropagation();
-            }
+            if (t3.target.classList.contains("dp-day")) /iPhone|iPad|iPod/i.test(navigator.userAgent);
         });
         return i1.on(u1), s1.on(u1), a2.addEventListener("mouseover", function(t3) {
             t3.target.classList.contains("dp-day");
@@ -80062,19 +79988,15 @@ function onPreview(state) {
     var onFocusList = [];
     onChangeList.forEach(function(id) {
         jquery_1.default("#" + id).on('change', function() {
-            setTimeout(function() {
-                return bidPreview(state);
-            }, 10000);
+            bidPreview(state);
         });
     });
     onFocusList.forEach(function(id) {
         jquery_1.default("#" + id).on('change', function() {
-            setTimeout(function() {
-                return bidPreview(state);
-            }, 10000);
+            bidPreview(state);
         });
     });
-    jquery_1.default("#" + shared.domElementId.carSelectId).trigger('change');
+// $(`#${shared.domElementId.carSelectId}`).trigger('change');
 }
 exports.onPreview = onPreview;
 

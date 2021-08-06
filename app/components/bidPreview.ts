@@ -10,10 +10,6 @@ import { translateDate } from '../shared/sharedActions';
 import { BidCostRequest } from '../CORS/entities/apiExchange/clientTypes';
 import { BidCostResponse, PlacesResponse, SingleCar, SinglePlace } from '../CORS/entities/apiExchange/serverTypes';
 import { getCost } from '../CORS/querySender';
-import isBefore from 'date-fns/isBefore';
-import { startOfYesterday } from 'date-fns';
-import { lowerFirst } from 'lodash';
-
 
 export async function bidPreview(state: State): Promise<void> {
 	
@@ -102,16 +98,16 @@ export function onPreview(state: State): void {
 	]
 	onChangeList.forEach((id: string) => {
 		$(`#${id}`).on('change', () => {
-			setTimeout( () => bidPreview(state), 10000)
+			bidPreview(state);
 		});
 	});
 	onFocusList.forEach((id: string) => {
 		$(`#${id}`).on('change', () => {
-			setTimeout( () => bidPreview(state), 10000)
+			bidPreview(state);
 		});
 	});
 
 
-	$(`#${shared.domElementId.carSelectId}`).trigger('change');
+	// $(`#${shared.domElementId.carSelectId}`).trigger('change');
 }
 

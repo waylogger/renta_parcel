@@ -38,19 +38,23 @@ export async function CalendarEnjector(myState) {
         let rightDateInsert = false;
         if (txtStart.value) {
             $(`#${shared.domElementId.selectReceiveTimeId}`).attr('disabled', null);
+            $(`#${shared.domElementId.selectReceiveTimeId}`).trigger('change');
             leftDateInsert = true;
-            bidPreview(myState);
+            // bidPreview(myState);
         } else {
             $(`#${shared.domElementId.selectReceiveTimeId}`).attr('disabled', true);
-            bidPreview(myState);
+
+            // bidPreview(myState);
         }
         if (txtEnd.value) {
             $(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', null);
             rightDateInsert = true;
-            bidPreview(myState);
+            // bidPreview(myState);
+            $(`#${shared.domElementId.returnPlaceSelectId}`).trigger('change');
+
         } else {
             $(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', true);
-            bidPreview(myState);
+            // bidPreview(myState);
         }
     });
 
@@ -77,7 +81,6 @@ export async function CalendarEnjector(myState) {
     }
     
     $(document).on('click',hidePicker);
-
     $('.dr-cal-end').detach();
     $('.dp-next').css('visibility', 'visible');
 
