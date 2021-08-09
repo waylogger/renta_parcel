@@ -4,8 +4,6 @@
 import { rootSection } from "./app/views/template";
 import * as shared from './app/shared/sharedData'
 import $, { when } from 'jquery';
-import { CalendarEnjector } from './app/components/CalendarEnjection';
-import { getPlaceList } from './app/CORS/querySender'
 import { State, BookingState } from './app/state/state'
 import { placeOptions, selectPlace } from "./app/components/placeSelect";
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from "./app/components/timeSelect";
@@ -15,6 +13,7 @@ import { carSelect } from "./app/components/carSelect";
 import { bidPreview, onPreview } from "./app/components/bidPreview";
 import { createBid } from "./app/components/createBid";
 import { validateChecker, validateField } from "./app/shared/sharedActions";
+import { CalendarInjector } from "./app/components/Calendar/CalendarInjector";
 
 
 const checkHash = (): void => {
@@ -43,8 +42,10 @@ const checkHash = (): void => {
 				nameValidateAndSave(state);
 				placeOptions(state);
 				selectPlace(state);
-
 				onPreview(state);
+
+				CalendarInjector(state);
+
 				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => correctionSecondTimeAfterFirst(state))
 
 				$(`#${shared.domElementId.selectReceiveTimeId}`).on('change', () => {
@@ -105,11 +106,28 @@ const checkHash = (): void => {
 					validateField(shared.domElementId.returnCustomPlaceInputId, shared.domElementId.returnCustomTextId);
 				});
 
+				$('#' + `${shared.domElementId.receiveDataId}`).on('click', (e) => {
+					$('#' + shared.domElementId.inputPickerId).addClass('ex-inputs-picker-visible');
+					e.stopPropagation();
+
+				});
+
+				$('#' + `${shared.domElementId.returnDataId}`).on('click', (e) => {
+					$('#' + shared.domElementId.inputPickerId).addClass('ex-inputs-picker-visible');
+					e.stopPropagation();
+				})
+
+				$('#' + shared.domElementId.bookModuleId).on('click', () => {
+					$('#' + shared.domElementId.inputPickerId).removeClass('ex-inputs-picker-visible');
+				});
 
 
+				$(document).on('click', () => {
+					$('#' + shared.domElementId.inputPickerId).removeClass('ex-inputs-picker-visible');
+				});
+				
+				
 			}
-
-
 		);
 
 	}

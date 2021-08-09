@@ -16,6 +16,7 @@ export async function bidPreview(state: State): Promise<void> {
 	let carModel: String = state.getSelectedCarModelName();
 	carModel = carModel.replace('Mkpp','МКПП');
 	carModel = carModel.replace('Akpp','АКПП');
+	
 	const leftDate: string | undefined = $(`#${shared.domElementId.receiveDataId}`).val()?.toString();
 	const leftTime: string | undefined = $(`#${shared.domElementId.selectReceiveTimeId}`).val()?.toString();
 	const leftPlace: string | undefined = $(`#${shared.domElementId.receivePlaceSelectId}`).val()?.toString();
@@ -60,9 +61,10 @@ export async function bidPreview(state: State): Promise<void> {
 			end_place_id: placeEnd.place_id,
 			services: [],
 		}
-
+		
 		await getCost(bidRequest).then(
 			(bidCost: BidCostResponse) => {
+				
 				const cost: number = bidCost.cost;
 				let deposit: number = bidCost.deposit;
 				if (deposit === null) deposit = 10000;
@@ -84,7 +86,7 @@ export async function bidPreview(state: State): Promise<void> {
 }
 
 export function onPreview(state: State): void {
-
+	
 	const onChangeList: string[] = [
 		`${shared.domElementId.carSelectId}`,
 		`${shared.domElementId.selectReceiveTimeId}`,
@@ -93,12 +95,13 @@ export function onPreview(state: State): void {
 		`${shared.domElementId.returnPlaceSelectId}`,
 	];
 	const onFocusList: string[] = [
-		// `${shared.domElementId.receiveDataId}`,
-		// `${shared.domElementId.returnDataId}`,
+		`${shared.domElementId.receiveDataId}`,
+		`${shared.domElementId.returnDataId}`,
 	]
 	onChangeList.forEach((id: string) => {
 		$(`#${id}`).on('change', () => {
 			bidPreview(state);
+			
 		});
 	});
 	onFocusList.forEach((id: string) => {
@@ -107,7 +110,6 @@ export function onPreview(state: State): void {
 		});
 	});
 
-
-	// $(`#${shared.domElementId.carSelectId}`).trigger('change');
+	bidPreview(state);
 }
 

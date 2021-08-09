@@ -16,6 +16,7 @@ import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { transliterate } from 'transliteration'
+import { isThrowStatement } from 'typescript';
 
 
 function trimPeriodBy3HoursOnEachSide(period: SinglePeriod): SinglePeriod {
@@ -77,7 +78,7 @@ function isWithinIntervalsAndFindIt(periods: SinglePeriod[], timestamps: Date[])
 
 	//если период длится более 2 суток, то мне нужно произвести не более 2 сравнений: первого и последнего ts, если оба ts в периоде, то остальные 1438 ts можно не сравнивать 
 	periodsMoreThen2Days.forEach(
-		period => isAfter(timestamps[0], new Date(period.begin)) && isBefore(timestamps[timestamps.length-1],new Date(period.end))
+		period => isAfter(timestamps[0], new Date(period.begin)) && isBefore(timestamps[timestamps.length - 1], new Date(period.end))
 
 	);
 
@@ -105,6 +106,59 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 
 
 export class State {
+
+	private firstSelectedId: string = '';
+	public setFirstSelectedId(id: string): void{
+		this.firstSelectedId = id;
+	}
+
+	private secondSelectedId: string = '';
+	public setSecondSelectedId(id: string): void{
+		this.secondSelectedId = id;
+	}
+		
+
+	private selectedMonthInx: number = new Date().getMonth();
+	public setSelectedMonthInx(monthInx: number): void {
+		this.selectedMonthInx = monthInx;
+	}
+	public incSelectedMonthInx(): void {
+		if (this.selectedMonthInx === 11) {
+			this.selectedYear++;
+			this.selectedMonthInx = 0;
+			return;
+		}
+		this.selectedMonthInx++;
+	}
+
+	public decSelectedMonthInx(): void {
+		if (this.selectedMonthInx === 0) {
+			this.selectedYear--;
+			this.selectedMonthInx = 11;
+			return;
+		}
+		this.selectedMonthInx = this.selectedMonthInx - 1;
+
+	}
+
+
+
+	public getSelectedMonthInx(): number {
+		const ret = this.selectedMonthInx;
+		return ret;
+	}
+
+	private selectedYear: number = new Date().getFullYear();
+	public setSelectedYear(monthInx: number): void {
+		this.selectedYear = monthInx;
+	}
+
+	public getSelectedYear(): number {
+		const ret = this.selectedYear;
+		return ret;
+	}
+
+
 
 	private selectedCarModelName: string = '';
 	public getSelectedCarModelName(): String {
@@ -146,16 +200,21 @@ export class State {
 		this.firstDateOfRange = timestampOfFirstSelectDate;
 		timeSelectorBy15Min('receive', shared.domElementId.selectReceiveTimeId, arrayForGenerateHTML);
 
+		$('#' + `${shared.domElementId.selectReceiveTimeId}`).attr('disabled', null);
+
+        $('#' + `${shared.domElementId.receiveDataId}`).val(this.getFirstDateOfRange().toLocaleDateString());
+
 		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	public dropFirstDateOfRange() {
 		$(`#${shared.domElementId.receiveDataId}`).val('');
-		$(`#${shared.domElementId.selectReceiveTimeId}`).val('00:00');
+		$(`#${shared.domElementId.selectReceiveTimeId}`).val('10:00');
 		$(`#${shared.domElementId.selectReceiveTimeId}`).attr('disabled', 'disabled');
 
 		this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
 		this.firstDateOfRange = undefined;
 
+		$('#' + `${this.secondSelectedId}`).removeClass('dp-selected');
 		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	//-----------------------------------------------------------------------------------------
@@ -166,7 +225,9 @@ export class State {
 
 	private secondTimeOfRange: Date | undefined = undefined;
 	public setSecondTimeOfRange(ftr: Date | undefined): void { this.secondTimeOfRange = ftr; }
-	public getSecondTimeOfRange(): Date | undefined { const ftr = this.firstTimeOfRange; return ftr; }
+	public getSecondTimeOfRange(): Date | undefined {
+		const ftr = this.secondTimeOfRange; return ftr;
+	}
 
 	private secondDateOfRange: Date | undefined = undefined;
 	public isSecondDateOfRangeWasSelect(): boolean {
@@ -190,23 +251,43 @@ export class State {
 		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
 		correctionSecondTimeAfterFirst(this);
 		this.setMainCar();
+
+        $('#' + `${shared.domElementId.returnDataId}`).val(this.getSecondDateOfRange().toLocaleDateString());
+		$('#' + `${shared.domElementId.selectReceiveTimeId}`).trigger('change');
 		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
+
 
 	}
 	public dropSecondDateOfRange() {
 		$(`#${shared.domElementId.returnDataId}`).val('');
-		$(`#${shared.domElementId.selectReturnTimeId}`).val('00:00');
+		$(`#${shared.domElementId.selectReturnTimeId}`).val('10:00');
 		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
 		this.secondDateOfRange = undefined;
+
+		$('#' + `${this.secondSelectedId}`).removeClass('dp-selected');
 		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
 	}
 
 	public getSecondDateOfRange() {
-		if (this.secondDateOfRange)
-			return new Date(this.secondDateOfRange);
+
+		if (this.secondDateOfRange) {
+			const dt = new Date(this.secondDateOfRange);
+
+			return dt;
+		}
 		else
 			return shared.badDateEqualNull;
 	}
+
+	public dropDateState() {
+		this.dropFirstDateOfRange();
+		this.dropSecondDateOfRange();
+
+		$('#' + `${shared.domElementId.receiveDataId}`).val('');
+		$('#' + `${shared.domElementId.returnDataId}`).val('')
+		$('#' + `${shared.domElementId.carSelectId}`).trigger('change');
+	}
+
 
 	public setMainCar() {
 		this.mainCarForBid = this.freePeriodsForCurrentBookingCarAfterFirstSelect[0].car_id;
@@ -413,8 +494,8 @@ export class State {
 			}
 		);
 
-		await this.fetchFreePeriodsForAllCars();
 		this.selectedCarModelName = nameOfCarFromCarSelectOrHash;
+		await this.fetchFreePeriodsForAllCars();
 
 
 
@@ -441,6 +522,15 @@ export class State {
 		const numberTimeSlotsInFourHours = 1 * 4; //one
 
 		if (isBefore(dt, new Date())) return dateIsBusy;
+		if (this.isSecondDateOfRangeWasSelect()) {
+			const secondDate: Date | undefined = this.getSecondDateOfRange();
+
+			if (secondDate && isAfter(dt, secondDate)) {
+				return dateIsBusy;
+			}
+
+		}
+
 		if (this.isFirstDateOfRangeWasSelect()) {
 
 			if (!this.firstDateOfRange) return dateIsFree;
@@ -448,7 +538,7 @@ export class State {
 			if (this.firstDateOfRange)
 				this.filterCurrentCarForBookingBySelection(this.firstDateOfRange);
 
-				
+
 			if (isBefore(dt, this.firstDateOfRange)) return dateIsBusy;
 
 			let lastEndOfLatestInterval: Date = shared.badDateEqualNull;
@@ -458,32 +548,32 @@ export class State {
 			for (let i = 0; i < this.freePeriodsForCurrentBookingCarAfterFirstSelect.length; ++i) {
 
 				const periods = this.freePeriodsForCurrentBookingCarAfterFirstSelect[i].car_periods;
-				
+
 				let slicePeriods = periods.filter(//оставляем только периоды, которые заканчиваются после начала сравнимого дня
 					(period) => this.firstDateOfRange && isAfter(new Date(period.end), this.firstDateOfRange)
 				);
 
 				slicePeriods = slicePeriods.filter(//оставляем только те периоды, которые начинаются в течении сравнимого дня
-					(period) => this.firstDateOfRange && isBefore(new Date(period.begin), new Date(this.firstDateOfRange).setDate(this.firstDateOfRange.getDate()+1))
+					(period) => this.firstDateOfRange && isBefore(new Date(period.begin), new Date(this.firstDateOfRange).setDate(this.firstDateOfRange.getDate() + 1))
 				);
-				
+
 				const finded = isWithinIntervalsAndFindIt(slicePeriods, splitDateByMinutes(this.firstDateOfRange, 15));
 				if (finded) {
-					
+
 					findedPeriod.push(finded);
-					
+
 				}
 			}
 			findedPeriod.forEach((period: SinglePeriod) => {
-				
+
 				if (isAfter(new Date(period.end), lastEndOfLatestInterval)) lastEndOfLatestInterval = new Date(period.end);
 			});
-			
+
 			if (isAfter(dt, lastEndOfLatestInterval)) {
-				
+
 				return dateIsBusy;
 			}
-			
+
 			return dateIsFree;
 		}
 

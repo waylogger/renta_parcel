@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "start": "tsc && parcel index.html",
-    "dev": "npx tsc-watch --onSuccess \"npm run parcel\"",
+    "dev": "npx tsc-watch",
     "parcel": "parcel index.html",
     "doc": "npx typedoc bundle.ts app/* && firefox ./docs/index.html",
     "build": "tsc && npx parcel build index.html"

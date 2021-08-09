@@ -6,10 +6,8 @@ import $ from 'jquery';
 import { State } from '../state/state';
 import { option, clearColor, formatCarModelFromBaseToSelect, formatCarModelFromSelectToHash, formatCarModelFromHashToSelect } from '../shared/sharedActions';
 import * as shared from '../shared/sharedData';
-import _, { Primitive } from 'lodash';
-import { DateRangePicker } from '../components/Calendar'
-import { CalendarEnjector } from './CalendarEnjection';
-import { SingleCar } from '../CORS/entities/apiExchange/serverTypes'
+import _ from 'lodash';
+import { CalendarInjector } from './Calendar/CalendarInjector';
 
 
 
@@ -73,7 +71,7 @@ export const carSelect = async (state: State): Promise<void> => {
 			state.dropSecondDateOfRange();
 
 		await state.selectCar(stringValueFromSelect);
-		await CalendarEnjector(state);
+		await CalendarInjector(state);
 		
 	})
 	$(`#${shared.domElementId.carSelectId}`).trigger('change');

@@ -10,7 +10,7 @@ import * as shared from '../shared/sharedData';
 
 
 export const rootSection = (): any => {
-return `
+	return `
 <div id="${shared.domElementId.bookSelectDivId}" class="book__title tn-atom">Забронировать
 	<span class="bool_title-price" id="carPrice"></span>
 	<select id="${shared.domElementId.carSelectId}">
@@ -20,7 +20,7 @@ return `
 	<div id="${shared.domElementId.formInputId}">
 		<div id="somes" style="background: #FAFAFB; padding: 15px">
 
-			<div id="dateListener" class="book__dates ex-inputs">
+			<div id="${shared.domElementId.dateListenerId}" class="book__dates ex-inputs">
 				<div id="leftDateFrame" class="book__field-start book__field-wrap book__outline">
 					<input id="${shared.domElementId.receiveDataId}"
 						class="ex-inputs-start book__field-value" placeholder="DD.MM.YYYY"
@@ -50,7 +50,9 @@ return `
 					</select>
 				</div>
 				<div class="row">
-					<div class="ex-inputs-picker"></div>
+					<div id="${shared.domElementId.inputPickerId}"class="ex-inputs-picker">
+					<div id="${shared.domElementId.calendarCanvasId}"> </div>	
+					</div>
 				</div>
 			</div>
 			<div class="book__field-wrap">

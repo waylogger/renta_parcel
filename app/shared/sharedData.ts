@@ -28,6 +28,7 @@ export const domElementId = {
 	//-------------------------------------------
 	bidTextId: 'bidTextId',
 	receiveDataId: 'leftDate',
+	dateListenerId: 'dateListenerId',
 	returnDataId: 'rightDate',
 	deliveryCostId: 'deliveryCostId',
 	//--------------------------------------------
@@ -50,6 +51,16 @@ export const domElementId = {
 	correctFieldClass: 'correctFieldClass',
 	closePickerId: 'closeIt',
 	closePickerClass: 'closeIt',
+	calendarCanvasId: 'calendarCanvasId',
+	calendarGridId: 'calendarGridId',
+
+	inputPickerId: 'ex-inputs-picker',
+	dpDaysGridId: 'dp-days-gridId',
+	dpNextMonth: "dp-next-month",
+	dpPrevMonth: "dp-prev-month",
+
+
+
 
 }
 
