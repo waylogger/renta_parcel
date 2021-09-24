@@ -5,6 +5,7 @@ import { BidCreateRequest } from "../CORS/entities/apiExchange/clientTypes";
 import $ from 'jquery'
 import { sendRequest } from "../CORS/querySender";
 import { validateChecker, validateField } from "../shared/sharedActions";
+import _ from "lodash";
 
 
 
@@ -67,8 +68,8 @@ export async function createBid(state: State) {
 		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
 		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
 
-		console.log(state.getMainCar());
-		
+		// console.log(state.getMainCar());
+
 		const bidRequest: BidCreateRequest = {
 			car_id: state.getMainCar(),
 			begin: d1,
@@ -89,8 +90,12 @@ export async function createBid(state: State) {
 				form.append(key, vals[inx]);
 			}
 		);
+
+		$(`#${shared.domElementId.bookButtonId}`).attr('disabled','disabled');
 		const bid: BidCreateResponse = await sendRequest(form);
+
 		// const bid: BidCreateResponse = { bid_id: 2, bid_number: 1, error_message: null }
+			
 		if (bid.error_message == null) {
 
 			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительское удостоверение) по <a href="https://wa.me/+79999151515" target="_blank">WhatsApp на номер +7 (999) 915-15-15</a><br> </div><a href="https://wa.me/+79999151514" target="_blank"><div class="book__btn" style="display: flex;

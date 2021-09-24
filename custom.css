@@ -61,7 +61,6 @@ input {
       border: 1px solid #dadee7;
       border-radius: 8px;
       margin-top: 12px;
-      background: transparent;
       z-index: -1;
       font-size: 16px;
       padding: 4px 12px 12px 12px;
@@ -79,6 +78,7 @@ input.book__field {
       padding: 16px 12px 0 12px;
       height: 60px;
       width: 100%;
+      background: #FAFAFB;
 }
 
 .book__field-value {
@@ -472,7 +472,7 @@ input[type="range"]:focus::-ms-fill-upper {
 .code-sample {
       display: inline-block;
       font-family: monospace;
-      background: #f5f5f5;
+      background: #f8f9fb;
       padding: 4px;
       border: 1px solid #eee;
 }
@@ -591,7 +591,8 @@ input[type="range"]:focus::-ms-fill-upper {
       position: relative;
       text-align: center;
       padding-bottom: 16px;
-      background: #f5f5f5;
+      background: #f8f9fb;
+      border-radius: 8px 8px 0 0;
 }
 
 .dp-next,
@@ -657,7 +658,10 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .dp-cal-footer {
       text-align: center;
-      background: #f5f5f5;
+      background: #f8f9fb;
+      display: flex;
+      justify-content: center;
+      border-radius: 0 0 8px 8px;
 }
 
 .dp-day-today:after {
@@ -683,8 +687,14 @@ input[type="range"]:focus::-ms-fill-upper {
       color: inherit;
       border: 0;
       background: transparent;
+      padding: 12px 8px;
 }
-
+.dp-clear {
+    border-radius: 0 0 0 8px;
+}
+.dp-close {
+    border-radius: 0 0 8px 0;
+}
 .dp-permanent .dp-close,
 .dp-permanent .dp-clear {
       display: block;
@@ -699,18 +709,15 @@ input[type="range"]:focus::-ms-fill-upper {
 .dp-next:hover,
 .dp-next:focus,
 .dp-prev:hover,
-.dp-prev:focus,
-.dp-cal-month:focus,
-.dp-cal-month:hover,
-.dp-cal-year:hover,
-.dp-cal-year:focus {
+.dp-prev:focus
+{
       background: #f7b903;
       color: white;
 }
 
 .dp-col-header,
 .dp-day {
-      width: 13.2%;
+      width: 12.5%;
       display: inline-block;
       padding: 8px 1.5px;
       text-align: center;
@@ -721,6 +728,7 @@ input[type="range"]:focus::-ms-fill-upper {
       text-transform: uppercase;
       font-weight: 300;
       font-size: 0.8em;
+      margin-right: 4px;
 }
 
 .dp-month {
@@ -817,17 +825,20 @@ input[type="range"]:focus::-ms-fill-upper {
       position: absolute;
       z-index: 1000;
       left: 49.9%;
-      top: calc(100% + 6px);
+      top: calc(100% + 7px);
       opacity: 0;
       z-index: -20;
       transform: translateX(-50%);
       transition: all 0.25s;
-      width: 100%;
+      width: calc(100% + 3px);
 }
 
 .ex-inputs-picker-visible {
       opacity: 1;
       z-index: 1000;
+      border: 1px solid #dadee7;
+      border-radius: 8px;
+      box-shadow: 5px 5px 35px -10px #999ea9;
 }
 
 @media (max-width: 616px), (max-height: 480px) {
@@ -861,14 +872,7 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .dr-cals .dp-edge-day {
       visibility: visible;
-}
-
-.dr-cals .dp-cal-footer {
-      display: flex;
-      justify-content: center;
-}
-
-.dr-cals .dp {
+}.dr-cals .dp {
       border: 0;
 }
 
@@ -886,7 +890,7 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .dr-cal-end .dp {
-      border-left: 8px solid #f5f5f5;
+      border-left: 8px solid #f8f9fb;
 }
 
 .dr-cal-start .dp-next,
@@ -931,6 +935,9 @@ input[type="range"]:focus::-ms-fill-upper {
       -moz-box-sizing: border-box !important;
       box-sizing: border-box !important;
 }
+#calendarCanvasId {
+    border-radius: 8px;
+}
 .customPlace-wrap-start,
 .customPlace-wrap-end {
       display: none;
@@ -968,7 +975,7 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .book__title {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
 }
 
 .incorrectFieldClass {
@@ -995,15 +1002,21 @@ text-align: center
 #bookSelectDivId {
 font-size: 20px;
 font-family: 'FuturaPT',Arial,sans-serif;
-margin: 0 -20px 10px 10px;
 display: flex;
-padding: 0 7px 0 0;
+margin-left: 20px;
+align-items: baseline;
 }
 
 #carSelectId {
-      font-size: 20px;
       font-family: 'FuturaPT',Arial,sans-serif;
-      margin: 0 -20px 10px 10px;
+      margin: 0 16px 10px 10px;
+      border: 1px solid #dadee7;
+    border-radius: 8px;
+    padding: 8px;
+    align-items: baseline;
+    font-size: 16px;
+    width: 49.5%;
+    justify-self: end;
 }
 input,  textarea {   
       -webkit-appearance: none;
@@ -1011,3 +1024,81 @@ input,  textarea {
       appearance: none;
       outline: none;    
   }
+
+.dp-days{
+      background: white;
+      text-align: center;
+      padding-top: 8px;
+}
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+.t-popup_show .t-popup__container {
+    -moz-transform: none;
+    -ms-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    transform: none !important;
+    top: 30px;
+    padding: 30px 0 0 0;
+    background: #FAFAFB;
+}
+.t-popup {
+    padding:0;
+}
+.t-popup__container.t-popup__container-static {
+    margin: 0 auto
+}
+.t-popup__container {
+    right: 0;
+    left: 0;
+}
+@media screen and (max-width: 414px) {
+    .t-popup_show .t-popup__container {
+    top: 0;
+}
+.t-popup__close-icon {
+    width: 15px;
+    height: 15px;
+}
+#bookSelectDivId {
+    margin-top: 20px;
+}
+.temp-box-sharow-modal {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(250,250,251, 1) 60%, rgba(255,255,255, 0));
+    height: 66px;
+    z-index: 9999999;
+    top: 0;
+    position: fixed;
+}
+}
+.t-popup__container {
+    right: 0;
+    left: 0
+}
+.t943__buttonwrapper {
+    position: relative;
+    z-index: 10;
+}
+select{
+	background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat right 10px center;
+	-moz-appearance: none; 
+	-webkit-appearance: none; 
+	appearance: none;
+    background-size: 18px;
+}
+.dp-day-disabled {
+    background: red;
+    text-decoration: none;
+    color: rgb(255 255 255);
+}
+
+.button-disabled {
+      background-color: gray;
+}
+
+.button-disabled:hover{
+      background-color: gray;
+}

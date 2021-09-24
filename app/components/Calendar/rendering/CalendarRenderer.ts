@@ -41,9 +41,9 @@ export async function calendarRenderer(state: State): Promise<boolean> {
     );
 
     $('.' + 'dp-clear').on('click', async (e) => {
+        
         state.dropDateState();
         e.stopPropagation();
-
         await calendarRenderer(state);
     }
     )

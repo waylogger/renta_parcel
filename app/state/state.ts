@@ -11,12 +11,10 @@ import eachMinuteOfInterval from 'date-fns/eachMinuteOfInterval';
 import _, { find, isEqual, lowerFirst } from 'lodash'
 import { PeriodsRequest } from '../CORS/entities/apiExchange/clientTypes';
 import $ from 'jquery'
-import { DateRangePicker } from '../components/Calendar';
 import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { transliterate } from 'transliteration'
-import { isThrowStatement } from 'typescript';
 
 
 function trimPeriodBy3HoursOnEachSide(period: SinglePeriod): SinglePeriod {
@@ -108,15 +106,15 @@ const defaultPlacesResponse: PlacesResponse = { result_code: 0, places: [] }
 export class State {
 
 	private firstSelectedId: string = '';
-	public setFirstSelectedId(id: string): void{
+	public setFirstSelectedId(id: string): void {
 		this.firstSelectedId = id;
 	}
 
 	private secondSelectedId: string = '';
-	public setSecondSelectedId(id: string): void{
+	public setSecondSelectedId(id: string): void {
 		this.secondSelectedId = id;
 	}
-		
+
 
 	private selectedMonthInx: number = new Date().getMonth();
 	public setSelectedMonthInx(monthInx: number): void {
@@ -202,7 +200,7 @@ export class State {
 
 		$('#' + `${shared.domElementId.selectReceiveTimeId}`).attr('disabled', null);
 
-        $('#' + `${shared.domElementId.receiveDataId}`).val(this.getFirstDateOfRange().toLocaleDateString());
+		$('#' + `${shared.domElementId.receiveDataId}`).val(this.getFirstDateOfRange().toLocaleDateString());
 
 		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
@@ -211,10 +209,10 @@ export class State {
 		$(`#${shared.domElementId.selectReceiveTimeId}`).val('10:00');
 		$(`#${shared.domElementId.selectReceiveTimeId}`).attr('disabled', 'disabled');
 
+		if (this.firstSelectedId !== '')
+			$(`#${this.firstSelectedId}`).removeClass('dp-selected');
 		this.freePeriodsForCurrentBookingCarAfterFirstSelect = this.freePeriodsForCurrentBookingCar;
 		this.firstDateOfRange = undefined;
-
-		$('#' + `${this.secondSelectedId}`).removeClass('dp-selected');
 		validateField(shared.domElementId.receiveDataId, shared.domElementId.receiveDateTextId);
 	}
 	//-----------------------------------------------------------------------------------------
@@ -252,7 +250,7 @@ export class State {
 		correctionSecondTimeAfterFirst(this);
 		this.setMainCar();
 
-        $('#' + `${shared.domElementId.returnDataId}`).val(this.getSecondDateOfRange().toLocaleDateString());
+		$('#' + `${shared.domElementId.returnDataId}`).val(this.getSecondDateOfRange().toLocaleDateString());
 		$('#' + `${shared.domElementId.selectReceiveTimeId}`).trigger('change');
 		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
 
@@ -264,7 +262,8 @@ export class State {
 		$(`#${shared.domElementId.selectReturnTimeId}`).attr('disabled', 'disabled');
 		this.secondDateOfRange = undefined;
 
-		$('#' + `${this.secondSelectedId}`).removeClass('dp-selected');
+		if (this.secondSelectedId)
+			$(`#${this.secondSelectedId}`).removeClass('dp-selected');
 		validateField(shared.domElementId.returnDataId, shared.domElementId.returnDateTextId);
 	}
 
@@ -282,10 +281,9 @@ export class State {
 	public dropDateState() {
 		this.dropFirstDateOfRange();
 		this.dropSecondDateOfRange();
-
-		$('#' + `${shared.domElementId.receiveDataId}`).val('');
-		$('#' + `${shared.domElementId.returnDataId}`).val('')
-		$('#' + `${shared.domElementId.carSelectId}`).trigger('change');
+		$(`#${shared.domElementId.receiveDataId}`).val('');
+		$(`#${shared.domElementId.returnDataId}`).val('')
+		$(`#${shared.domElementId.carSelectId}`).trigger('change');
 	}
 
 
@@ -513,24 +511,29 @@ export class State {
 	}
 
 	public isDateBusy(dt: Date): Boolean {
-		// console.log('busy');
-
 		const splitDate: Date[] = eachMinuteOfInterval({ start: dt, end: new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 1) }, { step: 15 });
 		let fourHoursContinuesDurationFounded = false;
 		const dateIsBusy = true;
 		const dateIsFree = false;
 		const numberTimeSlotsInFourHours = 1 * 4; //one
+		const today = new Date();
+		// today it is 23:59:59 of yesterday - because next comparance to be evaluate with 00:00:00
+		today.setHours(0);
+		today.setMinutes(0);
+		today.setSeconds(-1);
 
-		if (isBefore(dt, new Date())) return dateIsBusy;
+		if (isBefore(dt, today) && !isEqual(dt, today)) {
+			return dateIsBusy;
+		}
 		if (this.isSecondDateOfRangeWasSelect()) {
 			const secondDate: Date | undefined = this.getSecondDateOfRange();
 
 			if (secondDate && isAfter(dt, secondDate)) {
+
 				return dateIsBusy;
 			}
 
 		}
-
 		if (this.isFirstDateOfRangeWasSelect()) {
 
 			if (!this.firstDateOfRange) return dateIsFree;
@@ -538,8 +541,9 @@ export class State {
 			if (this.firstDateOfRange)
 				this.filterCurrentCarForBookingBySelection(this.firstDateOfRange);
 
-
-			if (isBefore(dt, this.firstDateOfRange)) return dateIsBusy;
+			if (isBefore(dt, this.firstDateOfRange)) {
+				return dateIsBusy;
+			}
 
 			let lastEndOfLatestInterval: Date = shared.badDateEqualNull;
 
@@ -608,6 +612,7 @@ export class State {
 			}
 		);
 		if (fourHoursContinuesDurationFounded) return dateIsFree;
+
 		return dateIsBusy;
 	}
 

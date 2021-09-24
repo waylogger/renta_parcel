@@ -84,5 +84,13 @@ export async function sendRequest(body: FormData ){
 		body: body,
 		
 	});
-	return res.json();
+	if (res.ok) {
+		return res.json();
+	}
+	else{
+		console.log(res);
+		return undefined;
+		
+	}
+
 }

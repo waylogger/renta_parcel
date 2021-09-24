@@ -89,13 +89,14 @@ export function currentYearForServer(): string {
 
 export function nextYearForServer() {
 	const dt = new Date();
-	dt.setFullYear(dt.getFullYear() + 1);
+	dt.setFullYear(dt.getFullYear() + 10);
 	dt.setMonth(0);
 	dt.setDate(1);
 	dt.setHours(0);
 	dt.setMinutes(0);
 	dt.setSeconds(0);
 	dt.setMilliseconds(0);
+	
 	return dateForServer(dt);
 }
 

@@ -8,6 +8,7 @@ import { State } from "../../../state/state";
 export async function gridRenderer(state: State): Promise<string> {
 
     function resHTML(timestamp: Date, e: number, dayRender: Function) {
+        
         timestamp.setHours(0);
         timestamp.setMinutes(0);
         timestamp.setSeconds(0);
@@ -17,10 +18,12 @@ export async function gridRenderer(state: State): Promise<string> {
         var newDate = new Date(timestamp);
         newDate.setDate(1);
         newDate.setDate(1 - newDate.getDay() + e);
+        
         e && newDate.getDate() === e + 1 && newDate.setDate(e - 6);
         for (var r = 0; r < 42; ++r) {
             const r = dayRender(newDate);
             res += r;
+            
             newDate.setDate(newDate.getDate() + 1);
         }
         return res;
@@ -34,9 +37,11 @@ export async function gridRenderer(state: State): Promise<string> {
     */
     function dayHTML(timestamp: Date) {
         var currentMonth = state.getSelectedMonthInx();
+
         // e === true if currenthMonth не равен t.Month(). Смысл переменной в том, что она используется для установления класса пограничного дня
         var onBorder = timestamp.getMonth() !== currentMonth;//Boolean
         // var n = !i.inRange(t);//Boolean 
+        
         var shouldToDisabled = state.isDateBusy(timestamp);
         var attr = shouldToDisabled ? 'disabled' : '';
         // Если а установлено, то дата помечается как сегодняшнее число
@@ -68,6 +73,14 @@ export async function gridRenderer(state: State): Promise<string> {
     const weekStr = `${days.map(function (item, inx) {
             return `<span class="dp-col-header"> ${item} </span>`
     }).join("")}`
-    const body = weekStr + resHTML(new Date(), 0, dayHTML);
+    const startDate = new Date();
+
+    startDate.setHours(0);
+    startDate.setMinutes(0);
+    startDate.setSeconds(0);
+    startDate.setDate(1);
+    startDate.setMonth(state.getSelectedMonthInx());
+    
+    const body = weekStr + resHTML(startDate, 1, dayHTML);
     return body;
 }

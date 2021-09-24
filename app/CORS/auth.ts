@@ -4,7 +4,8 @@ import 'whatwg-fetch'
 import { SessionKey, accessTokenKey, refreshTokenKey, expiredKey } from './entities/SessionKey'
 import { AccessData } from "./entities/AccessData";
 
-export const server: string = 'http://81.177.48.80';
+// export const server: string = 'http://81.177.48.80';
+export const server: string = 'https://audi-don.ru';
 export const port: string = '50500';
 const passwordHash: string = 'f7f8e967f2756082ada759e8e189e772e00a1deb13583e9beee02ad9a5420fda5ce2069e942cdc22a8cae4ecb90ace005737c6c96dd655330f0f1ae6a0ffd8fc';
 const login: string = 'USER_FOR_SITE';
