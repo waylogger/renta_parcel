@@ -99,7 +99,7 @@ export async function createBid(state: State) {
 			
 		if (bid.error_message == null) {
 
-			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительское удостоверение) по <a href="https://wa.me/+79999151515" target="_blank">WhatsApp на номер +7 (999) 915-15-15</a><br> </div><a href="https://wa.me/+7999151515" target="_blank"><div class="book__btn" style="display: flex;
+			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительское удостоверение) по <a href="https://wa.me/+79915151515" target="_blank">WhatsApp на номер +7 (991) 515-15-15</a><br> </div><a href="https://wa.me/+79915151515" target="_blank"><div class="book__btn" style="display: flex;
 justify-content: center;
 align-items: center;text-decoration: none;">Отправить документы</div></a>`
 
