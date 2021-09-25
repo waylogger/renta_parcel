@@ -8,10 +8,9 @@ import { SingleCarWithPeriods } from '../entities/carPeriods';
 import { formatCarModelFromBaseToSelect, formatCarModelFromHashToSelect, dateForServer, currentYearForServer, nextYearForServer, splitDateByMinutes, validateField, formatCarModelFromSelectToHash } from '../shared/sharedActions';
 import * as shared from '../shared/sharedData'
 import eachMinuteOfInterval from 'date-fns/eachMinuteOfInterval';
-import _, { find, isEqual, lowerFirst } from 'lodash'
 import { PeriodsRequest } from '../CORS/entities/apiExchange/clientTypes';
 import $ from 'jquery'
-import { addHours, addMinutes, isAfter, isBefore } from 'date-fns';
+import { addHours, addMinutes, isAfter, isBefore, isEqual } from 'date-fns';
 import { correctionSecondTimeAfterFirst, timeSelectorBy15Min } from '../components/timeSelect';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { transliterate } from 'transliteration'

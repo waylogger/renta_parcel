@@ -65,10 +65,9 @@ export async function createBid(state: State) {
 			fileArr = new File(fArr, 'получение-возврат');
 		}
 
-		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}Z`;
-		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}Z`;
-
-		// console.log(state.getMainCar());
+		
+		let d1: string = `${leftDate.split('.').reverse().join('-')} ${leftTime}`;
+		let d2: string = `${rightDate.split('.').reverse().join('-')} ${rightTime}`;
 
 		const bidRequest: BidCreateRequest = {
 			car_id: state.getMainCar(),
@@ -85,6 +84,7 @@ export async function createBid(state: State) {
 		const keys = Object.keys(bidRequest);
 		const vals = Object.values(bidRequest);
 
+
 		keys.forEach(
 			(key, inx) => {
 				form.append(key, vals[inx]);
@@ -95,10 +95,11 @@ export async function createBid(state: State) {
 		const bid: BidCreateResponse = await sendRequest(form);
 
 		// const bid: BidCreateResponse = { bid_id: 2, bid_number: 1, error_message: null }
+		// $(`#${shared.domElementId.bookButtonId}`).attr('disabled',null);
 			
 		if (bid.error_message == null) {
 
-			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительское удостоверение) по <a href="https://wa.me/+79999151515" target="_blank">WhatsApp на номер +7 (999) 915-15-15</a><br> </div><a href="https://wa.me/+79999151514" target="_blank"><div class="book__btn" style="display: flex;
+			const thankStr = `<div class="thankyou__book">Ваша заявка на бронирование ${$(`#${shared.domElementId.carNameId}`).html().split(':')[1]} ${$(`#${shared.domElementId.periodRentId}`).html()} принята. <br><br>Если это первое бронирование с нами, пожалуйста отправьте документы (паспорт и водительское удостоверение) по <a href="https://wa.me/+79999151515" target="_blank">WhatsApp на номер +7 (999) 915-15-15</a><br> </div><a href="https://wa.me/+7999151515" target="_blank"><div class="book__btn" style="display: flex;
 justify-content: center;
 align-items: center;text-decoration: none;">Отправить документы</div></a>`
 
