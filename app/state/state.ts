@@ -506,7 +506,20 @@ export class State {
 
   public getPlacesForReceiveAndReturnCars(): PlacesResponse {
     const places = this.placesForReceiveAndReturnCars;
-    return { result_code: places.result_code, places: places.places };
+    const correctedPlaces = places.places;
+    correctedPlaces[0].title = "Офис, ул. Гриса Плиева 5Б";
+    correctedPlaces[1].title = "Аэропорт Владикавказ";
+    correctedPlaces[2].title = "Фиагдон";
+    correctedPlaces[3].title = "Другое место (Владикавказ)";
+    correctedPlaces[4].title = "Аэропорт Беслан";
+    correctedPlaces[5].title = "";
+
+	// меняем фиагдон и АЭ Беслан местами
+    const store = correctedPlaces[2];
+    correctedPlaces[2] = correctedPlaces[4];
+    correctedPlaces[4] = store;
+
+    return { result_code: places.result_code, places: correctedPlaces };
   }
 
   public saveCustomersPhone(num: string | undefined): void {
@@ -590,7 +603,6 @@ export class State {
     today.setSeconds(-1);
 
     if (isBefore(dt, today) && !isEqual(dt, today)) {
-
       return dateIsBusy;
     }
     if (this.isSecondDateOfRangeWasSelect()) {
