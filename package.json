@@ -4,7 +4,13 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "dev": "tsc-watch ; webpack"
+    "dev": "tsc-watch ; webpack",
+    "start": "node server.js",
+    "mon": "nodemon"
+  },
+  "nodemonConfig": {
+    "ext": "ts",
+    "exec": "tsc && webpack && npm start"
   },
   "keywords": [],
   "author": "",
